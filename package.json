@@ -1,0 +1,22 @@
+{
+  "name": "g3-scouting",
+  "version": "1.0.0",
+  "description": "Scouting Software for FRC team 1648.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gradyrobotics/G3-Scouting.git"
+  },
+  "author": "G3 Midtown Robotics",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gradyrobotics/G3-Scouting/issues"
+  },
+  "homepage": "https://github.com/gradyrobotics/G3-Scouting#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
