@@ -1,7 +1,14 @@
 const express = require('express');
 const app = express();
+const fs = require("fs");
 
 const PORT = 8080;
+
+app.set('views', 'views');
+app.set('view engine', 'ejs');
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 app.use(function(req, res, next) {
     var auth;
@@ -19,8 +26,25 @@ app.use(function(req, res, next) {
     }
 });
 
+app.use(express.static(__dirname + '/static/'));
 
-app.use(express.static(__dirname + "/static"))
+app.get('/pit', (req, res) => {
+    formContent = fs.readFileSync("./src/pitForm.html").toString();
 
-console.log(`listening on port ${PORT}!`)
+    res.render('scouting', {title: 'Pit Scouting Form', form: formContent});
+}) 
+
+app.get('/pit', (req, res) => {
+    formContent = fs.readFileSync("./src/qualitativeForm.html").toString();
+
+    res.render('scouting', {title: 'Qualitative Scouting Form', form: formContent});
+}) 
+
+app.get('/pit', (req, res) => {
+    formContent = fs.readFileSync("./src/quantitativeForm.html").toString();
+
+    res.render('scouting', {title: 'Quantitative Scouting Form', form: formContent});
+}) 
+
+console.log(`listening on port ${PORT}!`);
 app.listen(PORT);
