@@ -18,6 +18,7 @@
   "homepage": "https://github.com/gradyrobotics/G3-Scouting#readme",
   "dependencies": {
     "ejs": "^3.1.9",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "xlsx": "^0.18.5"
   }
 }

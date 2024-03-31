@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const fs = require("fs");
+const reader = require('xlsx') 
 
 const PORT = 8080;
 
@@ -47,8 +48,25 @@ app.get('/quantitative', (req, res) => {
 }) 
 
 app.get('/data', (req, res) => {
-    res.render('data', {});
+    res.render('data', {data: getSheet()});
 })
 
+// Read sheet
+
+function getSheet() {
+    const file = reader.readFile('./src/numbers.xlsx');
+    const data = reader.utils.sheet_to_json(file.Sheets.Sheet1);
+
+    for (i=0; i<data.length; i++) {
+        for (x=0; x<Object.keys(data[i]).length; x++) {
+            const key = Object.keys(data[i])[x]
+            console.log(data[i][key]);
+        }
+    }  
+    return data;
+}
+
+getSheet()
+  
 console.log(`listening on port ${PORT}!`);
 app.listen(PORT);

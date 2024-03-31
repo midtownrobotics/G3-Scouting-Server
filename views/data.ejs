@@ -1,1 +1,26 @@
-<eeeeeeeeeeeeeeeee>not yet :)</eeeeeeeeeeeeeeeee>
+<table>
+
+    <thead>
+        <tr>
+            <% for (x=0; x<Object.keys(data[0]).length; x++) { %>
+                <td>
+                    <%= Object.keys(data[0])[x] %>
+                </td>
+            <% } %>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% for(i = 0; i < data.length; i++) { %>
+            <tr>
+                <% for (x=0; x<Object.keys(data[i]).length; x++) { %>
+                    <td>
+                        <% const key = Object.keys(data[i])[x] %>
+                        <%= data[i][key] %>
+                    </td>
+                <% } %>
+            </tr>
+        <% } %>
+    </tbody>
+
+</table>
