@@ -48,13 +48,13 @@ app.get('/quantitative', (req, res) => {
 }) 
 
 app.get('/data', (req, res) => {
-    res.render('data', {data: getSheet()});
+    res.render('data', {data: getSheet('scouting')});
 })
 
 // Read sheet
 
-function getSheet() {
-    const file = reader.readFile('./src/numbers.xlsx');
+function getSheet(sheetToGet) {
+    const file = reader.readFile(`./src/${sheetToGet}.xlsx`);
     const data = reader.utils.sheet_to_json(file.Sheets.Sheet1);
 
     for (i=0; i<data.length; i++) {
@@ -66,7 +66,7 @@ function getSheet() {
     return data;
 }
 
-getSheet()
+getSheet('scouting')
   
 console.log(`listening on port ${PORT}!`);
 app.listen(PORT);

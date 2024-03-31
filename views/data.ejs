@@ -1,26 +1,85 @@
-<table>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+        <link rel="icon" type="image/png" href="/g3.png">
+        <title>G3 Scouting!</title>
+    </head>
+    <body>
+        <table class="table table-hover" id="data-table">
 
-    <thead>
-        <tr>
-            <% for (x=0; x<Object.keys(data[0]).length; x++) { %>
-                <td>
-                    <%= Object.keys(data[0])[x] %>
-                </td>
-            <% } %>
-        </tr>
-    </thead>
+            <thead>
+                <tr>
+                    <% for (x=0; x<Object.keys(data[0]).length; x++) { %>
+                        <th scope="col">
+                            <button class="btn btn-link" onclick="sortTable('<%= x %>')">
+                                <%= Object.keys(data[0])[x] %>
+                            </button>
+                        </th>
+                    <% } %>
+                </tr>
+            </thead>
 
-    <tbody>
-        <% for(i = 0; i < data.length; i++) { %>
-            <tr>
-                <% for (x=0; x<Object.keys(data[i]).length; x++) { %>
-                    <td>
-                        <% const key = Object.keys(data[i])[x] %>
-                        <%= data[i][key] %>
-                    </td>
+            <tbody>
+                <% for(i = 0; i < data.length; i++) { %>
+                    <tr>
+                        <% for (x=0; x<Object.keys(data[i]).length; x++) { %>
+                            <td>
+                                <% const key = Object.keys(data[i])[x] %>
+                                <%= data[i][key] %>
+                            </td>
+                        <% } %>
+                    </tr>
                 <% } %>
-            </tr>
-        <% } %>
-    </tbody>
+            </tbody>
 
-</table>
+        </table>
+    </body>
+</html>
+
+<script>
+    function sortTable(row) {
+        console.log(row)
+
+        var table, rows, switching, i, x, y, shouldSwitch;
+        table = document.getElementById("data-table");
+        switching = true;
+
+        while (switching) {
+
+            switching = false;
+            rows = table.rows;
+
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+
+                x = rows[i].getElementsByTagName("TD")[row];
+                y = rows[i + 1].getElementsByTagName("TD")[row];
+
+                if (Number.isNaN(x.innerHTML)) {
+                    x = parseInt(x.innerHTML)
+                } else {
+                    x = x.innerHTML.toLowerCase()
+                }
+
+                console.log(parseInt(y.innerHTML))
+
+                if (Number.isNaN(y.innerHTML)) {
+                    y = parseInt(y.innerHTML)
+                } else {
+                    y = y.innerHTML.toLowerCase()
+                }
+
+                if (x > y) {
+                    shouldSwitch = true;
+                    break;
+                }
+                
+            }
+
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+    }
+</script>
