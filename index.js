@@ -34,17 +34,21 @@ app.get('/pit', (req, res) => {
     res.render('scouting', {title: 'Pit Scouting Form', form: formContent});
 }) 
 
-app.get('/pit', (req, res) => {
+app.get('/qualitative', (req, res) => {
     formContent = fs.readFileSync("./src/qualitativeForm.html").toString();
 
     res.render('scouting', {title: 'Qualitative Scouting Form', form: formContent});
 }) 
 
-app.get('/pit', (req, res) => {
+app.get('/quantitative', (req, res) => {
     formContent = fs.readFileSync("./src/quantitativeForm.html").toString();
 
     res.render('scouting', {title: 'Quantitative Scouting Form', form: formContent});
 }) 
+
+app.get('/data', (req, res) => {
+    res.render('data', {});
+})
 
 console.log(`listening on port ${PORT}!`);
 app.listen(PORT);

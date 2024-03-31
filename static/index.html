@@ -6,10 +6,10 @@
     </head>
     <body>
         <h1>Welcome to the G3 Scouting Website!</h1>
-        <h2>Please Select the desired form below!</h2>
-        <button class="btn btn-primary">Pit</button><br><br>
-        <button class="btn btn-primary">Qualitative</button><br><br>
-        <button class="btn btn-primary">Quantitative</button><br><br>
+        <a href="/pit" class="btn btn-primary">Pit</a><br><br>
+        <a href="/qualitative" class="btn btn-primary">Qualitative</a><br><br>
+        <a href="/quantitative" class="btn btn-primary">Quantitative</a><br><br>
+        <a href="/data" class="btn btn-primary">Data</a><br><br>
     </body>
 </html>
 
@@ -29,7 +29,7 @@
     /* Mobile Landscape Only */
 
     @media (orientation: landscape) and (max-width: 1025px) {
-        button {
+        a {
             width: 50%;
             height: 30%;
             font-size: 500% !important;
@@ -39,7 +39,7 @@
     /* Mobile Portrait Only */
 
     @media (orientation: portrait) and (max-width: 1025px) {
-        button {
+        a {
             width: 50%;
             height: 10%;
             font-size: 500% !important;
@@ -49,7 +49,7 @@
     /* Desktop Only */
 
     @media (min-width: 1025px) {
-        button {
+        a {
             width: 40%;
             height: 15%;
             font-size: 300% !important;
