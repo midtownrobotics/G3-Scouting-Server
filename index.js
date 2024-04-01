@@ -18,7 +18,7 @@ app.use(function(req, res, next) {
         auth = Buffer.from(req.headers.authorization.substring(6), 'base64').toString().split(':');
     }
 
-    if (!auth || auth[0] !== 'g3' || auth[1] !== 'cowabunga') {
+    if (!auth || auth[0] !== 'g3' || auth[1] !== 'testing') {
         res.statusCode = 401;
         res.setHeader('WWW-Authenticate', 'Basic realm="G3"');
         res.end('Unauthorized');
@@ -54,15 +54,8 @@ app.get('/data', (req, res) => {
 // Read sheet
 
 function getSheet(sheetToGet) {
-    const file = reader.readFile(`./src/${sheetToGet}.xlsx`);
+    const file = reader.readFile(`./static/sheets/${sheetToGet}.xlsx`);
     const data = reader.utils.sheet_to_json(file.Sheets.Sheet1);
-
-    for (i=0; i<data.length; i++) {
-        for (x=0; x<Object.keys(data[i]).length; x++) {
-            const key = Object.keys(data[i])[x]
-            console.log(data[i][key]);
-        }
-    }  
     return data;
 }
 
