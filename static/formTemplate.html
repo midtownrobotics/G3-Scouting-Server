@@ -1,0 +1,275 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <link rel="icon" type="image/png" href="/g3.png">
+        <title>G3 Scouting!</title>
+        <style>
+            h1 {
+                text-align: center;
+                margin-top: 50px;
+                margin-bottom: 50px;
+                font-size: 60px;
+            }
+            
+            p {
+                margin: 0px;
+            }
+
+            h2 {
+                font-size: 50px;
+                margin-bottom: 0px;
+                padding-left: 5px;
+            }
+
+            textarea {
+                width: calc(100vw - 60px);
+            }
+
+            body {
+                height: 100%;
+                width: 100%;
+            }
+
+            table {
+                border: 0px;
+            }
+
+            input[type='radio'] { 
+                 transform: scale(2); 
+            }
+
+            #header_container {
+                background-color: lightgrey;
+                margin-top: 20px;
+                margin-left: 20px;
+                margin-right: 20px;
+                border-radius: 20px;
+                width: auto;
+            }
+
+            .section_head {
+                background-color: lightblue;
+                margin-left: 20px;
+                margin-right: 20px;
+                margin-top: 20px;
+                border-radius: 20px 20px 0px 0px;
+                height: 80 px;
+            }
+            .question-block{
+                background-color: lightgrey;
+                margin-left: 20px;
+                margin-right: 20px;
+                height: auto;
+                padding-top: 10px;
+                padding-bottom: 20px;
+            }
+
+            .textInput {
+                font-size: 40px;
+                margin: 10px;
+            }
+
+            .error {
+                color: red;
+                font-size: 35;
+                margin-left: 20px;
+                margin-bottom: 1px;
+            }
+
+            .pointsBlock {
+                font-size: 40px;
+                text-align: center;
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+
+            .pointsBlock-head {
+                background-color: darkgray;
+                width: calc(100vw - 60px);
+                font-size: 40px;
+                text-align: center;
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-top: 10px;
+            }
+
+            .minus {
+                background-color: lightslategray;
+                width: calc((100vw - 60px)/3);
+                height: 100px;
+            }
+
+            .value {
+                background-color: lightslategrey;
+                width: calc((100vw - 60px)/3);
+                height: 100px;
+            }
+
+            .plus {
+                background-color: lightslategray;
+                width: calc((100vw - 60px)/3);
+                height: 100px;
+            }
+            
+            .multiple-choice-question {
+                margin-left: 20px;
+                font-size: 40px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="card" id="header_container">
+            <h1> Quantitative Scouting Form </h1>
+        </div>
+
+        <form>
+            <div class="section_head">
+                <h2>Pre-game</h2>
+            </div>
+            <div class="question-block">
+                <label class="textInput" for="matchNum">Match Number:</label>
+                <input class="textInput" id="matchNum" type="number" name="matchNum" placeholder="Match Number" required><br>
+                <label class="textInput" for="TeamNum">Team Number:</label>
+                <input class="textInput" id="TeamNum" type="number" name="TeamNum" placeholder="Team Number" required><br>
+                <p id="matchNumErr" class = "error"></p>
+                <p id="teamNumErr" class = "error"></p>
+                <p id="preGeneralErr" class = "error"></p>
+            </div>
+            <div class="section_head">
+                <h2>Autonomous</h2>
+            </div>
+            <div class="question-block">
+                <div class="pointsBlock-head">
+                    <p>Speaker</p>
+                </div>
+                <table class="pointsBlock">
+                    <tr>
+                        <td class="minus">-</td>
+                        <td class="value">0</td>
+                        <td class="plus">+</td>
+                    </tr>
+                </table>
+
+                <div class="pointsBlock-head">
+                    <p>Amp</p>
+                </div>
+                <table class="pointsBlock">
+                    <tr>
+                        <td class="minus">-</td>
+                        <td class="value">0</td>
+                        <td class="plus">+</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="section_head">
+                <h2>Match</h2>
+            </div>
+            <div class="question-block">
+                <div class="pointsBlock-head">
+                    <p>Speaker</p>
+                </div>
+                <table class="pointsBlock">
+                    <tr>
+                        <td class="minus">-</td>
+                        <td class="value">0</td>
+                        <td class="plus">+</td>
+                    </tr>
+                </table>
+
+                <div class="pointsBlock-head">
+                    <p>Amp</p>
+                </div>
+                <table class="pointsBlock">
+                    <tr>
+                        <td class="minus">-</td>
+                        <td class="value">0</td>
+                        <td class="plus">+</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="section_head">
+                <h2>Endgame</h2>
+            </div>
+            <div class="question-block">
+                <div class="multiple-choice-question">
+                    <p class="question">Can the robot climb?</p>
+                    <input type = "radio" id="climbYes" name="climb" value="Yes">
+                    <label for="climbYes">Yes</label><br>
+                    <input type = "radio" id="climbNo" name="climb" value="No">
+                    <label for="climbNo">No</label>
+                </div>
+
+                <div class="multiple-choice-question">
+                    <p class="question">Did the human player make the throw?</p>
+                    <input type = "radio" id="throwYes" name="throw" value="Yes">
+                    <label for="throwYes">Yes</label><br>
+                    <input type = "radio" id="throwNo" name="throw" value="No">
+                    <label for="throwNo">No</label><br>
+                    <input type = "radio" id="noPlayer" name="throw" value="No human player">
+                    <label for="noPlayer">No Human Player</label>
+                </div>
+            </div>
+            <div class="section_head">
+                <h2>Post-game</h2>
+            </div>
+            <div class="question-block">
+                <label class="textInput" for="additionalNotes">Additional Notes:</label><br>
+                <textarea class="textInput" id="additionalNotes" type="text" name="additionalNotes" placeholder="Additional Notes" rows="7" cols="35" required></textarea>
+            </div>
+        </form>
+        <script>
+            $(".section_head").click(function(){
+                $(this).next().slideToggle(100);
+            });
+            
+            $("#matchNum").change(function(){
+                if(Object.keys(breakTimes).some(function(matchNumber){return matchNumber == $("#matchNum").val();}) == true){
+                    $("#matchNumErr").html("You do not need to scout for this match, you are " + breakTimes[$("#matchNum").val()]);
+                } else if ($("#matchNumErr").html() != "") {
+                    $("#matchNumErr").html("");
+                }
+
+                if (isValidWholeNumber($("#matchNum").val()) == false){
+                    $("#preGeneralErr").html("One of your inputs is not a whole number");
+                } else if ($("#preGeneralErr").html() != "") {
+                    $("#preGeneralErr").html("");
+                }
+            });
+
+            $("#TeamNum").change(function(){
+                if(dontScout.some(function(teamNumber){return teamNumber == $("#TeamNum").val();}) == true){
+                    $("#teamNumErr").html("You do not need to scout for this team.");
+                } else if ($("#teamNumErr").html() != "" && isValidWholeNumber($("#TeamNum").val()) != false) {
+                    $("#teamNumErr").html("");
+                }
+
+                if (isValidWholeNumber($("#TeamNum").val()) == false){
+                    $("#preGeneralErr").html("One of your inputs is not a whole number");
+                } else if ($("#preGeneralErr").html() != "" && isValidWholeNumber($("#matchNum").val()) != false) {
+                    $("#preGeneralErr").html("");
+                } 
+            });
+
+            breakTimes = {"16":"in pits", "20":"on break"};
+            dontScout = [1648];
+
+            function isValidWholeNumber(input){
+                for (let i = 0; i < input.length; i++){
+                    if (input[i] != "1" && input[i] != "2" && input[i] != "3" && input[i] != "4" && input[i] != "5" && input[i] != "6" && input[i] != "7"&& input[i] != "8" && input[i] != "9" && input[i] != "0") {
+                        return false;
+                    }
+                } 
+                return true
+            }
+
+            $(".plus").click(function() {
+                $(this).prev().html(parseInt($(this).prev().html())+1);
+            });
+
+            $(".minus").click(function() {
+                $(this).next().html(parseInt($(this).next().html())-1);
+            });
+        </script>
+    </body>
+</html>
