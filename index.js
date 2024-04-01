@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const fs = require("fs");
-const reader = require('xlsx') 
+const XLSX = require('xlsx') 
 
 const PORT = 8080;
 
@@ -51,15 +51,88 @@ app.get('/data', (req, res) => {
     res.render('data', {data: getSheet('scouting')});
 })
 
+app.post('/post', (req, res) => {
+    const action = req.body.action
+    const body = req.body
+
+    if (action == "getSheet" && body.sheet) {
+        res.send({res: getSheet(body.sheet)});
+    } else if (action == "addRow" && body.sheet && body.data) {
+        addRowToSheet(body.sheet, body.data);
+        res.send({res: "OK"});
+    } else if (action == "addColumn" && body.sheet && body.data) {
+        addColumnToSheet(body.sheet, body.data);
+        res.send({res: "OK"});
+    } else {
+        res.send({res: "Invalid Request"});
+    }
+})
+
 // Read sheet
 
 function getSheet(sheetToGet) {
-    const file = reader.readFile(`./static/sheets/${sheetToGet}.xlsx`);
-    const data = reader.utils.sheet_to_json(file.Sheets.Sheet1);
+    const file = XLSX.readFile(`./static/sheets/${sheetToGet}.xlsx`);
+    const SheetName = file.SheetNames[0]
+    const data = XLSX.utils.sheet_to_json(file.Sheets[SheetName]);
     return data;
 }
 
-getSheet('scouting')
-  
+// Add row
+
+function addRowToSheet(sheet, data) {
+    const file = XLSX.readFile(`./static/sheets/${sheet}.xlsx`)
+    const SheetName = file.SheetNames[0]
+
+    let newWorkBook = file
+    
+    XLSX.utils.sheet_add_aoa(newWorkBook.Sheets[SheetName], [
+        data
+    ], {origin: -1});
+
+    //console.log(newWorkBook.Sheets[SheetName])
+
+    XLSX.writeFile(newWorkBook, `./static/sheets/${sheet}.xlsx`)
+}
+
+// Add column
+
+function addColumnToSheet(sheet, name) {
+    const file = XLSX.readFile(`./static/sheets/${sheet}.xlsx`)
+    const SheetName = file.SheetNames[0]
+
+    let newWorkBook = file
+    let nextColumn;
+
+    const lastColumn = newWorkBook.Sheets[SheetName]['!ref'].split(":")[1].replace(/\d/g, "") //|| newWorkBook.Sheets[SheetName]['!ref']
+
+    if (newWorkBook.Sheets[SheetName][`${lastColumn}1`] !== undefined) {
+        nextColumn = getNextKey(lastColumn)
+    } else {
+        nextColumn = lastColumn
+    }
+    
+    XLSX.utils.sheet_add_aoa(newWorkBook.Sheets[SheetName], [[name],[name]], {origin: `${nextColumn}1`});
+
+    console.log(file.Sheets[SheetName])
+
+    XLSX.writeFile(newWorkBook, `./static/sheets/${sheet}.xlsx`)
+}
+
+// Gets the next column EX: AZ -> BA
+
+function getNextKey(key) {
+    if (key === 'Z') {
+        return String.fromCharCode(key.charCodeAt() - 25) + String.fromCharCode(key.charCodeAt() - 25); // AA or aa
+    } else {
+        var lastChar = key.slice(-1);
+        var sub = key.slice(0, -1);
+        if (lastChar === 'Z') {
+            return getNextKey(sub) + String.fromCharCode(lastChar.charCodeAt() - 25);
+        } else {
+            return sub + String.fromCharCode(lastChar.charCodeAt() + 1);
+        }
+    }
+};
+
 console.log(`listening on port ${PORT}!`);
 app.listen(PORT);
