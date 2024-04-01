@@ -1,5 +1,3 @@
-<script>
-
 function TBHAPI(theUrl){
     const parsedUrl = "https://www.thebluealliance.com/api/v3" + theUrl + "?X-TBA-Auth-Key=LVDMCD06pMcEyS94sswn0hp8mGup9P2vfYhXZ6MgTgWt5oLzlNCP3RdBsm41g8Zs"
     var xmlHttp = new XMLHttpRequest();
@@ -18,7 +16,7 @@ function getTeams(event) {
         teamNameList.push(teamsObj[i].nickname);
     }
 
-    return {"team_numbers": teamNumbList, "team_names": teamNameList};
+    return {"team_numbers": teamNumbList, "team_names": teamNameList, "full_object": teamsObj};
 }
 
 async function postData(data) {
@@ -33,5 +31,3 @@ async function postData(data) {
         return data.res
     });
 }
-
-</script>
