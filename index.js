@@ -51,6 +51,22 @@ app.get('/data', (req, res) => {
     res.render('data', {data: getSheet('scouting')});
 })
 
+app.get('/sheets', async (req, res) => {
+    if (req.query.id) {
+        const sheetToGet = req.query.id
+        const file = XLSX.readFile("./src/sheets/" + sheetToGet + ".xlsx")
+        let sheet = XLSX.utils.sheet_to_json(file.Sheets[file.SheetNames[0]])
+        sheet.splice(0, 1)
+        let newSheet = XLSX.utils.json_to_sheet(sheet)
+        let newWorkBook = XLSX.utils.book_new()
+        XLSX.utils.book_append_sheet(newWorkBook, newSheet)
+        await XLSX.writeFile(newWorkBook, "./src/sheets/displaySheets/" + sheetToGet + ".xlsx")
+        res.sendFile(__dirname + '/src/sheets/displaySheets/' + sheetToGet + ".xlsx")
+    } else {
+        res.send("sheet not found")
+    }
+})
+
 app.post('/post', (req, res) => {
     const action = req.body.action
     const body = req.body
@@ -71,7 +87,7 @@ app.post('/post', (req, res) => {
 // Read sheet
 
 function getSheet(sheetToGet) {
-    const file = XLSX.readFile(`./static/sheets/${sheetToGet}.xlsx`);
+    const file = XLSX.readFile(`./src/sheets/${sheetToGet}.xlsx`);
     const SheetName = file.SheetNames[0]
     const data = XLSX.utils.sheet_to_json(file.Sheets[SheetName]);
     return data;
@@ -80,7 +96,7 @@ function getSheet(sheetToGet) {
 // Add row
 
 function addRowToSheet(sheet, data) {
-    const file = XLSX.readFile(`./static/sheets/${sheet}.xlsx`)
+    const file = XLSX.readFile(`./src/sheets/${sheet}.xlsx`)
     const SheetName = file.SheetNames[0]
 
     let newWorkBook = file
@@ -91,13 +107,13 @@ function addRowToSheet(sheet, data) {
 
     //console.log(newWorkBook.Sheets[SheetName])
 
-    XLSX.writeFile(newWorkBook, `./static/sheets/${sheet}.xlsx`)
+    XLSX.writeFile(newWorkBook, `./src/sheets/${sheet}.xlsx`)
 }
 
 // Add column
 
 function addColumnToSheet(sheet, name) {
-    const file = XLSX.readFile(`./static/sheets/${sheet}.xlsx`)
+    const file = XLSX.readFile(`./src/sheets/${sheet}.xlsx`)
     const SheetName = file.SheetNames[0]
 
     let newWorkBook = file
@@ -115,7 +131,7 @@ function addColumnToSheet(sheet, name) {
 
     console.log(file.Sheets[SheetName])
 
-    XLSX.writeFile(newWorkBook, `./static/sheets/${sheet}.xlsx`)
+    XLSX.writeFile(newWorkBook, `./src/sheets/${sheet}.xlsx`)
 }
 
 // Gets the next column EX: AZ -> BA
