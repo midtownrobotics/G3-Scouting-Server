@@ -79,6 +79,9 @@ app.post('/post', (req, res) => {
     } else if (action == "addColumn" && body.sheet && body.data) {
         addColumnToSheet(body.sheet, body.data);
         res.send({res: "OK"});
+    } else if (action == "deleteRow" && body.sheet && body.data) {
+        deleteRowFromSheet(body.sheet, body.data);
+        res.send({res: "OK"})
     } else {
         res.send({res: "Invalid Request"});
     }
@@ -98,6 +101,11 @@ function getSheet(sheetToGet) {
 function addRowToSheet(sheet, data) {
     const file = XLSX.readFile(`./src/sheets/${sheet}.xlsx`)
     const SheetName = file.SheetNames[0]
+
+    const fileJSON = XLSX.utils.sheet_to_json(file.Sheets[SheetName])
+    const numberOfColumns = Object.keys(fileJSON[0]).length
+
+    data.slice(0, numberOfColumns)
 
     let newWorkBook = file
     
@@ -132,6 +140,18 @@ function addColumnToSheet(sheet, name) {
     console.log(file.Sheets[SheetName])
 
     XLSX.writeFile(newWorkBook, `./src/sheets/${sheet}.xlsx`)
+}
+
+// Delete Row
+
+function deleteRowFromSheet(sheet, rowNumb) {
+    const file = XLSX.readFile(`./src/sheets/${sheet}.xlsx`)
+    let newSheet = XLSX.utils.sheet_to_json(file.Sheets[file.SheetNames[0]])
+    newSheet.splice(rowNumb, 1)
+    let newNewSheet = XLSX.utils.json_to_sheet(newSheet)
+    let newWorkBook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(newWorkBook, newNewSheet)
+    XLSX.writeFile(newWorkBook, "./src/sheets/" + sheet + ".xlsx")
 }
 
 // Gets the next column EX: AZ -> BA

@@ -1,27 +1,37 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
         <link rel="icon" type="image/png" href="/g3.png">
         <title>G3 Scouting!</title>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="/api.js"></script>
     </head>
     <body>
 
-        <div id="saveToDrive">
+        <div id="save">
             <div class="g-savetodrive"
             data-src="/sheets?id=scouting"
             data-filename="Scouting.xlsx"
             data-sitename="G3 Robotics">
             </div>
-            <span>
-                <<<< Click Here to save in Google Drive! (You can then view this in Google sheets)
-            </span>
+            &nbsp;&nbsp;&nbsp;
+            <div>
+                <button id="download">
+                    <a href="/sheets?id=scouting">
+                        Download <i class="bi bi-download"></i>
+                    </a>
+                </button>
+            </div>
         </div>
 
-        <table class="table table-hover" id="data-table">
+        <table class="table table-hover table-bordered" id="data-table">
 
             <thead>
                 <tr>
+                    <th id="trash-head"></th>
+
                     <% for (x=0; x<Object.keys(data[0]).length; x++) { %>
                         <th scope="col">
                             <!-- <button class="btn btn-link" onclick="sortTable('<%= x %>')"> -->
@@ -33,8 +43,12 @@
             </thead>
 
             <tbody>
+
                 <% for(i = 1; i < data.length; i++) { %>
-                    <tr>
+                    <tr id="row-<%= i %>">
+                        <td class="trash">
+                            <i class="bi bi-trash-fill"></i>
+                        </td>
                         <% for (x=0; x<Object.keys(data[i]).length; x++) { %>
                             <td>
                                 <% const key = Object.keys(data[i])[x] %>
@@ -55,12 +69,41 @@
         margin-top: 40px;
     }
 
-    #saveToDrive {
+    #save {
         position: absolute;
         left: 100px;
-        top: 10px;
+        top: 5px;
+        display : inline-flex;
+    }
+
+    #download a {
+        color: black;
+        text-decoration: none;
+    }
+
+    #download {
+        border: none;
+    }
+
+    #trash-head {
+        width: 30px;
+    }
+
+    .trash:hover {
+        cursor: pointer;
     }
 </style>
+
+<script>
+    $(".trash").on("click", function(){
+        const rowNumb = $(this).parent().attr('id').split("-")[1];
+        const uSure = confirm(`Row number ${rowNumb} will be deleted!`)
+        if (uSure) {
+            postData({action: "deleteRow", sheet: "scouting", data: rowNumb})
+            window.location.reload();
+        }
+    })
+</script>
 
 <!-- <script>
     function sortTable(row) {
