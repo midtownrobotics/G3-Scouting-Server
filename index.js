@@ -18,7 +18,7 @@ app.use(function(req, res, next) {
         auth = Buffer.from(req.headers.authorization.substring(6), 'base64').toString().split(':');
     }
 
-    if (!auth || auth[0] !== 'g3' || auth[1] !== 'testing') {
+    if (!auth || !checkAuth(auth[0], auth[1])) {
         res.statusCode = 401;
         res.setHeader('WWW-Authenticate', 'Basic realm="G3"');
         res.end('Unauthorized');
@@ -26,6 +26,22 @@ app.use(function(req, res, next) {
         next();
     }
 });
+
+function checkAuth(username, password) {
+    const users = getSettings().users
+    let isReal = [];
+    for (i = 0; i < users.length; i++) {
+        if (users[i].username == username && users[i].password == password) {
+            isReal = true;
+            return users[i].permissions || true
+        } else {
+            isReal = false;
+        }
+    }
+    return false;
+}
+
+console.log(checkAuth("admin", "password"))
 
 app.use(express.static(__dirname + '/static/'));
 
@@ -86,6 +102,24 @@ app.post('/post', (req, res) => {
         res.send({res: "Invalid Request"});
     }
 })
+
+// Get Settings
+
+function getSettings() {
+    return JSON.parse(fs.readFileSync(__dirname + "/settings.json").toString())
+}
+
+function writeSettings(data) {
+    fs.writeFileSync(__dirname + "/settings.json", JSON.stringify(data))
+}
+
+/* EXAMPLE OF USAGE
+
+    var settings = getSettings()
+    settings.users.push({username: "gay", password: "youare"})
+    writeSettings(settings) 
+
+*/
 
 // Read sheet
 

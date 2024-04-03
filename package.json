@@ -20,5 +20,8 @@
     "ejs": "^3.1.9",
     "express": "^4.19.2",
     "xlsx": "^0.18.5"
+  },
+  "nodemonConfig": {
+    "ignore": ["*.json", "static/*.js"]
   }
 }
