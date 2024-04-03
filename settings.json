@@ -1,1 +1,1 @@
-{"users":[{"username":"admin","password":"password"},{"username":"gay","password":"youare"},{"username":"gay","password":"youare"},{"username":"gay","password":"youare"},{"username":"gay","password":"youare"}]}
+{"users":[{"username":"admin","password":"password","permissions":0},{"username":"gray","password":"jn","permissions":1},{"username":"g3","password":"robotics"}],"permissionLevels":[{"id":0,"blacklist":[]},{"id":1,"blacklist":["/data"]}]}

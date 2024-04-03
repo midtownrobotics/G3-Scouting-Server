@@ -13,35 +13,45 @@ app.use(express.urlencoded({extended: true}));
 
 app.use(function(req, res, next) {
     var auth;
+    let url = req.url;
+    if (url.charAt(url.length - 1) == "/") {
+        url = url.substring(0, url.length-1)
+    }
 
     if (req.headers.authorization) {
         auth = Buffer.from(req.headers.authorization.substring(6), 'base64').toString().split(':');
     }
 
-    if (!auth || !checkAuth(auth[0], auth[1])) {
+    let permissions;
+
+    if (auth) {
+        permissions = checkAuth(auth[0], auth[1])
+    } else {
+        permissions = "BAD USER"
+    }
+
+    if (!auth || permissions == "BAD USER") {
         res.statusCode = 401;
         res.setHeader('WWW-Authenticate', 'Basic realm="G3"');
         res.end('Unauthorized');
     } else {
-        next();
+        if (!getSettings().permissionLevels[permissions].blacklist.includes(url)) {
+            next();
+        } else {
+            res.send("You are not authorized to be here");
+        } 
     }
 });
 
 function checkAuth(username, password) {
     const users = getSettings().users
-    let isReal = [];
     for (i = 0; i < users.length; i++) {
         if (users[i].username == username && users[i].password == password) {
-            isReal = true;
-            return users[i].permissions || true
-        } else {
-            isReal = false;
+            return users[i].permissions
         }
     }
-    return false;
+    return "BAD USER";
 }
-
-console.log(checkAuth("admin", "password"))
 
 app.use(express.static(__dirname + '/static/'));
 
@@ -116,7 +126,7 @@ function writeSettings(data) {
 /* EXAMPLE OF USAGE
 
     var settings = getSettings()
-    settings.users.push({username: "gay", password: "youare"})
+    settings.users.push({username: "g3", password: "robotics"})
     writeSettings(settings) 
 
 */
