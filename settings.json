@@ -1,1 +1,38 @@
-{"users":[{"username":"admin","password":"password","permissions":0},{"username":"gray","password":"jn","permissions":1},{"username":"g3","password":"robotics"}],"permissionLevels":[{"id":0,"blacklist":[]},{"id":1,"blacklist":["/data"]}]}
+{
+    "users": [
+        {
+            "username": "admin",
+            "password": "password",
+            "permissions": 0
+        },
+        {
+            "username": "gray",
+            "password": "jn",
+            "permissions": 2
+        },
+        {
+            "username": "g3",
+            "password": "robotics",
+            "permissions": 1
+        }
+    ],
+    "permissionLevels": [
+        {
+            "name": "admins",
+            "blacklist": []
+        },
+        {
+            "name": "high-users",
+            "blacklist": [
+                "/admin"
+            ]
+        },
+        {
+            "name": "users",
+            "blacklist": [
+                "/admin",
+                "/data"
+            ]
+        }
+    ]
+}

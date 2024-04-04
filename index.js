@@ -55,6 +55,12 @@ function checkAuth(username, password) {
 
 app.use(express.static(__dirname + '/static/'));
 
+app.get('/logout', (req, res) => {
+    res.statusCode = 401;
+    res.setHeader('WWW-Authenticate', 'Basic realm="G3"');
+    res.send('Unauthorized');
+})
+
 app.get('/pit', (req, res) => {
     formContent = fs.readFileSync("./src/pitForm.html").toString();
 
@@ -75,6 +81,10 @@ app.get('/quantitative', (req, res) => {
 
 app.get('/data', (req, res) => {
     res.render('data', {data: getSheet('scouting')});
+})
+
+app.get('/admin', (req, res) => {
+    res.render('admin', {users: getSettings().users, perms: getSettings().permissionLevels})
 })
 
 app.get('/sheets', async (req, res) => {
@@ -108,6 +118,14 @@ app.post('/post', (req, res) => {
     } else if (action == "deleteRow" && body.sheet && body.data) {
         deleteRowFromSheet(body.sheet, body.data);
         res.send({res: "OK"})
+    } else if (action == "addUser" && body.data) {
+        var settings = getSettings()
+        settings.users.push(body.data)
+        writeSettings(settings) 
+    } else if (action == "addPerm" && body.data) {
+        var settings = getSettings()
+        settings.permissionLevels.push(body.data)
+        writeSettings(settings) 
     } else {
         res.send({res: "Invalid Request"});
     }

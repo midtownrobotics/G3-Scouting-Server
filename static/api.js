@@ -31,3 +31,8 @@ async function postData(data) {
         return data.res
     });
 }
+
+function logoutUser() {
+    fetch('/logout')
+    window.location.reload();
+}

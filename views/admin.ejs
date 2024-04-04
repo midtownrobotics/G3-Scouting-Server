@@ -1,0 +1,167 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+        <link rel="icon" type="image/png" href="/g3.png">
+        <title>G3 Scouting!</title>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="/api.js"></script>
+    </head>
+    <body>
+
+        <div id="save">
+            &nbsp;&nbsp;&nbsp;
+            <div>
+                <button class="head-buttons">
+                    <a href="/">
+                        Go Home <i class="bi bi-house-door-fill"></i>
+                    </a>
+                </button>
+            </div>
+        </div>
+
+        <br>
+
+        <h2>Users</h2>
+
+        <div>
+            <button class="btn btn-primary" id="add-user">
+                Add User
+            </button>
+        </div>
+
+        <table class="table table-hover table-bordered" id="user-table">
+
+            <thead>
+                <tr>
+                    <% for (x=0; x<Object.keys(users[0]).length; x++) { %>
+                        <th scope="col">
+                            <!-- <button class="btn btn-link" onclick="sortTable('<%= x %>')"> -->
+                                <%= Object.keys(users[0])[x] %>
+                            <!-- </button> -->
+                        </th>
+                    <% } %>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <% for(i = 0; i < users.length; i++) { %>
+                    <tr id="row-<%= i %>">  
+                        <% for (x=0; x<Object.keys(users[i]).length; x++) { %>
+                            <td>
+                                <% const key = Object.keys(users[i])[x] %>
+                                <%= users[i][key] %>
+                            </td>
+                        <% } %>
+                    </tr>
+                <% } %>
+            </tbody>
+
+        </table>
+
+        <h2>Permissions</h2>
+        
+        <div>
+            <button class="btn btn-primary" id="add-perm">
+                Add Permission
+            </button>
+        </div>
+
+        <table class="table table-hover table-bordered" id="perm-table">
+
+            <thead>
+                <tr>
+                    <th>
+                        id
+                    </th>
+                    <% for (x=0; x<Object.keys(perms[0]).length; x++) { %>
+                        <th scope="col">
+                            <!-- <button class="btn btn-link" onclick="sortTable('<%= x %>')"> -->
+                                <%= Object.keys(perms[0])[x] %>
+                            <!-- </button> -->
+                        </th>
+                    <% } %>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <% for(i = 0; i < perms.length; i++) { %>
+                    <tr id="row-<%= i %>">  
+                        <td>
+                            <%= i %>
+                        </td>
+                        <% for (x=0; x<Object.keys(perms[i]).length; x++) { %>
+                            <td>
+                                <% const key = Object.keys(perms[i])[x] %>
+                                <%= perms[i][key] %>
+                            </td>
+                        <% } %>
+                    </tr>
+                <% } %>
+            </tbody>
+
+        </table>
+    </body>
+</html>
+
+<style>
+    body {
+        margin: 20px;
+        background-color: rgb(255, 73, 73);
+    }
+
+    table {
+        border-top: 3px;
+        margin-top: 40px;
+    }
+
+    #save {
+        position: absolute;
+        left: 100px;
+        top: 5px;
+        display : inline-flex;
+    }
+
+    .head-buttons a {
+        color: black;
+        text-decoration: none;
+    }
+
+    .head-buttons {
+        border: none;
+    }
+
+    #user-table, #perm-table {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+</style>
+
+<script>
+    $("#add-perm").on("click", function() {
+        const newName = prompt("What should the name of this permission be?");
+        let blackList = prompt("What pages should they not be allowed on? EX: /page1,/page2/ex");
+
+        blackList = blackList.split(",")
+
+        if (newName && blackList) {
+            postData({action: "addPerm", data: {name: newName, blacklist: blackList}})
+        } else {
+            alert("Error making permission.")
+        }
+    })
+
+    $("#add-user").on("click", function () {
+        const newName = prompt("What is this users name?");
+        const newPassword = prompt("What is theis users password?");
+        const perm = prompt("What is the ID of the permission they should have?")
+
+        if (newName && newPassword && Number.isInteger(parseInt(perm)) && Math.round(perm) == perm) {
+            postData({action: "addUser", data: {username: newName, password: newPassword, permissions: perm}})
+        } else {
+            alert("Error making user.")
+        }
+    })
+</script>
