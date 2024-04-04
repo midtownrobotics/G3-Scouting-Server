@@ -38,7 +38,7 @@ app.use(function(req, res, next) {
         if (!getSettings().permissionLevels[permissions].blacklist.includes(url)) {
             next();
         } else {
-            res.send("You are not authorized to be here");
+            res.sendFile(__dirname + "/src/401.html");
         } 
     }
 });
