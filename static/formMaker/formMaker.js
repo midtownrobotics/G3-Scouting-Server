@@ -100,8 +100,29 @@ function save() {
             count++;
         }
     }
-    save.HTML = document;
+    save.HTML = {};
+    save.HTML.title = $("#header_container").children().html();
+    save.HTML.sections = {};
+    for (let i=0; i < $(".section_head").length; i++){
+        save.HTML.sections[i] = {"name":$(".section_head").children()[i].innerHTML,"contents":{"id":$(".section_head").next()[i].id}};
+    }
+    let types = ["textarea",".textInput",".pointsBlock",".mutliple-choice-question"];
+    var textAreas = $("textarea");
+    var parent = "";
+    for (var i=0; i<textAreas.length; i++){
+        parentId = $("#"+textAreas[i].id).parent().id;
+        var parentNumb = 0;
+        for (var j=0; j<save.HTML.sections.length; j++){
+            if (save.HTML.sections[j].contents.id == parentId){
+                parentNumb = j;
+            } else {
+                console.log("error")
+            }
+        }
+        save.HTML.sections[parentNumb].contents.textArea = {"id":textAreas[i].id,"placeholder":textAreas[i].placeholder,"rows":textAreas[i].rows,"cols":textAreas[i].cols};
+    }
     console.log(save)
+    return save;
 }
 
 function randomString(length) {
