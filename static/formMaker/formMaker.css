@@ -1,3 +1,28 @@
+/**
+Form maker Css:
+**/
+#bar {
+    width: 100%;
+    height: 25px;
+    background-color: lightgray;
+    position: sticky;
+    position: -webkit-sticky;
+}
+
+#preview {
+    /**width: 414px;**/
+    width: 100%;
+    /**height: 896px;**/
+    height: 500px;
+    background-color: white;
+    border: 1px solid black;
+    /**margin-left: calc((100vw - 414px)/2);
+    margin-right: calc((100vw - 414px)/2);
+    margin-top: 10px;**/
+    overflow: scroll;
+}
+
+/**Form CSS**/
 h1 {
     text-align: center;
     margin-top: 50px;
