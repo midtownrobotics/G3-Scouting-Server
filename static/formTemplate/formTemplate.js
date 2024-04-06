@@ -59,3 +59,19 @@ $(".plus").click(function() {
 $(".minus").click(function() {
     $(this).next().html(parseInt($(this).next().html())-1);
 });
+
+$("#sumbitButton").click(function() {
+    const formData = $('#form').serializeArray()
+    let data = []
+    for (let i = 0; i < formData.length; i++) {
+        data.push(formData[i].value);
+        
+    }
+    postData({action: "addRow", sheet: "scouting", data: data}).then(function(res){
+        if (res == "OK") {
+            window.location.reload()
+        } else {
+            alert("FORM NOT SAVED!")
+        }
+    })
+})

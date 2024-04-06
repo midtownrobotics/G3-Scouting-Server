@@ -131,6 +131,13 @@ app.post('/post', (req, res) => {
     }
 })
 
+// addColumnToSheet("scouting", "matchNum")
+// addColumnToSheet("scouting", "TeamNum")
+// addColumnToSheet("scouting", "climb")
+// addColumnToSheet("scouting", "throw")
+// addColumnToSheet("scouting", "additionalNotes")
+
+
 // Get Settings
 
 function getSettings() {
