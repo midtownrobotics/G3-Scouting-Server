@@ -67,7 +67,7 @@ $("#sumbitButton").click(function() {
         data.push(formData[i].value);
         
     }
-    postData({action: "addRow", sheet: "scouting", data: data}).then(function(res){
+    postData({action: "addRow", sheet: "testing-sheet", data: data}).then(function(res){
         if (res == "OK") {
             window.location.reload()
         } else {

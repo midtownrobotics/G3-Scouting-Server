@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const fs = require("fs");
+const fs = require('fs');
 const XLSX = require('xlsx') 
 
 const PORT = 8080;
@@ -62,46 +62,43 @@ app.get('/logout', (req, res) => {
 })
 
 app.get('/pit', (req, res) => {
-    formContent = fs.readFileSync("./src/pitForm.html").toString();
+    formContent = JSON.parse(fs.readFileSync("./src/pitForm.html")).toString();
 
     res.render('scouting', {title: 'Pit Scouting Form', form: formContent});
 }) 
 
 app.get('/qualitative', (req, res) => {
-    formContent = fs.readFileSync("./src/qualitativeForm.html").toString();
+    formContent = JSON.parse(fs.readFileSync("./src/qualitativeForm.html")).toString();
 
     res.render('scouting', {title: 'Qualitative Scouting Form', form: formContent});
 }) 
 
 app.get('/quantitative', (req, res) => {
-    formContent = fs.readFileSync("./src/quantitativeForm.html").toString();
+    formContent = JSON.parse(fs.readFileSync("./src/quantitativeForm.html")).toString();
 
     res.render('scouting', {title: 'Quantitative Scouting Form', form: formContent});
 }) 
 
 app.get('/data', (req, res) => {
-    res.render('data', {data: getSheet('scouting')});
+    res.render('data', {data: getSheet('testing-sheet')});
 })
 
 app.get('/admin', (req, res) => {
     res.render('admin', {users: getSettings().users, perms: getSettings().permissionLevels})
 })
 
-app.get('/sheets', async (req, res) => {
-    if (req.query.id) {
-        const sheetToGet = req.query.id
-        const file = XLSX.readFile("./src/sheets/" + sheetToGet + ".xlsx")
-        let sheet = XLSX.utils.sheet_to_json(file.Sheets[file.SheetNames[0]])
-        sheet.splice(0, 1)
-        let newSheet = XLSX.utils.json_to_sheet(sheet)
-        let newWorkBook = XLSX.utils.book_new()
-        XLSX.utils.book_append_sheet(newWorkBook, newSheet)
-        await XLSX.writeFile(newWorkBook, "./src/sheets/displaySheets/" + sheetToGet + ".xlsx")
-        res.sendFile(__dirname + '/src/sheets/displaySheets/' + sheetToGet + ".xlsx")
-    } else {
-        res.send("sheet not found")
-    }
-})
+// app.get('/sheets', async (req, res) => {
+//     if (req.query.id) {
+//         const sheetToGet = req.query.id
+//         let sheet = XLSX.utils.json_to_sheet(getSheet(sheetToGet))
+//         let newWorkBook = XLSX.utils.book_new()
+//         XLSX.utils.book_append_sheet(newWorkBook, sheet)
+//         await XLSX.writeFile(newWorkBook, "./src/sheets/displaySheets/" + sheetToGet + ".xlsx")
+//         res.sendFile(__dirname + '/src/sheets/displaySheets/' + sheetToGet + ".xlsx")
+//     } else {
+//         res.send("sheet not found")
+//     }
+// })
 
 app.post('/post', (req, res) => {
     const action = req.body.action
@@ -131,13 +128,6 @@ app.post('/post', (req, res) => {
     }
 })
 
-// addColumnToSheet("scouting", "matchNum")
-// addColumnToSheet("scouting", "TeamNum")
-// addColumnToSheet("scouting", "climb")
-// addColumnToSheet("scouting", "throw")
-// addColumnToSheet("scouting", "additionalNotes")
-
-
 // Get Settings
 
 function getSettings() {
@@ -145,7 +135,7 @@ function getSettings() {
 }
 
 function writeSettings(data) {
-    fs.writeFileSync(__dirname + "/settings.json", JSON.stringify(data))
+    JSON.parse(fs.writeFileSync(__dirname + "/settings.json", JSON.stringify(data)))
 }
 
 /* EXAMPLE OF USAGE
@@ -156,88 +146,27 @@ function writeSettings(data) {
 
 */
 
-// Read sheet
-
-function getSheet(sheetToGet) {
-    const file = XLSX.readFile(`./src/sheets/${sheetToGet}.xlsx`);
-    const SheetName = file.SheetNames[0]
-    const data = XLSX.utils.sheet_to_json(file.Sheets[SheetName]);
-    return data;
+function getSheet(sheet) {
+    return JSON.parse(fs.readFileSync(__dirname + "/src/data/scouting.json").toString())[sheet]
 }
 
-// Add row
-
-function addRowToSheet(sheet, data) {
-    const file = XLSX.readFile(`./src/sheets/${sheet}.xlsx`)
-    const SheetName = file.SheetNames[0]
-
-    const fileJSON = XLSX.utils.sheet_to_json(file.Sheets[SheetName])
-    const numberOfColumns = Object.keys(fileJSON[0]).length
-
-    data.slice(0, numberOfColumns)
-
-    let newWorkBook = file
-    
-    XLSX.utils.sheet_add_aoa(newWorkBook.Sheets[SheetName], [
-        data
-    ], {origin: -1});
-
-    //console.log(newWorkBook.Sheets[SheetName])
-
-    XLSX.writeFile(newWorkBook, `./src/sheets/${sheet}.xlsx`)
+function addRowToSheet(sheet, row) {
+    let newJSON = JSON.parse(fs.readFileSync(__dirname + "/src/data/scouting.json").toString())
+    newJSON[sheet].rows.push(row)
+    fs.writeFileSync(__dirname + "/src/data/scouting.json", JSON.stringify(newJSON))
 }
 
-// Add column
-
-function addColumnToSheet(sheet, name) {
-    const file = XLSX.readFile(`./src/sheets/${sheet}.xlsx`)
-    const SheetName = file.SheetNames[0]
-
-    let newWorkBook = file
-    let nextColumn;
-
-    const lastColumn = newWorkBook.Sheets[SheetName]['!ref'].split(":")[1].replace(/\d/g, "") //|| newWorkBook.Sheets[SheetName]['!ref']
-
-    if (newWorkBook.Sheets[SheetName][`${lastColumn}1`] !== undefined) {
-        nextColumn = getNextKey(lastColumn)
-    } else {
-        nextColumn = lastColumn
-    }
-    
-    XLSX.utils.sheet_add_aoa(newWorkBook.Sheets[SheetName], [[name],[name]], {origin: `${nextColumn}1`});
-
-    console.log(file.Sheets[SheetName])
-
-    XLSX.writeFile(newWorkBook, `./src/sheets/${sheet}.xlsx`)
+function addColumnToSheet(sheet, column) {
+    let newJSON = JSON.parse(fs.readFileSync(__dirname + "/src/data/scouting.json").toString())
+    newJSON[sheet].cols.push(column)
+    fs.writeFileSync(__dirname + "/src/data/scouting.json", JSON.stringify(newJSON))
 }
 
-// Delete Row
-
-function deleteRowFromSheet(sheet, rowNumb) {
-    const file = XLSX.readFile(`./src/sheets/${sheet}.xlsx`)
-    let newSheet = XLSX.utils.sheet_to_json(file.Sheets[file.SheetNames[0]])
-    newSheet.splice(rowNumb, 1)
-    let newNewSheet = XLSX.utils.json_to_sheet(newSheet)
-    let newWorkBook = XLSX.utils.book_new()
-    XLSX.utils.book_append_sheet(newWorkBook, newNewSheet)
-    XLSX.writeFile(newWorkBook, "./src/sheets/" + sheet + ".xlsx")
+function deleteRowFromSheet(sheet, row) {
+    let newJSON = JSON.parse(fs.readFileSync(__dirname + "/src/data/scouting.json").toString())
+    newJSON[sheet].rows.splice(row, 1)
+    fs.writeFileSync(__dirname + "/src/data/scouting.json", JSON.stringify(newJSON))
 }
-
-// Gets the next column EX: AZ -> BA
-
-function getNextKey(key) {
-    if (key === 'Z') {
-        return String.fromCharCode(key.charCodeAt() - 25) + String.fromCharCode(key.charCodeAt() - 25); // AA or aa
-    } else {
-        var lastChar = key.slice(-1);
-        var sub = key.slice(0, -1);
-        if (lastChar === 'Z') {
-            return getNextKey(sub) + String.fromCharCode(lastChar.charCodeAt() - 25);
-        } else {
-            return sub + String.fromCharCode(lastChar.charCodeAt() + 1);
-        }
-    }
-};
 
 console.log(`listening on port ${PORT}!`);
 app.listen(PORT);
