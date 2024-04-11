@@ -6,8 +6,8 @@ function TBHAPI(theUrl){
     return JSON.parse(xmlHttp.responseText);
 }
 
-function getTeams(event) {
-    const teamsObj = TBHAPI(`/event/${event}/teams`)
+async function getTeams() {
+    const teamsObj = TBHAPI(`/event/${await eventKey}/teams`)
     let teamNumbList = [];
     let teamNameList = [];
 
@@ -17,6 +17,21 @@ function getTeams(event) {
     }
 
     return {"team_numbers": teamNumbList, "team_names": teamNameList, "full_object": teamsObj};
+}
+
+async function getMatches() {
+    const matchesObj = TBHAPI(`/event/${await postData({action: "getKey"})}/matches/simple`)
+    let matches = [];
+
+    for (let i = 0; i < matchesObj.length; i++) {
+        if (matchesObj[i].comp_level == "qm") {
+            const red = matchesObj[i].alliances.red.team_keys
+            const blue = matchesObj[i].alliances.blue.team_keys
+            matches.push([red[0].substring(3), red[1].substring(3), red[2].substring(3), blue[0].substring(3), blue[1].substring(3), blue[2].substring(3)])
+        }
+    }
+
+    return matches;
 }
 
 async function postData(data) {

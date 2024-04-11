@@ -123,6 +123,12 @@ app.post('/post', (req, res) => {
         var settings = getSettings()
         settings.permissionLevels.push(body.data)
         writeSettings(settings) 
+    } else if (action == "changeKey" && body.data) {
+        var settings = getSettings()
+        settings.eventKey = body.data
+        writeSettings(settings)
+    } else if (action == "getKey") {
+        res.send({res: getSettings().eventKey})
     } else {
         res.send({res: "Invalid Request"});
     }
@@ -135,7 +141,7 @@ function getSettings() {
 }
 
 function writeSettings(data) {
-    JSON.parse(fs.writeFileSync(__dirname + "/settings.json", JSON.stringify(data)))
+    fs.writeFileSync(__dirname + "/settings.json", JSON.stringify(data))
 }
 
 /* EXAMPLE OF USAGE

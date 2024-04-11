@@ -22,91 +22,163 @@
 
         <br>
 
-        <h2>Users</h2>
+        <h2>
+            Matches
+            <i class="bi bi-caret-down-fill collapse-icon"></i>
+        </h2>
 
         <div>
-            <button class="btn btn-primary" id="add-user">
-                Add User
-            </button>
+
+            <h4>Auto Assigner Settings</h3>
+            <div id="auto-assigner-settings">
+                <b>
+                    High Priority Teams (In order): <input id="aas-hpt" type="text" placeholder="EX: 1648, 1234, 4321"><br>
+                    Length of breaks (In matches): <input id="aas-lob" type="text" placeholder="EX: 1"><br>
+                    Matches between breaks: <input id="aas-mbb" type="text" placeholder="EX: 5"><br>
+                    Users to not assign matches: <input id="aas-dna" type="text" placeholder="EX: gray, admin">
+                </b>
+            </div> 
+
+            <h4>Matches</h4>
+            <table class="table table-hover table-bordered" id="match-table" style="margin-top: -6px;">
+                <thead style="font-weight: bold;">
+                    <tr>
+                        <td style="width: 1px">Number</td>
+                        <td>Red 1</td>
+                        <td>Red 2</td>
+                        <td>Red 3</td>
+                        <td>Blue 1</td>
+                        <td>Blue 2</td>
+                        <td>Blue 3</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
         </div>
 
-        <table class="table table-hover table-bordered" id="user-table">
+        <hr>
 
-            <thead>
-                <tr>
-                    <% for (x=0; x<Object.keys(users[0]).length; x++) { %>
-                        <th scope="col">
-                            <!-- <button class="btn btn-link" onclick="sortTable('<%= x %>')"> -->
-                                <%= Object.keys(users[0])[x] %>
-                            <!-- </button> -->
-                        </th>
-                    <% } %>
-                </tr>
-            </thead>
+        <h2>
+            Settings
+            <i class="bi bi-caret-down-fill collapse-icon"></i>
+        </h2>
 
-            <tbody>
-
-                <% for(i = 0; i < users.length; i++) { %>
-                    <tr id="row-<%= i %>">  
-                        <% for (x=0; x<Object.keys(users[i]).length; x++) { %>
-                            <td>
-                                <% const key = Object.keys(users[i])[x] %>
-                                <%= users[i][key] %>
-                            </td>
-                        <% } %>
-                    </tr>
-                <% } %>
-            </tbody>
-
-        </table>
-
-        <h2>Permissions</h2>
-        
-        <div>
-            <button class="btn btn-primary" id="add-perm">
-                Add Permission
-            </button>
+        <div id="settings">
+            <span id="currentKey"></span><br>
+            <span>TBA Event Key:</span>
+            <input id="eventKey" type="text" placeholder="YYYYSSCCC"><br>
+            <button class="btn btn-primary" id="save-settings">Save</button>
         </div>
 
-        <table class="table table-hover table-bordered" id="perm-table">
+        <hr>
 
-            <thead>
-                <tr>
-                    <th>
-                        id
-                    </th>
-                    <% for (x=0; x<Object.keys(perms[0]).length; x++) { %>
-                        <th scope="col">
-                            <!-- <button class="btn btn-link" onclick="sortTable('<%= x %>')"> -->
-                                <%= Object.keys(perms[0])[x] %>
-                            <!-- </button> -->
-                        </th>
-                    <% } %>
-                </tr>
-            </thead>
+        <h2>
+            Users
+            <i class="bi bi-caret-down-fill collapse-icon"></i>
+        </h2>
 
-            <tbody>
+        <div id="users">
 
-                <% for(i = 0; i < perms.length; i++) { %>
-                    <tr id="row-<%= i %>">  
-                        <td>
-                            <%= i %>
-                        </td>
-                        <% for (x=0; x<Object.keys(perms[i]).length; x++) { %>
-                            <td>
-                                <% const key = Object.keys(perms[i])[x] %>
-                                <%= perms[i][key] %>
-                            </td>
+
+            <div>
+                <button class="btn btn-primary" id="add-user">
+                    Add User
+                </button>
+            </div>
+
+            <table class="table table-hover table-bordered" id="user-table">
+
+                <thead>
+                    <tr>
+                        <% for (x=0; x<Object.keys(users[0]).length; x++) { %>
+                            <th scope="col">
+                                <!-- <button class="btn btn-link" onclick="sortTable('<%= x %>')"> -->
+                                    <%= Object.keys(users[0])[x] %>
+                                <!-- </button> -->
+                            </th>
                         <% } %>
                     </tr>
-                <% } %>
-            </tbody>
+                </thead>
 
-        </table>
+                <tbody>
+
+                    <% for(i = 0; i < users.length; i++) { %>
+                        <tr id="row-<%= i %>">  
+                            <% for (x=0; x<Object.keys(users[i]).length; x++) { %>
+                                <td>
+                                    <% const key = Object.keys(users[i])[x] %>
+                                    <%= users[i][key] %>
+                                </td>
+                            <% } %>
+                        </tr>
+                    <% } %>
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <hr>
+
+        <h2>
+            Permissions
+            <i class="bi bi-caret-down-fill collapse-icon"></i>
+        </h2>
+
+        <div id="permissions">
+            
+            <div>
+                <button class="btn btn-primary" id="add-perm">
+                    Add Permission
+                </button>
+            </div>
+
+            <table class="table table-hover table-bordered" id="perm-table">
+
+                <thead>
+                    <tr>
+                        <th>
+                            id
+                        </th>
+                        <% for (x=0; x<Object.keys(perms[0]).length; x++) { %>
+                            <th scope="col">
+                                <!-- <button class="btn btn-link" onclick="sortTable('<%= x %>')"> -->
+                                    <%= Object.keys(perms[0])[x] %>
+                                <!-- </button> -->
+                            </th>
+                        <% } %>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <% for(i = 0; i < perms.length; i++) { %>
+                        <tr>  
+                            <td>
+                                <%= i %>
+                            </td>
+                            <% for (x=0; x<Object.keys(perms[i]).length; x++) { %>
+                                <td>
+                                    <% const key = Object.keys(perms[i])[x] %>
+                                    <%= perms[i][key] %>
+                                </td>
+                            <% } %>
+                        </tr>
+                    <% } %>
+                </tbody>
+
+            </table>
+        </div>
     </body>
 </html>
 
 <style>
+    span {
+        font-weight: bold;
+    }
+
     body {
         margin: 20px;
         background-color: rgb(255, 73, 73);
@@ -139,29 +211,4 @@
     }
 </style>
 
-<script>
-    $("#add-perm").on("click", function() {
-        const newName = prompt("What should the name of this permission be?");
-        let blackList = prompt("What pages should they not be allowed on? EX: /page1,/page2/ex");
-
-        blackList = blackList.split(",")
-
-        if (newName && blackList) {
-            postData({action: "addPerm", data: {name: newName, blacklist: blackList}})
-        } else {
-            alert("Error making permission.")
-        }
-    })
-
-    $("#add-user").on("click", function () {
-        const newName = prompt("What is this users name?");
-        const newPassword = prompt("What is theis users password?");
-        const perm = prompt("What is the ID of the permission they should have?")
-
-        if (newName && newPassword && Number.isInteger(parseInt(perm)) && Math.round(perm) == perm) {
-            postData({action: "addUser", data: {username: newName, password: newPassword, permissions: perm}})
-        } else {
-            alert("Error making user.")
-        }
-    })
-</script>
+<script src="/admin.js"></script>
