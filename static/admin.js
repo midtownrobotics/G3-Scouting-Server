@@ -3,7 +3,8 @@
 setCurrentKey()
 makeMatchTable()
 
-indexToAlliance = [
+// List of stations to convert index 0-5 to station
+indexToStation = [
     "red1",
     "red2",
     "red3",
@@ -13,9 +14,12 @@ indexToAlliance = [
 ]
 
 async function assignMatches() {
+    // Gets neccicary data
     const matches = await getMatches()
     const doNotAssign = $("#aas-dna").val().replace(/\s/g, '').split(",")
     const priorityTeams = $("#aas-hpt").val().replace(/\s/g, '').split(",")
+    const lengthOfBreaks = parseInt($("#aas-lob").val().replace(/\s/g, ''))
+    const lengthOfOnDuty = parseInt($("#aas-mbb").val().replace(/\s/g, ''))
 
     // Remove users that shouldn't be assigned matches
     let remainingUsers = getUsers()
@@ -28,8 +32,8 @@ async function assignMatches() {
 
     // Makes scout for each user that should be scouting
     let scouts = [];
-    for (i = 0; i < remainingUsers.length; i++) {
-        scouts.push({name: remainingUsers[i], matchNumbs: [], matches: []})
+    for (let i = 0; i < remainingUsers.length; i++) {
+        scouts.push({name: remainingUsers[i], matchNumbs: [], matches: [], breaks: []})
     }
 
     // Finds all matches and ranks them by priority (if applicable)
@@ -52,23 +56,33 @@ async function assignMatches() {
         allScouting.push(nonPriorityScouting[i])
     }
 
-    
+    // Assignes matches
     for (let i = 0; i < allScouting.length; i++) {
+        const matchNumb = allScouting[i].match
         scouts.sort(JSONCompareByNumberOfMatches)
         for (let x = 0; x < scouts.length; x++) {
-            if (!scouts[x].matchNumbs.includes(allScouting[i].match)) {
-                scouts[x].matchNumbs.push(allScouting[i].match)
-                let highPriority = false
-                if (allScouting[i].priority) {
-                    highPriority = true
-                }
-                scouts[x].matches.push({number: allScouting[i].match, alliance: indexToAlliance[allScouting[i].index], team: allScouting[i].team, highPriority: highPriority})
+            let highPriority = false
+            if (allScouting[i].priority !== undefined) {
+                highPriority = true
+            }
+
+            const onBreak = ((matchNumb % (lengthOfOnDuty + lengthOfBreaks)) - (lengthOfBreaks-1)) <= 0
+
+            if ((!onBreak || highPriority) && !scouts[x].matchNumbs.includes(matchNumb)) {
+                scouts[x].matchNumbs.push(matchNumb)
+                scouts[x].matches.push({number: matchNumb, alliance: indexToStation[allScouting[i].index], team: allScouting[i].team, highPriority: highPriority})
                 break
             }
         }
     }
 
-    console.log(scouts)
+    // Finds breaks and adds them to scout
+    const allMatchNumbers = Array.from(Array(matches.length).keys(), ((x) => x+1)) // Makes array of every match by number
+    for (let i = 0; i < scouts.length; i++) {
+        scouts[i].breaks = allMatchNumbers.filter(x => !scouts[i].matchNumbs.includes(x));
+    }
+
+    console.log(JSON.stringify(scouts))
 }
 
 function JSONCompareByNumberOfMatches(a, b) {
