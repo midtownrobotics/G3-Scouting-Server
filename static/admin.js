@@ -3,6 +3,15 @@
 setCurrentKey()
 makeMatchTable()
 
+indexToAlliance = [
+    "red1",
+    "red2",
+    "red3",
+    "blue1",
+    "blue2",
+    "blue3"
+]
+
 async function assignMatches() {
     const matches = await getMatches()
     const doNotAssign = $("#aas-dna").val().replace(/\s/g, '').split(",")
@@ -17,10 +26,15 @@ async function assignMatches() {
         }
     }
 
-    let priorityScouting = []
-    let nonPriorityScouting = []
+    // Makes scout for each user that should be scouting
+    let scouts = [];
+    for (i = 0; i < remainingUsers.length; i++) {
+        scouts.push({name: remainingUsers[i], matchNumbs: [], matches: []})
+    }
 
     // Finds all matches and ranks them by priority (if applicable)
+    let priorityScouting = []
+    let nonPriorityScouting = []
     for (let i = 0; i < matches.length; i++) {
         for (let x = 0; x < 6; x++) {
             if (matches[i].indexOf(priorityTeams[x]) > -1) {
@@ -30,9 +44,41 @@ async function assignMatches() {
             }
         }
     }
+    priorityScouting.sort(JSONCompareByPriority)
 
-    console.log(priorityScouting.sort(JSONCompareByPriority))
-    console.log(nonPriorityScouting)
+    // Puts all scouting matches into one object, with the priority ones first
+    let allScouting = priorityScouting
+    for (let i = 0; i < nonPriorityScouting.length; i++) {
+        allScouting.push(nonPriorityScouting[i])
+    }
+
+    
+    for (let i = 0; i < allScouting.length; i++) {
+        scouts.sort(JSONCompareByNumberOfMatches)
+        for (let x = 0; x < scouts.length; x++) {
+            if (!scouts[x].matchNumbs.includes(allScouting[i].match)) {
+                scouts[x].matchNumbs.push(allScouting[i].match)
+                let highPriority = false
+                if (allScouting[i].priority) {
+                    highPriority = true
+                }
+                scouts[x].matches.push({number: allScouting[i].match, alliance: indexToAlliance[allScouting[i].index], team: allScouting[i].team, highPriority: highPriority})
+                break
+            }
+        }
+    }
+
+    console.log(scouts)
+}
+
+function JSONCompareByNumberOfMatches(a, b) {
+    if (a.matchNumbs.length < b.matchNumbs.length) {
+        return -1;
+    }
+    if (a.matchNumbs.length > b.matchNumbs.length) {
+        return 1;
+    }
+    return 0;
 }
 
 function JSONCompareByPriority(a, b) {
@@ -82,6 +128,10 @@ function getUsers() {
     return users;
 }
 
+$('#aas-button').on('click', function(){
+    assignMatches()
+})
+
 $('#save-settings').on('click', function() {
     if ($('#eventKey').val() !== "") {
         postData({action: 'changeKey', data: $('#eventKey').val()})
@@ -109,13 +159,14 @@ $("#add-perm").on("click", function() {
     }
 })
 
-$("#add-user").on("click", function () {
+$("#add-user").on("click", async function () {
     const newName = prompt("What is this users name?");
     const newPassword = prompt("What is theis users password?");
     const perm = prompt("What is the ID of the permission they should have?")
 
     if (newName && newPassword && Number.isInteger(parseInt(perm)) && Math.round(perm) == perm) {
-        postData({action: "addUser", data: {username: newName, password: newPassword, permissions: perm, matches: []}})
+        await postData({action: "addUser", data: {username: newName, password: newPassword, permissions: perm, matches: []}})
+        window.location.reload()
     } else {
         alert("Error making user.")
     }

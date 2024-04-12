@@ -23,23 +23,29 @@
         <br>
 
         <h2>
+            Auto Assigner
+            <i class="bi bi-caret-down-fill collapse-icon"></i>
+        </h2>
+
+        <div>
+            <b>
+                High Priority Teams (In order): <input class="form-control" id="aas-hpt" type="text" placeholder="EX: 1648, 1234, 4321">
+                Length of breaks (In matches): <input class="form-control" id="aas-lob" type="text" placeholder="EX: 1">
+                Matches between breaks: <input class="form-control" id="aas-mbb" type="text" placeholder="EX: 5">
+                Users to not assign matches: <input class="form-control" id="aas-dna" type="text" placeholder="EX: gray, admin">
+            </b><br>
+            <button class="btn btn-primary" id="aas-button">Generate</button>
+        </div>
+        
+        <hr>
+
+        <h2>
             Matches
             <i class="bi bi-caret-down-fill collapse-icon"></i>
         </h2>
 
         <div>
 
-            <h4>Auto Assigner Settings</h3>
-            <div id="auto-assigner-settings">
-                <b>
-                    High Priority Teams (In order): <input id="aas-hpt" type="text" placeholder="EX: 1648, 1234, 4321"><br>
-                    Length of breaks (In matches): <input id="aas-lob" type="text" placeholder="EX: 1"><br>
-                    Matches between breaks: <input id="aas-mbb" type="text" placeholder="EX: 5"><br>
-                    Users to not assign matches: <input id="aas-dna" type="text" placeholder="EX: gray, admin">
-                </b>
-            </div> 
-
-            <h4>Matches</h4>
             <table class="table table-hover table-bordered" id="match-table" style="margin-top: -6px;">
                 <thead style="font-weight: bold;">
                     <tr>
@@ -68,7 +74,7 @@
         <div id="settings">
             <span id="currentKey"></span><br>
             <span>TBA Event Key:</span>
-            <input id="eventKey" type="text" placeholder="YYYYSSCCC"><br>
+            <input class="form-control" id="eventKey" type="text" placeholder="YYYYSSCCC"><br>
             <button class="btn btn-primary" id="save-settings">Save</button>
         </div>
 
