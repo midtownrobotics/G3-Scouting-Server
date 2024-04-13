@@ -20,6 +20,7 @@ async function assignMatches() {
     const priorityTeams = $("#aas-hpt").val().replace(/\s/g, '').split(",")
     const lengthOfBreaks = parseInt($("#aas-lob").val().replace(/\s/g, ''))
     const lengthOfOnDuty = parseInt($("#aas-mbb").val().replace(/\s/g, ''))
+    const breakOffset = parseInt($("#aas-off").val().replace(/\s/g, ''))
 
     // Remove users that shouldn't be assigned matches
     let remainingUsers = getUsers()
@@ -64,7 +65,7 @@ async function assignMatches() {
                 highPriority = true
             }
 
-            const onBreak = ((matchNumb % (lengthOfOnDuty + lengthOfBreaks)) - (lengthOfBreaks-1)) <= 0
+            const onBreak = (((matchNumb+x*breakOffset) % (lengthOfOnDuty + lengthOfBreaks)) - (lengthOfBreaks-1)) <= 0
 
             if ((!onBreak || highPriority) && !scouts[x].matchNumbs.includes(matchNumb) && !allScouting[i].assigned) {
                 allScouting[i].assigned = scouts[x].name
@@ -215,4 +216,14 @@ $("#add-user").on("click", async function () {
     } else {
         alert("Error making user.")
     }
+})
+
+$(".perm-delete").on('click', function() {
+    const id = $(this).parent().next().text().trim()
+    console.log(id)
+})
+
+$(".user-delete").on('click', function() {
+    const name = $(this).parent().next().text().trim()
+    console.log(name)
 })

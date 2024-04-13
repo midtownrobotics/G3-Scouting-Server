@@ -31,7 +31,9 @@
             High Priority Teams (In order): <input class="form-control" id="aas-hpt" type="text" placeholder="EX: 1648, 1234, 4321">
             Length of breaks (In matches): <input class="form-control" id="aas-lob" type="text" placeholder="EX: 1">
             Matches between breaks: <input class="form-control" id="aas-mbb" type="text" placeholder="EX: 5">
-            Users to not assign matches: <input class="form-control" id="aas-dna" type="text" placeholder="EX: gray, admin"><br>
+            Scout break offsets: <input class="form-control" id="aas-off" type="text" placeholder="EX: 1">
+            Users to not assign matches: <input class="form-control" id="aas-dna" type="text" placeholder="EX: gray, admin">
+            <br>
             <button class="btn btn-primary" id="aas-button">Simulate</button>
             <div id="aas-results"></div>
         </div>
@@ -97,6 +99,7 @@
 
                 <thead>
                     <tr>
+                            <th scope="col" width="1px"></th>
                         <% for (x=0; x<Object.keys(users[0]).length; x++) { %>
                             <th scope="col">
                                 <!-- <button class="btn btn-link" onclick="sortTable('<%= x %>')"> -->
@@ -111,6 +114,9 @@
 
                     <% for(i = 0; i < users.length; i++) { %>
                         <tr id="row-<%= i %>">  
+                            <td>
+                                <i class="bi bi-trash-fill user-delete curser"></i>
+                            </td>
                             <% for (x=0; x<Object.keys(users[i]).length; x++) { %>
                                 <td>
                                     <% const key = Object.keys(users[i])[x] %>
@@ -144,6 +150,7 @@
 
                 <thead>
                     <tr>
+                        <th scope="col" width="1px"></th>
                         <th>
                             id
                         </th>
@@ -160,7 +167,10 @@
                 <tbody>
 
                     <% for(i = 0; i < perms.length; i++) { %>
-                        <tr>  
+                        <tr>
+                            <td>
+                                <i class="bi bi-trash-fill perm-delete curser"></i>
+                            </td>
                             <td>
                                 <%= i %>
                             </td>
@@ -213,6 +223,10 @@
     #user-table, #perm-table {
         margin-top: 15px;
         margin-bottom: 15px;
+    }
+
+    .curser:hover {
+        cursor: pointer;
     }
 </style>
 
