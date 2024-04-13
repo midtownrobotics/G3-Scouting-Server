@@ -20,7 +20,7 @@ async function assignMatches() {
     const priorityTeams = $("#aas-hpt").val().replace(/\s/g, '').split(",")
     const lengthOfBreaks = parseInt($("#aas-lob").val().replace(/\s/g, ''))
     const lengthOfOnDuty = parseInt($("#aas-mbb").val().replace(/\s/g, ''))
-    const breakOffset = parseInt($("#aas-off").val().replace(/\s/g, ''))
+    const breakOffset = parseInt($("#aas-off").val().replace(/\s/g, '')) || 0
 
     // Remove users that shouldn't be assigned matches
     let remainingUsers = getUsers()
@@ -168,7 +168,7 @@ async function setCurrentKey() {
 function getUsers() {
     let users = []
     for (i = 0 ; i < $('#user-table tbody').children().length; i++) {
-        users.push( $($($('#user-table tbody').children()[i]).children()[0]).text().trim() )
+        users.push( $($($('#user-table tbody').children()[i]).children()[1]).text().trim() )
     }
 
     return users;
@@ -220,10 +220,11 @@ $("#add-user").on("click", async function () {
 
 $(".perm-delete").on('click', function() {
     const id = $(this).parent().next().text().trim()
-    console.log(id)
+    confirm(`You are about to permission #${id}!`)
+
 })
 
 $(".user-delete").on('click', function() {
     const name = $(this).parent().next().text().trim()
-    console.log(name)
+    confirm(`You are about to delete user ${name}!`)
 })
