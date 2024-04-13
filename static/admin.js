@@ -81,7 +81,16 @@ async function assignMatches() {
         scouts[i].breaks = allMatchNumbers.filter(x => !scouts[i].matchNumbs.includes(x));
     }
 
-    console.log(Math.round((matches.length*6 - [...allScouting].filter((el) => !el.assigned).length) / (matches.length * 6) * 100)+"%")
+    const matchesCovered = Math.round((matches.length*6 - [...allScouting].filter((el) => !el.assigned).length) / (matches.length * 6) * 1000)/10
+    const priorityMatches = [...allScouting].filter((el) => el.priority !== undefined)
+    const priorityCovered = Math.round((priorityMatches.length - priorityMatches.filter((el) => !el.assigned).length) / (priorityMatches.length) * 1000)/10
+
+    $('#aas-results').html(`
+        <br>
+        <h4>Results:</h4>
+        <p>Percent of all matches scouted: ${matchesCovered}%</p>
+        ${(priorityCovered) ? ("<p>Percent of priority matches scouted: "+priorityCovered+"%</p>") : ""}
+    `)
 
     makeMatchTable([...allScouting].sort(JSONCompareByMatchNumber))
 }
