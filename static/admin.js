@@ -76,15 +76,12 @@ async function assignMatches() {
     }
 
     // Finds breaks and adds them to scout
-    let allBreaks = [];
     const allMatchNumbers = Array.from(Array(matches.length).keys(), ((x) => x+1)) // Makes array of every match by number
     for (let i = 0; i < scouts.length; i++) {
         scouts[i].breaks = allMatchNumbers.filter(x => !scouts[i].matchNumbs.includes(x));
-        Array.prototype.push.apply(allBreaks, scouts[i].breaks)
     }
 
-    console.log(Math.round((matches.length*6 - allBreaks.length) / (matches.length * 6) * 100)+"%")
-    console.log([...allScouting].sort(JSONCompareByMatchNumber).filter((el) => el.match == 3).find((el) => el.index == 0))
+    console.log(Math.round((matches.length*6 - [...allScouting].filter((el) => !el.assigned).length) / (matches.length * 6) * 100)+"%")
 
     makeMatchTable([...allScouting].sort(JSONCompareByMatchNumber))
 }
