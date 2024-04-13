@@ -41,20 +41,18 @@ async function assignMatches() {
     let nonPriorityScouting = []
     for (let i = 0; i < matches.length; i++) {
         for (let x = 0; x < 6; x++) {
-            if (matches[i].indexOf(priorityTeams[x]) > -1) {
-                priorityScouting.push({match: i+1, index: matches[i].indexOf(priorityTeams[x]), team: priorityTeams[x], priority: x})
+            if (priorityTeams.indexOf(matches[i][x]) > -1) {
+                priorityScouting.push({match: i+1, index: x, team: matches[i][x], priority: priorityTeams.indexOf(matches[i][x])})
             } else {
                 nonPriorityScouting.push({match: i+1, index: x, team: matches[i][x]})
             }
         }
     }
-    priorityScouting.sort(JSONCompareByPriority)
 
     // Puts all scouting matches into one object, with the priority ones first
-    let allScouting = priorityScouting
-    for (let i = 0; i < nonPriorityScouting.length; i++) {
-        allScouting.push(nonPriorityScouting[i])
-    }
+    let allScouting = [];
+    Array.prototype.push.apply(allScouting, [...priorityScouting].sort(JSONCompareByPriority))
+    Array.prototype.push.apply(allScouting, nonPriorityScouting)
 
     // Assignes matches
     for (let i = 0; i < allScouting.length; i++) {
@@ -68,7 +66,8 @@ async function assignMatches() {
 
             const onBreak = ((matchNumb % (lengthOfOnDuty + lengthOfBreaks)) - (lengthOfBreaks-1)) <= 0
 
-            if ((!onBreak || highPriority) && !scouts[x].matchNumbs.includes(matchNumb)) {
+            if ((!onBreak || highPriority) && !scouts[x].matchNumbs.includes(matchNumb) && !allScouting[i].assigned) {
+                allScouting[i].assigned = scouts[x].name
                 scouts[x].matchNumbs.push(matchNumb)
                 scouts[x].matches.push({number: matchNumb, alliance: indexToStation[allScouting[i].index], team: allScouting[i].team, highPriority: highPriority})
                 break
@@ -77,12 +76,17 @@ async function assignMatches() {
     }
 
     // Finds breaks and adds them to scout
+    let allBreaks = [];
     const allMatchNumbers = Array.from(Array(matches.length).keys(), ((x) => x+1)) // Makes array of every match by number
     for (let i = 0; i < scouts.length; i++) {
         scouts[i].breaks = allMatchNumbers.filter(x => !scouts[i].matchNumbs.includes(x));
+        Array.prototype.push.apply(allBreaks, scouts[i].breaks)
     }
 
-    console.log(JSON.stringify(scouts))
+    console.log(Math.round((matches.length*6 - allBreaks.length) / (matches.length * 6) * 100)+"%")
+    console.log([...allScouting].sort(JSONCompareByMatchNumber).filter((el) => el.match == 3).find((el) => el.index == 0))
+
+    makeMatchTable([...allScouting].sort(JSONCompareByMatchNumber))
 }
 
 function JSONCompareByNumberOfMatches(a, b) {
@@ -105,21 +109,42 @@ function JSONCompareByPriority(a, b) {
     return 0;
 }
 
-async function makeMatchTable() {
+function JSONCompareByMatchNumber(a, b) {
+    if (a.match < b.match) {
+        return -1;
+    }
+    if (a.match > b.match) {
+        return 1;
+    }
+    return 0;
+}
+
+async function makeMatchTable(matchesScouting) {
     $('#match-table tbody').empty()
 
     const matches = await getMatches()
 
     for (let i = 0; i < matches.length; i++) {
+        let rows;
+        if (!matchesScouting) {
+            for (let x = 0; x < 6; x++) {
+                rows += `<td>${matches[i][x]}</td>`
+            }
+        } else {
+            for (let x = 0; x < 6; x++) {
+                const assigned = matchesScouting.filter((el) => el.match == i+1).find((el) => el.index == x).assigned;
+                if (assigned == undefined) {
+                    rows += `<td class="table-danger">${matches[i][x]}</td>`
+                } else {
+                    rows += `<td>${matches[i][x]}: ${assigned}</td>`
+                }
+            }
+        }
+
         $('#match-table tbody').append(`
             <tr>
                 <td><b>${i+1}</b></td>
-                <td class="team">${matches[i][0]}</td>
-                <td class="team">${matches[i][1]}</td>
-                <td class="team">${matches[i][2]}</td>
-                <td class="team">${matches[i][3]}</td>
-                <td class="team">${matches[i][4]}</td>
-                <td class="team">${matches[i][5]}</td>
+                ${rows}
             </tr>
         `)
     }
