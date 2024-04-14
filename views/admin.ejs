@@ -150,7 +150,6 @@
 
                 <thead>
                     <tr>
-                        <th scope="col" width="1px"></th>
                         <th>
                             id
                         </th>
@@ -169,9 +168,6 @@
                     <% for(i = 0; i < perms.length; i++) { %>
                         <tr>
                             <td>
-                                <i class="bi bi-trash-fill perm-delete curser"></i>
-                            </td>
-                            <td>
                                 <%= i %>
                             </td>
                             <% for (x=0; x<Object.keys(perms[i]).length; x++) { %>
@@ -185,6 +181,8 @@
                 </tbody>
 
             </table>
+
+            <b>Note: You cannot delete permissions. The only way to remove them is to clear the database.</b>
         </div>
     </body>
 </html>

@@ -18,8 +18,8 @@ async function assignMatches() {
     const matches = await getMatches()
     const doNotAssign = $("#aas-dna").val().replace(/\s/g, '').split(",")
     const priorityTeams = $("#aas-hpt").val().replace(/\s/g, '').split(",")
-    const lengthOfBreaks = parseInt($("#aas-lob").val().replace(/\s/g, ''))
-    const lengthOfOnDuty = parseInt($("#aas-mbb").val().replace(/\s/g, ''))
+    const lengthOfBreaks = parseInt($("#aas-lob").val().replace(/\s/g, '')) || 0
+    const lengthOfOnDuty = parseInt($("#aas-mbb").val().replace(/\s/g, '')) || 0
     const breakOffset = parseInt($("#aas-off").val().replace(/\s/g, '')) || 0
 
     // Remove users that shouldn't be assigned matches
@@ -34,7 +34,7 @@ async function assignMatches() {
     // Makes scout for each user that should be scouting
     let scouts = [];
     for (let i = 0; i < remainingUsers.length; i++) {
-        scouts.push({name: remainingUsers[i], matchNumbs: [], matches: [], breaks: []})
+        scouts.push({name: remainingUsers[i], matchNumbs: [], matches: [], breaks: [], id: i})
     }
 
     // Finds all matches and ranks them by priority (if applicable)
@@ -65,7 +65,7 @@ async function assignMatches() {
                 highPriority = true
             }
 
-            const onBreak = (((matchNumb+x*breakOffset) % (lengthOfOnDuty + lengthOfBreaks)) - (lengthOfBreaks-1)) <= 0
+            const onBreak = (((matchNumb+scouts[x].id*breakOffset) % (lengthOfOnDuty + lengthOfBreaks)) - (lengthOfBreaks-1)) <= 0
 
             if ((!onBreak || highPriority) && !scouts[x].matchNumbs.includes(matchNumb) && !allScouting[i].assigned) {
                 allScouting[i].assigned = scouts[x].name
