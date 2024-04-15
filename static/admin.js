@@ -85,11 +85,18 @@ async function assignMatches() {
     const matchesCovered = Math.round((matches.length*6 - [...allScouting].filter((el) => !el.assigned).length) / (matches.length * 6) * 1000)/10
     const priorityMatches = [...allScouting].filter((el) => el.priority !== undefined)
     const priorityCovered = Math.round((priorityMatches.length - priorityMatches.filter((el) => !el.assigned).length) / (priorityMatches.length) * 1000)/10
+    const averageNumberOfMatches = Math.round(scouts.map(value => value.matchNumbs.length).reduce((a,b) => a+b) / scouts.length * 10)/10;
+    const averageNumberOfBreaks = Math.round(scouts.map(value => value.breaks.length).reduce((a,b) => a+b) / scouts.length * 10)/10;
+
+    console.log(averageNumberOfMatches)
+    console.log(averageNumberOfBreaks)
 
     $('#aas-results').html(`
         <br>
         <h4>Results:</h4>
-        <p>Percent of all matches scouted: ${matchesCovered}%</p>
+        <a>Percent of all matches scouted: ${matchesCovered}%</a><br>
+        <a>Average number of matches: ${averageNumberOfMatches}</a><br>
+        <a>Average number of breaks: ${averageNumberOfBreaks}</a><br>
         ${(priorityCovered) ? ("<p>Percent of priority matches scouted: "+priorityCovered+"%</p>") : ""}
     `)
 
