@@ -13,6 +13,16 @@ indexToStation = [
     "blue3"
 ]
 
+// List of alliances to convert index 0-5 to alliance
+indexToAlliance = [
+    "red",
+    "red",
+    "red",
+    "blue",
+    "blue",
+    "blue"
+]
+
 async function assignMatches() {
     // Gets neccicary data
     const matches = await getMatches()
@@ -21,6 +31,7 @@ async function assignMatches() {
     const lengthOfBreaks = parseInt($("#aas-lob").val().replace(/\s/g, '')) || 0
     const lengthOfOnDuty = parseInt($("#aas-mbb").val().replace(/\s/g, '')) || 0
     const breakOffset = parseInt($("#aas-off").val().replace(/\s/g, '')) || 0
+    const stickToOneAlliance = document.getElementById('aas-soa').checked
 
     // Remove users that shouldn't be assigned matches
     let remainingUsers = getUsers()
@@ -32,9 +43,23 @@ async function assignMatches() {
     }
 
     // Makes scout for each user that should be scouting
+    let assignedAlliance = {red: 0, blue: 0}
     let scouts = [];
     for (let i = 0; i < remainingUsers.length; i++) {
-        scouts.push({name: remainingUsers[i], matchNumbs: [], matches: [], breaks: [], id: i})
+        scouts.push({name: remainingUsers[i], matchNumbs: [], matches: [], breaks: [], id: i, assignedAlliance: ""})
+        if (stickToOneAlliance) {
+            if (((i+1) - remainingUsers.length/2) > 0) {
+                scouts[i].assignedAlliance = "blue"
+                assignedAlliance.blue++
+            } else {
+                scouts[i].assignedAlliance = "red"
+                assignedAlliance.red++
+            }
+        }
+    }
+
+    if (stickToOneAlliance && assignedAlliance.blue !== assignedAlliance.red) {
+        scouts[0].assignedAlliance = "both"
     }
 
     // Finds all matches and ranks them by priority (if applicable)
@@ -55,6 +80,8 @@ async function assignMatches() {
     Array.prototype.push.apply(allScouting, [...priorityScouting].sort(JSONCompareByPriority))
     Array.prototype.push.apply(allScouting, nonPriorityScouting)
 
+    console.log(allScouting)
+
     // Assignes matches
     for (let i = 0; i < allScouting.length; i++) {
         const matchNumb = allScouting[i].match
@@ -66,8 +93,9 @@ async function assignMatches() {
             }
 
             const onBreak = (((matchNumb+scouts[x].id*breakOffset) % (lengthOfOnDuty + lengthOfBreaks)) - (lengthOfBreaks-1)) <= 0
+            const correctAlliance = stickToOneAlliance ? scouts[x].assignedAlliance == indexToAlliance[allScouting[i].index] : true
 
-            if ((!onBreak || highPriority) && !scouts[x].matchNumbs.includes(matchNumb) && !allScouting[i].assigned) {
+            if ((!onBreak || highPriority) && correctAlliance && !scouts[x].matchNumbs.includes(matchNumb) && !allScouting[i].assigned) {
                 allScouting[i].assigned = scouts[x].name
                 scouts[x].matchNumbs.push(matchNumb)
                 scouts[x].matches.push({number: matchNumb, alliance: indexToStation[allScouting[i].index], team: allScouting[i].team, highPriority: highPriority})
