@@ -1,4 +1,4 @@
-// $('.collapse-icon').parent().next().slideUp(0)
+$('.collapse-icon').parent().next().slideUp(0)
 
 setCurrentKey()
 makeMatchTable()
@@ -128,7 +128,7 @@ async function assignMatches() {
         ${(priorityCovered) ? ("<p>Percent of priority matches scouted: "+priorityCovered+"%</p>") : ""}
     `)
 
-    makeMatchTable([...allScouting].sort(JSONCompareByMatchNumber))
+    makeMatchTable([...allScouting].sort(JSONCompareByMatchNumber), "simulator-table")
 }
 
 function JSONCompareByNumberOfMatches(a, b) {
@@ -161,8 +161,8 @@ function JSONCompareByMatchNumber(a, b) {
     return 0;
 }
 
-async function makeMatchTable(matchesScouting) {
-    $('#match-table tbody').empty()
+async function makeMatchTable(matchesScouting, tableId = "match-table") {
+    $('#'+tableId+' tbody').empty()
 
     const matches = await getMatches()
 
@@ -183,7 +183,7 @@ async function makeMatchTable(matchesScouting) {
             }
         }
 
-        $('#match-table tbody').append(`
+        $('#'+tableId+' tbody').append(`
             <tr>
                 <td><b>${i+1}</b></td>
                 ${rows}
