@@ -101,36 +101,71 @@ app.get('/admin', (req, res) => {
 // })
 
 app.post('/post', (req, res) => {
-    const action = req.body.action
     const body = req.body
 
-    if (action == "getSheet" && body.sheet) {
-        res.send({res: getSheet(body.sheet)});
-    } else if (action == "addRow" && body.sheet && body.data) {
-        addRowToSheet(body.sheet, body.data);
-        res.send({res: "OK"});
-    } else if (action == "addColumn" && body.sheet && body.data) {
-        addColumnToSheet(body.sheet, body.data);
-        res.send({res: "OK"});
-    } else if (action == "deleteRow" && body.sheet && body.data) {
-        deleteRowFromSheet(body.sheet, body.data);
-        res.send({res: "OK"})
-    } else if (action == "addUser" && body.data) {
-        var settings = getSettings()
-        settings.users.push(body.data)
-        writeSettings(settings) 
-    } else if (action == "addPerm" && body.data) {
-        var settings = getSettings()
-        settings.permissionLevels.push(body.data)
-        writeSettings(settings) 
-    } else if (action == "changeKey" && body.data) {
-        var settings = getSettings()
-        settings.eventKey = body.data
-        writeSettings(settings)
-    } else if (action == "getKey") {
-        res.send({res: getSettings().eventKey})
-    } else {
-        res.send({res: "Invalid Request"});
+    switch (req.body.action) {
+        case "getSheet":
+            res.send({res: getSheet(body.sheet)});
+            break
+        case "addRow":
+            addRowToSheet(body.sheet, body.data);
+            res.send({res: "OK"});
+            break
+        case "addColumn":
+            addColumnToSheet(body.sheet, body.data);
+            res.send({res: "OK"});
+            break
+        case "deleteRow":
+            deleteRowFromSheet(body.sheet, body.data);
+            res.send({res: "OK"})
+            break
+        case "addUser":
+            var settings = getSettings()
+            settings.users.push(body.data)
+            writeSettings(settings) 
+            break
+        case "addPerm":
+            var settings = getSettings()
+            settings.permissionLevels.push(body.data)
+            writeSettings(settings) 
+            break
+        case "changeKey":
+            var settings = getSettings()
+            settings.eventKey = body.data
+            writeSettings(settings)
+            break
+        case "getKey":
+            res.send({res: getSettings().eventKey})
+            break
+        default:
+            res.send({res: "Invalid Request"});
+            break
+    }
+    
+})
+
+app.post('/admin', (res, req) => {
+    const body = req.body
+
+    switch (req.body.action) {
+        case "deleteDatabase":
+            var settings = getSettings()
+            settings.users = []
+            settings.eventKey = "NONE"
+            writeSettings(settings)
+            fs.writeFileSync(__dirname + "/src/data/scouting.json", {})
+            break
+        case "deleteDatabaseAndPerms":
+            var settings = getSettings()
+            settings.users = []
+            settings.eventKey = "NONE"
+            settings.permissionLevels = []
+            writeSettings(settings)
+            fs.writeFileSync(__dirname + "/src/data/scouting.json", {})
+            break
+        default:
+            res.send({res: "Invalid Request"});
+            break
     }
 })
 
