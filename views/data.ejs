@@ -34,6 +34,8 @@
             </div>
         </div>
 
+        <% if (data?.rows) { %>
+
         <table class="table table-hover table-bordered" id="data-table">
 
             <thead>
@@ -67,6 +69,15 @@
             </tbody>
 
         </table>
+
+        <% } else { %>
+
+        <br><br><br>
+        <h1>There is no data to show! :(</h1>
+        <h3>There may be no responses or there may be in internal error.</h3>
+
+        <% } %>
+
     </body>
 </html>
 
