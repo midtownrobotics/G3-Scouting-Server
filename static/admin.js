@@ -263,3 +263,19 @@ $(".user-delete").on('click', function() {
     const name = $(this).parent().next().text().trim()
     confirm(`You are about to delete user ${name}!`)
 })
+
+$("#clear-database").on('click', function(){
+    if (confirm("You are about to delete the whole database. This includes all scouting data, users, and settings. HIGHLY DESTRUCTIVE!!!")) {
+        if (prompt("Please type 'Delete Everything' if you REALLY want to reset the database!!") == 'Delete Everything') {
+            postData({action: "deleteDatabase"}, true)
+        }
+    }
+})
+
+$("#clear-database-perm").on('click', function(){
+    if (confirm("You are about to delete the whole database. This includes all scouting data, users, permissions, and settings. HIGHLY DESTRUCTIVE!!!")) {
+        if (prompt("Please type 'Delete Everything' if you REALLY want to reset the database!!") == 'Delete Everything') {
+            postData({action: "deleteDatabaseAndPerms"}, true)
+        }
+    }
+})

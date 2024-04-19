@@ -34,8 +34,9 @@ async function getMatches() {
     return matches;
 }
 
-async function postData(data) {
-    return fetch("/post/", {
+async function postData(data, admin = false) {
+    const url = admin ? "/admin/" : "/post/"
+    return fetch(url, {
         method: "POST", 
         credentials: 'same-origin',
         headers: {
