@@ -48,7 +48,7 @@ app.use(function(req, res, next) {
         res.setHeader('WWW-Authenticate', 'Basic realm="G3"');
         res.end('Unauthorized');
     } else {
-        if (!getSettings().permissionLevels[permissions].blacklist.includes(url)) {
+        if (!getSettings().permissionLevels[permissions].blacklist.includes(url) || url == "") {
             next();
         } else {
             res.sendFile(__dirname + "/src/401.html");
