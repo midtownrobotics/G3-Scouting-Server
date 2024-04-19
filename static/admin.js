@@ -267,6 +267,7 @@ $(".user-delete").on('click', function() {
 $("#clear-database").on('click', function(){
     if (confirm("You are about to delete the whole database. This includes all scouting data, users, and settings. HIGHLY DESTRUCTIVE!!!")) {
         if (prompt("Please type 'Delete Everything' if you REALLY want to reset the database!!") == 'Delete Everything') {
+            alert("Succesfully deleted database. Contact server administrator to restore data.")
             postData({action: "deleteDatabase"}, true)
         }
     }
@@ -275,6 +276,7 @@ $("#clear-database").on('click', function(){
 $("#clear-database-perm").on('click', function(){
     if (confirm("You are about to delete the whole database. This includes all scouting data, users, permissions, and settings. HIGHLY DESTRUCTIVE!!!")) {
         if (prompt("Please type 'Delete Everything' if you REALLY want to reset the database!!") == 'Delete Everything') {
+            alert("Succesfully deleted database. Contact server administrator to restore data.")
             postData({action: "deleteDatabaseAndPerms"}, true)
         }
     }

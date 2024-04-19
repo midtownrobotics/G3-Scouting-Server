@@ -36,6 +36,7 @@ async function getMatches() {
 
 async function postData(data, admin = false) {
     const url = admin ? "/admin/" : "/post/"
+    console.log(url)
     return fetch(url, {
         method: "POST", 
         credentials: 'same-origin',

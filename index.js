@@ -12,6 +12,19 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use(function(req, res, next) {
+
+    if(!getSettings().users[0]) {
+        var settings = getSettings()
+        settings.users.push({username: "admin", password: "password", permissions: "0", matches: []})
+        writeSettings(settings) 
+    }
+
+    if(!getSettings().permissionLevels[0]) {
+        var settings = getSettings()
+        settings.permissionLevels.push({name: "admin", blacklist: ""})
+        writeSettings(settings) 
+    }
+
     var auth;
     let url = req.url;
     if (url.charAt(url.length - 1) == "/") {
@@ -144,7 +157,7 @@ app.post('/post', (req, res) => {
     
 })
 
-app.post('/admin', (res, req) => {
+app.post('/admin', (req, res) => {
     const body = req.body
 
     switch (req.body.action) {
@@ -153,7 +166,7 @@ app.post('/admin', (res, req) => {
             settings.users = []
             settings.eventKey = "NONE"
             writeSettings(settings)
-            fs.writeFileSync(__dirname + "/src/data/scouting.json", {})
+            fs.writeFileSync(__dirname + "/src/data/scouting.json", JSON.stringify({}))
             break
         case "deleteDatabaseAndPerms":
             var settings = getSettings()
@@ -161,7 +174,7 @@ app.post('/admin', (res, req) => {
             settings.eventKey = "NONE"
             settings.permissionLevels = []
             writeSettings(settings)
-            fs.writeFileSync(__dirname + "/src/data/scouting.json", {})
+            fs.writeFileSync(__dirname + "/src/data/scouting.json", JSON.stringify({}))
             break
         default:
             res.send({res: "Invalid Request"});
