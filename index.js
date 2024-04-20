@@ -21,7 +21,7 @@ app.use(function(req, res, next) {
 
     if(!getSettings().permissionLevels[0]) {
         var settings = getSettings()
-        settings.permissionLevels.push({name: "admin", blacklist: ""})
+        settings.permissionLevels.push({name: "admin", blacklist: []})
         writeSettings(settings) 
     }
 
@@ -48,7 +48,15 @@ app.use(function(req, res, next) {
         res.setHeader('WWW-Authenticate', 'Basic realm="G3"');
         res.end('Unauthorized');
     } else {
-        if (!getSettings().permissionLevels[permissions].blacklist.includes(url) || url == "") {
+        const blacklist = getSettings().permissionLevels[permissions].blacklist
+        let bad = false;
+        for (let i=0; i < blacklist.length; i++) {
+            if (url.includes(blacklist[i])) {
+                bad = true
+                break
+            }
+        }
+        if (!bad) {
             next();
         } else {
             res.sendFile(__dirname + "/src/401.html");
@@ -74,23 +82,11 @@ app.get('/logout', (req, res) => {
     res.send('Unauthorized');
 })
 
-app.get('/pit', (req, res) => {
-    formContent = JSON.parse(fs.readFileSync("./src/pitForm.html")).toString();
+// app.get('/form', (req, res) => {
+//     formContent = ""
 
-    res.render('scouting', {title: 'Pit Scouting Form', form: formContent});
-}) 
-
-app.get('/qualitative', (req, res) => {
-    formContent = JSON.parse(fs.readFileSync("./src/qualitativeForm.html")).toString();
-
-    res.render('scouting', {title: 'Qualitative Scouting Form', form: formContent});
-}) 
-
-app.get('/quantitative', (req, res) => {
-    formContent = JSON.parse(fs.readFileSync("./src/quantitativeForm.html")).toString();
-
-    res.render('scouting', {title: 'Quantitative Scouting Form', form: formContent});
-}) 
+//     res.render('scouting', {form: formContent});
+// }) 
 
 app.get('/data', (req, res) => {
     const sheet = req.query.sheet
@@ -99,7 +95,7 @@ app.get('/data', (req, res) => {
     } else {
         sheets = fs.readFileSync(__dirname + "/scouting.json").toString() == "" ? false : Object.keys(JSON.parse(fs.readFileSync(__dirname + "/scouting.json").toString()))
         res.render('data-home', {sheets: sheets})
-    }   
+    }
 })
 
 app.get('/admin', (req, res) => {
