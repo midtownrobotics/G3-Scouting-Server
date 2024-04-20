@@ -166,7 +166,7 @@ app.post('/admin', (req, res) => {
             settings.users = []
             settings.eventKey = "NONE"
             writeSettings(settings)
-            fs.writeFileSync(__dirname + "/src/data/scouting.json", JSON.stringify({}))
+            fs.writeFileSync(__dirname + "/scouting.json", JSON.stringify({}))
             break
         case "deleteDatabaseAndPerms":
             var settings = getSettings()
@@ -174,7 +174,7 @@ app.post('/admin', (req, res) => {
             settings.eventKey = "NONE"
             settings.permissionLevels = []
             writeSettings(settings)
-            fs.writeFileSync(__dirname + "/src/data/scouting.json", JSON.stringify({}))
+            fs.writeFileSync(__dirname + "/scouting.json", JSON.stringify({}))
             break
         default:
             res.send({res: "Invalid Request"});
@@ -200,26 +200,37 @@ function writeSettings(data) {
 
 */
 
+function makeSheet(sheet) {
+    let newJSON = JSON.parse(fs.readFileSync(__dirname + "/scouting.json").toString())
+    if (!newJSON[sheet]) {
+        newJSON[sheet] = {"cols":[], "rows": []}
+        fs.writeFileSync(__dirname + "/scouting.json", JSON.stringify(newJSON))
+        return "OK"
+    } else {
+        return "Sheet Already Made"
+    }
+}
+
 function getSheet(sheet) {
-    return JSON.parse(fs.readFileSync(__dirname + "/src/data/scouting.json").toString())[sheet]
+    return JSON.parse(fs.readFileSync(__dirname + "/scouting.json").toString())[sheet]
 }
 
 function addRowToSheet(sheet, row) {
-    let newJSON = JSON.parse(fs.readFileSync(__dirname + "/src/data/scouting.json").toString())
+    let newJSON = JSON.parse(fs.readFileSync(__dirname + "/scouting.json").toString())
     newJSON[sheet].rows.push(row)
-    fs.writeFileSync(__dirname + "/src/data/scouting.json", JSON.stringify(newJSON))
+    fs.writeFileSync(__dirname + "/scouting.json", JSON.stringify(newJSON))
 }
 
 function addColumnToSheet(sheet, column) {
-    let newJSON = JSON.parse(fs.readFileSync(__dirname + "/src/data/scouting.json").toString())
+    let newJSON = JSON.parse(fs.readFileSync(__dirname + "/scouting.json").toString())
     newJSON[sheet].cols.push(column)
-    fs.writeFileSync(__dirname + "/src/data/scouting.json", JSON.stringify(newJSON))
+    fs.writeFileSync(__dirname + "/scouting.json", JSON.stringify(newJSON))
 }
 
 function deleteRowFromSheet(sheet, row) {
-    let newJSON = JSON.parse(fs.readFileSync(__dirname + "/src/data/scouting.json").toString())
+    let newJSON = JSON.parse(fs.readFileSync(__dirname + "/scouting.json").toString())
     newJSON[sheet].rows.splice(row, 1)
-    fs.writeFileSync(__dirname + "/src/data/scouting.json", JSON.stringify(newJSON))
+    fs.writeFileSync(__dirname + "/scouting.json", JSON.stringify(newJSON))
 }
 
 console.log(`listening on port ${PORT}!`);

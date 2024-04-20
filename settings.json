@@ -1,1 +1,17 @@
-{"eventKey":"NONE","users":[{"username":"admin","password":"password","permissions":"0","matches":[]}],"permissionLevels":[{"name":"admin","blacklist":""}]}
+{
+    "eventKey": "NONE",
+    "users": [
+        {
+            "username": "admin",
+            "password": "password",
+            "permissions": "0",
+            "matches": []
+        }
+    ],
+    "permissionLevels": [
+        {
+            "name": "admin",
+            "blacklist": ""
+        }
+    ]
+}
