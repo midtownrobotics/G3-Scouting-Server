@@ -58,5 +58,65 @@
                 }
             ]
         ]
+    },
+    "pit scouting": {
+        "cols": [
+            "scout",
+            "matchNum",
+            "TeamNum",
+            "climb",    
+            "throw",
+            "additionalNotes"
+        ],
+        "rows": [
+            [
+                {
+                    "name": "matchNum",
+                    "value": "333"
+                },
+                {
+                    "name": "TeamNum",
+                    "value": "33"
+                },
+                {
+                    "name": "climb",
+                    "value": "Yes"
+                },
+                {
+                    "name": "throw",
+                    "value": "Yes"
+                },
+                {
+                    "name": "scout",
+                    "value": "admin"
+                }
+            ],
+            [
+                {
+                    "name": "matchNum",
+                    "value": "1412834892173894701293874908127394701237490812734981723098471092874980123"
+                },
+                {
+                    "name": "TeamNum",
+                    "value": "30897419802734098172983478901237409817293804"
+                },
+                {
+                    "name": "climb",
+                    "value": "Yes"
+                },
+                {
+                    "name": "throw",
+                    "value": "Yes"
+                },
+                {
+                    "name": "additionalNotes",
+                    "value": "3470123h lsjd hoqrwiuoffiwhaeorucfh3iuhqgoi4h5fiouhiuofhoiuhoiqhweoiuhweiourhfoiuqwehroiuwheriouhweqoiurhwoiquehroiuwqhreiouwqehroiuhqweoiurhweoiurhoiwquhroiuweqhroiuweqhroiuhweqoiurhqwoeiurhoiewqhroiwqehr"
+                },
+                {
+                    "name": "scout",
+                    "value": "admin"
+                }
+            ]
+        ]
     }
 }

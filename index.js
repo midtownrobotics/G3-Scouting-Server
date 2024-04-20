@@ -93,7 +93,13 @@ app.get('/quantitative', (req, res) => {
 }) 
 
 app.get('/data', (req, res) => {
-    res.render('data', {data: getSheet('testing-sheet')});
+    const sheet = req.query.sheet
+    if (sheet) {
+        res.render('data', {data: getSheet(sheet)});
+    } else {
+        sheets = fs.readFileSync(__dirname + "/scouting.json").toString() == "" ? false : Object.keys(JSON.parse(fs.readFileSync(__dirname + "/scouting.json").toString()))
+        res.render('data-home', {sheets: sheets})
+    }   
 })
 
 app.get('/admin', (req, res) => {
