@@ -60,18 +60,16 @@ $(".minus").click(function() {
     $(this).next().html(parseInt($(this).next().html())-1);
 });
 
-$("#sumbitButton").click(function() {
+$('#form').on("submit", submitForm)
+
+function submitForm() {
     const formData = $('#form').serializeArray()
-    let data = []
-    for (let i = 0; i < formData.length; i++) {
-        data.push(formData[i].value);
-        
-    }
-    postData({action: "addRow", sheet: "testing-sheet", data: data}).then(function(res){
+    postData({action: "addRow", sheet: "testing-sheet", data: formData}).then(function(res){
         if (res == "OK") {
-            window.location.reload()
+            $('#form').trigger("reset");
+            window.scrollTo(0, 0);
         } else {
             alert("FORM NOT SAVED!")
         }
     })
-})
+}

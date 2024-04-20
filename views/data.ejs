@@ -60,8 +60,10 @@
                             <i class="bi bi-trash-fill"></i>
                         </td>
                         <% for (x=0; x < data.cols.length; x++) { %>
-                            <td>
-                                <%= data.rows[i][x] %>
+                            <td>        
+                                <% if (data.rows[i].findIndex(p => p.name == data.cols[x]) > -1) { %>
+                                    <%= data.rows[i][data.rows[i].findIndex(p => p.name == data.cols[x])].value %> 
+                                <% } %>
                             </td>
                         <% } %>
                     </tr>

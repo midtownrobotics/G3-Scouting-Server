@@ -121,7 +121,7 @@ app.post('/post', (req, res) => {
             res.send({res: getSheet(body.sheet)});
             break
         case "addRow":
-            addRowToSheet(body.sheet, body.data);
+            addRowToSheet(body.sheet, body.data, Buffer.from(req.headers.authorization.substring(6), 'base64').toString().split(':')[0]);
             res.send({res: "OK"});
             break
         case "addColumn":
@@ -215,9 +215,13 @@ function getSheet(sheet) {
     return JSON.parse(fs.readFileSync(__dirname + "/scouting.json").toString())[sheet]
 }
 
-function addRowToSheet(sheet, row) {
+function addRowToSheet(sheet, data, username) {
+    data.push({name: "scout", value: username})
     let newJSON = JSON.parse(fs.readFileSync(__dirname + "/scouting.json").toString())
-    newJSON[sheet].rows.push(row)
+    for (let i=0; i < data.length; i++) {
+        !newJSON[sheet].cols.includes(data[i].name) ? newJSON[sheet].cols.push(data[i].name) : ""
+    }
+    newJSON[sheet].rows.push(data)
     fs.writeFileSync(__dirname + "/scouting.json", JSON.stringify(newJSON))
 }
 
