@@ -24,18 +24,23 @@
                     </a>
                 </button>
             </div> -->
-            &nbsp;&nbsp;&nbsp;
+            <!-- &nbsp;&nbsp;&nbsp; -->
             <div>
                 <button class="head-buttons">
                     <a href="/">
-                        Go Home <i class="bi bi-house-door-fill"></i>
+                        Home <i class="bi bi-house-door-fill"></i>
+                    </a>
+                </button>
+                <button class="head-buttons">
+                    <a href="/data">
+                        Data Home <i class="bi bi-bar-chart-fill"></i>
                     </a>
                 </button>
             </div>
         </div>
 
         <% if (data?.rows) { %>
-
+        
         <table class="table table-hover table-bordered" id="data-table">
 
             <thead>
@@ -60,7 +65,7 @@
                             <i class="bi bi-trash-fill"></i>
                         </td>
                         <% for (x=0; x < data.cols.length; x++) { %>
-                            <td>        
+                            <td style="white-space: nowrap;">        
                                 <% if (data.rows[i].findIndex(p => p.name == data.cols[x]) > -1) { %>
                                     <%= data.rows[i][data.rows[i].findIndex(p => p.name == data.cols[x])].value %> 
                                 <% } %>
@@ -89,8 +94,7 @@
         background-color: rgb(255, 73, 73);
     }
 
-    table {
-        border-top: 3px;
+    #data-table {
         margin-top: 40px;
     }
 

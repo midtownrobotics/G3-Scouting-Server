@@ -3,6 +3,12 @@ $('.collapse-icon').parent().next().slideUp(0)
 setCurrentKey()
 makeMatchTable()
 
+postData({action: "getSchedule"}).then(function(res){
+    if (res !== "") {
+        makeMatchTable(res)
+    }
+})
+
 // List of stations to convert index 0-5 to station
 indexToStation = [
     "red1",
@@ -288,6 +294,7 @@ $("#clear-database-perm").on('click', function(){
 })
 
 $("#aad-button").on('click', async function () {
-    const scoutsObj = (await assignMatches()).scouts
-    postData({action: "assignMatches", data: scoutsObj})
+    const assignMatchesObj = await assignMatches()
+    postData({action: "assignMatches", data: assignMatchesObj.scouts})
+    postData({action: "setSchedule", data: assignMatchesObj.matches})
 })

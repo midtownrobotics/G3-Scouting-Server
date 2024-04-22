@@ -93,7 +93,7 @@ app.get('/data', (req, res) => {
     if (sheet) {
         res.render('data', {data: getSheet(sheet)});
     } else {
-        sheets = fs.readFileSync(__dirname + "/scouting.json").toString() == "" ? false : Object.keys(JSON.parse(fs.readFileSync(__dirname + "/scouting.json").toString()))
+        sheets = getFile("/storage/scouting.json").toString() == "" ? false : Object.keys(getFile("/storage/scouting.json"))
         res.render('data-home', {sheets: sheets})
     }
 })
@@ -140,26 +140,37 @@ app.post('/post', (req, res) => {
             var settings = getSettings()
             settings.users.push(body.data)
             writeSettings(settings) 
+            res.send({res: "OK"})
             break
         case "addPerm":
             var settings = getSettings()
             settings.permissionLevels.push(body.data)
             writeSettings(settings) 
+            res.send({res: "OK"})
             break
         case "changeKey":
             var settings = getSettings()
             settings.eventKey = body.data
             writeSettings(settings)
+            res.send({res: "OK"})
             break
         case "getKey":
             res.send({res: getSettings().eventKey})
             break
         case "assignMatches":
-            fs.writeFileSync(__dirname+"/scouts.json", JSON.stringify(body.data))
+            fs.writeFileSync(__dirname+"/storage/scouts.json", JSON.stringify(body.data))
+            res.send({res: "OK"})
             break
         case "getScout":
-            const scouts = JSON.parse(fs.readFileSync(__dirname+"/scouts.json"))
+            const scouts = getFile('/storage/scouts.json')
             res.send({res: scouts[scouts.findIndex(p => p.name == Buffer.from(req.headers.authorization.substring(6), 'base64').toString().split(':')[0])]})
+            break
+        case "getSchedule":
+            res.send({res: getFile("/storage/matches.json")})
+            break
+        case "setSchedule":
+            fs.writeFileSync(__dirname+"/storage/matches.json", JSON.stringify(body.data))
+            res.send({res: "OK"})
             break
         default:
             res.send({res: "Invalid Request"});
@@ -167,6 +178,15 @@ app.post('/post', (req, res) => {
     }
     
 })
+
+function getFile(relativePath) {
+    const file = fs.readFileSync(__dirname+relativePath).toString()
+    try {
+        return JSON.parse(file)
+    } catch {
+        return file
+    }
+}   
 
 app.post('/admin', (req, res) => {
     const body = req.body
@@ -177,7 +197,8 @@ app.post('/admin', (req, res) => {
             settings.users = []
             settings.eventKey = "NONE"
             writeSettings(settings)
-            fs.writeFileSync(__dirname + "/scouting.json", JSON.stringify({}))
+            fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify({}))
+            res.send({res: "OK"})
             break
         case "deleteDatabaseAndPerms":
             var settings = getSettings()
@@ -185,7 +206,8 @@ app.post('/admin', (req, res) => {
             settings.eventKey = "NONE"
             settings.permissionLevels = []
             writeSettings(settings)
-            fs.writeFileSync(__dirname + "/scouting.json", JSON.stringify({}))
+            fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify({}))
+            res.send({res: "OK"})
             break
         default:
             res.send({res: "Invalid Request"});
@@ -196,11 +218,11 @@ app.post('/admin', (req, res) => {
 // Get Settings
 
 function getSettings() {
-    return JSON.parse(fs.readFileSync(__dirname + "/settings.json").toString())
+    return getFile("/storage/settings.json")
 }
 
 function writeSettings(data) {
-    fs.writeFileSync(__dirname + "/settings.json", JSON.stringify(data))
+    fs.writeFileSync(__dirname + "/storage/settings.json", JSON.stringify(data))
 }
 
 /* EXAMPLE OF USAGE
@@ -212,10 +234,10 @@ function writeSettings(data) {
 */
 
 function makeSheet(sheet) {
-    let newJSON = JSON.parse(fs.readFileSync(__dirname + "/scouting.json").toString())
+    let newJSON = getFile("/storage/scouting.json")
     if (!newJSON[sheet]) {
         newJSON[sheet] = {"cols":[], "rows": []}
-        fs.writeFileSync(__dirname + "/scouting.json", JSON.stringify(newJSON))
+        fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify(newJSON))
         return "OK"
     } else {
         return "Sheet Already Made"
@@ -223,37 +245,37 @@ function makeSheet(sheet) {
 }
 
 function completeMatch(matchNumber, username) {
-    let scouts = JSON.parse(fs.readFileSync(__dirname+"/scouts.json"))
+    let scouts = getFile("/storage/scouts.json")
     const user = scouts.findIndex(({name}) => name == username)
     scouts[user].matches.find(({number}) => number == matchNumber) ? scouts[user].matches.find(({number}) => number == matchNumber).scouted = true : ""
     scouts[user].matchNumbs.splice(scouts[user].matchNumbs.indexOf(parseInt(matchNumber)), 1)
-    fs.writeFileSync(__dirname+"/scouts.json", JSON.stringify(scouts))
+    fs.writeFileSync(__dirname+"/storage/scouts.json", JSON.stringify(scouts))
 }
 
 function getSheet(sheet) {
-    return JSON.parse(fs.readFileSync(__dirname + "/scouting.json").toString())[sheet]
+    return getFile("/storage/scouting.json")[sheet]
 }
 
 function addRowToSheet(sheet, data, username) {
     data.push({name: "scout", value: username})
-    let newJSON = JSON.parse(fs.readFileSync(__dirname + "/scouting.json").toString())
+    let newJSON = getFile("/storage/scouting.json")
     for (let i=0; i < data.length; i++) {
         !newJSON[sheet].cols.includes(data[i].name) ? newJSON[sheet].cols.push(data[i].name) : ""
     }
     newJSON[sheet].rows.push(data)
-    fs.writeFileSync(__dirname + "/scouting.json", JSON.stringify(newJSON))
+    fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify(newJSON))
 }
 
 function addColumnToSheet(sheet, column) {
-    let newJSON = JSON.parse(fs.readFileSync(__dirname + "/scouting.json").toString())
+    let newJSON = getFile("/storage/scouting.json")
     newJSON[sheet].cols.push(column)
-    fs.writeFileSync(__dirname + "/scouting.json", JSON.stringify(newJSON))
+    fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify(newJSON))
 }
 
 function deleteRowFromSheet(sheet, row) {
-    let newJSON = JSON.parse(fs.readFileSync(__dirname + "/scouting.json").toString())
+    let newJSON = getFile("/storage/scouting.json")
     newJSON[sheet].rows.splice(row, 1)
-    fs.writeFileSync(__dirname + "/scouting.json", JSON.stringify(newJSON))
+    fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify(newJSON))
 }
 
 console.log(`listening on port ${PORT}!`);

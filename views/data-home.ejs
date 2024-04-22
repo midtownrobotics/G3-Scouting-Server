@@ -5,6 +5,14 @@
         <link rel="icon" type="image/png" href="/g3.png">
         <title>G3 Scouting!</title>
     </head>
+
+    <button class="head-buttons btn btn-primary">
+        <a href="/">
+            Home <i class="bi bi-house-door-fill"></i>
+        </a>
+    </button>
+    <br><br>
+
     <h1>Welcome to the data manager!</h1>
     <% if (sheets[0]) { %>
         <h3>Please select a sheet below.</h3>
@@ -25,5 +33,9 @@
     a {
         color: black;
         font-size: large;
+    }
+
+    .head-buttons a {
+        text-decoration: none;
     }
 </style>    
