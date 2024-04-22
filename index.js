@@ -123,7 +123,9 @@ app.post('/post', (req, res) => {
             res.send({res: getSheet(body.sheet)});
             break
         case "addRow":
+            console.log(body)
             addRowToSheet(body.sheet, body.data, Buffer.from(req.headers.authorization.substring(6), 'base64').toString().split(':')[0]);
+            completeMatch(body.matchNumb, Buffer.from(req.headers.authorization.substring(6), 'base64').toString().split(':')[0])
             res.send({res: "OK"});
             break
         case "addColumn":
@@ -151,6 +153,13 @@ app.post('/post', (req, res) => {
             break
         case "getKey":
             res.send({res: getSettings().eventKey})
+            break
+        case "assignMatches":
+            fs.writeFileSync(__dirname+"/scouts.json", JSON.stringify(body.data))
+            break
+        case "getScout":
+            const scouts = JSON.parse(fs.readFileSync(__dirname+"/scouts.json"))
+            res.send({res: scouts[scouts.findIndex(p => p.name == Buffer.from(req.headers.authorization.substring(6), 'base64').toString().split(':')[0])]})
             break
         default:
             res.send({res: "Invalid Request"});
@@ -211,6 +220,14 @@ function makeSheet(sheet) {
     } else {
         return "Sheet Already Made"
     }
+}
+
+function completeMatch(matchNumber, username) {
+    let scouts = JSON.parse(fs.readFileSync(__dirname+"/scouts.json"))
+    const user = scouts.findIndex(({name}) => name == username)
+    scouts[user].matches.find(({number}) => number == matchNumber) ? scouts[user].matches.find(({number}) => number == matchNumber).scouted = true : ""
+    scouts[user].matchNumbs.splice(scouts[user].matchNumbs.indexOf(parseInt(matchNumber)), 1)
+    fs.writeFileSync(__dirname+"/scouts.json", JSON.stringify(scouts))
 }
 
 function getSheet(sheet) {

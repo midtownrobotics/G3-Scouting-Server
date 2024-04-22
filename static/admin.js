@@ -45,16 +45,24 @@ async function assignMatches() {
     // Makes scout for each user that should be scouting
     let assignedAlliance = {red: 0, blue: 0}
     let scouts = [];
-    for (let i = 0; i < remainingUsers.length; i++) {
-        scouts.push({name: remainingUsers[i], matchNumbs: [], matches: [], breaks: [], id: i, assignedAlliance: ""})
-        if (stickToOneAlliance) {
-            if (((i+1) - remainingUsers.length/2) > 0) {
-                scouts[i].assignedAlliance = "blue"
-                assignedAlliance.blue++
-            } else {
-                scouts[i].assignedAlliance = "red"
-                assignedAlliance.red++
+    for (let i = 0; i < remainingUsers.length; i++) { 
+        scouts.push({name: remainingUsers[i], 
+        matchNumbs: [], 
+        matches: [], 
+        breaks: [], 
+        id: i, 
+        assignedAlliance: ""} )
+    }
+
+    if (stickToOneAlliance) {
+        for(let i = 0; i < remainingUsers.length; i+=2 ){
+            scouts[i].assignedAlliance = "blue"
+            assignedAlliance.blue++
+            if (!scouts[i+1]){
+                break;
             }
+            scouts[i+1].assignedAlliance = "red"
+            assignedAlliance.red++
         }
     }
 
@@ -80,8 +88,6 @@ async function assignMatches() {
     Array.prototype.push.apply(allScouting, [...priorityScouting].sort(JSONCompareByPriority))
     Array.prototype.push.apply(allScouting, nonPriorityScouting)
 
-    console.log(allScouting)
-
     // Assignes matches
     for (let i = 0; i < allScouting.length; i++) {
         const matchNumb = allScouting[i].match
@@ -93,12 +99,12 @@ async function assignMatches() {
             }
 
             const onBreak = (((matchNumb+scouts[x].id*breakOffset) % (lengthOfOnDuty + lengthOfBreaks)) - (lengthOfBreaks-1)) <= 0
-            const correctAlliance = stickToOneAlliance ? scouts[x].assignedAlliance == indexToAlliance[allScouting[i].index] : true
+            const correctAlliance = stickToOneAlliance ? (scouts[x].assignedAlliance == indexToAlliance[allScouting[i].index] || scouts[x].assignedAlliance == "both") : true
 
             if ((!onBreak || highPriority) && correctAlliance && !scouts[x].matchNumbs.includes(matchNumb) && !allScouting[i].assigned) {
                 allScouting[i].assigned = scouts[x].name
                 scouts[x].matchNumbs.push(matchNumb)
-                scouts[x].matches.push({number: matchNumb, alliance: indexToStation[allScouting[i].index], team: allScouting[i].team, highPriority: highPriority})
+                scouts[x].matches.push({number: matchNumb, alliance: indexToStation[allScouting[i].index], team: allScouting[i].team, highPriority: highPriority, scouted: false})
                 break
             }
         }
@@ -116,19 +122,18 @@ async function assignMatches() {
     const averageNumberOfMatches = Math.round(scouts.map(value => value.matchNumbs.length).reduce((a,b) => a+b) / scouts.length * 10)/10;
     const averageNumberOfBreaks = Math.round(scouts.map(value => value.breaks.length).reduce((a,b) => a+b) / scouts.length * 10)/10;
 
-    console.log(averageNumberOfMatches)
-    console.log(averageNumberOfBreaks)
-
     $('#aas-results').html(`
         <br>
         <h4>Results:</h4>
         <a>Percent of all matches scouted: ${matchesCovered}%</a><br>
         <a>Average number of matches: ${averageNumberOfMatches}</a><br>
         <a>Average number of breaks: ${averageNumberOfBreaks}</a><br>
-        ${(priorityCovered) ? ("<p>Percent of priority matches scouted: "+priorityCovered+"%</p>") : ""}
+        ${(priorityCovered) ? ("<a>Percent of priority matches scouted: "+priorityCovered+"%</a>") : ""}
     `)
 
     makeMatchTable([...allScouting].sort(JSONCompareByMatchNumber), "simulator-table")
+
+    return {scouts: scouts, matches: allScouting}
 }
 
 function JSONCompareByNumberOfMatches(a, b) {
@@ -280,4 +285,9 @@ $("#clear-database-perm").on('click', function(){
             postData({action: "deleteDatabaseAndPerms"}, true)
         }
     }
+})
+
+$("#aad-button").on('click', async function () {
+    const scoutsObj = (await assignMatches()).scouts
+    postData({action: "assignMatches", data: scoutsObj})
 })
