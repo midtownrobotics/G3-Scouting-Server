@@ -195,20 +195,23 @@ app.post('/admin', (req, res) => {
         case "deleteDatabase":
             var settings = getSettings()
             settings.users = []
-            settings.eventKey = "NONE"
-            writeSettings(settings)
-            fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify({}))
-            res.send({res: "OK"})
-            break
-        case "deleteDatabaseAndPerms":
-            var settings = getSettings()
-            settings.users = []
-            settings.eventKey = "NONE"
             settings.permissionLevels = []
+            settings.eventKey = "NONE"
             writeSettings(settings)
             fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify({}))
+            fs.writeFileSync(__dirname + "/storage/matches.json", JSON.stringify({}))
+            fs.writeFileSync(__dirname + "/storage/scouts.json", JSON.stringify({}))
             res.send({res: "OK"})
             break
+        // case "deleteDatabaseAndPerms":
+        //     var settings = getSettings()
+        //     settings.users = []
+        //     settings.eventKey = "NONE"
+        //     settings.permissionLevels = []
+        //     writeSettings(settings)
+        //     fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify({}))
+        //     res.send({res: "OK"})
+        //     break
         default:
             res.send({res: "Invalid Request"});
             break

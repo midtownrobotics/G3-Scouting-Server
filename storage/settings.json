@@ -1,1 +1,29 @@
-{"eventKey":"2024gacmp","users":[{"username":"admin","password":"password","permissions":"0","matches":[]},{"username":"gray","password":"gray","permissions":"1","matches":[]}],"permissionLevels":[{"name":"admin","blacklist":[]},{"name":"scout","blacklist":["/admin"]}]}
+{
+    "eventKey": "2024gacmp",
+    "users": [
+        {
+            "username": "admin",
+            "password": "password",
+            "permissions": "0",
+            "matches": []
+        },
+        {
+            "username": "gray",
+            "password": "gray",
+            "permissions": "1",
+            "matches": []
+        }
+    ],
+    "permissionLevels": [
+        {
+            "name": "admin",
+            "blacklist": []
+        },
+        {
+            "name": "scout",
+            "blacklist": [
+                "/admin"
+            ]
+        }
+    ]
+}
