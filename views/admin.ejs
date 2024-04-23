@@ -124,6 +124,9 @@
                 </button>
             </div>
 
+            <br>
+            <b>Click on the field of a user to edit it.</b>
+
             <table class="table table-hover table-bordered" id="user-table">
 
                 <thead>
@@ -147,7 +150,7 @@
                                 <i class="bi bi-trash-fill user-delete curser"></i>
                             </td>
                             <% for (x=0; x<Object.keys(users[i]).length; x++) { %>
-                                <td>
+                                <td class="user-field">
                                     <% const key = Object.keys(users[i])[x] %>
                                     <%= users[i][key] %>
                                 </td>

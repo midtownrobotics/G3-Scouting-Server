@@ -13,7 +13,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.use(function(req, res, next) {
 
-    if(!getSettings().users[0]) {
+    if(!getSettings().users[0] || !getSettings().users.find(item => item.permissions == "0")) {
         var settings = getSettings()
         settings.users.push({username: "admin", password: "password", permissions: "0", matches: []})
         writeSettings(settings) 
@@ -142,6 +142,15 @@ app.post('/post', (req, res) => {
             writeSettings(settings) 
             res.send({res: "OK"})
             break
+        case "deleteUser":
+            { // needed to declare const only used in this case
+                var settings = getSettings()
+                const userIndex = settings.users.findIndex(item => item.username === body.data)
+                settings.users.splice(userIndex, 1)
+                writeSettings(settings) 
+                res.send({res: "OK"})
+            }
+            break
         case "addPerm":
             var settings = getSettings()
             settings.permissionLevels.push(body.data)
@@ -171,6 +180,15 @@ app.post('/post', (req, res) => {
         case "setSchedule":
             fs.writeFileSync(__dirname+"/storage/matches.json", JSON.stringify(body.data))
             res.send({res: "OK"})
+            break
+        case "editUserField":
+            { // needed to declare const only used in this case
+                var settings = getSettings()
+                const userIndex = settings.users.findIndex(p => p.username == body.data.name)
+                settings.users[userIndex][body.data.field] = body.data.updated
+                writeSettings(settings)
+                res.send({res: "OK"})
+            }
             break
         default:
             res.send({res: "Invalid Request"});

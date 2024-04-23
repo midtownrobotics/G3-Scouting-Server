@@ -264,22 +264,40 @@ $("#add-user").on("click", async function () {
     }
 })
 
-$(".perm-delete").on('click', function() {
-    const id = $(this).parent().next().text().trim()
-    confirm(`You are about to permission #${id}!`)
-
-})
+// $(".perm-delete").on('click', function() {
+//     const id = $(this).parent().next().text().trim()
+//     confirm(`You are about to permission #${id}!`)
+// })
 
 $(".user-delete").on('click', function() {
     const name = $(this).parent().next().text().trim()
-    confirm(`You are about to delete user ${name}!`)
+    if (confirm(`You are about to delete user ${name}!`)) {
+        postData({action: "deleteUser", data: name})
+    }
+})
+
+$(".user-field").on('click', function() {
+    const name = $(this).parent().children().eq(1).text().trim()
+    const field = $(this).closest('table').find('th').eq($(this).index()).text().trim();
+    if (field == "matches") {return}
+    const updated = prompt(`What would you like to change ${name}'s ${field} to?`)
+    postData({
+        action: "editUserField", 
+        data: {
+            name: name, 
+            field: field, 
+            updated: updated
+        }
+    })
 })
 
 $("#clear-database").on('click', function(){
     if (confirm("You are about to delete the whole database. This includes all scouting data, users, perms, schedules, scouts, and settings. HIGHLY DESTRUCTIVE!!!")) {
         if (prompt("Please type 'Delete Everything' if you REALLY want to reset the database!!") == 'Delete Everything') {
             alert("Succesfully deleted database. Contact server administrator to restore data.")
-            postData({action: "deleteDatabase"}, true)
+            postData({
+                action: "deleteDatabase"
+            }, true)
         }
     }
 })
