@@ -236,6 +236,28 @@ $('.collapse-icon').on("click", function() {
     $(this).toggleClass('bi-caret-down-fill');
     $(this).toggleClass('bi-caret-up-fill');
     $(this).parent().next().slideToggle()
+    document.cookie = `{MENU}${$(this).parent().attr('id').replace('-h2', '')}=${$(this).hasClass('bi-caret-up-fill')};`
+})
+
+// opens / closes to last saved position
+for (let i=0; i < document.cookie.split(";").length; i++) {
+    if (document.cookie.split(";")[i].includes("{MENU}")) {
+        const cookie = document.cookie.split(";")[i].trim().replace('{MENU}', '').split("=")
+        if (cookie[1] == "true") {
+            $(`#${cookie[0]}-h2 i`).toggleClass("bi-caret-up-fill").toggleClass("bi-caret-down-fill")
+            $(`#${cookie[0]}`).slideToggle(0)
+        }
+    }
+}
+
+// gets last saved scroll position and goes to it after 400ms
+setTimeout(function(){
+    window.scrollTo(0, parseInt(document.cookie.split(";").find((p) => p.includes("scroll")).replace("scroll=", "").trim()))
+}, 400)
+
+// sets scroll position after page leave
+$(window).on( "unload", function(){
+    document.cookie = `scroll=${Math.round(window.scrollY)};`
 })
 
 $("#add-perm").on("click", function() {
