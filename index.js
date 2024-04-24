@@ -102,6 +102,29 @@ app.get('/admin', (req, res) => {
     res.render('admin', {users: getSettings().users, perms: getSettings().permissionLevels})
 })
 
+app.get('/user-get', (req, res) => {
+    const name = Buffer.from(req.headers.authorization.substring(6), 'base64').toString().split(':')[0]
+    const user = getFile('/storage/scouts.json').find((p) => p.name == name)
+    const matchNumb = user.matchNumbs.reduce((a, b) => Math.min(a, b))
+    const match = user.matches.find((p) => p.number == matchNumb)
+    var matches = user.matches.filter((p) => p.scouted == false).sort((a, b) => (a.number > b.number ? 1 : -1)) // Only shows matches that havent been scouted
+    var matchesAndBreaks = []
+    for (let i = 0; i < matches.length; i++) {
+        matchesAndBreaks[matches[i].number-1] = matches[i]
+    }
+    matchesAndBreaks = Array.from(matchesAndBreaks, item => item || "break");
+    console.log(matchesAndBreaks)
+    res.send({
+        nextMatch: {
+            number: matchNumb, 
+            team: match.team, 
+            station: match.alliance, // Upercases first letter
+            highPriority: match.highPriority
+        },
+        matches: matchesAndBreaks
+    })
+})
+
 // app.get('/sheets', async (req, res) => {
 //     if (req.query.id) {
 //         const sheetToGet = req.query.id

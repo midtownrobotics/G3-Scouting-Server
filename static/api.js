@@ -7,7 +7,7 @@ function TBHAPI(theUrl){
 }
 
 async function getTeams() {
-    const teamsObj = TBHAPI(`/event/${await eventKey}/teams`)
+    const teamsObj = TBHAPI(`/event/${await postData({action: "getKey"})}/teams`)
     let teamNumbList = [];
     let teamNameList = [];
 

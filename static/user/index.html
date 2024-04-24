@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/libs/bootstrap.min.css">
+        <link rel="stylesheet" href="/libs/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css">
+        <link rel="icon" type="image/png" href="/g3.png">
+        <title>G3 Scouting!</title>
+        <script src="/libs/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="/api.js"></script>
+    </head>
+    <body>
+
+        <h2>Next Match Info:</h2>
+        <p>Number: <span id="nm-number"></span></p>
+        <p>Team #: <span id="nm-team"></span></p>
+        <p>Team: <span id="nm-teamname"></span></p>
+        <p>Station: <span id="nm-station"></span></p>
+        <p>High Priority: <span id="nm-hp"></span></p>
+
+        <h2>Schedule:</h2>
+        <table class="table">
+
+            <tbody id="table">
+            </tbody>
+        </table>
+
+    </body>
+</html>
+
+<style>
+
+    body {
+        margin: 20px;
+        background-color: rgb(255, 73, 73);
+    }
+
+    p {
+        margin-bottom: 10px;
+    }
+
+    /* Mobile Landscape Only */
+
+    @media (orientation: landscape) and (max-width: 1025px) {
+        p {
+            font-size: 30px;
+        }
+
+        h2 {
+            font-size: 40px;
+        }
+
+        td {
+            font-size: 20px;
+        }
+    }
+
+    /* Mobile Portrait Only */
+
+    @media (orientation: portrait) and (max-width: 1025px) {
+        p {
+            font-size: 50px;
+        }
+
+        h2 {
+            font-size: 100px;
+        }
+
+        td {
+            font-size: 40px;
+        }
+    }
+
+    /* Desktop Only */
+
+    @media (min-width: 1025px) {
+        p {
+            font-size: 25px;
+        }
+
+        h2 {
+            font-size: 50px;
+        }
+
+        td {
+            font-size: 25px;
+        }
+    }
+
+</style>
+<script src="user.js"></script>
