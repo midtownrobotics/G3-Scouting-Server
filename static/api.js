@@ -19,6 +19,20 @@ async function getTeams() {
     return {"team_numbers": teamNumbList, "team_names": teamNameList, "full_object": teamsObj};
 }
 
+async function currentMatch() {
+    const matches = TBHAPI(`/event/${await postData({action: "getKey"})}/matches`)
+    var matchesNotHappened = []
+    for (let i = 0; i < matches.length; i++) {
+        if (!matches[i].actual_time) {
+            matchesNotHappened.push(matches[i])
+        }
+    }
+
+    console.log(matchesNotHappened)
+
+    return matchesNotHappened[0]?.match_number;
+}
+
 async function getMatches() {
     const matchesObj = TBHAPI(`/event/${await postData({action: "getKey"})}/matches/simple`)
     let matches = [];

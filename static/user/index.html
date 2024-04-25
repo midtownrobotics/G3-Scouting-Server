@@ -10,9 +10,10 @@
     <body>
 
         <h2>Next Match Info:</h2>
+        <p>Matches Until: <span id="nm-mu"></span></p>
         <p>Number: <span id="nm-number"></span></p>
-        <p>Team #: <span id="nm-team"></span></p>
-        <p>Team: <span id="nm-teamname"></span></p>
+        <p>Team Number: <span id="nm-team"></span></p>
+        <p>Team Name: <span id="nm-teamname"></span></p>
         <p>Station: <span id="nm-station"></span></p>
         <p>High Priority: <span id="nm-hp"></span></p>
 
@@ -23,10 +24,29 @@
             </tbody>
         </table>
 
+        <button class="btn btn-link">
+            <i id="reload" class="bi bi-arrow-clockwise"></i>
+        </button>
+
     </body>
 </html>
 
 <style>
+
+    #top-row {
+        top: 0px;
+        position: sticky;
+    }
+
+    #reload {
+        transition-duration: 1s;
+        transition-property: transform;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 30px;
+        color: black;
+    }
 
     body {
         margin: 20px;

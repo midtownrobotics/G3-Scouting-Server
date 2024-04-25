@@ -113,7 +113,6 @@ app.get('/user-get', (req, res) => {
         matchesAndBreaks[matches[i].number-1] = matches[i]
     }
     matchesAndBreaks = Array.from(matchesAndBreaks, item => item || "break");
-    console.log(matchesAndBreaks)
     res.send({
         nextMatch: {
             number: matchNumb, 
