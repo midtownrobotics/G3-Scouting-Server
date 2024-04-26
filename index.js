@@ -258,6 +258,10 @@ app.post('/admin', (req, res) => {
     }
 })
 
+app.get("*", (req, res) => {
+    res.sendFile(__dirname+"/src/404.html")
+})
+
 // Get Settings
 
 function getSettings() {
