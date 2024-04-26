@@ -65,7 +65,7 @@
 <style>
 
     nav li a {
-        font-size: 30px !important;
+        font-size: 40px !important;
     }
 
     #top-row {
@@ -78,7 +78,6 @@
         transition-property: transform;
         position: absolute;
         right: 30px;
-        top: 90px;
         font-size: 80px;
         color: black;
     }
@@ -106,6 +105,10 @@
     /* Mobile Landscape Only */
 
     @media (orientation: landscape) and (max-width: 1025px) {
+        #reload {
+            top: 110px;
+        }
+
         p {
             font-size: 30px;
         }
@@ -126,6 +129,10 @@
     /* Mobile Portrait Only */
 
     @media (orientation: portrait) and (max-width: 1025px) {
+        #reload {
+            top: 140px;
+        }
+
         p {
             font-size: 50px;
         }
@@ -146,6 +153,10 @@
     /* Desktop Only */
 
     @media (min-width: 1025px) {
+        #reload {
+            top: 110px;
+        }
+
         p {
             font-size: 25px;
         }

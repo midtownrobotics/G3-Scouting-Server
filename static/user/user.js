@@ -1,6 +1,6 @@
 function rotateReload() {
     $("#reload").css("transition-duration", "1s")
-    $("#reload").css('transform','rotate(365deg)');
+    $("#reload").css('transform','rotate(360deg)');
     setTimeout(function(){
         $("#reload").css("transition-duration", "0s")
         $("#reload").css('transform','rotate(0deg)');

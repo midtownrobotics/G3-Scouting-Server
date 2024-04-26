@@ -232,11 +232,11 @@ $('#save-settings').on('click', function() {
     }
 })
 
-$('.collapse-icon').on("click", function() {
-    $(this).toggleClass('bi-caret-down-fill');
-    $(this).toggleClass('bi-caret-up-fill');
-    $(this).parent().next().slideToggle()
-    document.cookie = `{MENU}${$(this).parent().attr('id').replace('-h2', '')}=${$(this).hasClass('bi-caret-up-fill')};`
+$('.collapse-icon-parent').on("click", function() {
+    $(this).children().toggleClass('bi-caret-down-fill');
+    $(this).children().toggleClass('bi-caret-up-fill');
+    $(this).next().slideToggle()
+    document.cookie = `{MENU}${$(this).attr('id').replace('-h2', '')}=${$(this).children().hasClass('bi-caret-up-fill')}; path=/admin`
 })
 
 // opens / closes to last saved position
@@ -257,7 +257,7 @@ setTimeout(function(){
 
 // sets scroll position after page leave
 $(window).on( "unload", function(){
-    document.cookie = `scroll=${Math.round(window.scrollY)};`
+    document.cookie = `scroll=${Math.round(window.scrollY)}; path=/admin`
 })
 
 $("#add-perm").on("click", function() {
@@ -316,11 +316,20 @@ $(".user-field").on('click', function() {
 $("#clear-database").on('click', function(){
     if (confirm("You are about to delete the whole database. This includes all scouting data, users, perms, schedules, scouts, and settings. HIGHLY DESTRUCTIVE!!!")) {
         if (prompt("Please type 'Delete Everything' if you REALLY want to reset the database!!") == 'Delete Everything') {
-            alert("Succesfully deleted database. Contact server administrator to restore data.")
             postData({
                 action: "deleteDatabase"
-            }, true)
+            }, true).then((res) => {
+                if (res == "OK") {
+                    alert("Succesfully deleted database.")
+                } else {
+                    alert("ERROR: Database NOT deleted!")
+                }
+            })
+        } else {
+            alert("Database NOT deleted!")
         }
+    } else {
+        alert("Database NOT deleted!")
     }
 })
 

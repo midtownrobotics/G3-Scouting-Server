@@ -34,17 +34,17 @@
 
         <div id="dropdowns">
 
-            <h2 id="aa-h2">
+            <h2 id="aa-h2" class="collapse-icon-parent">
                 Auto Assigner
                 <i class="bi bi-caret-down-fill collapse-icon"></i>
             </h2>
 
             <div id="aa" style="font-weight: bold;">
-                High Priority Teams (In order): <input class="form-control" id="aas-hpt" type="text" placeholder="EX: 1648, 1234, 4321">
-                Length of breaks (In matches): <input class="form-control" id="aas-lob" type="text" placeholder="EX: 1">
-                Matches between breaks: <input class="form-control" id="aas-mbb" type="text" placeholder="EX: 5">
-                Scout break offsets: <input class="form-control" id="aas-off" type="text" placeholder="EX: 1">
-                Users to not assign matches: <input class="form-control" id="aas-dna" type="text" placeholder="EX: gray, admin"><br>
+                High Priority Teams (In order): <input class="text-input form-control" id="aas-hpt" type="text" placeholder="EX: 1648, 1234, 4321">
+                Length of breaks (In matches): <input class="text-input form-control" id="aas-lob" type="text" placeholder="EX: 1">
+                Matches between breaks: <input class="text-input form-control" id="aas-mbb" type="text" placeholder="EX: 5">
+                Scout break offsets: <input class="text-input form-control" id="aas-off" type="text" placeholder="EX: 1">
+                Users to not assign matches: <input class="text-input form-control" id="aas-dna" type="text" placeholder="EX: gray, admin"><br>
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="aas-soa">
                     <label class="form-check-label" for="aas-soa">Scouts stick to one alliance</label>
@@ -53,7 +53,7 @@
                 <button class="btn btn-primary" id="aas-button">Simulate</button>
                 <button class="btn btn-primary" id="aad-button">Deploy</button>
                 <div id="aas-results"></div><br>
-                <h4>
+                <h4 class="collapse-icon-parent">
                     Simulated Schedule
                     <i class="bi bi-caret-down-fill collapse-icon"></i>
                 </h4>
@@ -79,13 +79,14 @@
             
             <hr>
 
-            <h2 id="matches-h2">
+            <h2 id="matches-h2" class="collapse-icon-parent">
                 Matches / Schedule
                 <i class="bi bi-caret-down-fill collapse-icon"></i>
             </h2>
 
             <div id="matches">
 
+                <br>
                 <table class="table table-hover table-bordered" id="match-table" style="margin-top: -6px;">
                     <thead style="font-weight: bold;">
                         <tr>
@@ -106,7 +107,7 @@
 
             <hr>
 
-            <h2 id="settings-h2">
+            <h2 id="settings-h2" class="collapse-icon-parent">
                 Settings
                 <i class="bi bi-caret-down-fill collapse-icon"></i>
             </h2>
@@ -114,7 +115,7 @@
             <div id="settings">
                 <span id="currentKey"></span><br>
                 <span>TBA Event Key:</span>
-                <input class="form-control" id="eventKey" type="text" placeholder="YYYYSSCCC"><br>
+                <input class="form-control text-input" id="eventKey" type="text" placeholder="YYYYSSCCC"><br>
                 <button class="btn btn-primary" id="save-settings">Save Changed Settings</button><br><br>
                 <button class="btn btn-danger" id="clear-database">Clear Database</button>
                 <!-- <button class="btn btn-danger" id="clear-database-perm">Clear Database and Permissions</button> -->
@@ -122,7 +123,7 @@
 
             <hr>
 
-            <h2 id="users-h2">
+            <h2 id="users-h2" class="collapse-icon-parent">
                 Users
                 <i class="bi bi-caret-down-fill collapse-icon"></i>
             </h2>
@@ -177,7 +178,7 @@
 
             <hr>
 
-            <h2 id="permissions-h2">
+            <h2 id="permissions-h2" class="collapse-icon-parent">
                 Permissions
                 <i class="bi bi-caret-down-fill collapse-icon"></i>
             </h2>
@@ -235,7 +236,7 @@
 
 <style>
     nav li a {
-        font-size: 30px !important;
+        font-size: 40px !important;
     }
 
     #dropdowns {
@@ -282,6 +283,14 @@
 
     #aas-results a {
         margin-left: 20px;
+    }
+
+    #matches {
+        width: calc(100% - 20px);
+    }
+
+    .text-input {
+        width: calc(100% - 20px) !important;
     }
 </style>
 
