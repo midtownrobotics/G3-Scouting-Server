@@ -14,10 +14,10 @@
                         <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/forms">Forms</a>
+                        <a class="nav-link active" href="/forms">Forms</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/data">Data</a>
+                        <a class="nav-link" href="/data">Data</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin">Admin</a>
@@ -27,16 +27,16 @@
         </div>
     </nav>
 
-    <div id="sheets">
+    <div id="forms">
 
-        <h1>Welcome to the data manager!</h1>
+        <h1>Welcome to the scouting forms page!</h1>
         <% if (sheets[0]) { %>
-            <h3>Please select a sheet below.</h3>
+            <h3>Please select a form below.</h3>
             <% for (let i=0; i < sheets.length; i++) { %>
-                <a href="/data?sheet=<%=sheets[i]%>">#<%=i+1%>: <%=sheets[i]%></a><br>
+                <a href="/forms?form=<%=sheets[i]%>">#<%=i+1%>: <%=sheets[i]%></a><br>
             <% } %>
         <% } else { %>
-            <h3>No sheets were found! Contact your server administrator if you think this is an issue.</h3>
+            <h3>No forms were found! Contact your server administrator if you think this is an issue.</h3>
         <% } %>
 
     </div>
@@ -47,19 +47,19 @@
         font-size: 30px !important;
     }
 
-    #sheets {
+    #forms {
         margin: 20px;
     }
 
-    #sheets h1 {
+    #forms h1 {
         font-size: 60px;
     }
 
-    #sheets h3 {
+    #forms h3 {
         font-size: 45px;
     }
 
-    #sheets a {
+    #forms   a {
         font-size: 30px;
     }
 

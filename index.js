@@ -82,24 +82,32 @@ app.get('/logout', (req, res) => {
     res.send('Unauthorized');
 })
 
-// app.get('/form', (req, res) => {
-//     formContent = ""
-
-//     res.render('scouting', {form: formContent});
-// }) 
+app.get('/forms', (req, res) => {
+    const form = req.query.form
+    if (form) {
+        res.render('form', {data: getSheet(form)});
+    } else {
+        const sheets = getFile("/storage/scouting.json").toString() == "" ? false : Object.keys(getFile("/storage/scouting.json"))
+        res.render('form-home', {sheets: sheets})
+    }
+})
 
 app.get('/data', (req, res) => {
     const sheet = req.query.sheet
     if (sheet) {
         res.render('data', {data: getSheet(sheet)});
     } else {
-        sheets = getFile("/storage/scouting.json").toString() == "" ? false : Object.keys(getFile("/storage/scouting.json"))
+        const sheets = getFile("/storage/scouting.json").toString() == "" ? false : Object.keys(getFile("/storage/scouting.json"))
         res.render('data-home', {sheets: sheets})
     }
 })
 
 app.get('/admin', (req, res) => {
     res.render('admin', {users: getSettings().users, perms: getSettings().permissionLevels})
+})
+
+app.get('/', (req, res) => {
+    res.render('user', {username: "gray"})
 })
 
 app.get('/user-get', (req, res) => {
