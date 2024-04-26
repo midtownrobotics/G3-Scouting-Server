@@ -9,44 +9,87 @@
     </head>
     <body>
 
-        <div id="save">
-            &nbsp;&nbsp;&nbsp;
-            <div>
-                <button class="head-buttons">
-                    <a href="/">
-                        Go Home <i class="bi bi-house-door-fill"></i>
-                    </a>
-                </button>
+        <nav class="navbar navbar-expand bg-light">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user">User</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/forms">Forms</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/data">Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/admin">Admin</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        </nav>
 
         <br>
 
-        <h2 id="aa-h2">
-            Auto Assigner
-            <i class="bi bi-caret-down-fill collapse-icon"></i>
-        </h2>
+        <div id="dropdowns">
 
-        <div id="aa" style="font-weight: bold;">
-            High Priority Teams (In order): <input class="form-control" id="aas-hpt" type="text" placeholder="EX: 1648, 1234, 4321">
-            Length of breaks (In matches): <input class="form-control" id="aas-lob" type="text" placeholder="EX: 1">
-            Matches between breaks: <input class="form-control" id="aas-mbb" type="text" placeholder="EX: 5">
-            Scout break offsets: <input class="form-control" id="aas-off" type="text" placeholder="EX: 1">
-            Users to not assign matches: <input class="form-control" id="aas-dna" type="text" placeholder="EX: gray, admin"><br>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="aas-soa">
-                <label class="form-check-label" for="aas-soa">Scouts stick to one alliance</label>
-            </div>
-            <br>
-            <button class="btn btn-primary" id="aas-button">Simulate</button>
-            <button class="btn btn-primary" id="aad-button">Deploy</button>
-            <div id="aas-results"></div><br>
-            <h4>
-                Simulated Schedule
+            <h2 id="aa-h2">
+                Auto Assigner
                 <i class="bi bi-caret-down-fill collapse-icon"></i>
-            </h4>
-            <div>
-                <table class="table table-hover table-bordered" id="simulator-table" style="margin-top: -6px;">
+            </h2>
+
+            <div id="aa" style="font-weight: bold;">
+                High Priority Teams (In order): <input class="form-control" id="aas-hpt" type="text" placeholder="EX: 1648, 1234, 4321">
+                Length of breaks (In matches): <input class="form-control" id="aas-lob" type="text" placeholder="EX: 1">
+                Matches between breaks: <input class="form-control" id="aas-mbb" type="text" placeholder="EX: 5">
+                Scout break offsets: <input class="form-control" id="aas-off" type="text" placeholder="EX: 1">
+                Users to not assign matches: <input class="form-control" id="aas-dna" type="text" placeholder="EX: gray, admin"><br>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="aas-soa">
+                    <label class="form-check-label" for="aas-soa">Scouts stick to one alliance</label>
+                </div>
+                <br>
+                <button class="btn btn-primary" id="aas-button">Simulate</button>
+                <button class="btn btn-primary" id="aad-button">Deploy</button>
+                <div id="aas-results"></div><br>
+                <h4>
+                    Simulated Schedule
+                    <i class="bi bi-caret-down-fill collapse-icon"></i>
+                </h4>
+                <div>
+                    <table class="table table-hover table-bordered" id="simulator-table" style="margin-top: -6px;">
+                        <thead style="font-weight: bold;">
+                            <tr>
+                                <td style="width: 1px">Number</td>
+                                <td>Red 1</td>
+                                <td>Red 2</td>
+                                <td>Red 3</td>
+                                <td>Blue 1</td>
+                                <td>Blue 2</td>
+                                <td>Blue 3</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <hr>
+
+            <h2 id="matches-h2">
+                Matches / Schedule
+                <i class="bi bi-caret-down-fill collapse-icon"></i>
+            </h2>
+
+            <div id="matches">
+
+                <table class="table table-hover table-bordered" id="match-table" style="margin-top: -6px;">
                     <thead style="font-weight: bold;">
                         <tr>
                             <td style="width: 1px">Number</td>
@@ -63,169 +106,150 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-        
-        <hr>
 
-        <h2 id="matches-h2">
-            Matches / Schedule
-            <i class="bi bi-caret-down-fill collapse-icon"></i>
-        </h2>
+            <hr>
 
-        <div id="matches">
+            <h2 id="settings-h2">
+                Settings
+                <i class="bi bi-caret-down-fill collapse-icon"></i>
+            </h2>
 
-            <table class="table table-hover table-bordered" id="match-table" style="margin-top: -6px;">
-                <thead style="font-weight: bold;">
-                    <tr>
-                        <td style="width: 1px">Number</td>
-                        <td>Red 1</td>
-                        <td>Red 2</td>
-                        <td>Red 3</td>
-                        <td>Blue 1</td>
-                        <td>Blue 2</td>
-                        <td>Blue 3</td>
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-        </div>
-
-        <hr>
-
-        <h2 id="settings-h2">
-            Settings
-            <i class="bi bi-caret-down-fill collapse-icon"></i>
-        </h2>
-
-        <div id="settings">
-            <span id="currentKey"></span><br>
-            <span>TBA Event Key:</span>
-            <input class="form-control" id="eventKey" type="text" placeholder="YYYYSSCCC"><br>
-            <button class="btn btn-primary" id="save-settings">Save Changed Settings</button><br><br>
-            <button class="btn btn-danger" id="clear-database">Clear Database</button>
-            <!-- <button class="btn btn-danger" id="clear-database-perm">Clear Database and Permissions</button> -->
-        </div>
-
-        <hr>
-
-        <h2 id="users-h2">
-            Users
-            <i class="bi bi-caret-down-fill collapse-icon"></i>
-        </h2>
-
-        <div id="users">
-
-
-            <div>
-                <button class="btn btn-primary" id="add-user">
-                    Add User
-                </button>
+            <div id="settings">
+                <span id="currentKey"></span><br>
+                <span>TBA Event Key:</span>
+                <input class="form-control" id="eventKey" type="text" placeholder="YYYYSSCCC"><br>
+                <button class="btn btn-primary" id="save-settings">Save Changed Settings</button><br><br>
+                <button class="btn btn-danger" id="clear-database">Clear Database</button>
+                <!-- <button class="btn btn-danger" id="clear-database-perm">Clear Database and Permissions</button> -->
             </div>
 
-            <br>
-            <b>Click on the field of a user to edit it.</b>
+            <hr>
 
-            <table class="table table-hover table-bordered" id="user-table">
+            <h2 id="users-h2">
+                Users
+                <i class="bi bi-caret-down-fill collapse-icon"></i>
+            </h2>
 
-                <thead>
-                    <tr>
-                            <th scope="col" width="1px"></th>
-                        <% for (x=0; x<Object.keys(users[0]).length; x++) { %>
-                            <th scope="col">
-                                <!-- <button class="btn btn-link" onclick="sortTable('<%= x %>')"> -->
-                                    <%= Object.keys(users[0])[x] %>
-                                <!-- </button> -->
-                            </th>
-                        <% } %>
-                    </tr>
-                </thead>
+            <div id="users">
 
-                <tbody>
 
-                    <% for(i = 0; i < users.length; i++) { %>
-                        <tr id="row-<%= i %>">  
-                            <td>
-                                <i class="bi bi-trash-fill user-delete curser"></i>
-                            </td>
-                            <% for (x=0; x<Object.keys(users[i]).length; x++) { %>
-                                <td class="user-field">
-                                    <% const key = Object.keys(users[i])[x] %>
-                                    <%= users[i][key] %>
-                                </td>
-                            <% } %>
-                        </tr>
-                    <% } %>
-                </tbody>
+                <div>
+                    <button class="btn btn-primary" id="add-user">
+                        Add User
+                    </button>
+                </div>
 
-            </table>
+                <br>
+                <b>Click on the field of a user to edit it.</b>
 
-        </div>
+                <table class="table table-hover table-bordered" id="user-table">
 
-        <hr>
-
-        <h2 id="permissions-h2">
-            Permissions
-            <i class="bi bi-caret-down-fill collapse-icon"></i>
-        </h2>
-
-        <div id="permissions">
-            
-            <div>
-                <button class="btn btn-primary" id="add-perm">
-                    Add Permission
-                </button>
-            </div>
-
-            <table class="table table-hover table-bordered" id="perm-table">
-
-                <thead>
-                    <tr>
-                        <th>
-                            id
-                        </th>
-                        <% for (x=0; x<Object.keys(perms[0]).length; x++) { %>
-                            <th scope="col">
-                                <!-- <button class="btn btn-link" onclick="sortTable('<%= x %>')"> -->
-                                    <%= Object.keys(perms[0])[x] %>
-                                <!-- </button> -->
-                            </th>
-                        <% } %>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    <% for(i = 0; i < perms.length; i++) { %>
+                    <thead>
                         <tr>
-                            <td>
-                                <%= i %>
-                            </td>
-                            <% for (x=0; x<Object.keys(perms[i]).length; x++) { %>
-                                <td>
-                                    <% const key = Object.keys(perms[i])[x] %>
-                                    <%= perms[i][key] %>
-                                </td>
+                                <th scope="col" width="1px"></th>
+                            <% for (x=0; x<Object.keys(users[0]).length; x++) { %>
+                                <th scope="col">
+                                    <!-- <button class="btn btn-link" onclick="sortTable('<%= x %>')"> -->
+                                        <%= Object.keys(users[0])[x] %>
+                                    <!-- </button> -->
+                                </th>
                             <% } %>
                         </tr>
-                    <% } %>
-                </tbody>
+                    </thead>
 
-            </table>
+                    <tbody>
 
-            <b>Note: You cannot delete permissions. The only way to remove them is to clear the database. You can do this in settings.</b>
+                        <% for(i = 0; i < users.length; i++) { %>
+                            <tr id="row-<%= i %>">  
+                                <td>
+                                    <i class="bi bi-trash-fill user-delete curser"></i>
+                                </td>
+                                <% for (x=0; x<Object.keys(users[i]).length; x++) { %>
+                                    <td class="user-field">
+                                        <% const key = Object.keys(users[i])[x] %>
+                                        <%= users[i][key] %>
+                                    </td>
+                                <% } %>
+                            </tr>
+                        <% } %>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <hr>
+
+            <h2 id="permissions-h2">
+                Permissions
+                <i class="bi bi-caret-down-fill collapse-icon"></i>
+            </h2>
+
+            <div id="permissions">
+                
+                <div>
+                    <button class="btn btn-primary" id="add-perm">
+                        Add Permission
+                    </button>
+                </div>
+
+                <table class="table table-hover table-bordered" id="perm-table">
+
+                    <thead>
+                        <tr>
+                            <th>
+                                id
+                            </th>
+                            <% for (x=0; x<Object.keys(perms[0]).length; x++) { %>
+                                <th scope="col">
+                                    <!-- <button class="btn btn-link" onclick="sortTable('<%= x %>')"> -->
+                                        <%= Object.keys(perms[0])[x] %>
+                                    <!-- </button> -->
+                                </th>
+                            <% } %>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <% for(i = 0; i < perms.length; i++) { %>
+                            <tr>
+                                <td>
+                                    <%= i %>
+                                </td>
+                                <% for (x=0; x<Object.keys(perms[i]).length; x++) { %>
+                                    <td>
+                                        <% const key = Object.keys(perms[i])[x] %>
+                                        <%= perms[i][key] %>
+                                    </td>
+                                <% } %>
+                            </tr>
+                        <% } %>
+                    </tbody>
+
+                </table>
+
+                <b>Note: You cannot delete permissions. The only way to remove them is to clear the database. You can do this in settings.</b>
+            </div>
+
         </div>
     </body>
 </html>
 
 <style>
+    nav li a {
+        font-size: 30px !important;
+    }
+
+    #dropdowns {
+        margin-left: 20px;
+    }
+    
     span {
         font-weight: bold;
     }
 
     body {
-        margin: 20px;
         background-color: rgb(255, 73, 73);
     }
 

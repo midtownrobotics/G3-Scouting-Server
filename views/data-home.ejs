@@ -6,27 +6,67 @@
         <title>G3 Scouting!</title>
     </head>
 
-    <button class="head-buttons btn btn-primary">
-        <a href="/">
-            Home <i class="bi bi-house-door-fill"></i>
-        </a>
-    </button>
-    <br><br>
+    <nav class="navbar navbar-expand bg-light">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user">User</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/forms">Forms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/data">Data</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin">Admin</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <h1>Welcome to the data manager!</h1>
-    <% if (sheets[0]) { %>
-        <h3>Please select a sheet below.</h3>
-        <% for (let i=0; i < sheets.length; i++) { %>
-            <a href="/data?sheet=<%=sheets[i]%>">#<%=i+1%>: <%=sheets[i]%></a><br>
+    <div id="sheets">
+
+        <h1>Welcome to the data manager!</h1>
+        <% if (sheets[0]) { %>
+            <h3>Please select a sheet below.</h3>
+            <% for (let i=0; i < sheets.length; i++) { %>
+                <a href="/data?sheet=<%=sheets[i]%>">#<%=i+1%>: <%=sheets[i]%></a><br>
+            <% } %>
+        <% } else { %>
+            <h3>No sheets were found! Contact your server administrator if you think this is an issue.</h3>
         <% } %>
-    <% } else { %>
-        <h3>No sheets were found! Contact your server administrator if you think this is an issue.</h3>
-    <% } %>
+
+    </div>
 </html>
 
 <style>
-    body {
+    nav li a {
+        font-size: 30px !important;
+    }
+
+    #sheets {
         margin: 20px;
+    }
+
+    #sheets h1 {
+        font-size: 60px;
+    }
+
+    #sheets h3 {
+        font-size: 45px;
+    }
+
+    #sheets a {
+        font-size: 30px;
+    }
+
+    body {
         background-color: rgb(255, 73, 73);
     }
 
