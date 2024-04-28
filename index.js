@@ -43,7 +43,8 @@ app.use(function(req, res, next) {
         permissions = "BAD USER"
     }
 
-    if (!auth || permissions == "BAD USER") {
+    if (permissions == "BAD USER") {
+        console.log(`User ${auth[0]} was denied access to your website!`)
         res.statusCode = 401;
         res.setHeader('WWW-Authenticate', 'Basic realm="G3"');
         res.end('Unauthorized');
@@ -57,8 +58,10 @@ app.use(function(req, res, next) {
             }
         }
         if (!bad) {
+            console.log(`User ${auth[0]} navigated to ${req.url} succesfully!`)
             next();
         } else {
+            console.log(`User ${auth[0]} was denied access to ${req.url}!`)
             res.sendFile(__dirname + "/src/401.html");
         } 
     }
@@ -107,7 +110,8 @@ app.get('/admin', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.render('user', {username: "gray"})
+    const auth = Buffer.from(req.headers.authorization.substring(6), 'base64').toString().split(':')
+    res.render('user', {username: auth[0]})
 })
 
 app.get('/user-get', (req, res) => {
@@ -147,6 +151,8 @@ app.get('/user-get', (req, res) => {
 
 app.post('/post', (req, res) => {
     const body = req.body
+
+    console.log(`Action ${body.action} was posted.`)
 
     switch (req.body.action) {
         case "getSheet":

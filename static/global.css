@@ -1,0 +1,38 @@
+/* Mobile Landscape Only */
+
+@media (orientation: landscape) and (max-width: 1025px) {
+    nav li a {
+        font-size: 20px !important;
+    }
+    
+    nav li {
+        margin-left:5px;
+        margin-right:5px;
+    }
+}
+
+/* Mobile Portrait Only */
+
+@media (orientation: portrait) and (max-width: 1025px) {
+    nav li a {
+        font-size: 40px !important;
+    }
+    
+    nav li {
+        margin-left:10px;
+        margin-right:10px;
+    }
+}
+
+/* Desktop Only */
+
+@media (min-width: 1025px) {
+    nav li a {
+        font-size: 30px !important;
+    }
+    
+    nav li {
+        margin-left:10px;
+        margin-right:10px;
+    }
+}

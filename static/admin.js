@@ -252,8 +252,12 @@ for (let i=0; i < document.cookie.split(";").length; i++) {
 
 // gets last saved scroll position and goes to it after 400ms
 setTimeout(function(){
-    window.scrollTo(0, parseInt(document.cookie.split(";").find((p) => p.includes("scroll")).replace("scroll=", "").trim()))
-}, 400)
+    window.scrollTo({
+        top: parseInt(document.cookie.split(";").find((p) => p.includes("scroll")).replace("scroll=", "").trim()),
+        left: 0,
+        behavior: 'instant'
+    });
+}, 500)
 
 // sets scroll position after page leave
 $(window).on( "unload", function(){

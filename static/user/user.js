@@ -46,7 +46,6 @@ function generateTable(userGet) {
 async function getNextMatch(userGet) {
     const nextMatch = userGet.nextMatch
     const teams = await getTeams()
-    console.log((await currentMatch()) - nextMatch.number)
 
     $("#nm-until").text()
     $("#nm-number").text(nextMatch.number)

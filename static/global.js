@@ -20,6 +20,7 @@ async function getTeams() {
 }
 
 async function currentMatch() {
+    console.log("ran")
     const matches = TBHAPI(`/event/${await postData({action: "getKey"})}/matches`)
     var matchesNotHappened = []
     for (let i = 0; i < matches.length; i++) {
@@ -27,8 +28,6 @@ async function currentMatch() {
             matchesNotHappened.push(matches[i])
         }
     }
-
-    console.log(matchesNotHappened)
 
     return matchesNotHappened[0]?.match_number;
 }
