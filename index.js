@@ -39,13 +39,15 @@ app.use(function(req, res, next) {
 
     if (auth) {
         permissions = checkAuth(auth[0], auth[1])
+        if (permissions == "BAD USER") {
+            console.log(`User ${auth[0]} was denied access to your website!`)
+        }
     } else {
         permissions = "BAD USER"
     }
 
     if (permissions == "BAD USER") {
-        console.log(`User ${auth[0]} was denied access to your website!`)
-        res.statusCode = 401;
+            res.statusCode = 401;
         res.setHeader('WWW-Authenticate', 'Basic realm="G3"');
         res.end('Unauthorized');
     } else {
