@@ -46,14 +46,16 @@ function generateTable(userGet) {
 async function getNextMatch(userGet) {
     const nextMatch = userGet.nextMatch
     const teams = await getTeams()
+    const currentMatchNumber = await currentMatch()
+    console.log(currentMatchNumber)
 
     $("#nm-until").text()
     $("#nm-number").text(nextMatch.number)
     $("#nm-team").text(nextMatch.team)
-    $("#nm-teamname").text(teams.team_names[teams.team_numbers.findIndex((p) => p == nextMatch.team)])
+    $("#nm-teamname").text(teams.team_names[teams.team_numbers.findIndex((p) => p == nextMatch.team)] || "????")
     $("#nm-station").text(nextMatch.station.charAt(0).toUpperCase() + nextMatch.station.slice(1))
     $("#nm-hp").text(nextMatch.highPriority ? "Yes" : "No")
-    $("#nm-mu").text(nextMatch.number - (await currentMatch()) || "Already Happened")
+    $("#nm-mu").text(currentMatchNumber == "CANNOT ACCESS" ? "????" : nextMatch.number - currentMatchNumber || "Already Happened" )
 }
 
 async function reloadData() {

@@ -1,8 +1,13 @@
 function TBHAPI(theUrl){
     const parsedUrl = "https://www.thebluealliance.com/api/v3" + theUrl + "?X-TBA-Auth-Key=LVDMCD06pMcEyS94sswn0hp8mGup9P2vfYhXZ6MgTgWt5oLzlNCP3RdBsm41g8Zs"
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", parsedUrl, false ); // false for synchronous request
-    xmlHttp.send( null );
+    try { 
+        xmlHttp.open( "GET", parsedUrl, false ); // false for synchronous request
+        xmlHttp.send( null ) 
+    } catch (err) {
+        console.warn("Cannot access TBA API.")
+        return "CANNOT ACCESS"
+    };
     return JSON.parse(xmlHttp.responseText);
 }
 
@@ -20,8 +25,10 @@ async function getTeams() {
 }
 
 async function currentMatch() {
-    console.log("ran")
     const matches = TBHAPI(`/event/${await postData({action: "getKey"})}/matches`)
+    if (matches == "CANNOT ACCESS") {
+        return "CANNOT ACCESS"
+    }
     var matchesNotHappened = []
     for (let i = 0; i < matches.length; i++) {
         if (!matches[i].actual_time) {
