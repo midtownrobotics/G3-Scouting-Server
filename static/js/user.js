@@ -54,7 +54,7 @@ async function getNextMatch(userGet) {
     $("#nm-team").text(nextMatch.team)
     $("#nm-teamname").text(teams.team_names[teams.team_numbers.findIndex((p) => p == nextMatch.team)] || "????")
     $("#nm-station").text(nextMatch.station.charAt(0).toUpperCase() + nextMatch.station.slice(1))
-    $("#nm-hp").text(nextMatch.highPriority ? "Yes" : "No")
+    // $("#nm-hp").text(nextMatch.highPriority ? "Yes" : "No")
     $("#nm-mu").text(currentMatchNumber == "CANNOT ACCESS" ? "????" : nextMatch.number - currentMatchNumber || "Already Happened" )
 }
 
