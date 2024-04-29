@@ -11,26 +11,7 @@
     </head>
     <body>
 
-        <nav class="navbar navbar-expand bg-light">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/forms">Forms</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/data">Data</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin">Admin</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <%- nav %>
 
         <% if (data?.rows) { %>
         
@@ -80,6 +61,8 @@
 
     </body>
 </html>
+
+<script>$("#nav-data").addClass("active")</script>
 
 <style>
 

@@ -90,30 +90,30 @@ app.get('/logout', (req, res) => {
 app.get('/forms', (req, res) => {
     const form = req.query.form
     if (form) {
-        res.render('form', {data: getSheet(form)});
+        res.render('form', {data: getSheet(form), nav: getFile("/src/nav.html")});
     } else {
         const sheets = getFile("/storage/scouting.json").toString() == "" ? false : Object.keys(getFile("/storage/scouting.json"))
-        res.render('form-home', {sheets: sheets})
+        res.render('form-home', {sheets: sheets, nav: getFile("/src/nav.html")})
     }
 })
 
 app.get('/data', (req, res) => {
     const sheet = req.query.sheet
     if (sheet) {
-        res.render('data', {data: getSheet(sheet)});
+        res.render('data', {data: getSheet(sheet), nav: getFile("/src/nav.html")});
     } else {
         const sheets = getFile("/storage/scouting.json").toString() == "" ? false : Object.keys(getFile("/storage/scouting.json"))
-        res.render('data-home', {sheets: sheets})
+        res.render('data-home', {sheets: sheets, nav: getFile("/src/nav.html")})
     }
 })
 
 app.get('/admin', (req, res) => {
-    res.render('admin', {users: getSettings().users, perms: getSettings().permissionLevels})
+    res.render('admin', {users: getSettings().users, perms: getSettings().permissionLevels, nav: getFile("/src/nav.html")})
 })
 
 app.get('/', (req, res) => {
     const auth = Buffer.from(req.headers.authorization.substring(6), 'base64').toString().split(':')
-    res.render('user', {username: auth[0]})
+    res.render('user', {username: auth[0], nav: getFile("/src/nav.html")})
 })
 
 app.get('/user-get', (req, res) => {

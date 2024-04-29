@@ -4,29 +4,12 @@
         <link rel="stylesheet" href="/libs/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css">
         <link rel="icon" type="image/png" href="/g3.png">
         <link rel="stylesheet" href="/global.css">
+        <script src="/libs/jquery-3.7.1.min.js"></script>
+        <script src="/global.js"></script>
         <title>G3 Scouting!</title>
     </head>
 
-    <nav class="navbar navbar-expand bg-light">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/forms">Forms</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/data">Data</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin">Admin</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <%- nav %>
 
     <div id="forms">
 
@@ -42,6 +25,8 @@
 
     </div>
 </html>
+
+<script>$("#nav-forms").addClass("active")</script>
 
 <style>
 

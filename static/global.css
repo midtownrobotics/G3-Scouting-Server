@@ -1,7 +1,16 @@
+nav .logout {
+    text-decoration: none;
+    color: dimgray;
+}
+
+nav .logout:hover {
+    color: black;
+}
+
 /* Mobile Landscape Only */
 
 @media (orientation: landscape) and (max-width: 1025px) {
-    nav li a {
+    nav li a, nav .logout {
         font-size: 20px !important;
     }
     
@@ -14,7 +23,7 @@
 /* Mobile Portrait Only */
 
 @media (orientation: portrait) and (max-width: 1025px) {
-    nav li a {
+    nav li a, nav .logout {
         font-size: 40px !important;
     }
     
@@ -27,7 +36,7 @@
 /* Desktop Only */
 
 @media (min-width: 1025px) {
-    nav li a {
+    nav li a, nav .logout {
         font-size: 30px !important;
     }
     
