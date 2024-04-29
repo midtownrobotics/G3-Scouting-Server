@@ -286,7 +286,7 @@ $("#add-user").on("click", async function () {
     const perm = prompt("What is the ID of the permission they should have?")
 
     if (newName && newPassword && Number.isInteger(parseInt(perm)) && Math.round(perm) == perm) {
-        await postData({action: "addUser", data: {username: newName, password: newPassword, permissions: perm, matches: []}})
+        await postData({action: "addUser", data: {username: newName, password: newPassword, permissions: perm}})
         window.location.reload()
     } else {
         alert("Error making user.")
