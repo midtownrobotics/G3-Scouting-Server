@@ -11,18 +11,20 @@
 
     <%- nav %>
 
-    <div id="sheets">
+    <div id="main">
 
         <h1>Welcome to the data manager!</h1>
         <% if (sheets[0]) { %>
-            <h3>Please select a sheet below.</h3>
+            <h3>View form data:</h3>
             <% for (let i=0; i < sheets.length; i++) { %>
                 <a href="/data?sheet=<%=sheets[i]%>">#<%=i+1%>: <%=sheets[i]%></a><br>
             <% } %>
         <% } else { %>
             <h3>No sheets were found! Contact your server administrator if you think this is an issue.</h3>
         <% } %>
-
+        
+        <br><br>
+        <a href="/data/tba">View TBA data</a>
     </div>
 </html>
 
@@ -31,19 +33,19 @@
 <style>
 
 
-    #sheets {
+    #main {
         margin: 20px;
     }
 
-    #sheets h1 {
+    #main h1 {
         font-size: 60px;
     }
 
-    #sheets h3 {
+    #main h3 {
         font-size: 45px;
     }
 
-    #sheets a {
+    #main a {
         font-size: 30px;
     }
 

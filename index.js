@@ -107,6 +107,10 @@ app.get('/data', (req, res) => {
     }
 })
 
+app.get('/data/tba', (req, res) => {
+    res.render('data-tba', {nav: getFile("/src/nav.html")})
+})
+
 app.get('/admin', (req, res) => {
     res.render('admin', {users: getSettings().users, perms: getSettings().permissionLevels, nav: getFile("/src/nav.html")})
 })
