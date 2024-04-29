@@ -38,6 +38,7 @@ async function assignMatches() {
     const lengthOfOnDuty = parseInt($("#aas-mbb").val().replace(/\s/g, '')) || 0
     const breakOffset = parseInt($("#aas-off").val().replace(/\s/g, '')) || 0
     const stickToOneAlliance = document.getElementById('aas-soa').checked
+    const highPriorityOverBreaks = document.getElementById('aas-hob').checked
 
     // Remove users that shouldn't be assigned matches
     let remainingUsers = getUsers()
@@ -104,10 +105,12 @@ async function assignMatches() {
                 highPriority = true
             }
 
-            const onBreak = (((matchNumb+scouts[x].id*breakOffset) % (lengthOfOnDuty + lengthOfBreaks)) - (lengthOfBreaks-1)) <= 0
+            const onBreak = (highPriority && highPriorityOverBreaks) ? false : (((matchNumb+scouts[x].id*breakOffset) % (lengthOfOnDuty + lengthOfBreaks)) - (lengthOfBreaks-1)) <= 0
             const correctAlliance = stickToOneAlliance ? (scouts[x].assignedAlliance == indexToAlliance[allScouting[i].index] || scouts[x].assignedAlliance == "both") : true
 
-            if ((!onBreak || highPriority) && correctAlliance && !scouts[x].matchNumbs.includes(matchNumb) && !allScouting[i].assigned) {
+            const shouldAssignMatch = !onBreak && correctAlliance && !scouts[x].matchNumbs.includes(matchNumb) && !allScouting[i].assigned
+
+            if (shouldAssignMatch) {
                 allScouting[i].assigned = scouts[x].name
                 scouts[x].matchNumbs.push(matchNumb)
                 scouts[x].matches.push({number: matchNumb, alliance: indexToStation[allScouting[i].index], team: allScouting[i].team, highPriority: highPriority, scouted: false})
@@ -250,7 +253,7 @@ for (let i=0; i < document.cookie.split(";").length; i++) {
     }
 }
 
-// gets last saved scroll position and goes to it after 400ms
+// gets last saved scroll position and goes to it after 500ms
 setTimeout(function(){
     window.scrollTo({
         top: parseInt(document.cookie.split(";").find((p) => p.includes("scroll")).replace("scroll=", "").trim()),
@@ -347,7 +350,9 @@ $("#clear-database").on('click', function(){
 // })
 
 $("#aad-button").on('click', async function () {
-    const assignMatchesObj = await assignMatches()
-    postData({action: "assignMatches", data: assignMatchesObj.scouts})
-    postData({action: "setSchedule", data: assignMatchesObj.matches})
+    if (confirm("You are about to deploy the current schedule based on the selected parameters. This will overright any current schedule and become effective immediately.")) {
+        const assignMatchesObj = await assignMatches()
+        postData({action: "assignMatches", data: assignMatchesObj.scouts})
+        postData({action: "setSchedule", data: assignMatchesObj.matches})
+    }
 })
