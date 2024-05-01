@@ -73,9 +73,9 @@ async function assignMatches() {
         }
     }
 
-    if (stickToOneAlliance && assignedAlliance.blue !== assignedAlliance.red) {
-        scouts[0].assignedAlliance = "both"
-    }
+    // if (stickToOneAlliance && assignedAlliance.blue !== assignedAlliance.red) {
+    //     scouts[0].assignedAlliance = "both"
+    // }
 
     // Finds all matches and ranks them by priority (if applicable)
     let priorityScouting = []
