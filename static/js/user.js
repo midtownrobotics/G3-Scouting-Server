@@ -13,9 +13,9 @@ function generateTable(userGet) {
     $("#table").html(`                
         <tr style="font-weight: bold;" id="top-row">
             <td>Number</td>
-            <td>Team</td>
+            <td>Team Number</td>
+            <td>Team Name</td>
             <td>Station</td>
-            <td>High Priority</td>
         </tr>
     `)
 
@@ -25,9 +25,9 @@ function generateTable(userGet) {
             $("#table").append(`
                 <tr>
                     <td>${matches[i].number}</td>
-                    <td>${matches[i].team} </td>
+                    <td>${matches[i].team}</td>
+                    <td>${getTeamName(matches[i].team)}</td>
                     <td>${matches[i].alliance.charAt(0).toUpperCase() + matches[i].alliance.slice(1)} </td>
-                    <td>${matches[i].highPriority ? "Yes" : "No"}</td>
                 </tr>
             `)
 
@@ -45,17 +45,25 @@ function generateTable(userGet) {
 
 async function getNextMatch(userGet) {
     const nextMatch = userGet.nextMatch
-    const teams = await getTeams()
     const currentMatchNumber = await currentMatch()
     console.log(currentMatchNumber)
 
     $("#nm-until").text()
     $("#nm-number").text(nextMatch.number)
     $("#nm-team").text(nextMatch.team)
-    $("#nm-teamname").text(teams.team_names[teams.team_numbers.findIndex((p) => p == nextMatch.team)] || "????")
+    $("#nm-teamname").text(getTeamName(nextMatch.team))
     $("#nm-station").text(nextMatch.station.charAt(0).toUpperCase() + nextMatch.station.slice(1))
     // $("#nm-hp").text(nextMatch.highPriority ? "Yes" : "No")
     $("#nm-mu").text(currentMatchNumber == "CANNOT ACCESS" ? "????" : nextMatch.number - currentMatchNumber || "Already Happened" )
+}
+
+let teams = [];
+getTeams().then((res) => {
+    teams = res
+})
+
+function getTeamName(number) {
+    return teams.team_names[teams.team_numbers.findIndex((p) => p == number)] || "????"
 }
 
 async function reloadData() {
