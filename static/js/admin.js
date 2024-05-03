@@ -39,6 +39,18 @@ async function assignMatches() {
     const breakOffset = parseInt($("#aas-off").val().replace(/\s/g, '')) || 0
     const stickToOneAlliance = document.getElementById('aas-soa').checked
     const highPriorityOverBreaks = document.getElementById('aas-hob').checked
+    const scoutingGroupsInput = $("#aas-sgr").val().replace(/\s/g, '').split("[")
+
+    // makes scouting groups based on input
+    let scoutingGroups = {};
+    for(let i=0; i<scoutingGroupsInput.length; i++) {
+        if (scoutingGroupsInput[i] !== "") {
+            let justNames = scoutingGroupsInput[i].split("]")[0]
+            justNames.split(",").forEach((val) => {
+                scoutingGroups[val] = {id: i, alliance: !(i % 2) ? "red" : "blue"}
+            })
+        }
+    }
 
     // Remove users that shouldn't be assigned matches
     let remainingUsers = getUsers()
@@ -50,26 +62,35 @@ async function assignMatches() {
     }
 
     // Makes scout for each user that should be scouting
-    let assignedAlliance = {red: 0, blue: 0}
     let scouts = [];
     for (let i = 0; i < remainingUsers.length; i++) { 
         scouts.push({name: remainingUsers[i], 
-        matchNumbs: [], 
-        matches: [], 
-        breaks: [], 
-        id: i, 
-        assignedAlliance: ""} )
+            matchNumbs: [], 
+            matches: [], 
+            breaks: [], 
+            id: i, 
+            assignedAlliance: scoutingGroups[remainingUsers[i]]?.alliance || "",
+            group: scoutingGroups[remainingUsers[i]]?.id || "n/a"
+        })
     }
 
+    // let assignedAlliance = {red: 0, blue: 0}
     if (stickToOneAlliance) {
         for(let i = 0; i < remainingUsers.length; i+=2 ){
-            scouts[i].assignedAlliance = "blue"
-            assignedAlliance.blue++
+
+            if (scouts[i].assignedAlliance == "") {
+                scouts[i].assignedAlliance = "blue"
+            }
+            // assignedAlliance.blue++
+
             if (!scouts[i+1]){
                 break;
             }
-            scouts[i+1].assignedAlliance = "red"
-            assignedAlliance.red++
+            
+            if (scouts[i+1].assignedAlliance == "") {
+                scouts[i+1].assignedAlliance = "red"
+            }
+            // assignedAlliance.red++
         }
     }
 
@@ -105,7 +126,9 @@ async function assignMatches() {
                 highPriority = true
             }
 
-            const onBreak = (highPriority && highPriorityOverBreaks) ? false : (((matchNumb+scouts[x].id*breakOffset) % (lengthOfOnDuty + lengthOfBreaks)) - (lengthOfBreaks-1)) <= 0
+            const offsetNumber = scouts[x].group !== "n/a" ? scouts[x].group-1 : scouts[x].id
+
+            const onBreak = (highPriority && highPriorityOverBreaks) ? false : (((matchNumb+offsetNumber*breakOffset) % (lengthOfOnDuty + lengthOfBreaks)) - (lengthOfBreaks-1)) <= 0
             const correctAlliance = stickToOneAlliance ? (scouts[x].assignedAlliance == indexToAlliance[allScouting[i].index] || scouts[x].assignedAlliance == "both") : true
 
             const shouldAssignMatch = !onBreak && correctAlliance && !scouts[x].matchNumbs.includes(matchNumb) && !allScouting[i].assigned
@@ -145,43 +168,13 @@ async function assignMatches() {
     return {scouts: scouts, matches: allScouting}
 }
 
-function JSONCompareByNumberOfMatches(a, b) {
-    if (a.matchNumbs.length < b.matchNumbs.length) {
-        return -1;
-    }
-    if (a.matchNumbs.length > b.matchNumbs.length) {
-        return 1;
-    }
-    return 0;
-}
-
-function JSONCompareByPriority(a, b) {
-    if (a.priority < b.priority) {
-      return -1;
-    }
-    if (a.priority > b.priority) {
-      return 1;
-    }
-    return 0;
-}
-
-function JSONCompareByMatchNumber(a, b) {
-    if (a.match < b.match) {
-        return -1;
-    }
-    if (a.match > b.match) {
-        return 1;
-    }
-    return 0;
-}
-
 async function makeMatchTable(matchesScouting, tableId = "match-table") {
     $('#'+tableId+' tbody').empty()
 
     const matches = await getMatches()
 
     for (let i = 0; i < matches.length; i++) {
-        let rows;
+        let rows = "";
         if (!matchesScouting) {
             for (let x = 0; x < 6; x++) {
                 rows += `<td>${matches[i][x]}</td>`
@@ -190,9 +183,9 @@ async function makeMatchTable(matchesScouting, tableId = "match-table") {
             for (let x = 0; x < 6; x++) {
                 const assigned = matchesScouting.filter((el) => el.match == i+1).find((el) => el.index == x).assigned;
                 if (assigned == undefined) {
-                    rows += `<td class="table-danger">${matches[i][x]}</td>`
+                    rows += `<td class="team table-danger">${matches[i][x]}</td>`
                 } else {
-                    rows += `<td>${matches[i][x]}: ${assigned}</td>`
+                    rows += `<td class="team">${matches[i][x]}: ${assigned}</td>`
                 }
             }
         }
@@ -209,6 +202,15 @@ async function makeMatchTable(matchesScouting, tableId = "match-table") {
         console.log($(this).text())
     })
 }
+
+$('#aas-sgr').on('input', function(){
+    if($(this).val() !== "") {
+        $("#aas-soa").prop('checked', true)
+        $("#aas-soa").prop('disabled', true)
+    } else {
+        $("#aas-soa").prop('disabled', false)
+    }
+})
 
 async function setCurrentKey() {
     $("#currentKey").text("Current Event: " + await postData({action: "getKey"}))
@@ -356,3 +358,33 @@ $("#aad-button").on('click', async function () {
         postData({action: "setSchedule", data: assignMatchesObj.matches})
     }
 })
+
+function JSONCompareByNumberOfMatches(a, b) {
+    if (a.matchNumbs.length < b.matchNumbs.length) {
+        return -1;
+    }
+    if (a.matchNumbs.length > b.matchNumbs.length) {
+        return 1;
+    }
+    return 0;
+}
+
+function JSONCompareByPriority(a, b) {
+    if (a.priority < b.priority) {
+      return -1;
+    }
+    if (a.priority > b.priority) {
+      return 1;
+    }
+    return 0;
+}
+
+function JSONCompareByMatchNumber(a, b) {
+    if (a.match < b.match) {
+        return -1;
+    }
+    if (a.match > b.match) {
+        return 1;
+    }
+    return 0;
+}
