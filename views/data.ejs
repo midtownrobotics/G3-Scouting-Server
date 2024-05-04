@@ -62,6 +62,12 @@
     </body>
 </html>
 
+<script>
+    $("th").on('click', function(){
+        sortTable("data-table", $(this).index())
+    })
+</script>
+
 <script>$("#nav-data").addClass("active")</script>
 
 <style>
