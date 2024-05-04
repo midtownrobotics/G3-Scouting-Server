@@ -29,6 +29,15 @@ indexToAlliance = [
     "blue"
 ]
 
+stationToIndex = {
+    "red1":0,
+    "red2":1,
+    "red3":2,
+    "blue1":3,
+    "blue2":4,
+    "blue3":5
+}
+
 async function assignMatches() {
     // Gets neccicary data
     const matches = await getMatches()
@@ -40,6 +49,7 @@ async function assignMatches() {
     const stickToOneAlliance = document.getElementById('aas-soa').checked
     const highPriorityOverBreaks = document.getElementById('aas-hob').checked
     const scoutingGroupsInput = $("#aas-sgr").val().replace(/\s/g, '').split("[")
+    const manualAssignments = $("#ma-list").text().split(",")
 
     // makes scouting groups based on input
     let scoutingGroups = {};
@@ -115,6 +125,26 @@ async function assignMatches() {
     let allScouting = [];
     Array.prototype.push.apply(allScouting, [...priorityScouting].sort(JSONCompareByPriority))
     Array.prototype.push.apply(allScouting, nonPriorityScouting)
+
+    // Assigns all manually assigned matches
+    for (let i = 0; i < manualAssignments.length; i++) {
+        if(manualAssignments[i] == "") {
+            continue;
+        }
+
+        const info = manualAssignments[i].split(":")
+        const scout = scouts.findIndex((scout) => scout.name == info[2])
+
+        scouts[scout].matchNumbs.push(parseInt(info[0]))
+        scouts[scout].matches.push({
+            alliance: info[1].toLowerCase(),
+            highPriority: false,
+            number: parseInt(info[0]),
+            scouted: false,
+            team: matches[info[0]-1][stationToIndex[info[1].toLowerCase()]]
+        })
+        allScouting.find((team) => (team.match == info[0] && team.index == stationToIndex[info[1].toLowerCase()])).assigned = info[2]
+    }
 
     // Assignes matches
     for (let i = 0; i < allScouting.length; i++) {
@@ -199,7 +229,8 @@ async function makeMatchTable(matchesScouting, tableId = "match-table") {
     }
 
     $('.team').on('click', function () {
-        console.log($(this).text())
+        const matchNumber = $(this).closest('tr').children().first().children('b').text()
+        const alliance = $(this).index()-1
     })
 }
 
@@ -209,6 +240,22 @@ $('#aas-sgr').on('input', function(){
         $("#aas-soa").prop('disabled', true)
     } else {
         $("#aas-soa").prop('disabled', false)
+    }
+})
+
+$("#ma-add").on('click', function(){
+    const station = $('#ma-station').val()
+    const person = $('#ma-person').val()
+    const match = $('#ma-match').val()
+    if(station && person && match) {
+        $("#ma-list").append('<span class="ma-item">' + ($("#ma-list").text() ? ", " : "") + match + ":" + station + ":" + person + "</span>")
+    }
+})
+
+$("#ma-list").on('click', '.ma-item', function(){
+    $(this).remove()
+    if($("#ma-list").children().first().text().includes(", ")) {
+        $("#ma-list").children().first().text($("#ma-list").children().first().text().substring(2))
     }
 })
 

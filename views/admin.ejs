@@ -36,10 +36,44 @@
                     <input class="form-check-input" type="checkbox" id="aas-hob">
                     <label class="form-check-label" for="aas-hob">High priority matches are more important than breaks</label>
                 </div>
+
                 <br>
+
+                <h4>
+                    Manual Assignments
+                </h4>
+                <a>Warning! Manual Assignments will override all other settings.</a>
+                <div>
+                    <div style="display: inline-flex;">
+                        <input class="text-input form-control" id="ma-match" style="width: fit-content !important;" type="text" placeholder="Match Number">&nbsp;
+                        <select class="form-select" id="ma-station" style="width: fit-content;">
+                            <option value="" disabled selected>Select Station</option>
+                            <option value="Red1">Red 1</option>
+                            <option value="Red2">Red 2</option>
+                            <option value="Red3">Red 3</option>
+                            <option value="Blue1">Blue 1</option>
+                            <option value="Blue2">Blue 2</option>
+                            <option value="Blue3">Blue 3</option>
+                        </select>&nbsp;                        
+                        <select class="form-select" id="ma-person" style="width: fit-content;">
+                            <option value="" disabled selected>Select User</option>
+                            <% for(i = 0; i < users.length; i++) { %>
+                                <option value="<%= users[i].username %>"><%= users[i].username %></option>
+                            <% } %>
+                        </select>&nbsp;                        
+                        <button class="btn btn-primary" id="ma-add">Add</button>
+                    </div><br>
+                    <div id="ma-list"></div>
+                </div>
+
+                <br>
+
                 <button class="btn btn-primary" id="aas-button">Simulate</button>
                 <button class="btn btn-primary" id="aad-button">Deploy</button>
-                <div id="aas-results"></div><br>
+                <div id="aas-results"></div>
+
+                <br>
+
                 <h4 class="collapse-icon-parent">
                     Simulated Schedule
                     <i class="bi bi-caret-down-fill collapse-icon"></i>
@@ -193,7 +227,7 @@
                                 </th>
                             <% } %>
                         </tr>
-                    </thead>
+                    </thead>    
 
                     <tbody>
 
@@ -225,6 +259,13 @@
 
 <style>
 
+    html {
+        user-select: none;
+    }
+
+    hr {
+        width: calc(100% - 40px);
+    }
 
     #dropdowns {
         margin-left: 20px;
