@@ -359,6 +359,7 @@ $(".user-field").on('click', function() {
     const field = $(this).closest('table').find('th').eq($(this).index()).text().trim();
     if (field == "matches") {return}
     const updated = prompt(`What would you like to change ${name}'s ${field} to?`)
+    if (!updated) {alert("nvm")}
     postData({
         action: "editUserField", 
         data: {
@@ -366,7 +367,7 @@ $(".user-field").on('click', function() {
             field: field, 
             updated: updated
         }
-    })
+    }, true)
 })
 
 $("#clear-database").on('click', function(){

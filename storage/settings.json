@@ -1,1 +1,47 @@
-{"eventKey":"2024gacmp","users":[{"username":"admin","password":"password","permissions":"0"},{"username":"gray","password":"gray","permissions":"1"},{"username":"rohan","password":null,"permissions":"1"},{"username":"ankit","password":"is cool","permissions":"1"},{"username":"esan","password":"ebner","permissions":"1"},{"username":"Erik Boyled","password":"ilikefeet","permissions":"1"}],"permissionLevels":[{"name":"admin","blacklist":[]},{"name":"scout","blacklist":["/admin"]}]}
+{
+    "eventKey": "2024gacmp",
+    "users": [
+        {
+            "username": "admin",
+            "password": "password",
+            "permissions": "0"
+        },
+        {
+            "username": "gray",
+            "password": "gray",
+            "permissions": "1"
+        },
+        {
+            "username": "rohan",
+            "password": "reddy",
+            "permissions": "1"
+        },
+        {
+            "username": "ankit",
+            "password": "is cool",
+            "permissions": "1"
+        },
+        {
+            "username": "esan",
+            "password": "ebner",
+            "permissions": "1"
+        },
+        {
+            "username": "Erik Boyled",
+            "password": "ilikefeet",
+            "permissions": "1"
+        }
+    ],
+    "permissionLevels": [
+        {
+            "name": "admin",
+            "blacklist": []
+        },
+        {
+            "name": "scout",
+            "blacklist": [
+                "/admin"
+            ]
+        }
+    ]
+}

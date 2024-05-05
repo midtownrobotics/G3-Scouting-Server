@@ -223,15 +223,6 @@ app.post('/post', (req, res) => {
             fs.writeFileSync(__dirname+"/storage/matches.json", JSON.stringify(body.data))
             res.send({res: "OK"})
             break
-        case "editUserField":
-            { // needed to declare const only used in this case
-                var settings = getSettings()
-                const userIndex = settings.users.findIndex(p => p.username == body.data.name)
-                settings.users[userIndex][body.data.field] = body.data.updated
-                writeSettings(settings)
-                res.send({res: "OK"})
-            }
-            break
         default:
             res.send({res: "Invalid Request"});
             break
@@ -262,6 +253,15 @@ app.post('/admin', (req, res) => {
             fs.writeFileSync(__dirname + "/storage/matches.json", JSON.stringify({}))
             fs.writeFileSync(__dirname + "/storage/scouts.json", JSON.stringify({}))
             res.send({res: "OK"})
+            break
+        case "editUserField":
+            { // needed to declare const only used in this case
+                var settings = getSettings()
+                const userIndex = settings.users.findIndex(p => p.username == body.data.name)
+                settings.users[userIndex][body.data.field] = body.data.updated
+                writeSettings(settings)
+                res.send({res: "OK"})
+            }
             break
         // case "deleteDatabaseAndPerms":
         //     var settings = getSettings()
