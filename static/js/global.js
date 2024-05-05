@@ -74,7 +74,7 @@ function logoutUser() {
     window.location.reload();
 }
 
-function sortTable(tableId, column) {
+function sortTable(tableId, column, reverse = false) {
     let i;
     let table = document.getElementById(tableId);
     let switching = true;
@@ -89,10 +89,10 @@ function sortTable(tableId, column) {
             let x = rows[i].getElementsByTagName("TD")[column];
             let y = rows[i + 1].getElementsByTagName("TD")[column];
 
-            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase() && !Number.isFinite(parseInt(x.innerHTML))) {
+            if ((reverse ? x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase() : x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) && !Number.isFinite(parseInt(x.innerHTML))) {
                 shouldSwitch = true;
                 break;
-            } else if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
+            } else if (reverse ? parseInt(x.innerHTML) < parseInt(y.innerHTML) : parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
                 shouldSwitch = true;
                 break;
             }

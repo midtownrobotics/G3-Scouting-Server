@@ -12,59 +12,73 @@
     <body>
 
         <%- nav %>
-
-        <% if (data?.rows) { %>
         
-        <table class="table table-hover table-bordered" id="data-table">
+        <div id="main">
 
-            <thead>
-                <tr>
-                    <th id="trash-head"></th>
+            <% if (data?.rows) { %>
 
-                    <% for (x=0; x < data.cols.length; x++) { %>
-                        <th scope="col">
-                            <!-- <button class="btn btn-link" onclick="sortTable('<%= x %>')"> -->
-                                <%= data.cols[x] %>
-                            <!-- </button> -->
-                        </th>
-                    <% } %>
-                </tr>
-            </thead>
+            <b>Click on a bold header to sort by that column. Click on it again to reverse sort!</b>
 
-            <tbody>
+            
+            <table class="table table-hover table-bordered" id="data-table">
 
-                <% for(i = 0; i < data.rows.length; i++) { %>
-                    <tr id="row-<%= i %>">
-                        <td class="trash">
-                            <i class="bi bi-trash-fill"></i>
-                        </td>
+                <thead>
+                    <tr>
+                        <th id="trash-head"></th>
+
                         <% for (x=0; x < data.cols.length; x++) { %>
-                            <td style="white-space: nowrap;">        
-                                <% if (data.rows[i].findIndex(p => p.name == data.cols[x]) > -1) { %>
-                                    <%= data.rows[i][data.rows[i].findIndex(p => p.name == data.cols[x])].value %> 
-                                <% } %>
-                            </td>
+                            <th scope="col">
+                                <!-- <button class="btn btn-link" onclick="sortTable('<%= x %>')"> -->
+                                    <%= data.cols[x] %>
+                                <!-- </button> -->
+                            </th>
                         <% } %>
                     </tr>
-                <% } %>
-            </tbody>
+                </thead>
 
-        </table>
+                <tbody>
 
-        <% } else { %>
+                    <% for(i = 0; i < data.rows.length; i++) { %>
+                        <tr id="row-<%= i %>">
+                            <td class="trash">
+                                <i class="bi bi-trash-fill"></i>
+                            </td>
+                            <% for (x=0; x < data.cols.length; x++) { %>
+                                <td style="white-space: nowrap;">        
+                                    <% if (data.rows[i].findIndex(p => p.name == data.cols[x]) > -1) { %>
+                                        <%= data.rows[i][data.rows[i].findIndex(p => p.name == data.cols[x])].value %> 
+                                    <% } %>
+                                </td>
+                            <% } %>
+                        </tr>
+                    <% } %>
+                </tbody>
 
-        <br><br><br>
-        <h1>There is no data to show! :(</h1>
-        <h3>There may be no responses, and incorrect URL, or an internal error.</h3>
+            </table>
 
-        <% } %>
+            <% } else { %>
+
+            <br><br><br>
+            <h1>There is no data to show! :(</h1>
+            <h3>There may be no responses, and incorrect URL, or an internal error.</h3>
+
+            <% } %>
+
+        </div>
 
     </body>
 </html>
 
 <script>
     $("th").on('click', function(){
-        sortTable("data-table", $(this).index())
+        if ($(this).hasClass("reverse-sort")) {
+            $("th").removeClass("reverse-sort")
+            sortTable("data-table", $(this).index(), true)
+        } else {
+            $("th").removeClass("reverse-sort")
+            $(this).addClass("reverse-sort")
+            sortTable("data-table", $(this).index(), false)
+        }
     })
 </script>
 
@@ -83,9 +97,8 @@
         background-color: rgb(255, 73, 73);
     }
 
-    #data-table {
+    #main {
         margin: 20px;
-        margin-top: 40px;
     }
 
     #save {
