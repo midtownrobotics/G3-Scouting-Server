@@ -40,7 +40,7 @@ app.use(function(req, res, next) {
     if (auth) {
         permissions = checkAuth(auth[0], auth[1])
         if (permissions == "BAD USER") {
-            console.log(`User ${auth[0]} was denied access to your website!`)
+            // console.log(`User ${auth[0]} was denied access to your website!`)
         }
     } else {
         permissions = "BAD USER"
@@ -60,10 +60,10 @@ app.use(function(req, res, next) {
             }
         }
         if (!bad) {
-            console.log(`User ${auth[0]} navigated to ${req.url} succesfully!`)
+            // console.log(`User ${auth[0]} navigated to ${req.url} succesfully!`)
             next();
         } else {
-            console.log(`User ${auth[0]} was denied access to ${req.url}!`)
+            // console.log(`User ${auth[0]} was denied access to ${req.url}!`)
             res.sendFile(__dirname + "/src/401.html");
         } 
     }
@@ -142,6 +142,53 @@ app.get('/user-get', (req, res) => {
     })
 })
 
+app.get('/data/analysis', (req, res) => {
+    if (req.query.team) {
+
+        const sheet = req.query.sheet
+
+        let rows = getFile('/storage/scouting.json')[sheet]?.rows
+
+        console.log(rows)
+
+        if (!rows) {
+            res.render('data-analysis-home', {nav: getFile("/src/nav.html"), sheets: Object.keys(getFile("/storage/scouting.json")), error: "No data found for team!"})
+            return;
+        }
+
+        let infoFields = {}
+        let info = []
+
+        for (let i = 0; i < rows.length; i++) {
+            if (rows[i].findIndex((t) => t.value == req.query.team) !== -1) {
+                for (let x = 0; x < rows[i].length; x++) {
+
+                    if (infoFields[rows[i][x].name] == undefined) {
+                        infoFields[rows[i][x].name] = Object.keys(infoFields).length
+                    }
+
+                    if (info[infoFields[rows[i][x].name]] == undefined) {
+                        info[infoFields[rows[i][x].name]] = []
+                    }
+
+                    info[parseInt(infoFields[rows[i][x].name])].push(rows[i][x].value)
+
+                }
+            }
+        }
+
+        if (!info[0]) {
+            res.render('data-analysis-home', {nav: getFile("/src/nav.html"), sheets: Object.keys(getFile("/storage/scouting.json")), error: "No data found for team!"})
+            return;
+        }
+
+        res.render('data-analysis', {nav: getFile("/src/nav.html"), info: info, infoFields: infoFields})
+
+    } else {
+        res.render('data-analysis-home', {nav: getFile("/src/nav.html"), sheets: Object.keys(getFile("/storage/scouting.json")), error: null})
+    }
+})
+
 // app.get('/sheets', async (req, res) => {
 //     if (req.query.id) {
 //         const sheetToGet = req.query.id
@@ -158,14 +205,13 @@ app.get('/user-get', (req, res) => {
 app.post('/post', (req, res) => {
     const body = req.body
 
-    console.log(`Action ${body.action} was posted.`)
+    // console.log(`Action ${body.action} was posted.`)
 
     switch (req.body.action) {
         case "getSheet":
             res.send({res: getSheet(body.sheet)});
             break
         case "addRow":
-            console.log(body)
             addRowToSheet(body.sheet, body.data, Buffer.from(req.headers.authorization.substring(6), 'base64').toString().split(':')[0]);
             completeMatch(body.matchNumb, Buffer.from(req.headers.authorization.substring(6), 'base64').toString().split(':')[0])
             res.send({res: "OK"});
@@ -345,5 +391,5 @@ function deleteRowFromSheet(sheet, row) {
     fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify(newJSON))
 }
 
-console.log(`listening on port ${PORT}!`);
+// console.log(`listening on port ${PORT}!`);
 app.listen(PORT);

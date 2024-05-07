@@ -23,8 +23,18 @@
             <h3>No sheets were found! Contact your server administrator if you think this is an issue.</h3>
         <% } %>
         
-        <br><br>
-        <a href="/data/tba">View TBA data</a>
+        <br>
+        <a href="/data/tba">
+            <button class="btn btn-primary">
+                View TBA data
+            </button>
+        </a>&nbsp;
+
+        <a href="/data/analysis">
+            <button class="btn btn-primary">
+                Data Analysis
+            </button>
+        </a>
     </div>
 </html>
 
@@ -32,6 +42,13 @@
 
 <style>
 
+    a {
+        text-decoration: none;
+    }
+
+    button {
+        font-size: 30px !important;
+    }
 
     #main {
         margin: 20px;

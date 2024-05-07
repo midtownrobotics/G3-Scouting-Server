@@ -1,0 +1,144 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/libs/bootstrap.min.css">
+        <link rel="stylesheet" href="/libs/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="/global.css">
+        <link rel="icon" type="image/png" href="/g3.png">
+        <script src="/libs/jquery-3.7.1.min.js"></script>
+        <script src="/js/global.js"></script>
+        <title>G3 Scouting!</title>
+    </head>
+
+    <%- nav %>
+
+    <div id="main">
+
+        <h1>Welcome to the data analyzer!</h1>
+
+        <div id="inline">
+            <select id="select-col" class="form-select">
+            <option disabled selected>Field</option>
+            <% for (let i = 0; i < Object.keys(infoFields).length; i++) { %>
+                <option value="<%= i+1 %>"><%= Object.keys(infoFields)[i] %></option>
+            <% } %>
+            </select>&nbsp;
+            <select id="select-mode" class="form-select">
+                <option disabled selected>Action</option>
+                <option value="0">Count</option>
+                <option value="1">Add</option>
+                <option value="2">Average</option>
+            </select>&nbsp;
+            <button onclick="getColumn()" class="btn btn-primary">Search!</button>&nbsp;
+        </div>
+
+        <br><br>
+        <table class="table" style="width: 50%;" id="result-table">
+            <thead style="font-weight: bold;">
+                <tr>
+                    <td>Item</td>
+                    <td>Number of occurances</td>
+                    <td>Percent of total</td>
+                </tr>
+            </thead>
+            <tbody id="result"></tbody>
+        </table>
+        <h2 id="result-text"></h2>
+        <br>
+
+        <table class="table table-hover table-bordered" id="data-table">
+            <thead>
+                <tr style="font-weight: bold;">
+                    <% for (let i = 0; i < Object.keys(infoFields).length; i++) { %>
+                        <td>
+                            <%= Object.keys(infoFields)[i] %>
+                        </td>
+                    <% } %>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let i = 0; i < info[0].length; i++) { %>
+                    <tr>
+                        <% for (let x = 0; x < info.length; x++) { %>
+                            <td><%= info[x][i] %></td>
+                        <% } %>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</html>
+
+<script>$("#nav-data").addClass("active")</script>
+
+<script>
+    $("#result-text").hide()
+    $("#result-table").hide()
+
+    function getColumn() {
+        var items=[]
+        const action = $("#select-mode").val()
+        const number = $("#select-col").val()
+
+        $(`#data-table tbody tr td:nth-child(${number})`).each(function(){
+            items.push($(this).text());       
+        });
+
+        if (action == 1) {
+            $("#result-table").hide()
+            $("#result-text").show()
+            $("#result-text").text("Result: " + (items.reduce((t, c) => (parseInt(t) + parseInt(c)))))
+            return items;
+        } else if (action == 0) {
+            let numberOf = []
+            const uItems = [...new Set(items)]
+            for (let i = 0; i < uItems.length; i++) {
+                const number = items.filter((x) => x == uItems[i]).length
+                numberOf.push({field: uItems[i], number: number, percent: (number / items.length * 100)})
+            }
+            $("#result").html("")
+            $("#result-table").show()
+            $("#result-text").hide()
+            for (let i = 0; i < numberOf.length; i++) {
+                $("#result").append(`<tr><td>${numberOf[i].field}</td> <td>${numberOf[i].number}</td> <td>${numberOf[i].percent}%</td></tr>`)
+            }
+            return numberOf;
+        } else if (action == 2) {
+            $("#result-table").hide()
+            $("#result-text").show()
+            $("#result-text").text("Average: " + Math.round((items.reduce((t, c) => (parseInt(t) + parseInt(c)))) / items.length * 1000) / 1000)
+        }
+
+    }
+</script>
+
+<style>
+
+    #inline {
+        display: inline-flex;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    #main {
+        margin: 20px;
+    }
+
+    #main h1 {
+        font-size: 60px;
+    }
+
+    body {
+        background-color: rgb(255, 73, 73);
+    }
+
+    a {
+        color: black;
+        font-size: large;
+    }
+
+    .head-buttons a {
+        text-decoration: none;
+    }
+</style>    
