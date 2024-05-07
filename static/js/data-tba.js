@@ -16,7 +16,6 @@ async function async() {
 
     $("#match-number").on("input propertychange paste", async function(){
         if ($(this).val() !== "") {
-            await displayData($(this).val())
             search($("#search").val())
         } else {
             $("#blue").empty()
@@ -37,6 +36,20 @@ async function displayData(matchNumb) {
 
     $("#blue").empty()
     $("#red").empty()
+
+    if (match.winning_alliance == "blue") {
+        $("#blue-h3").css("font-weight", "bold");
+        $("#red-h3").css("font-weight", "normal");
+    } else {
+        $("#red-h3").css("font-weight", "bold");
+        $("#blue-h3").css("font-weight", "normal");
+    }
+
+    $("#blue").append(`<span>Won: ${match.winning_alliance == "blue" ? true : false}</span><br>`)
+    $("#red").append(`<span>Won: ${match.winning_alliance == "red" ? true : false}</span><br>`)
+
+    $("#blue").append(`<span>Teams: ${match.alliances.blue.team_keys[0].substring(3)}, ${match.alliances.blue.team_keys[1].substring(3)}, ${match.alliances.blue.team_keys[2].substring(3)}</span><br>`)
+    $("#red").append(`<span>Teams: ${match.alliances.red.team_keys[0].substring(3)}, ${match.alliances.red.team_keys[1].substring(3)}, ${match.alliances.red.team_keys[2].substring(3)}</span><br>`)
 
     for (let i = 0; i < Object.keys(match.score_breakdown.blue).length; i++) {
         $("#blue").append(`<span>${camelCaseToWords(Object.keys(match.score_breakdown.blue)[i])}: ${match.score_breakdown.blue[Object.keys(match.score_breakdown.blue)[i]]}</span><br>`)
