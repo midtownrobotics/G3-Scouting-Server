@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="/libs/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css">
         <link rel="stylesheet" href="/global.css">
         <link rel="icon" type="image/png" href="/g3.png">
+        <script src="https://cdn.plot.ly/plotly-2.32.0.min.js" charset="utf-8"></script>
         <script src="/libs/jquery-3.7.1.min.js"></script>
         <script src="/js/global.js"></script>
         <title>G3 Scouting!</title>
@@ -14,6 +15,17 @@
     <div id="main">
 
         <h1>Welcome to the data analyzer!</h1>
+
+        <div id="inline">
+            <input class="text-input form-control" id="search-team" style="width: 150px;" type="text" placeholder="Team Number">&nbsp;
+            <select id="search-select" class="form-select">
+                <option disabled selected>Sheet</option>
+                <% for (let i=0; i < sheets.length; i++) { %>
+                    <option value="<%= sheets[i] %>"><%= sheets[i] %></option>
+                <% } %>
+            </select>&nbsp;
+            <button class="btn btn-primary" id="search">Go!</button>
+        </div><br><br>
 
         <div id="inline">
             <select id="select-col" class="form-select">
@@ -32,18 +44,22 @@
         </div>
 
         <br><br>
-        <table class="table" style="width: 50%;" id="result-table">
-            <thead style="font-weight: bold;">
-                <tr>
-                    <td>Item</td>
-                    <td>Number of occurances</td>
-                    <td>Percent of total</td>
-                </tr>
-            </thead>
-            <tbody id="result"></tbody>
-        </table>
+        
+        <div style="width: 100%;" id="results">
+            <table style="width: 50%; height: 100%;" class="table">
+                <thead style="font-weight: bold;">
+                    <tr>
+                        <td>Item</td>
+                        <td>Number of occurances</td>
+                        <td>Percent of total</td>
+                    </tr>
+                </thead>
+                <tbody id="result"></tbody>
+            </table>&nbsp;&nbsp;&nbsp;
+            <div id="chart" style="height: 250px; width: 50%;"></div>
+        </div>
         <h2 id="result-text"></h2>
-        <br>
+        <br><br>
 
         <table class="table table-hover table-bordered" id="data-table">
             <thead>
@@ -71,8 +87,20 @@
 <script>$("#nav-data").addClass("active")</script>
 
 <script>
+
+    $('#search-team').keypress(function(event){
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            window.location.href = "?team=" + $("#search-team").val() + "&sheet=" + $("#search-select").val()
+        }
+    });
+
+    $("#search").click(function(){
+        window.location.href = "?team=" + $("#search-team").val() + "&sheet=" + $("#search-select").val()
+    })
+
     $("#result-text").hide()
-    $("#result-table").hide()
+    $("#results").hide()
 
     function getColumn() {
         var items=[]
@@ -84,26 +112,43 @@
         });
 
         if (action == 1) {
-            $("#result-table").hide()
+            $("#results").hide()
             $("#result-text").show()
             $("#result-text").text("Result: " + (items.reduce((t, c) => (parseInt(t) + parseInt(c)))))
             return items;
         } else if (action == 0) {
-            let numberOf = []
+            let numberOf = [], fields = [], values = []
             const uItems = [...new Set(items)]
             for (let i = 0; i < uItems.length; i++) {
                 const number = items.filter((x) => x == uItems[i]).length
                 numberOf.push({field: uItems[i], number: number, percent: (number / items.length * 100)})
+                fields.push(uItems[i])
+                values.push(number)
             }
             $("#result").html("")
-            $("#result-table").show()
+            $("#results").show()
+
+            console.log(values, fields)
+
+            const layout = {
+                width: $('#results table').width(),
+                height: 200,
+                margin: {"t": 10, "b": 10, "l": 10, "r": 10}
+            }
+
+            Plotly.newPlot($("#chart")[0], [{
+                values: values,
+                labels: fields,
+                type: 'pie'
+            }], layout);
+
             $("#result-text").hide()
             for (let i = 0; i < numberOf.length; i++) {
                 $("#result").append(`<tr><td>${numberOf[i].field}</td> <td>${numberOf[i].number}</td> <td>${numberOf[i].percent}%</td></tr>`)
             }
             return numberOf;
         } else if (action == 2) {
-            $("#result-table").hide()
+            $("#results").hide()
             $("#result-text").show()
             $("#result-text").text("Average: " + Math.round((items.reduce((t, c) => (parseInt(t) + parseInt(c)))) / items.length * 1000) / 1000)
         }
@@ -112,6 +157,15 @@
 </script>
 
 <style>
+
+    #results {
+        display: inline-flex;
+        height: fit-content;
+    }
+
+    #chart {
+        
+    }
 
     #inline {
         display: inline-flex;

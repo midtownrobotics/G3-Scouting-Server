@@ -149,8 +149,6 @@ app.get('/data/analysis', (req, res) => {
 
         let rows = getFile('/storage/scouting.json')[sheet]?.rows
 
-        console.log(rows)
-
         if (!rows) {
             res.render('data-analysis-home', {nav: getFile("/src/nav.html"), sheets: Object.keys(getFile("/storage/scouting.json")), error: "No data found for team!"})
             return;
@@ -182,7 +180,7 @@ app.get('/data/analysis', (req, res) => {
             return;
         }
 
-        res.render('data-analysis', {nav: getFile("/src/nav.html"), info: info, infoFields: infoFields})
+        res.render('data-analysis', {nav: getFile("/src/nav.html"), info: info, sheets: Object.keys(getFile("/storage/scouting.json")), infoFields: infoFields})
 
     } else {
         res.render('data-analysis-home', {nav: getFile("/src/nav.html"), sheets: Object.keys(getFile("/storage/scouting.json")), error: null})
