@@ -69,11 +69,11 @@ function isValidWholeNumber(input){
 }
 
 $(".plus").click(function() {
-    $(this).prev().html(parseInt($(this).prev().html())+1);
+    $(this).prev().children().first().val(parseInt($(this).prev().children().first().val())+1);
 });
 
 $(".minus").click(function() {
-    $(this).next().html(parseInt($(this).next().html())-1);
+    $(this).next().children().first().val(parseInt($(this).next().children().first().val())-1);
 });
 
 $('#form').on("submit", submitForm)

@@ -15,7 +15,7 @@ app.use(function(req, res, next) {
 
     if(!getSettings().users[0] || !getSettings().users.find(item => item.permissions == "0")) {
         var settings = getSettings()
-        settings.users.push({username: "admin", password: "password", permissions: "0", matches: []})
+        settings.users.push({username: "admin", password: "password", permissions: "0"})
         writeSettings(settings) 
     }
 
