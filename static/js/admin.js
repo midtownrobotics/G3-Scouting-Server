@@ -278,7 +278,7 @@ $('#aas-button').on('click', function(){
 
 $('#save-settings').on('click', function() {
     if ($('#eventKey').val() !== "") {
-        postData({action: 'changeKey', data: $('#eventKey').val()})
+        postData({action: 'changeKey', data: $('#eventKey').val()}, true)
         $('#eventKey').val("")
         setCurrentKey()
     }
@@ -323,7 +323,12 @@ $("#add-perm").on("click", function() {
     blackList = blackList.split(",")
 
     if (newName && blackList) {
-        postData({action: "addPerm", data: {name: newName, blacklist: blackList}})
+        postData({action: "addPerm", data: {
+            name: newName, 
+            blacklist: blackList
+        }}, true).then(function () {
+            window.location.reload()
+        })
     } else {
         alert("Error making permission.")
     }
@@ -335,8 +340,18 @@ $("#add-user").on("click", async function () {
     const perm = prompt("What is the ID of the permission they should have?")
 
     if (newName && newPassword && Number.isInteger(parseInt(perm)) && Math.round(perm) == perm) {
-        await postData({action: "addUser", data: {username: newName, password: newPassword, permissions: perm}})
-        window.location.reload()
+        postData({action: "addUser", data: {
+                username: newName, 
+                password: newPassword, 
+                permissions: perm
+            }
+        }, true).then(function(res) {
+            if (res == 'Bad User') {
+                alert('Bad User!')
+            } else {
+                window.location.reload()
+            }
+        })
     } else {
         alert("Error making user.")
     }
@@ -350,16 +365,19 @@ $("#add-user").on("click", async function () {
 $(".user-delete").on('click', function() {
     const name = $(this).parent().next().text().trim()
     if (confirm(`You are about to delete user ${name}!`)) {
-        postData({action: "deleteUser", data: name})
+        postData({action: "deleteUser", data: name}, true).then(function () {
+            window.location.reload()
+        })
     }
 })
 
 $(".user-field").on('click', function() {
     const name = $(this).parent().children().eq(1).text().trim()
     const field = $(this).closest('table').find('th').eq($(this).index()).text().trim();
-    if (field == "matches") {return}
     const updated = prompt(`What would you like to change ${name}'s ${field} to?`)
-    if (!updated) {alert("nvm")}
+    if (!updated) {
+        return
+    }
     postData({
         action: "editUserField", 
         data: {
@@ -367,7 +385,13 @@ $(".user-field").on('click', function() {
             field: field, 
             updated: updated
         }
-    }, true)
+    }, true).then(function(res) {
+        if (res != "Bad User") {
+            window.location.reload()
+        } else {
+            alert("Bad User!")
+        }
+    })
 })
 
 $("#clear-database").on('click', function(){
@@ -378,16 +402,13 @@ $("#clear-database").on('click', function(){
             }, true).then((res) => {
                 if (res == "OK") {
                     alert("Succesfully deleted database.")
-                } else {
-                    alert("ERROR: Database NOT deleted!")
+                    window.location.reload()
                 }
             })
-        } else {
-            alert("Database NOT deleted!")
+            return
         }
-    } else {
-        alert("Database NOT deleted!")
     }
+    alert("ERROR: Database NOT deleted!")
 })
 
 // $("#clear-database-perm").on('click', function(){
@@ -402,8 +423,8 @@ $("#clear-database").on('click', function(){
 $("#aad-button").on('click', async function () {
     if (confirm("You are about to deploy the current schedule based on the selected parameters. This will overright any current schedule and become effective immediately.")) {
         const assignMatchesObj = await assignMatches()
-        postData({action: "assignMatches", data: assignMatchesObj.scouts})
-        postData({action: "setSchedule", data: assignMatchesObj.matches})
+        postData({action: "assignMatches", data: assignMatchesObj.scouts}, true)
+        postData({action: "setSchedule", data: assignMatchesObj.matches}, true)
     }
 })
 

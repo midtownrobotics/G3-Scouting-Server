@@ -222,39 +222,8 @@ app.post('/post', (req, res) => {
             deleteRowFromSheet(body.sheet, body.data);
             res.send({res: "OK"})
             break
-        case "addUser":
-            var settings = getSettings()
-            settings.users.push(body.data)
-            writeSettings(settings) 
-            res.send({res: "OK"})
-            break
-        case "deleteUser":
-            { // needed to declare const only used in this case
-                var settings = getSettings()
-                const userIndex = settings.users.findIndex(item => item.username === body.data)
-                settings.users.splice(userIndex, 1)
-                writeSettings(settings) 
-                res.send({res: "OK"})
-            }
-            break
-        case "addPerm":
-            var settings = getSettings()
-            settings.permissionLevels.push(body.data)
-            writeSettings(settings) 
-            res.send({res: "OK"})
-            break
-        case "changeKey":
-            var settings = getSettings()
-            settings.eventKey = body.data
-            writeSettings(settings)
-            res.send({res: "OK"})
-            break
         case "getKey":
             res.send({res: getSettings().eventKey})
-            break
-        case "assignMatches":
-            fs.writeFileSync(__dirname+"/storage/scouts.json", JSON.stringify(body.data))
-            res.send({res: "OK"})
             break
         case "getScout":
             const scouts = getFile('/storage/scouts.json')
@@ -263,16 +232,21 @@ app.post('/post', (req, res) => {
         case "getSchedule":
             res.send({res: getFile("/storage/matches.json")})
             break
-        case "setSchedule":
-            fs.writeFileSync(__dirname+"/storage/matches.json", JSON.stringify(body.data))
-            res.send({res: "OK"})
-            break
         default:
             res.send({res: "Invalid Request"});
             break
     }
     
 })
+
+function isValidUser(userObject) {
+    const settings = getFile('/storage/settings.json')
+    if (!!userObject.username && !!userObject.password && userObject.permissions < settings.permissionLevels.length) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 function getFile(relativePath) {
     const file = fs.readFileSync(__dirname+relativePath).toString()
@@ -303,19 +277,53 @@ app.post('/admin', (req, res) => {
                 var settings = getSettings()
                 const userIndex = settings.users.findIndex(p => p.username == body.data.name)
                 settings.users[userIndex][body.data.field] = body.data.updated
-                writeSettings(settings)
+                if (isValidUser(settings.users[userIndex])) {
+                    writeSettings(settings)
+                    res.send({res: "OK"})
+                } else {
+                    res.send({res: "Bad User"});
+                }
+            }
+            break
+        case "setSchedule":
+            fs.writeFileSync(__dirname+"/storage/matches.json", JSON.stringify(body.data))
+            res.send({res: "OK"})
+            break
+        case "assignMatches":
+            fs.writeFileSync(__dirname+"/storage/scouts.json", JSON.stringify(body.data))
+            res.send({res: "OK"})
+            break
+        case "addUser":
+            var settings = getSettings()
+            if (isValidUser(body.data)) {
+                settings.users.push(body.data)
+                writeSettings(settings) 
+                res.send({res: "OK"})
+            } else {
+                res.send({res: "Bad User"});
+            }
+            break
+        case "deleteUser":
+            { // needed to declare const only used in this case
+                var settings = getSettings()
+                const userIndex = settings.users.findIndex(item => item.username === body.data)
+                settings.users.splice(userIndex, 1)
+                writeSettings(settings) 
                 res.send({res: "OK"})
             }
             break
-        // case "deleteDatabaseAndPerms":
-        //     var settings = getSettings()
-        //     settings.users = []
-        //     settings.eventKey = "NONE"
-        //     settings.permissionLevels = []
-        //     writeSettings(settings)
-        //     fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify({}))
-        //     res.send({res: "OK"})
-        //     break
+        case "addPerm":
+            var settings = getSettings()
+            settings.permissionLevels.push(body.data)
+            writeSettings(settings) 
+            res.send({res: "OK"})
+            break
+        case "changeKey":
+            var settings = getSettings()
+            settings.eventKey = body.data
+            writeSettings(settings)
+            res.send({res: "OK"})
+            break
         default:
             res.send({res: "Invalid Request"});
             break
