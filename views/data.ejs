@@ -5,7 +5,6 @@
         <link rel="icon" type="image/png" href="/g3.png">
         <link rel="stylesheet" href="/global.css">
         <title>G3 Scouting!</title>
-        <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
         <script src="/libs/jquery-3.7.1.min.js"></script>
         <script src="/js/global.js"></script>
     </head>
@@ -17,8 +16,11 @@
 
             <% if (data?.rows) { %>
 
+            <button class="btn btn-primary" onclick="downloadTable()">Download as CSV</button><br><br>
+
             <b>Click on a bold header to sort by that column. Click on it again to reverse sort!</b>
 
+            <div id="saveToDriveButton"></div>
             
             <table class="table table-hover table-bordered" id="data-table">
 
@@ -31,7 +33,7 @@
                                 <!-- <button class="btn btn-link" onclick="sortTable('<%= x %>')"> -->
                                     <%= data.cols[x] %>
                                 <!-- </button> -->
-                            </th>
+                              </th>
                         <% } %>
                     </tr>
                 </thead>
@@ -80,6 +82,39 @@
             sortTable("data-table", $(this).index(), false)
         }
     })
+
+    function downloadTable() {
+        let csvTable = "! This CSV was generated using the G3 Scouting software! \n";
+        for (let i = 0; i < $("#data-table thead tr").children().length-1; i++) {
+            csvTable += $("#data-table thead tr").children()[i+1].innerText + ","
+        }
+
+        csvTable = csvTable.slice(0, -1) + "\n";
+
+        for (let i = 0; i < $("#data-table tbody tr").length; i++) {
+            for (let x = 0; x < $($("#data-table tbody tr")[i]).children().length - 1; x++) {
+                csvTable += $($("#data-table tbody tr")[i]).children()[x+1].innerText + ","
+            }
+
+            csvTable = csvTable.slice(0, -1) + "\n";
+        }
+
+        const file = new File([csvTable], 'table.csv', {
+            type: 'text/plain',
+        })
+
+        const link = document.createElement('a')
+        const url = URL.createObjectURL(file)
+
+        link.href = url
+        link.download = file.name
+
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+
+        window.URL.revokeObjectURL(url)
+    }
 </script>
 
 <script>$("#nav-data").addClass("active")</script>
