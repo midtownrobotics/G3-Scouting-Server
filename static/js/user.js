@@ -35,7 +35,7 @@ function generateTable(userGet) {
                 </tr>
             `);
 
-        } else if (firstNonBreak == false){
+        } else if (firstNonBreak == true) {
 
             $("#table").append(`
                 <tr class="table-primary">
