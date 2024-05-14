@@ -30,9 +30,7 @@
         <div id="inline">
             <select id="select-col" class="form-select">
             <option disabled selected>Field</option>
-            <% for (let i = 0; i < Object.keys(infoFields).length; i++) { %>
-                <option value="<%= i+1 %>"><%= Object.keys(infoFields)[i] %></option>
-            <% } %>
+
             </select>&nbsp;
             <select id="select-mode" class="form-select">
                 <option disabled selected>Action</option>
@@ -64,18 +62,28 @@
         <table class="table table-hover table-bordered" id="data-table">
             <thead>
                 <tr style="font-weight: bold;">
-                    <% for (let i = 0; i < Object.keys(infoFields).length; i++) { %>
-                        <td>
-                            <%= Object.keys(infoFields)[i] %>
-                        </td>
+                    <th style="width: 10px;">
+
+                    </th>
+                    <% for (x=0; x < info.cols.length; x++) { %>
+                        <th scope="col">
+                                <%= info.cols[x] %>
+                        </th>
                     <% } %>
                 </tr>
             </thead>
             <tbody>
-                <% for (let i = 0; i < info[0].length; i++) { %>
-                    <tr>
-                        <% for (let x = 0; x < info.length; x++) { %>
-                            <td><%= info[x][i] %></td>
+                <% for(i = 0; i < info.rows.length; i++) { %>
+                    <tr id="row-<%= i %>">
+                        <td class="trash">
+                            <i class="bi bi-trash-fill"></i>
+                        </td>
+                        <% for (x=0; x < info.cols.length; x++) { %>
+                            <td style="white-space: nowrap;">        
+                                <% if (info.rows[i].findIndex(p => p.name == info.cols[x]) > -1) { %>
+                                    <%= info.rows[i][info.rows[i].findIndex(p => p.name == info.cols[x])].value %> 
+                                <% } %>
+                            </td>
                         <% } %>
                     </tr>
                 <% } %>

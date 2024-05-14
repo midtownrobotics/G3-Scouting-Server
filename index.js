@@ -145,42 +145,21 @@ app.get('/user-get', (req, res) => {
 app.get('/data/analysis', (req, res) => {
     if (req.query.team) {
 
-        const sheet = req.query.sheet
+        let sheet = getFile('/storage/scouting.json')[req.query.sheet]
 
-        let rows = getFile('/storage/scouting.json')[sheet]?.rows
-
-        if (!rows) {
+        if (!sheet) {
             res.render('data-analysis-home', {nav: getFile("/src/nav.html"), sheets: Object.keys(getFile("/storage/scouting.json")), error: "No data found for team!"})
             return;
         }
 
-        let infoFields = {}
-        let info = []
+        sheet.rows = sheet.rows.filter((row) => row.find((v) => v.name == "TeamNum").value == req.query.team)
 
-        for (let i = 0; i < rows.length; i++) {
-            if (rows[i].findIndex((t) => t.value == req.query.team) !== -1) {
-                for (let x = 0; x < rows[i].length; x++) {
-
-                    if (infoFields[rows[i][x].name] == undefined) {
-                        infoFields[rows[i][x].name] = Object.keys(infoFields).length
-                    }
-
-                    if (info[infoFields[rows[i][x].name]] == undefined) {
-                        info[infoFields[rows[i][x].name]] = []
-                    }
-
-                    info[parseInt(infoFields[rows[i][x].name])].push(rows[i][x].value)
-
-                }
-            }
-        }
-
-        if (!info[0]) {
+        if (!sheet.rows[0]) {
             res.render('data-analysis-home', {nav: getFile("/src/nav.html"), sheets: Object.keys(getFile("/storage/scouting.json")), error: "No data found for team!"})
             return;
         }
 
-        res.render('data-analysis', {nav: getFile("/src/nav.html"), info: info, sheets: Object.keys(getFile("/storage/scouting.json")), infoFields: infoFields})
+        res.render('data-analysis', {nav: getFile("/src/nav.html"), info: sheet, sheets: Object.keys(getFile("/storage/scouting.json"))})
 
     } else {
         res.render('data-analysis-home', {nav: getFile("/src/nav.html"), sheets: Object.keys(getFile("/storage/scouting.json")), error: null})
