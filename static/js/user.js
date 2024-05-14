@@ -19,8 +19,12 @@ function generateTable(userGet) {
         </tr>
     `)
 
+    let firstNonBreak = false;
+
     for(let i=0; i < matches.length; i++) { 
         if (matches[i] !== "break") {
+
+            firstNonBreak = true;
 
             $("#table").append(`
                 <tr>
@@ -29,15 +33,15 @@ function generateTable(userGet) {
                     <td>${getTeamName(matches[i].team)}</td>
                     <td>${matches[i].alliance.charAt(0).toUpperCase() + matches[i].alliance.slice(1)} </td>
                 </tr>
-            `)
+            `);
 
-        } else { 
+        } else if (firstNonBreak == false){
 
             $("#table").append(`
                 <tr class="table-primary">
                     <td colspan="4">${i+1 }</td>
                 </tr>
-            `)
+            `);
 
         } 
     } 
