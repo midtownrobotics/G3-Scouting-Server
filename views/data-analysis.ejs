@@ -29,8 +29,12 @@
 
         <div id="inline">
             <select id="select-col" class="form-select">
-            <option disabled selected>Field</option>
-
+                <option disabled selected>Field</option>
+                <% for (x=0; x < info.cols.length; x++) { %>
+                    <option>
+                            <%= info.cols[x] %>
+                    </option>
+                <% } %>
             </select>&nbsp;
             <select id="select-mode" class="form-select">
                 <option disabled selected>Action</option>
