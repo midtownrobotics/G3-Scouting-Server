@@ -16,9 +16,10 @@
         <h1>Welcome to the scouting forms page!</h1>
         <% if (sheets[0]) { %>
             <h3>Please select a form below.</h3>
-            <% for (let i=0; i < sheets.length; i++) { %>
+            <a href="/formTemplate">#1: Example Form (temp)</a><br>
+            <!-- <% for (let i=0; i < sheets.length; i++) { %>
                 <a href="/forms?form=<%=sheets[i]%>">#<%=i+1%>: <%=sheets[i]%></a><br>
-            <% } %>
+            <% } %> -->
         <% } else { %>
             <h3>No forms were found! Contact your server administrator if you think this is an issue.</h3>
         <% } %>
