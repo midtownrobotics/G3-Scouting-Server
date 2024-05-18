@@ -132,6 +132,7 @@ app.get('/user-get', (req, res) => {
     }
     matchesAndBreaks = Array.from(matchesAndBreaks, item => item || "break");
     res.send({
+        name: name,
         nextMatch: {
             number: matchNumb, 
             team: match.team, 
