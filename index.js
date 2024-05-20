@@ -47,7 +47,7 @@ app.use(function(req, res, next) {
     }
 
     if (permissions == "BAD USER") {
-            res.statusCode = 401;
+        res.statusCode = 401;
         res.setHeader('WWW-Authenticate', 'Basic realm="G3"');
         res.end('Unauthorized');
     } else {
@@ -167,19 +167,6 @@ app.get('/data/analysis', (req, res) => {
     }
 })
 
-// app.get('/sheets', async (req, res) => {
-//     if (req.query.id) {
-//         const sheetToGet = req.query.id
-//         let sheet = XLSX.utils.json_to_sheet(getSheet(sheetToGet))
-//         let newWorkBook = XLSX.utils.book_new()
-//         XLSX.utils.book_append_sheet(newWorkBook, sheet)
-//         await XLSX.writeFile(newWorkBook, "./src/sheets/displaySheets/" + sheetToGet + ".xlsx")
-//         res.sendFile(__dirname + '/src/sheets/displaySheets/' + sheetToGet + ".xlsx")
-//     } else {
-//         res.send("sheet not found")
-//     }
-// })
-
 app.post('/post', (req, res) => {
     const body = req.body
 
@@ -206,11 +193,31 @@ app.post('/post', (req, res) => {
             res.send({res: getSettings().eventKey})
             break
         case "getScout":
-            const scouts = getFile('/storage/scouts.json')
-            res.send({res: scouts[scouts.findIndex(p => p.name == Buffer.from(req.headers.authorization.substring(6), 'base64').toString().split(':')[0])]})
+            {
+                const scouts = getFile('/storage/scouts.json')
+                const username = Buffer.from(req.headers.authorization.substring(6), 'base64').toString().split(':')[0];
+                res.send({res: scouts.find(p => p.name == username)})
+            }
             break
         case "getSchedule":
             res.send({res: getFile("/storage/matches.json")})
+            break
+        case "syncOffline":
+            {
+                for (let i=0; i < Object.keys(body.data.scoutingData).length; i++) {
+                    const sheet = Object.keys(body.data.scoutingData)[i]
+                    const dataToAdd = body.data.scoutingData[Object.keys(body.data.scoutingData)[i]]
+
+                    for (let i=0; i < dataToAdd.rows.length; i++) {
+                        const scout = dataToAdd.rows[i].find((item) => (item.name == "scout")).value;
+                        const matchNumber = dataToAdd.rows[i].find((item) => (item.name == "matchNum")).value
+                        addRowToSheet(sheet, dataToAdd.rows[i], scout)
+                        completeMatch(matchNumber, scout)
+                    }
+                }
+
+                res.send({res: "OK"})
+            }
             break
         default:
             res.send({res: "Invalid Request"});
@@ -332,17 +339,6 @@ function writeSettings(data) {
 
 */
 
-function makeSheet(sheet) {
-    let newJSON = getFile("/storage/scouting.json")
-    if (!newJSON[sheet]) {
-        newJSON[sheet] = {"cols":[], "rows": []}
-        fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify(newJSON))
-        return "OK"
-    } else {
-        return "Sheet Already Made"
-    }
-}
-
 function completeMatch(matchNumber, username) {
     let scouts = getFile("/storage/scouts.json")
     const user = scouts.findIndex(({name}) => name == username)
@@ -358,17 +354,27 @@ function getSheet(sheet) {
 function addRowToSheet(sheet, data, username) {
     data.push({name: "scout", value: username})
     let newJSON = getFile("/storage/scouting.json")
+    if (!newJSON[sheet]) {
+        newJSON[sheet] = {
+            cols: [],
+            rows: []
+        }
+    }
     for (let i=0; i < data.length; i++) {
-        !newJSON[sheet].cols.includes(data[i].name) ? newJSON[sheet].cols.push(data[i].name) : ""
+        if (!newJSON[sheet].cols.includes(data[i].name)) { 
+            newJSON[sheet].cols.push(data[i].name)
+        }
     }
     newJSON[sheet].rows.push(data)
     fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify(newJSON))
 }
 
 function addColumnToSheet(sheet, column) {
-    let newJSON = getFile("/storage/scouting.json")
-    newJSON[sheet].cols.push(column)
-    fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify(newJSON))
+    let sheetFile = getFile("/storage/scouting.json")
+    if (sheetFile[sheet].cols.includes(column)) {
+        sheetFile[sheet].cols.push(column)
+        fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify(newJSON))
+    }
 }
 
 function deleteRowFromSheet(sheet, row) {
