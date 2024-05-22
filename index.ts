@@ -132,7 +132,7 @@ app.get('/user-get', (req, res) => {
     const matchNumb: number = user.matchNumbs.reduce((a: number, b: number) => Math.min(a, b))
     const match: AssignedMatch | undefined = user.matches.find((m: AssignedMatch) => m.number == matchNumb)
     let matches = user.matches.filter((m: AssignedMatch) => m.scouted == false)
-    matches.sort((a, b) => (a.number > b.number ? 1 : -1))
+    matches.sort((a: AssignedMatch, b: AssignedMatch) => (a.number > b.number ? 1 : -1))
 
     let matchesAndBreaks: Array<AssignedMatch | "break"> = [];
 
