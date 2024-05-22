@@ -90,7 +90,7 @@ app.get('/logout', (req, res) => {
 })
 
 app.get('/forms', (req, res) => {
-    const form: any = req.query.form
+    const form: string | undefined = req.query.form?.toString()
     if (form) {
         res.render('form', {data: getSheet(form), nav: getFile("/src/nav.html")});
     } else if (getFile("/storage/scouting.json").toString()){
@@ -102,7 +102,7 @@ app.get('/forms', (req, res) => {
 })
 
 app.get('/data', (req, res) => {
-    const sheet: any = req.query.sheet
+    const sheet: string | undefined = req.query.sheet?.toString()
     if (sheet) {
         res.render('data', {data: getSheet(sheet), nav: getFile("/src/nav.html")});
     } else if (getFile("/storage/scouting.json").toString()){
@@ -254,7 +254,7 @@ function isValidUser(userObject: User) {
 }
 
 app.post('/admin', (req, res) => {
-    const body = req.body
+    const body: any = req.body
 
     switch (req.body.action) {
         case "deleteDatabase":
