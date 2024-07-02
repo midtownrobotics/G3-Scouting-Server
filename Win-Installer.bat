@@ -43,45 +43,18 @@ if !node!==no (
 if !node!==yes (
     powershell write-host -fore Green "NVM is already downloaded!" 
     echo:
-
-    call :gitIsInstalled && set "git=yes" || set "git=no"
-
-    if !git!==no (
-        echo Downloading Git . . .
-        echo:
-        if exist "git-install.exe" del /q "git-install.exe" >nul 2>nul 
-        curl.exe --location --request GET "https://github.com/git-for-windows/git/releases/download/v2.45.1.windows.1/Git-2.45.1-64-bit.exe" --output git-install.exe -s
-        echo You are about install Git.
-        pause
-        start git-install.exe
-        echo:
-        powershell write-host -fore Blue Press any key once you have completed Git install, then restart the installer . . .
-        pause > nul
-        exit
-    )
-
-    if !git!==yes (
-        echo: Installing Node and NPM using NVM . . . 
-        powershell write-host -fore Red You may need to accept windows security prompts.
-        pause
-        nvm install lts
-        nvm use lts
-        SET PATH=C:\Program Files\Nodejs;%PATH%
-        echo:
-        echo:
-        powershell write-host -fore Green "Git is already downloaded!" 
-        echo:
-        echo Cloning repository . . . 
-        echo:
-        git clone https://github.com/midtownrobotics/G3-Scouting-Server.git ./Scouting-Server
-        echo:
-        echo: Installing packages . . . 
-        cd ./Scouting-Server
-        npm install .
-        cd ../
-        echo:
-        powershell write-host -fore Red "You have successfully installed the G3 Scouting Server! Please see the github https://github.com/midtownrobotics/G3-Scouting-Software if you need help."
-    )
+    echo: Installing Node and NPM using NVM . . . 
+    powershell write-host -fore Red You may need to accept windows security prompts.
+    pause
+    nvm install 20.14.0
+    nvm use 20.14.0
+    SET PATH=C:\Program Files\Nodejs;%PATH%
+    echo:
+    echo:
+    echo: Installing packages . . . 
+    npm install .
+    echo:
+    powershell write-host -fore Red "You have successfully installed the G3 Scouting Server! Please see the github https://github.com/midtownrobotics/G3-Scouting-Software if you need help."
 )
 
 endlocal
@@ -92,23 +65,6 @@ endlocal
     set "tempFile=%temp%\%~nx0.%random%.tmp"
 
     nvm --version > "%tempFile%" && set "error=" || set "error=1"
-
-    set "exitCode=1"
-
-    if not defined error (
-        set "exitCode=0"
-    )
-
-    if exist "%tempFile%" del /q "%tempFile%" >nul 2>nul 
-
-endlocal & exit /b %exitCode%
-
-:gitIsInstalled
-    setlocal enableextensions disabledelayedexpansion
-
-    set "tempFile=%temp%\%~nx0.%random%.tmp"
-
-    git --version > "%tempFile%" && set "error=" || set "error=1"
 
     set "exitCode=1"
 
