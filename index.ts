@@ -107,9 +107,9 @@ app.get('/data', (req, res) => {
         res.render('data', {data: getSheet(sheet), nav: getFile("/src/nav.html")});
     } else if (getFile("/storage/scouting.json").toString()){
         const sheets: Array<string> = Object.keys(getFile("/storage/scouting.json"))
-        res.render('form-home', {sheets: sheets, nav: getFile("/src/nav.html")})
+        res.render('data-home', {sheets: sheets, nav: getFile("/src/nav.html")})
     } else {
-        res.render('form-home', {sheets: false, nav: getFile("/src/nav.html")})
+        res.render('data-home', {sheets: false, nav: getFile("/src/nav.html")})
     }
 })
 
