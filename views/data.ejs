@@ -162,11 +162,14 @@
 </style>
 
 <script>
+    const URLParams = new URLSearchParams(window.location.search)
+    const sheet = URLParams.get("sheet");
+
     $(".trash").on("click", function(){
         const rowNumb = $(this).parent().attr('id').split("-")[1];
         const uSure = confirm(`Row number ${rowNumb} will be deleted!`)
         if (uSure) {
-            postData({action: "deleteRow", sheet: "testing-sheet", data: rowNumb})
+            postData({action: "deleteRow", sheet: sheet, data: rowNumb})
             window.location.reload();
         }
     })

@@ -80,7 +80,7 @@ $('#form').on("submit", submitForm)
 
 function submitForm() {
     const formData = $('#form').serializeArray()
-    postData({action: "addRow", sheet: "testing-sheet", data: formData, matchNumb: formData.find(({name}) => name == "matchNum").value}).then(function(res){
+    postData({action: "addRow", sheet: "Example_Form", data: formData, matchNumb: formData.find(({name}) => name == "matchNum").value}).then(function(res){
         if (res == "OK") {
             $('#form').trigger("reset");
             window.scrollTo(0, 0);
