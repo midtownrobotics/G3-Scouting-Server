@@ -1,16 +1,20 @@
 import express from 'express';
-import {Settings, Scout, AssignedMatch, Sheet, User, Row, getFile, getSettings, writeSettings, getSheet, addRowToSheet, completeMatch, addColumnToSheet, deleteRowFromSheet } from './storage';
+import {Settings, Scout, AssignedMatch, Sheet, User, getFile, getSettings, writeSettings, getSheet, addRowToSheet, completeMatch, addColumnToSheet, deleteRowFromSheet } from './storage';
 import * as fs from 'fs';
 
 const app = express();
 
-const PORT: number = 8082;
+let PORT: number = 8082;
 
 app.set('views', 'views');
 app.set('view engine', 'ejs');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+if (process.argv.indexOf("port") > -1) {
+    PORT = parseInt(process.argv[process.argv.indexOf("port") + 1])
+}
 
 app.use(function(req, res, next) {
 
@@ -131,7 +135,7 @@ app.get('/user-get', (req, res) => {
     const user: Scout = getFile("/storage/scouts.json").find((p: Scout) => p.name == name)
     const matchNumb: number = user.matchNumbs.reduce((a: number, b: number) => Math.min(a, b))
     const match: AssignedMatch | undefined = user.matches.find((m: AssignedMatch) => m.number == matchNumb)
-    let matches = user.matches.filter((m: AssignedMatch) => m.scouted == false)
+    let matches: Array<AssignedMatch> = user.matches.filter((m: AssignedMatch) => m.scouted == false)
     matches.sort((a: AssignedMatch, b: AssignedMatch) => (a.number > b.number ? 1 : -1))
 
     let matchesAndBreaks: Array<AssignedMatch | "break"> = [];
@@ -331,5 +335,5 @@ app.get("*", (req, res) => {
     res.sendFile(__dirname+"/src/404.html")
 })
 
-// console.log(`listening on port ${PORT}!`);
+console.log(`listening on port ${PORT}! enjoy!`);
 app.listen(PORT);
