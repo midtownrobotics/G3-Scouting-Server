@@ -100,20 +100,20 @@ export function getSheet(sheet: string) {
 
 export function addRowToSheet(sheet: string, data: Row, username: string) {
     data.push({name: "scout", value: username})
-    let newJSON: any = getFile("/storage/scouting.json")
-    if (!newJSON[sheet]) {
-        newJSON[sheet] = {
+    let scoutingJSON: any = getFile("/storage/scouting.json")
+    if (!scoutingJSON[sheet]) {
+        scoutingJSON[sheet] = {
             cols: [],
             rows: []
         }
     }
     for (let i=0; i < data.length; i++) {
-        if (!newJSON[sheet].cols.includes(data[i].name)) { 
-            newJSON[sheet].cols.push(data[i].name)
+        if (!scoutingJSON[sheet].cols.includes(data[i].name)) { 
+            scoutingJSON[sheet].cols.push(data[i].name)
         }
     }
-    newJSON[sheet].rows.push(data)
-    fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify(newJSON))
+    scoutingJSON[sheet].rows.push(data)
+    fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify(scoutingJSON))
 }
 
 export function addColumnToSheet(sheet: string, column: string) {
@@ -125,7 +125,7 @@ export function addColumnToSheet(sheet: string, column: string) {
 }
 
 export function deleteRowFromSheet(sheet: string, row: string) {
-    let newJSON: any = getFile("/storage/scouting.json")
-    newJSON[sheet].rows.splice(row, 1)
-    fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify(newJSON))
+    let scoutingJSON: any = getFile("/storage/scouting.json")
+    scoutingJSON[sheet].rows.splice(row, 1)
+    fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify(scoutingJSON))
 }

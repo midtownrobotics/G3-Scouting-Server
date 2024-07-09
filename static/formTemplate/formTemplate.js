@@ -79,7 +79,8 @@ $(".minus").click(function() {
 $('#form').on("submit", submitForm)
 
 function submitForm() {
-    const formData = $('#form').serializeArray()
+    let formData = $('#form').serializeArray()
+    formData.push({name: "timestamp", value: formatDate(new Date(Date.now()))})
     postData({action: "addRow", sheet: "Example_Form", data: formData, matchNumb: formData.find(({name}) => name == "matchNum").value}).then(function(res){
         if (res == "OK") {
             $('#form').trigger("reset");
@@ -89,4 +90,8 @@ function submitForm() {
             alert("FORM NOT SAVED!")
         }
     })
+}
+
+function formatDate(date) {
+    return [date.getMonth(), "/", date.getDate(), "/", date.getFullYear().toString().substring(2), " ", date.getHours(), ":", date.getMinutes(), ":", date.getSeconds()].join("");
 }
