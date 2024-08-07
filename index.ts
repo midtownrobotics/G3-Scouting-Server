@@ -199,7 +199,9 @@ app.post('/post', (req, res) => {
             break
         case "addRow":
             addRowToSheet(body.sheet, body.data, username);
-            completeMatch(body.matchNumb, username)
+            if (body.sheet == "Numeric") {
+                completeMatch(body.matchNumb, username)
+            }
             res.send({res: "OK"});
             break
         case "addColumn":

@@ -32,21 +32,6 @@ $("#TeamNum").on('input propertychange paste', function(){
     } 
 });
 
-window.onload = function(){
-    setDefaultValues()
-}
-
-function setDefaultValues() {
-    postData({action: "getScout"}).then(function(res){
-        for(let i=0; i<res.breaks.length; i++) {
-            breakTimes[res.breaks[i]] = "on break"
-        }
-        $("#matchNum").val(res.matchNumbs.reduce((a, b) => Math.min(a, b)))
-        $("#TeamNum").val(res.matches.find(({number}) => number == res.matchNumbs.reduce((a, b) => Math.min(a, b))).team)
-        console.log(breakTimes)
-    })
-}
-
 dontScout = [1648];
 
 function isValidWholeNumber(input){
@@ -81,7 +66,7 @@ $('#form').on("submit", submitForm)
 function submitForm() {
     let formData = $('#form').serializeArray()
     formData.push({name: "timestamp", value: formatDate(new Date(Date.now()))})
-    postData({action: "addRow", sheet: "Example_Form", data: formData, matchNumb: formData.find(({name}) => name == "matchNum").value}).then(function(res){
+    postData({action: "addRow", sheet: "Qualitative", data: formData, matchNumb: formData.find(({name}) => name == "matchNum").value}).then(function(res){
         if (res == "OK") {
             $('#form').trigger("reset");
             window.scrollTo(0, 0);

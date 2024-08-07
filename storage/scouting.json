@@ -1,1 +1,133 @@
-{"Example_Form":{"cols":["matchNum","TeamNum","auto-speaker","auto-amp","match-speaker","match-amp","climb","throw","additionalNotes","scout","timestamp"],"rows":[[{"name":"matchNum","value":"12"},{"name":"TeamNum","value":"4026"},{"name":"auto-speaker","value":"1"},{"name":"auto-amp","value":"2"},{"name":"match-speaker","value":"5"},{"name":"match-amp","value":"1"},{"name":"climb","value":"Yes"},{"name":"throw","value":"No human player"},{"name":"additionalNotes","value":":)"},{"name":"scout","value":"admin"}],[{"name":"matchNum","value":"13"},{"name":"TeamNum","value":"9260"},{"name":"auto-speaker","value":"0"},{"name":"auto-amp","value":"0"},{"name":"match-speaker","value":"0"},{"name":"match-amp","value":"0"},{"name":"climb","value":"No"},{"name":"throw","value":"Yes"},{"name":"additionalNotes","value":"no"},{"name":"scout","value":"admin"},{"name":"timestamp","value":"6/9 9:38:33"}],[{"name":"matchNum","value":"14"},{"name":"TeamNum","value":"8849"},{"name":"auto-speaker","value":"0"},{"name":"auto-amp","value":"0"},{"name":"match-speaker","value":"0"},{"name":"match-amp","value":"0"},{"name":"climb","value":"No"},{"name":"throw","value":"Yes"},{"name":"additionalNotes","value":"na"},{"name":"scout","value":"admin"},{"name":"timestamp","value":"6/9/24 9:41:42"}],[{"name":"matchNum","value":"15"},{"name":"TeamNum","value":"6366"},{"name":"auto-speaker","value":"0"},{"name":"auto-amp","value":"0"},{"name":"match-speaker","value":"0"},{"name":"match-amp","value":"0"},{"name":"climb","value":"Yes"},{"name":"throw","value":"No"},{"name":"additionalNotes","value":"new test"},{"name":"timestamp","value":"6/9/24 9:45:46"},{"name":"scout","value":"admin"},{"name":"timestamp","value":"6/9/24 9:45:46"}]]}}
+{
+    "Qualitative": {
+        "cols": [
+            "matchNum",
+            "TeamNum",
+            "Strengths",
+            "Weaknesses",
+            "Driving",
+            "WithoutPressing",
+            "Break",
+            "Interfere",
+            "Unique",
+            "AdditionalNotes",
+            "timestamp",
+            "scout"
+        ],
+        "rows": [
+            [
+                {
+                    "name": "matchNum",
+                    "value": "54"
+                },
+                {
+                    "name": "TeamNum",
+                    "value": "9999"
+                },
+                {
+                    "name": "Strengths",
+                    "value": "str"
+                },
+                {
+                    "name": "Weaknesses",
+                    "value": "wek"
+                },
+                {
+                    "name": "Driving",
+                    "value": "dri"
+                },
+                {
+                    "name": "WithoutPressing",
+                    "value": "No"
+                },
+                {
+                    "name": "Break",
+                    "value": "Yes"
+                },
+                {
+                    "name": "Interfere",
+                    "value": "No"
+                },
+                {
+                    "name": "Unique",
+                    "value": "uni"
+                },
+                {
+                    "name": "AdditionalNotes",
+                    "value": "add"
+                },
+                {
+                    "name": "timestamp",
+                    "value": "7/7/24 18:5:40"
+                },
+                {
+                    "name": "scout",
+                    "value": "admin"
+                }
+            ]
+        ]
+    },
+    "Numeric": {
+        "cols": [
+            "matchNum",
+            "TeamNum",
+            "auto-speaker",
+            "auto-amp",
+            "match-speaker",
+            "match-amp",
+            "climb",
+            "trap",
+            "additionalNotes",
+            "timestamp",
+            "scout"
+        ],
+        "rows": [
+            [
+                {
+                    "name": "matchNum",
+                    "value": "16"
+                },
+                {
+                    "name": "TeamNum",
+                    "value": "5109"
+                },
+                {
+                    "name": "auto-speaker",
+                    "value": "34"
+                },
+                {
+                    "name": "auto-amp",
+                    "value": "10"
+                },
+                {
+                    "name": "match-speaker",
+                    "value": "76"
+                },
+                {
+                    "name": "match-amp",
+                    "value": "98"
+                },
+                {
+                    "name": "climb",
+                    "value": "Yes"
+                },
+                {
+                    "name": "trap",
+                    "value": "No"
+                },
+                {
+                    "name": "additionalNotes",
+                    "value": "add"
+                },
+                {
+                    "name": "timestamp",
+                    "value": "7/7/24 18:6:10"
+                },
+                {
+                    "name": "scout",
+                    "value": "admin"
+                }
+            ]
+        ]
+    }
+}
