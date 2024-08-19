@@ -1,404 +1,29 @@
+let currentlyDownloadedForms;
+
 viewSaveLoadPage()
 
-function save(name) {
+function save(name, overwrite = false) {
   let formHTML = $("#preview").html().toString() // Gets the HTML of the sample form
   
   let save = {
     masterJSON: master,
-    html: formHTML
+    html: formHTML,
+    status: "none"
   }
 
-  postData({action: "saveForm", name: name, data: save}, true)
+  if (overwrite) {
+    postData({action: "overwriteForm", name: name, data: save}, true)
+  } else {
+    postData({action: "saveForm", name: name, data: save}, true)
+  }
+
+  reloadFormList()
+
 }
 
-let exampleLoadMaster = {
-    "title": "Very cool form",
-    "sections": {
-        "s0": {
-            "name": "Titled Section",
-            "id": "TitledSectionKdlK",
-            "childQuestions": {
-                "q0": {
-                    "type": "Number Input",
-                    "label": "label",
-                    "nameIsCustom": false,
-                    "name": "label",
-                    "value": "",
-                    "placeholder": "palce",
-                    "readonly": false,
-                    "required": false,
-                    "id": "labelvRKe",
-                    "index": 0,
-                    "parent": "s0",
-                    "parentIndex": 0
-                }
-            },
-            "object": {
-                "name": "Titled Section",
-                "id": "TitledSectionKdlK",
-                "location": "s0"
-            }
-        },
-        "s1": {
-            "name": "Untitled Section2",
-            "id": "UntitledSectionPxTNu",
-            "childQuestions": {
-                "q0": {
-                    "type": "Number Input",
-                    "label": "test #1",
-                    "nameIsCustom": false,
-                    "name": "test#1",
-                    "value": "",
-                    "placeholder": "nice",
-                    "readonly": false,
-                    "required": false,
-                    "id": "testD1Yzcb",
-                    "index": 1,
-                    "parent": "s1",
-                    "parentIndex": 0,
-                    "min": "",
-                    "max": "",
-                    "step": ""
-                },
-                "q1": {
-                    "type": "Number Input",
-                    "label": "test #2",
-                    "nameIsCustom": false,
-                    "name": "test#2",
-                    "value": "",
-                    "placeholder": "jjj",
-                    "readonly": false,
-                    "required": true,
-                    "id": "testQpbJde",
-                    "index": 2,
-                    "parent": "s1",
-                    "parentIndex": 1,
-                    "min": "",
-                    "max": "",
-                    "step": ""
-                },
-                "q2": {
-                    "type": "Number Input",
-                    "label": "test #3",
-                    "nameIsCustom": false,
-                    "name": "test#3",
-                    "value": "",
-                    "placeholder": "jjjffff",
-                    "readonly": false,
-                    "required": true,
-                    "id": "tests3SMXD",
-                    "index": 3,
-                    "parent": "s1",
-                    "parentIndex": 2,
-                    "min": "",
-                    "max": "",
-                    "step": ""
-                }
-            },
-            "object": {
-                "name": "Untitled Section2",
-                "id": "UntitledSectionPxTNu",
-                "location": "s1"
-            }
-        },
-        "s2": {
-            "name": "new section #3",
-            "id": "newsectionx3zxpd",
-            "childQuestions": {
-                "q0": {
-                    "type": "Number Input",
-                    "label": "test #4",
-                    "nameIsCustom": false,
-                    "name": "test#4",
-                    "value": "",
-                    "placeholder": "",
-                    "readonly": false,
-                    "required": true,
-                    "id": "testn4lTgM",
-                    "index": 4,
-                    "parent": "s2",
-                    "parentIndex": 0,
-                    "min": "",
-                    "max": "",
-                    "step": ""
-                },
-                "q1": {
-                    "type": "Number Input",
-                    "label": "test #5",
-                    "nameIsCustom": false,
-                    "name": "test#5",
-                    "value": "",
-                    "placeholder": "placeholder 5",
-                    "readonly": false,
-                    "required": true,
-                    "id": "testS5xDOv",
-                    "index": 5,
-                    "parent": "s2",
-                    "parentIndex": 1,
-                    "min": "",
-                    "max": "",
-                    "step": ""
-                }
-            },
-            "object": {
-                "name": "new section #3",
-                "id": "newsectionx3zxpd",
-                "location": "s2"
-            }
-        }
-    },
-    "ids": [
-        "TitledSectionKdlK",
-        "UntitledSectionPxTNu",
-        "labelvRKe",
-        "testD1Yzcb",
-        "testQpbJde",
-        "tests3SMXD",
-        "newsectionx3zxpd",
-        "testn4lTgM",
-        "testS5xDOv"
-    ],
-    "questions": {
-        "q0": {
-            "type": "Number Input",
-            "label": "label",
-            "nameIsCustom": false,
-            "name": "label",
-            "value": "",
-            "placeholder": "palce",
-            "readonly": false,
-            "required": false,
-            "id": "labelvRKe",
-            "index": 0,
-            "parent": "s0",
-            "parentIndex": 0
-        },
-        "q1": {
-            "type": "Number Input",
-            "label": "test #1",
-            "nameIsCustom": false,
-            "name": "test#1",
-            "value": "",
-            "placeholder": "nice",
-            "readonly": false,
-            "required": false,
-            "id": "testD1Yzcb",
-            "index": 1,
-            "parent": "s1",
-            "parentIndex": 0,
-            "min": "",
-            "max": "",
-            "step": ""
-        },
-        "q2": {
-            "type": "Number Input",
-            "label": "test #2",
-            "nameIsCustom": false,
-            "name": "test#2",
-            "value": "",
-            "placeholder": "jjj",
-            "readonly": false,
-            "required": true,
-            "id": "testQpbJde",
-            "index": 2,
-            "parent": "s1",
-            "parentIndex": 1,
-            "min": "",
-            "max": "",
-            "step": ""
-        },
-        "q3": {
-            "type": "Number Input",
-            "label": "test #3",
-            "nameIsCustom": false,
-            "name": "test#3",
-            "value": "",
-            "placeholder": "jjjffff",
-            "readonly": false,
-            "required": true,
-            "id": "tests3SMXD",
-            "index": 3,
-            "parent": "s1",
-            "parentIndex": 2,
-            "min": "",
-            "max": "",
-            "step": ""
-        },
-        "q4": {
-            "type": "Number Input",
-            "label": "test #4",
-            "nameIsCustom": false,
-            "name": "test#4",
-            "value": "",
-            "placeholder": "",
-            "readonly": false,
-            "required": true,
-            "id": "testn4lTgM",
-            "index": 4,
-            "parent": "s2",
-            "parentIndex": 0,
-            "min": "",
-            "max": "",
-            "step": ""
-        },
-        "q5": {
-            "type": "Number Input",
-            "label": "test #5",
-            "nameIsCustom": false,
-            "name": "test#5",
-            "value": "",
-            "placeholder": "placeholder 5",
-            "readonly": false,
-            "required": true,
-            "id": "testS5xDOv",
-            "index": 5,
-            "parent": "s2",
-            "parentIndex": 1,
-            "min": "",
-            "max": "",
-            "step": ""
-        }
-    },
-    "QidSearcher": {
-        "labelvRKe": {
-            "type": "Number Input",
-            "qIndex": 0,
-            "parent": "s0",
-            "parentIndex": 0,
-            "object": {
-                "type": "Number Input",
-                "label": "label",
-                "nameIsCustom": false,
-                "name": "label",
-                "value": "",
-                "placeholder": "palce",
-                "readonly": false,
-                "required": false,
-                "id": "labelvRKe",
-                "index": 0,
-                "parent": "s0",
-                "parentIndex": 0
-            }
-        },
-        "testD1Yzcb": {
-            "type": "Number Input",
-            "qIndex": 1,
-            "parent": "s1",
-            "parentIndex": 0,
-            "object": {
-                "type": "Number Input",
-                "label": "test #1",
-                "nameIsCustom": false,
-                "name": "test#1",
-                "value": "",
-                "placeholder": "nice",
-                "readonly": false,
-                "required": false,
-                "id": "testD1Yzcb",
-                "index": 1,
-                "parent": "s1",
-                "parentIndex": 0,
-                "min": "",
-                "max": "",
-                "step": ""
-            }
-        },
-        "testQpbJde": {
-            "type": "Number Input",
-            "qIndex": 2,
-            "parent": "s1",
-            "parentIndex": 1,
-            "object": {
-                "type": "Number Input",
-                "label": "test #2",
-                "nameIsCustom": false,
-                "name": "test#2",
-                "value": "",
-                "placeholder": "jjj",
-                "readonly": false,
-                "required": true,
-                "id": "testQpbJde",
-                "index": 2,
-                "parent": "s1",
-                "parentIndex": 1,
-                "min": "",
-                "max": "",
-                "step": ""
-            }
-        },
-        "tests3SMXD": {
-            "type": "Number Input",
-            "qIndex": 3,
-            "parent": "s1",
-            "parentIndex": 2,
-            "object": {
-                "type": "Number Input",
-                "label": "test #3",
-                "nameIsCustom": false,
-                "name": "test#3",
-                "value": "",
-                "placeholder": "jjjffff",
-                "readonly": false,
-                "required": true,
-                "id": "tests3SMXD",
-                "index": 3,
-                "parent": "s1",
-                "parentIndex": 2,
-                "min": "",
-                "max": "",
-                "step": ""
-            }
-        },
-        "testn4lTgM": {
-            "type": "Number Input",
-            "qIndex": 4,
-            "parent": "s2",
-            "parentIndex": 0,
-            "object": {
-                "type": "Number Input",
-                "label": "test #4",
-                "nameIsCustom": false,
-                "name": "test#4",
-                "value": "",
-                "placeholder": "",
-                "readonly": false,
-                "required": true,
-                "id": "testn4lTgM",
-                "index": 4,
-                "parent": "s2",
-                "parentIndex": 0,
-                "min": "",
-                "max": "",
-                "step": ""
-            }
-        },
-        "testS5xDOv": {
-            "type": "Number Input",
-            "qIndex": 5,
-            "parent": "s2",
-            "parentIndex": 1,
-            "object": {
-                "type": "Number Input",
-                "label": "test #5",
-                "nameIsCustom": false,
-                "name": "test#5",
-                "value": "",
-                "placeholder": "placeholder 5",
-                "readonly": false,
-                "required": true,
-                "id": "testS5xDOv",
-                "index": 5,
-                "parent": "s2",
-                "parentIndex": 1,
-                "min": "",
-                "max": "",
-                "step": ""
-            }
-        }
-    }
-}
+function load(form) {
 
-function load(masterToLoad) {
+  let masterToLoad = form.masterJSON
 
   changeTitleHTML(masterToLoad.title);
   
@@ -434,8 +59,104 @@ function load(masterToLoad) {
   
 }
 
-load(exampleLoadMaster)
-
 function viewSaveLoadPage() {
   $("#saveLoadPage").css("display", "inline-block");
 }
+
+$('#save-new-button').on('click', function() {
+    save($('#save-new-name').val());
+})
+
+function reloadFormList() {
+    fetch('/forms-get')
+    .then(function(res) {
+      return res.text()
+    }).then(function(data) {
+        data = JSON.parse(data)
+        currentlyDownloadedForms = data;
+        let forms = Object.keys(data);
+
+        $("#formManager").empty()
+
+        if (forms.length == 0) {
+            $("#formManager").html(`<h5>Your forms will appear here...</h5>`)
+        }
+        
+        for (let i=0;i < forms.length;i++) {
+
+            let formData = data[forms[i]]
+            $("#formManager").append(`
+                <p style="text-align:left;" class="formManagerItem form-status-${formData.status}" id="formLI${i}">
+                    <span ${formData.status == "deployed" ? 'style="font-weight: bold;"' : ""}>${forms[i]}</span>
+                    <span style="float:right;">
+                        <button class="load-button invisible-button">
+                            <i title="Load" class="bi bi-upload"></i>&nbsp;
+                        </button>
+                        <button class="overwrite-button invisible-button">
+                            <i title="Overwrite" class="bi bi-download"></i>&nbsp;
+                        </button>
+                        <button class="invisible-button">
+                            <i title="Deploy" class="bi bi-cloud-upload"></i>
+                        </button>
+                        <button class="delete-button invisible-button">
+                            <i title="Delete" class="bi bi-trash"></i>
+                        </button>
+                    </span>
+                </p>
+            `)
+        }
+
+        $('.load-button').off()
+        $('.load-button').on('click', function() {
+            let formID = $(this).parent().parent().attr("id").substring(6);
+            if (currentlyDownloadedForms) {
+                let forms = Object.keys(currentlyDownloadedForms);
+                load(currentlyDownloadedForms[forms[formID]]);
+            }
+        })
+
+        $('.delete-button').off()
+        $('.delete-button').on('click', function() {
+            let formID = $(this).parent().parent().attr("id").substring(6);
+            if (currentlyDownloadedForms) {
+                let forms = Object.keys(currentlyDownloadedForms);
+                if (confirm(`You are about to delete ${forms[formID]}.`)) {
+                    postData({action: "deleteForm", name: forms[formID]}, true).then(function(res) {
+                        reloadFormList();
+                    })
+                }
+            }
+        })
+
+        $('.overwrite-button').off()
+        $('.overwrite-button').on('click', function() {
+            let formID = $(this).parent().parent().attr("id").substring(6);
+            if (currentlyDownloadedForms) {
+                let forms = Object.keys(currentlyDownloadedForms);
+                if (confirm(`You are about to overwrite ${forms[formID]}.`)) {
+                    save(forms[formID], true)
+                }
+            }
+        })
+    })
+}
+
+reloadFormList()
+
+// <p style="text-align:left;" class="formManagerItem">
+//     FORM NAME HERE
+//     <span style="float:right;">
+//         <button class="invisible-button">
+//             <i title="Load" class="bi bi-floppy"></i>&nbsp;
+//         </button>
+//         <button class="invisible-button">
+//             <i title="Overright" class="bi bi-save"></i>&nbsp;
+//         </button>
+//         <button class="invisible-button">
+//             <i title="Deploy" class="bi bi-upload"></i>
+//         </button>
+//         <button class="invisible-button">
+//             <i title="Delete" class="bi bi-trash"></i>
+//         </button>
+//     </span>
+// </p>

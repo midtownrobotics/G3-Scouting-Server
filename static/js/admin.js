@@ -304,8 +304,14 @@ for (let i=0; i < document.cookie.split(";").length; i++) {
 
 // gets last saved scroll position and goes to it after 500ms
 setTimeout(function(){
+    let scrollTopPos;
+    try {
+        scrollTopPos = parseInt(document.cookie.split(";").find((p) => p.includes("scroll")).replace("scroll=", "").trim());
+    } catch (err) {
+        scrollTopPos = 0;
+    }
     window.scrollTo({
-        top: parseInt(document.cookie.split(";").find((p) => p.includes("scroll")).replace("scroll=", "").trim()),
+        top: scrollTopPos,
         left: 0,
         behavior: 'instant'
     });

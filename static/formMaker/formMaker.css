@@ -530,11 +530,11 @@ input[type='radio'] {
   font-size: 30px;
 }
 
-#save {
+#saveLoadPage {
   padding: 10px;
 }
 
-#save input {
+#saveLoadPage input {
   background-color: lightblue;
   border: 1px solid black;
   padding: 6px 12px 6px 12px;
@@ -542,7 +542,28 @@ input[type='radio'] {
   font-size: 16px;
 }
 
+.formManagerItem {
+  background-color: lightblue;
+  border: 1px solid black;
+  padding: 6px 12px 6px 12px;
+  border-radius: 6px;
+  font-size: 22px;
+  margin: 10px 0;
+}
 
+#saveLoadPage button {
+  margin: 0px;
+}
+
+.right-align {
+  margin-left: auto; 
+  margin-right: 0;
+}
+
+.invisible-button {
+  background-color: transparent;
+  border: none;
+}
 
 /** Backup without color changes --- Less readable maybe
 #titleBlock {

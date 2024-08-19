@@ -130,16 +130,23 @@ export function deleteRowFromSheet(sheet: string, row: string) {
     fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify(scoutingJSON))
 }
 
-export function saveForm(name: string, data: Object) {
+export function saveForm(name: string, data: Object, overwrite?: boolean) {
     let formsFile: any = getFile("/storage/forms.json");
     let updatedName: string = name;
     let duplicateNumber: number = 1;
-    while (formsFile[updatedName]) {
-        updatedName = name;
-        updatedName += duplicateNumber;
-        duplicateNumber++;
+    if (!overwrite) {
+        while (formsFile[updatedName]) {
+            updatedName = name;
+            updatedName += duplicateNumber;
+            duplicateNumber++;
+        }
     }
-    console.log(updatedName);
     formsFile[updatedName] = data;
+    fs.writeFileSync(__dirname + "/storage/forms.json", JSON.stringify(formsFile));
+}
+
+export function deleteForm(name: string) {
+    let formsFile: any = getFile("/storage/forms.json");
+    delete formsFile[name];
     fs.writeFileSync(__dirname + "/storage/forms.json", JSON.stringify(formsFile));
 }

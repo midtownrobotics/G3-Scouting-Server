@@ -132,7 +132,7 @@ async function submitPrompt(){
   if (purpose == "Enter Section Name") {
     let sectionHead = new SectionHead(value);
     sectionHead.add();
-    $("#addSectionButton").before(`<div class="elementHead">${value}<button class="editSectionTitleClass"><img src="/images/pencil-square.svg" alt="edit"></button><button class="expand">+</button></div>`);
+    $("#addSectionButton").before(`<div class="elementHead">${value}<button class="editSectionTitleClass"><i class="bi bi-pencil-square"></i></button><button class="expand">+</button></div>`);
     $("#addSectionButton").before(`<div class="existingQuestionsContainer"><button onclick="addNewElement()" class="addElement">+ Add Element</button></div>`);
     let element = $(".elementHead").last();
 
@@ -152,7 +152,7 @@ async function submitPrompt(){
         e.stopPropagation();
     });
   } else if (purpose == "New Title?"){
-    $("#titleBlock").html(`${value} <button onclick="newTitle()" id="titleEditButton"><img src="/images/pencil-square.svg" alt="edit"></button>`);
+    $("#titleBlock").html(`${value} <button onclick="newTitle()" id="titleEditButton"><i class="bi bi-pencil-square"></i></button>`);
     $("#title_container").children().html(value);
     master["title"]=value;
   }

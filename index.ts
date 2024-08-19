@@ -1,5 +1,5 @@
 import express from 'express';
-import {Settings, Scout, AssignedMatch, Sheet, User, getFile, getSettings, writeSettings, getSheet, addRowToSheet, completeMatch, addColumnToSheet, deleteRowFromSheet, saveForm } from './storage';
+import {Settings, Scout, AssignedMatch, Sheet, User, getFile, getSettings, writeSettings, getSheet, addRowToSheet, completeMatch, addColumnToSheet, deleteRowFromSheet, saveForm, deleteForm } from './storage';
 import * as fs from 'fs';
 
 const app = express();
@@ -333,6 +333,15 @@ app.post('/admin', (req, res) => {
             break
         case "saveForm":
             saveForm(body.name, body.data)
+            res.send({res: "OK"})
+            break
+        case "deleteForm":
+            deleteForm(body.name)
+            res.send({res: "OK"})
+            break
+        case "overwriteForm":
+            console.log(body.name)
+            saveForm(body.name, body.data, true)
             res.send({res: "OK"})
             break
         default:
