@@ -129,3 +129,17 @@ export function deleteRowFromSheet(sheet: string, row: string) {
     scoutingJSON[sheet].rows.splice(row, 1)
     fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify(scoutingJSON))
 }
+
+export function saveForm(name: string, data: Object) {
+    let formsFile: any = getFile("/storage/forms.json");
+    let updatedName: string = name;
+    let duplicateNumber: number = 1;
+    while (formsFile[updatedName]) {
+        updatedName = name;
+        updatedName += duplicateNumber;
+        duplicateNumber++;
+    }
+    console.log(updatedName);
+    formsFile[updatedName] = data;
+    fs.writeFileSync(__dirname + "/storage/forms.json", JSON.stringify(formsFile));
+}

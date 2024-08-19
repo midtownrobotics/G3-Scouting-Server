@@ -1,5 +1,5 @@
 import express from 'express';
-import {Settings, Scout, AssignedMatch, Sheet, User, getFile, getSettings, writeSettings, getSheet, addRowToSheet, completeMatch, addColumnToSheet, deleteRowFromSheet } from './storage';
+import {Settings, Scout, AssignedMatch, Sheet, User, getFile, getSettings, writeSettings, getSheet, addRowToSheet, completeMatch, addColumnToSheet, deleteRowFromSheet, saveForm } from './storage';
 import * as fs from 'fs';
 
 const app = express();
@@ -186,6 +186,10 @@ app.get('/data/analysis', (req, res) => {
     }
 })
 
+app.get('/forms-get', (req, res) => {
+    res.sendFile(__dirname + "/storage/forms.json")
+})
+
 app.post('/post', (req, res) => {
     const body: any = req.body
 
@@ -325,6 +329,10 @@ app.post('/admin', (req, res) => {
             var settings: Settings = getSettings()
             settings.eventKey = body.data
             writeSettings(settings)
+            res.send({res: "OK"})
+            break
+        case "saveForm":
+            saveForm(body.name, body.data)
             res.send({res: "OK"})
             break
         default:
