@@ -55,7 +55,7 @@ async function getMatches() {
 }
 
 async function postData(data, admin = false) {
-    const url = admin ? "/admin/" : "/post/"
+    const url = window.location.hostname += admin ? "/admin/" : "/post/"
     console.log(url)
     return fetch(url, {
         method: "POST", 
