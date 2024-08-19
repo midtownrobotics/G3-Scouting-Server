@@ -54,8 +54,10 @@ async function getMatches() {
     return matches;
 }
 
+let formMakerDev = true;
+
 async function postData(data, admin = false) {
-    const url = window.location.hostname += admin ? "/admin/" : "/post/"
+    const url = formMakerDev ? "https://server.grayjn.com" : "" += admin ? "/admin/" : "/post/"
     console.log(url)
     return fetch(url, {
         method: "POST", 
