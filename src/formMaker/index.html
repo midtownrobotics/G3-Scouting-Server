@@ -17,6 +17,7 @@
         <button id="textPromptSubmit" class="btn btn-success">Submit</button></>
     </div>
     <div id="bar">
+        <button class="menuButton" onclick="viewAdminPage()">Admin Page</button>
         <button class="menuButton" onclick="viewElementsPage()">Elements</button>
         <button class="menuButton" onclick="customizeStyle()">Customize Style</button>
         <button class="menuButton" onclick="viewSaveLoadPage()">Forms Manager</button>
@@ -29,6 +30,7 @@
         </div>
         <hr>
         <h4>Current forms:</h4>
+        <span id="boldFormTip" style="font-size: 13px;"><b>Bold</b>: Currently Deployed</span>
         <div id="formManager">
         </div>
         <hr>

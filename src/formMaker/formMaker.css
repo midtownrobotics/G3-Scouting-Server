@@ -5,6 +5,7 @@ Form maker Css:
 /**
 Form maker Css:
 **/
+
 #titleBlock {
   background-color: lightslategrey;
   font-size: 35px;
@@ -563,6 +564,14 @@ input[type='radio'] {
 .invisible-button {
   background-color: transparent;
   border: none;
+}
+
+#mainForm {
+  color: #212529;
+}
+
+h4 {
+  margin: 0px 0px 0px 0px;
 }
 
 /** Backup without color changes --- Less readable maybe

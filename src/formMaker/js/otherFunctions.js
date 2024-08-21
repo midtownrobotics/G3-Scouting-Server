@@ -102,6 +102,10 @@ function findIndexInArrayOfObjects(array, searchKey, searchValue){
     }
 }
 
+function viewAdminPage() {
+    window.location.href = "/admin"
+}
+
 
 
     

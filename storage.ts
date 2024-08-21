@@ -94,7 +94,9 @@ export function completeMatch(matchNumberParam: number | string, username: strin
     fs.writeFileSync(__dirname+"/storage/scouts.json", JSON.stringify(scouts))
 }
 
-export function getSheet(sheet: string) {
+// Sheet management
+
+export function getSheet(sheet: string): any {
     return getFile("/storage/scouting.json")[sheet]
 }
 
@@ -130,6 +132,12 @@ export function deleteRowFromSheet(sheet: string, row: string) {
     fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify(scoutingJSON))
 }
 
+// Form management
+
+export function getForm(form: string): string {
+    return getFile("/storage/forms.json")[form].html
+}
+
 export function saveForm(name: string, data: Object, overwrite?: boolean) {
     let formsFile: any = getFile("/storage/forms.json");
     let updatedName: string = name;
@@ -149,4 +157,21 @@ export function deleteForm(name: string) {
     let formsFile: any = getFile("/storage/forms.json");
     delete formsFile[name];
     fs.writeFileSync(__dirname + "/storage/forms.json", JSON.stringify(formsFile));
+}
+
+export function deployForm(name: string, undeploy: boolean = false) {
+    let formsFile: any = getFile("/storage/forms.json");
+    formsFile[name].status = undeploy ? "none" : "deployed";
+    fs.writeFileSync(__dirname + "/storage/forms.json", JSON.stringify(formsFile));
+}
+
+export function getDeployedForms(): Array<string> {
+    const allForms: Array<string> = Object.keys(getFile("/storage/forms.json"))
+    let deployedForms: Array<string> = []
+    for (let i = 0; i < allForms.length; i++) {
+        if (getFile("/storage/forms.json")[allForms[i]].status == "deployed") {
+            deployedForms.push(allForms[i])
+        }
+    }
+    return deployedForms
 }

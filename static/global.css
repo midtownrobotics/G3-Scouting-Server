@@ -7,6 +7,15 @@ nav .logout:hover {
     color: black;
 }
 
+body {
+    background-color: rgb(173, 176, 179);
+    color: rgb(39,38,38);
+}
+
+a:not(nav a) {
+    color:  rgb(39,38,38);
+}
+
 /* Mobile Landscape Only */
 
 @media (orientation: landscape) and (max-width: 1025px) {

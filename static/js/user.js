@@ -61,6 +61,20 @@ async function getNextMatch(userGet) {
     $("#nm-mu").text(currentMatchNumber == "CANNOT ACCESS" ? "????" : nextMatch.number - currentMatchNumber || "Already Happened" )
 }
 
+$(document).ready( function () {
+    if (document.cookie.split(";").find(a => a.includes("darkMode"))?.trim().split("=")[1] != "false") {
+        $("#reload").css("color", "rgb(173, 176, 179)")
+    }
+})
+
+$('#color-switcher').click(function () {
+    if(!$("#color-switcher i").hasClass("bi-sun")) {
+        $("#reload").css("color", "rgb(173, 176, 179)")
+    } else {
+        $("#reload").css("color", "rgb(39,38,38)")
+    }
+})
+
 let teams = [];
 getTeams().then((res) => {
     teams = res
@@ -81,7 +95,9 @@ $("#reload").click(function () {
     rotateReload()
 })
 
-reloadData()
+setTimeout(function () {
+    reloadData()
+}, 400)
 
 setInterval(function () {
     reloadData()

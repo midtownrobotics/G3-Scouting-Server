@@ -1,5 +1,5 @@
 import express from 'express';
-import {Settings, Scout, AssignedMatch, Sheet, User, getFile, getSettings, writeSettings, getSheet, addRowToSheet, completeMatch, addColumnToSheet, deleteRowFromSheet, saveForm, deleteForm } from './storage';
+import {Settings, Scout, AssignedMatch, Sheet, User, getFile, getSettings, writeSettings, getSheet, addRowToSheet, completeMatch, addColumnToSheet, deleteRowFromSheet, saveForm, deleteForm, getForm, deployForm, getDeployedForms } from './storage';
 import * as fs from 'fs';
 
 const app = express();
@@ -86,6 +86,11 @@ function checkAuth(username: string, password: string): 'BAD USER' | number {
 }
 
 app.use(express.static(__dirname + '/static/'));
+app.use('/admin/formMaker', express.static(__dirname + '/src/formMaker/'))
+
+app.get('/form.css', (req, res) => {
+    res.sendFile(__dirname + '/src/formMaker/formMaker.css')
+})
 
 app.get('/logout', (req, res) => {
     res.statusCode = 401;
@@ -95,11 +100,10 @@ app.get('/logout', (req, res) => {
 
 app.get('/forms', (req, res) => {
     const form: string | undefined = req.query.form?.toString()
-    if (form) {
-        res.render('form', {data: getSheet(form), nav: getFile("/src/nav.html")});
-    } else if (getFile("/storage/scouting.json").toString()){
-        const sheets: Array<string> = Object.keys(getFile("/storage/scouting.json"))
-        res.render('form-home', {sheets: sheets, nav: getFile("/src/nav.html")})
+    if (form && getDeployedForms().includes(form)) {
+        res.render('form', {data: getForm(form), nav: getFile("/src/nav.html")});
+    } else if (getDeployedForms().length > 0){
+        res.render('form-home', {sheets: getDeployedForms(), nav: getFile("/src/nav.html")})
     } else {
         res.render('form-home', {sheets: false, nav: getFile("/src/nav.html")})
     }
@@ -340,8 +344,11 @@ app.post('/admin', (req, res) => {
             res.send({res: "OK"})
             break
         case "overwriteForm":
-            console.log(body.name)
             saveForm(body.name, body.data, true)
+            res.send({res: "OK"})
+            break
+        case "deployForm":
+            deployForm(body.name, body.data)
             res.send({res: "OK"})
             break
         default:

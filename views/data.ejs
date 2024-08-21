@@ -129,7 +129,7 @@
         overflow: auto;
         width: fit-content;
         min-width: calc(100% - 40px);
-        background-color: rgba(255, 0, 0, 0.791);;
+        background-color: 
     }
 
     #main {
@@ -174,51 +174,3 @@
         }
     })
 </script>
-
-<!-- <script>
-    function sortTable(row) {
-        console.log(row)
-
-        var table, rows, switching, i, x, y, shouldSwitch;
-        table = document.getElementById("data-table");
-        switching = true;
-
-        while (switching) {
-
-            switching = false;
-            rows = table.rows;
-
-            for (i = 1; i < (rows.length - 1); i++) {
-                shouldSwitch = false;
-
-                x = rows[i].getElementsByTagName("TD")[row];
-                y = rows[i + 1].getElementsByTagName("TD")[row];
-
-                if (Number.isNaN(x.innerHTML)) {
-                    x = parseInt(x.innerHTML)
-                } else {
-                    x = x.innerHTML.toLowerCase()
-                }
-
-                console.log(parseInt(y.innerHTML))
-
-                if (Number.isNaN(y.innerHTML)) {
-                    y = parseInt(y.innerHTML)
-                } else {
-                    y = y.innerHTML.toLowerCase()
-                }
-
-                if (x > y) {
-                    shouldSwitch = true;
-                    break;
-                }
-                
-            }
-
-            if (shouldSwitch) {
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-            }
-        }
-    }
-</script> -->

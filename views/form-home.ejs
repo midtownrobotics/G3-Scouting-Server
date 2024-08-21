@@ -13,17 +13,14 @@
 
     <div id="forms">
 
-        <h1>Welcome to the scouting forms page!</h1>
-        <%# if (sheets[0]) { %>
+        <% if (sheets[0]) { %>
             <h3>Please select a form below.</h3>
-            <a href="/numericalScouting" target="_blank">#1: Quantitative Form</a><br>
-            <a href="/qualitativeScouting" target="_blank">#2: Qualitative Form</a><br>
-            <!-- <% for (let i=0; i < sheets.length; i++) { %>
+            <% for (let i=0; i < sheets.length; i++) { %>
                 <a href="/forms?form=<%=sheets[i]%>">#<%=i+1%>: <%=sheets[i]%></a><br>
-            <% } %> -->
-        <%# } else { %>
-            <!-- <h3>No forms were found! Contact your server administrator if you think this is an issue.</h3> -->
-        <%# } %>
+            <% } %>
+        <% } else { %>
+            <h3>No forms were found! Contact your server administrator if you think this is an issue.</h3>
+        <% } %>
 
     </div>
 </html>
@@ -50,7 +47,7 @@
     }
 
     body {
-        background-color: rgba(255, 0, 0, 0.791);;
+        background-color: 
     }
 
     a {

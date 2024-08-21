@@ -70,6 +70,32 @@ async function postData(data, admin = false) {
     });
 }
 
+$(document).ready( function () {
+    if (document.cookie.split(";").find(a => a.includes("darkMode"))?.trim().split("=")[1] != "false") {
+        switchColor()
+    }
+})
+
+function switchColor() {
+    if($("#color-switcher i").hasClass("bi-sun")) {
+        $("#color-switcher i").removeClass("bi-sun")
+        $("#color-switcher i").addClass("bi-moon")
+        $("body").css("backgroundColor", "rgb(39,38,38)")
+        $("body").css("color", "rgb(173, 176, 179)")
+        $("a:not(nav a)").css("color", "rgb(173, 176, 179)")
+        console.log("dark")
+        document.cookie = "darkMode=true; path=/"
+    } else {
+        $("#color-switcher i").removeClass("bi-moon")
+        $("#color-switcher i").addClass("bi-sun")
+        $("body").css("backgroundColor", "rgb(173, 176, 179)")
+        $("body").css("color", "rgb(39,38,38)")
+        $("a:not(nav a)").css("color", "rgb(39,38,38)")
+        console.log("light")
+        document.cookie = "darkMode=false; path=/"
+    }
+}
+
 function logoutUser() {
     fetch('/logout')
     window.location.reload();
