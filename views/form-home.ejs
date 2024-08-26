@@ -15,6 +15,7 @@
 
         <% if (sheets[0]) { %>
             <h3>Please select a form below.</h3>
+            <h5>Next Assigned Form: <span id="nextForm"></span></h5>
             <% for (let i=0; i < sheets.length; i++) { %>
                 <a href="/forms?form=<%=sheets[i]%>">#<%=i+1%>: <%=sheets[i]%></a><br>
             <% } %>
@@ -26,6 +27,14 @@
 </html>
 
 <script>$("#nav-forms").addClass("active")</script>
+
+<script>
+    async function Async() {
+        let userget = await fetch("/user-get/").then((res) => res.json())
+        $("#nextForm").text(userget.nextMatch.form)
+    }
+    Async()
+</script>
 
 <style>
 

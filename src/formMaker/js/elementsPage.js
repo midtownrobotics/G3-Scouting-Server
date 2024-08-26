@@ -1,12 +1,12 @@
 let elementsPageIdsandIndices = {};
 function viewElementsPage() {
   $("#elementsPage").css("display", "inline-block");
-  $("#elementsPage").append(`<div id="titleBlock">${$("#title_container").children().html()} <button onclick="newTitle()" id="titleEditButton"><img src="/images/pencil-square.svg" alt="edit"></button></div>`);
+  $("#elementsPage").append(`<div id="titleBlock">${$("#title_container").children().html()} <button onclick="newTitle()" id="titleEditButton"><img src="./images/pencil-square.svg" alt="edit"></button></div>`);
   elementsPageIdsandIndices = {};
   var numSections = Object.keys(sections).length;
   for (let i = 0; i < numSections; i++) {
     var title = sections["s" + i].name;
-    $("#elementsPage").append(`<div id="seectionfor${i}" class="elementHead"><button class="moveSection"><img src="images/grip_vertical_icon_151315.svg" alt="moveSection"></button>${title}<button class="editSectionTitleClass"><img src="/images/pencil-square.svg" alt="edit"></button><button class="deleteSection"><img src="images/trash-fill.svg" alt="delete"></button><button class="expand">+</button></div>`);
+    $("#elementsPage").append(`<div id="seectionfor${i}" class="elementHead"><button class="moveSection"><img src="images/grip_vertical_icon_151315.svg" alt="moveSection"></button>${title}<button class="editSectionTitleClass"><img src="./images/pencil-square.svg" alt="edit"></button><button class="deleteSection"><img src="images/trash-fill.svg" alt="delete"></button><button class="expand">+</button></div>`);
     $("#elementsPage").append(`<div class="existingQuestionsContainer"><button id="addSec${i}" class="addElement">+ Add Element</button></div>`);
     var numQuestions = Object.keys(sections["s"+i].childQuestions).length;
     for (let j = 0; j < numQuestions; j++) {
@@ -139,7 +139,7 @@ function addSection() {
 function makeSectionHTML(data) {
   let sectionHead = new SectionHead(data);
     sectionHead.add();
-    $("#addSectionButton").before(`<div id="seectionFor${(Object.keys(sections).length-1)}" class="elementHead"><button class="moveSection"><img src="images/grip_vertical_icon_151315.svg" alt="moveSection"></button>${data}<button class="editSectionTitleClass"><img src="/images/pencil-square.svg" alt="edit"></button><button class="deleteSection"><img src="images/trash-fill.svg" alt="delete"></button><button class="expand">+</button></div>`);
+    $("#addSectionButton").before(`<div id="seectionFor${(Object.keys(sections).length-1)}" class="elementHead"><button class="moveSection"><img src="images/grip_vertical_icon_151315.svg" alt="moveSection"></button>${data}<button class="editSectionTitleClass"><img src="./images/pencil-square.svg" alt="edit"></button><button class="deleteSection"><img src="images/trash-fill.svg" alt="delete"></button><button class="expand">+</button></div>`);
     $("#addSectionButton").before(`<div class="existingQuestionsContainer"><button id="addSec${Object.keys(sections).length-1}" class="addElement">+ Add Element</button></div>`);
     $(".addElement").off();
     $(".addElement").on("click", function (event){
@@ -189,7 +189,7 @@ function newTitle(title) {
 }
 
 function changeTitleHTML(value) {
-  $("#titleBlock").html(`${value} <button onclick="newTitle()" id="titleEditButton"><img src="/images/pencil-square.svg" alt="edit"></button>`);
+  $("#titleBlock").html(`${value} <button onclick="newTitle()" id="titleEditButton"><img src="./images/pencil-square.svg" alt="edit"></button>`);
   $("#title_container").children().html(value);
   master["title"]=value;
 }
@@ -205,8 +205,8 @@ function editSectionTitle(section) {
       } else {
         expanded = "-";
       }
-      // <div id="seectionfor${i}" class="elementHead"><button class="moveSection"><img src="images/grip_vertical_icon_151315.svg" alt="moveSection"></button>${title}<button class="editSectionTitleClass"><img src="/images/pencil-square.svg" alt="edit"></button><button class="deleteSection"><img src="images/trash-fill.svg" alt="delete"></button><button class="expand">+</button></div>
-      $(section).html(`${value}<button class="editSectionTitleClass"><img src="/images/pencil-square.svg" alt="edit"></button><button class="expand">${expanded}</button>`);
+      $(section).html(`<button class="moveSection"><img src="./images/grip_vertical_icon_151315.svg" alt="moveSection"></button>${value}<button class="editSectionTitleClass"><img src="./images/pencil-square.svg" alt="edit"></button><button class="deleteSection"><img src="images/trash-fill.svg" alt="delete"></button><button class="expand">${expanded}</button>`)
+      //$(section).html(`${value}<button class="editSectionTitleClass"><img src="./images/pencil-square.svg" alt="edit"></button><button class="expand">${expanded}</button>`);
       let index = $(section).attr("id");
       index = index.substring(11);
       sections[`s${index}`].object.editName(value);
@@ -333,9 +333,12 @@ function proccessNumberInput(destination, elemPageParent, info) {
     });
     $(".addElement").removeClass("inDraggable");
     let after = $(`#elemPageFor${id}`).next().attr('id').substring(11);
+    console.log($(`#elemPageFor${id}`).next().attr('id').substring(11));
+    console.log(id);
+    console.log(after)
     let section = $(`#elemPageFor${id}`).parent().prev().attr('id').substring(11);
     let obj = QidSearcher[id].object;
-    obj.move(after, section);
+    obj.move(after);
   });
 
   $(".elemTableMove").on("mouseup", function(){

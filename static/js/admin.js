@@ -1,5 +1,21 @@
 $('.collapse-icon').parent().next().slideUp(0)
 
+setDarkMode(document.cookie.split(";").find(a => a.includes("darkMode"))?.trim().split("=")[1] != "false")
+
+$('#color-switcher').click(function () {
+    setDarkMode(!$("#color-switcher i").hasClass("bi-sun"))
+})
+
+function setDarkMode(dark) {
+    if (dark) {
+        $("input, select").css("background-color", "rgb(173, 176, 179)")
+        $("input, select").css("border-color", "rgb(173, 176, 179)")
+    } else {
+        $("input, select").css("background-color", "#BFBFBF")
+        $("input, select").css("border-color", "rgb(39,38,38)")
+    }
+}
+
 setCurrentKey()
 makeMatchTable()
 
@@ -29,6 +45,7 @@ indexToAlliance = [
     "blue"
 ]
 
+// List of teams to convert station to index 0-5
 stationToIndex = {
     "red1":0,
     "red2":1,
@@ -39,7 +56,7 @@ stationToIndex = {
 }
 
 async function assignMatches() {
-    // Gets neccicary data
+    // Gets data from user inputs
     const matches = await getMatches()
     const doNotAssign = $("#aas-dna").val().replace(/\s/g, '').split(",")
     const priorityTeams = $("#aas-hpt").val().replace(/\s/g, '').split(",")
@@ -50,8 +67,30 @@ async function assignMatches() {
     const highPriorityOverBreaks = document.getElementById('aas-hob').checked
     const scoutingGroupsInput = $("#aas-sgr").val().replace(/\s/g, '').split("[")
     const manualAssignments = $("#ma-list").text().split(",")
+    const qualitativeTeams = $("#aas-qtm").val().replace(/\s/g, '').split(",")
+    const qualitativeFormsPerTeam = parseInt($("#aas-qpt").val().replace(/\s/g, '')) || 0
+    const qualitativeScouts = $("#aas-qsc").val().replace(/\s/g, '').split(",")
+    const form = $("#aas-form").val()
+    const qualitativeForm = $("#aas-qform").val()
 
-    // makes scouting groups based on input
+    let qualitativeFormTeams = [];
+
+    if (!qualitativeForm && !(qualitativeTeams.length == 1 && qualitativeTeams[0] == "")) {
+        alert("Please specify a qualitative form.")
+        return undefined;
+    }
+
+    if (!qualitativeFormsPerTeam && !(qualitativeTeams.length == 1 && qualitativeTeams[0] == "")) {
+        alert("Please specify number of qualitative forms per team.")
+        return undefined;
+    }
+
+    // Makes a list of all teams that should have a qualitative form and adds them as many times as there are qualitative forms per team
+    for (let i = 0; i < qualitativeFormsPerTeam; i++) {
+        qualitativeFormTeams.push(...qualitativeTeams)
+    }
+
+    // Makes scouting groups based on input
     let scoutingGroups = {};
     for(let i=0; i<scoutingGroupsInput.length; i++) {
         if (scoutingGroupsInput[i] !== "") {
@@ -80,18 +119,18 @@ async function assignMatches() {
             breaks: [], 
             id: i, 
             assignedAlliance: scoutingGroups[remainingUsers[i]]?.alliance || "",
-            group: scoutingGroups[remainingUsers[i]]?.id || "n/a"
+            group: scoutingGroups[remainingUsers[i]]?.id || "n/a",
+            canDoQualitative: qualitativeScouts.includes(remainingUsers[i])
         })
     }
 
-    // let assignedAlliance = {red: 0, blue: 0}
+    // Assignes alliances to scouts if enabled
     if (stickToOneAlliance) {
         for(let i = 0; i < remainingUsers.length; i+=2 ){
 
             if (scouts[i].assignedAlliance == "") {
                 scouts[i].assignedAlliance = "blue"
             }
-            // assignedAlliance.blue++
 
             if (!scouts[i+1]){
                 break;
@@ -100,13 +139,8 @@ async function assignMatches() {
             if (scouts[i+1].assignedAlliance == "") {
                 scouts[i+1].assignedAlliance = "red"
             }
-            // assignedAlliance.red++
         }
     }
-
-    // if (stickToOneAlliance && assignedAlliance.blue !== assignedAlliance.red) {
-    //     scouts[0].assignedAlliance = "both"
-    // }
 
     // Finds all matches and ranks them by priority (if applicable)
     let priorityScouting = []
@@ -141,7 +175,8 @@ async function assignMatches() {
             highPriority: false,
             number: parseInt(info[0]),
             scouted: false,
-            team: matches[info[0]-1][stationToIndex[info[1].toLowerCase()]]
+            team: matches[info[0]-1][stationToIndex[info[1].toLowerCase()]],
+            form: form
         })
         allScouting.find((team) => (team.match == info[0] && team.index == stationToIndex[info[1].toLowerCase()])).assigned = info[2]
     }
@@ -161,12 +196,21 @@ async function assignMatches() {
             const onBreak = (highPriority && highPriorityOverBreaks) ? false : (((matchNumb+offsetNumber*breakOffset) % (lengthOfOnDuty + lengthOfBreaks)) - (lengthOfBreaks-1)) <= 0
             const correctAlliance = stickToOneAlliance ? (scouts[x].assignedAlliance == indexToAlliance[allScouting[i].index] || scouts[x].assignedAlliance == "both") : true
 
-            const shouldAssignMatch = !onBreak && correctAlliance && !scouts[x].matchNumbs.includes(matchNumb) && !allScouting[i].assigned
+            const isAllowedToScout = qualitativeFormTeams.includes(allScouting[i].team) ? scouts[x].canDoQualitative : true
+            
+            const shouldAssignMatch = !onBreak && correctAlliance && !scouts[x].matchNumbs.includes(matchNumb) && !allScouting[i].assigned && isAllowedToScout
 
             if (shouldAssignMatch) {
+                if (qualitativeFormTeams.includes(allScouting[i].team)) {
+                    allScouting[i].form = qualitativeForm
+                    qualitativeFormTeams.splice(qualitativeFormTeams.indexOf(allScouting[i].team), 1)
+                    console.log(qualitativeFormTeams)
+                } else {
+                    allScouting[i].form = form
+                }
                 allScouting[i].assigned = scouts[x].name
                 scouts[x].matchNumbs.push(matchNumb)
-                scouts[x].matches.push({number: matchNumb, alliance: indexToStation[allScouting[i].index], team: allScouting[i].team, highPriority: highPriority, scouted: false})
+                scouts[x].matches.push({number: matchNumb, alliance: indexToStation[allScouting[i].index], team: allScouting[i].team, highPriority: highPriority, scouted: false, form: allScouting[i].form})
                 break
             }
         }
@@ -178,6 +222,7 @@ async function assignMatches() {
         scouts[i].breaks = allMatchNumbers.filter(x => !scouts[i].matchNumbs.includes(x));
     }
 
+    // Finds data used to display simulation results
     const matchesCovered = Math.round((matches.length*6 - [...allScouting].filter((el) => !el.assigned).length) / (matches.length * 6) * 1000)/10
     const priorityMatches = [...allScouting].filter((el) => el.priority !== undefined)
     const priorityCovered = Math.round((priorityMatches.length - priorityMatches.filter((el) => !el.assigned).length) / (priorityMatches.length) * 1000)/10
@@ -194,6 +239,8 @@ async function assignMatches() {
     `)
 
     makeMatchTable([...allScouting].sort(JSONCompareByMatchNumber), "simulator-table")
+
+    console.log(allScouting)
 
     return {scouts: scouts, matches: allScouting}
 }
@@ -227,12 +274,13 @@ async function makeMatchTable(matchesScouting, tableId = "match-table") {
             </tr>
         `)
     }
-
-    $('.team').on('click', function () {
-        const matchNumber = $(this).closest('tr').children().first().children('b').text()
-        const alliance = $(this).index()-1
-    })
 }
+
+$('#aas-equ').on('input', function(){
+    $("#qualitativeOptions").slideToggle()
+})
+
+$("#qualitativeOptions").slideToggle()
 
 $('#aas-sgr').on('input', function(){
     if($(this).val() !== "") {
@@ -426,11 +474,20 @@ $("#clear-database").on('click', function(){
 //     }
 // })
 
+$(".delete-data-table").click(function(){
+    let sheet = $(this).parent().next().text()
+    if (confirm(`Are you sure you want to delete ${sheet} sheet?`)) {
+        postData({action: "deleteTable", data: sheet}, true)
+    }
+})
+
 $("#aad-button").on('click', async function () {
     if (confirm("You are about to deploy the current schedule based on the selected parameters. This will overright any current schedule and become effective immediately.")) {
         const assignMatchesObj = await assignMatches()
-        postData({action: "assignMatches", data: assignMatchesObj.scouts}, true)
-        postData({action: "setSchedule", data: assignMatchesObj.matches}, true)
+        if (assignMatchesObj != undefined) {
+            postData({action: "assignMatches", data: assignMatchesObj.scouts}, true)
+            postData({action: "setSchedule", data: assignMatchesObj.matches}, true)
+        }
     }
 })
 

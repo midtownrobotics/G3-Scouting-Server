@@ -57,15 +57,15 @@ async function getNextMatch(userGet) {
     $("#nm-team").text(nextMatch.team)
     $("#nm-teamname").text(getTeamName(nextMatch.team))
     $("#nm-station").text(nextMatch.station.charAt(0).toUpperCase() + nextMatch.station.slice(1))
+    $("#nm-form").text(nextMatch.form)
     // $("#nm-hp").text(nextMatch.highPriority ? "Yes" : "No")
     $("#nm-mu").text(currentMatchNumber == "CANNOT ACCESS" ? "????" : nextMatch.number - currentMatchNumber || "Already Happened" )
 }
 
-$(document).ready( function () {
-    if (document.cookie.split(";").find(a => a.includes("darkMode"))?.trim().split("=")[1] != "false") {
-        $("#reload").css("color", "rgb(173, 176, 179)")
-    }
-})
+if (document.cookie.split(";").find(a => a.includes("darkMode"))?.trim().split("=")[1] != "false") {
+    $("#reload").css("color", "rgb(173, 176, 179)")
+}
+
 
 $('#color-switcher').click(function () {
     if(!$("#color-switcher i").hasClass("bi-sun")) {

@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/libs/bootstrap.min.css">
+        <link rel="stylesheet" href="/libs/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="/global.css">
+        <link rel="icon" type="image/png" href="/g3.png">
+        <title>G3 Scouting!</title>
+        <script src="/libs/jquery-3.7.1.min.js"></script>
+        <script src="/js/global.js"></script>
+    </head>
+    <body>
+        
+        <%- nav %>
+
+        <br>
+
+        <h1>ERROR 404: No page found!</h1>
+        <span id="redirect">Redirecting you to the <a href="/">home page</a>...</span>
+    </body>
+</html> 
+
+<style>
+    body {
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 450%;
+        margin-bottom: 30px;
+    }
+
+    #redirect {
+        font-size: 300%;
+    }
+</style>
+
+<script>
+    setTimeout(function() {
+        window.location.href = "/"
+    }, 1000)
+</script>

@@ -1,5 +1,5 @@
 import express from 'express';
-import {Settings, Scout, AssignedMatch, Sheet, User, getFile, getSettings, writeSettings, getSheet, addRowToSheet, completeMatch, addColumnToSheet, deleteRowFromSheet, saveForm, deleteForm, getForm, deployForm, getDeployedForms } from './storage';
+import {Settings, Scout, AssignedMatch, Sheet, User, getFile, getSettings, writeSettings, getSheet, addRowToSheet, completeMatch, addColumnToSheet, deleteRowFromSheet, saveForm, deleteForm, getForm, deployForm, getDeployedForms, deleteSheet } from './storage';
 import * as fs from 'fs';
 
 const app = express();
@@ -70,7 +70,7 @@ app.use(function(req, res, next) {
             next();
         } else {
             // console.log(`User ${auth[0]} was denied access to ${req.url}!`)
-            res.sendFile(__dirname + "/src/401.html");
+            res.render("401", {nav: getFile('/src/nav.html')});
         } 
     }
 });
@@ -126,7 +126,7 @@ app.get('/data/tba', (req, res) => {
 })
 
 app.get('/admin', (req, res) => {
-    res.render('admin', {users: getSettings().users, perms: getSettings().permissionLevels, nav: getFile("/src/nav.html")})
+    res.render('admin', {users: getSettings().users, perms: getSettings().permissionLevels, nav: getFile("/src/nav.html"), data: Object.keys(getFile("/storage/scouting.json"))})
 })
 
 app.get('/', (req, res) => {
@@ -160,7 +160,8 @@ app.get('/user-get', (req, res) => {
             number: matchNumb, 
             team: match?.team, 
             station: match?.alliance, // Upercases first letter
-            highPriority: match?.highPriority
+            highPriority: match?.highPriority,
+            form: match?.form
         },
         matches: matchesAndBreaks
     })
@@ -207,8 +208,8 @@ app.post('/post', (req, res) => {
             break
         case "addRow":
             addRowToSheet(body.sheet, body.data, username);
-            if (body.sheet == "Numeric") {
-                completeMatch(body.matchNumb, username)
+            if (body.matchNumb !== "none") {
+                completeMatch(body.matchNumb, username, body.sheet)
             }
             res.send({res: "OK"});
             break
@@ -243,7 +244,7 @@ app.post('/post', (req, res) => {
                         const matchNumber: number = parseInt(sheet.rows[i].find((item) => (item.name == "matchNum"))?.value)
                         if (scoutName && matchNumber) {
                             addRowToSheet(sheetName, sheet.rows[i], scoutName)
-                            completeMatch(matchNumber, scoutName)
+                            completeMatch(matchNumber, scoutName, sheetName)
                         }
                     }
                 }
@@ -280,8 +281,12 @@ app.post('/admin', (req, res) => {
             fs.writeFileSync(__dirname + "/storage/scouting.json", JSON.stringify({}))
             fs.writeFileSync(__dirname + "/storage/matches.json", JSON.stringify({}))
             fs.writeFileSync(__dirname + "/storage/scouts.json", JSON.stringify({}))
+            fs.writeFileSync(__dirname + "/storage/forms.json", JSON.stringify({}))
             res.send({res: "OK"})
             break
+        case "deleteTable":
+            deleteSheet(body.data)
+            break;
         case "editUserField":
             { // needed to declare const only used in this case
                 var settings: Settings = getSettings()
@@ -358,7 +363,7 @@ app.post('/admin', (req, res) => {
 })
 
 app.get("*", (req, res) => {
-    res.sendFile(__dirname+"/src/404.html")
+    res.render("404", {nav: getFile("/src/nav.html")})
 })
 
 console.log(`listening on port ${PORT}! enjoy!`);

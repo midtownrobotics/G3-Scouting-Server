@@ -106,7 +106,7 @@ class NumberInput {
     this[nameOf] = newVal;
   }
 
-  move(after, section) {
+  move(after) {
     $(`#${this.id}`).after(`#${after}`);
   }
 

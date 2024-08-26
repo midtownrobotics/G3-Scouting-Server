@@ -14,6 +14,8 @@
 
         <%- nav %>
 
+    <h4>Next Assigned Form: <span id="nextForm"></span></h4>
+
         <% if (data) { %>
 
             <%- data %>
@@ -33,6 +35,10 @@
 
     nav {
         width: calc(100% + 40px) !important;
+    }
+
+    h4 {
+        margin: 20px;
     }
 
     body {
@@ -73,6 +79,12 @@
 </style>
 
 <script>
+    async function setNextMatchInfo() {
+        let userget = await fetch("/user-get/").then((res) => res.json())
+        $("#nextForm").text(userget.nextMatch.form)
+    }
+    setNextMatchInfo()
+    
     $('#submitButton').click(function(e){
         e.preventDefault();
         submitForm()
@@ -81,9 +93,10 @@
     function submitForm() {
         let formData = $('form').serializeArray()
         formData.push({name: "timestamp", value: formatDate(new Date(Date.now()))})
-        postData({action: "addRow", sheet: "testing", data: formData, matchNumb: 0}).then(function(res){
+        postData({action: "addRow", sheet: new URLSearchParams(window.location.search).get('form'), data: formData, matchNumb: 0}).then(function(res){
             if (res == "OK") {
-                $('#form').trigger("reset");
+                $('form').trigger("reset");
+                setNextMatchInfo()
                 window.scrollTo(0, 0);
             } else {
                 alert("FORM NOT SAVED!")

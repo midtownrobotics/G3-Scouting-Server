@@ -81,16 +81,14 @@ function switchColor() {
         $("#color-switcher i").removeClass("bi-sun")
         $("#color-switcher i").addClass("bi-moon")
         $("body").css("backgroundColor", "rgb(39,38,38)")
-        $("body").css("color", "rgb(173, 176, 179)")
-        $("a:not(nav a)").css("color", "rgb(173, 176, 179)")
+        $("h1, h3, div, body, a:not(nav a)").css("color", "rgb(173, 176, 179)")
         console.log("dark")
         document.cookie = "darkMode=true; path=/"
     } else {
         $("#color-switcher i").removeClass("bi-moon")
         $("#color-switcher i").addClass("bi-sun")
         $("body").css("backgroundColor", "rgb(173, 176, 179)")
-        $("body").css("color", "rgb(39,38,38)")
-        $("a:not(nav a)").css("color", "rgb(39,38,38)")
+        $("h1, h3, div, body, a:not(nav a)").css("color", "rgb(39,38,38)")
         console.log("light")
         document.cookie = "darkMode=false; path=/"
     }

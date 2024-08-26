@@ -33,6 +33,7 @@ export type AssignedMatch = {
     team: string;
     highPriority: boolean;
     scouted: boolean;
+    form: string;
 }
 
 export type Sheet = {
@@ -73,7 +74,7 @@ export function writeSettings(data: Settings) {
 
 */
 
-export function completeMatch(matchNumberParam: number | string, username: string) {
+export function completeMatch(matchNumberParam: number | string, username: string, form: string) {
     let matchNumber: number;
 
     if (typeof matchNumberParam == "string") {
@@ -85,7 +86,7 @@ export function completeMatch(matchNumberParam: number | string, username: strin
     let scouts: Array<Scout> = getFile("/storage/scouts.json")
     const user: Scout | undefined = scouts.find((s) => s.name == username)
     if (user) {
-        const matchIndex: number = user.matches.findIndex((s) => s.number == matchNumber)
+        const matchIndex: number = user.matches.findIndex((s) => s.number == matchNumber && s.form == form)
         if (matchIndex > -1) {
             user.matches[matchIndex].scouted = true
             user.matchNumbs.splice(user.matchNumbs.indexOf(matchNumber), 1)
@@ -98,6 +99,12 @@ export function completeMatch(matchNumberParam: number | string, username: strin
 
 export function getSheet(sheet: string): any {
     return getFile("/storage/scouting.json")[sheet]
+}
+
+export function deleteSheet(sheet: string) {
+    let scoutingJSON: any = getFile("/storage/scouting.json")
+    delete scoutingJSON[sheet]
+    fs.writeFileSync(__dirname+"/storage/scouting.json", JSON.stringify(scoutingJSON))
 }
 
 export function addRowToSheet(sheet: string, data: Row, username: string) {
