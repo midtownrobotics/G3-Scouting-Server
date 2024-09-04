@@ -1,9 +1,9 @@
-function TBHAPI(theUrl){
+function TBHAPI(theUrl) {
     const parsedUrl = "https://www.thebluealliance.com/api/v3" + theUrl + "?X-TBA-Auth-Key=LVDMCD06pMcEyS94sswn0hp8mGup9P2vfYhXZ6MgTgWt5oLzlNCP3RdBsm41g8Zs"
     var xmlHttp = new XMLHttpRequest();
-    try { 
-        xmlHttp.open( "GET", parsedUrl, false ); // false for synchronous request
-        xmlHttp.send( null ) 
+    try {
+        xmlHttp.open("GET", parsedUrl, false); // false for synchronous request
+        xmlHttp.send(null)
     } catch (err) {
         console.warn("Cannot access TBA API.")
         return "CANNOT ACCESS"
@@ -12,7 +12,7 @@ function TBHAPI(theUrl){
 }
 
 async function getTeams() {
-    const teamsObj = TBHAPI(`/event/${await postData({action: "getKey"})}/teams`)
+    const teamsObj = TBHAPI(`/event/${await postData({ action: "getKey" })}/teams`)
     let teamNumbList = [];
     let teamNameList = [];
 
@@ -21,11 +21,11 @@ async function getTeams() {
         teamNameList.push(teamsObj[i].nickname);
     }
 
-    return {"team_numbers": teamNumbList, "team_names": teamNameList, "full_object": teamsObj};
+    return { "team_numbers": teamNumbList, "team_names": teamNameList, "full_object": teamsObj };
 }
 
 async function currentMatch() {
-    const matches = TBHAPI(`/event/${await postData({action: "getKey"})}/matches`)
+    const matches = TBHAPI(`/event/${await postData({ action: "getKey" })}/matches`)
     if (matches == "CANNOT ACCESS") {
         return "CANNOT ACCESS"
     }
@@ -40,7 +40,7 @@ async function currentMatch() {
 }
 
 async function getMatches() {
-    const matchesObj = TBHAPI(`/event/${await postData({action: "getKey"})}/matches/simple`)
+    const matchesObj = TBHAPI(`/event/${await postData({ action: "getKey" })}/matches/simple`)
     let matches = [];
 
     for (let i = 0; i < matchesObj.length; i++) {
@@ -59,7 +59,7 @@ async function postData(data, admin = false) {
     const url = admin ? "/admin/" : "/post/"
     console.log(url)
     return fetch(url, {
-        method: "POST", 
+        method: "POST",
         credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
@@ -70,14 +70,19 @@ async function postData(data, admin = false) {
     });
 }
 
-$(document).ready( function () {
-    if (document.cookie.split(";").find(a => a.includes("darkMode"))?.trim().split("=")[1] != "false") {
+$(document).ready(function () {
+    let darkMode = document.cookie.split(";").find(a => a.includes("darkMode"))?.trim().split("=")[1]
+
+    if (darkMode == "true") {
         switchColor()
+    } if (darkMode == undefined) {
+        document.cookie = "darkMode=false; path/"
     }
+
 })
 
 function switchColor() {
-    if($("#color-switcher i").hasClass("bi-sun")) {
+    if ($("#color-switcher i").hasClass("bi-sun")) {
         $("#color-switcher i").removeClass("bi-sun")
         $("#color-switcher i").addClass("bi-moon")
         $("body").css("backgroundColor", "rgb(39,38,38)")

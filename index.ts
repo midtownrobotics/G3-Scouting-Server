@@ -1,5 +1,5 @@
 import express from 'express';
-import {Settings, Scout, AssignedMatch, Sheet, User, getFile, getSettings, writeSettings, getSheet, addRowToSheet, completeMatch, addColumnToSheet, deleteRowFromSheet, saveForm, deleteForm, getForm, deployForm, getDeployedForms, deleteSheet } from './storage';
+import { Settings, Scout, AssignedMatch, Sheet, User, getFile, getSettings, writeSettings, getSheet, addRowToSheet, completeMatch, addColumnToSheet, deleteRowFromSheet, saveForm, deleteForm, getForm, deployForm, getDeployedForms, deleteSheet } from './storage';
 import * as fs from 'fs';
 
 const app = express();
@@ -10,31 +10,31 @@ app.set('views', 'views');
 app.set('view engine', 'ejs');
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 if (process.argv.indexOf("port") > -1) {
     PORT = parseInt(process.argv[process.argv.indexOf("port") + 1])
 }
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
 
-    if(!getSettings().users[0] || !getSettings().users.find((user) => user.permissions == "0")) {
+    if (!getSettings().users[0] || !getSettings().users.find((user) => user.permissions == "0")) {
         let settings: Settings = getSettings()
-        settings.users.push({username: "admin", password: "password", permissions: "0"})
-        writeSettings(settings) 
+        settings.users.push({ username: "admin", password: "password", permissions: "0" })
+        writeSettings(settings)
     }
 
-    if(!getSettings().permissionLevels[0]) {
+    if (!getSettings().permissionLevels[0]) {
         let settings: Settings = getSettings();
-        settings.permissionLevels.push({name: "admin", blacklist: []})
-        writeSettings(settings) 
+        settings.permissionLevels.push({ name: "admin", blacklist: [] })
+        writeSettings(settings)
     }
 
     let auth: Array<string> | null = null;
 
     let url: string = req.url;
     if (url.charAt(url.length - 1) == "/") {
-        url = url.substring(0, url.length-1)
+        url = url.substring(0, url.length - 1)
     }
 
     if (req.headers.authorization) {
@@ -59,7 +59,7 @@ app.use(function(req, res, next) {
     } else {
         const blacklist: Array<string> = getSettings().permissionLevels[permissions].blacklist
         let bad: boolean = false;
-        for (let i=0; i < blacklist.length; i++) {
+        for (let i = 0; i < blacklist.length; i++) {
             if (url.includes(blacklist[i])) {
                 bad = true
                 break
@@ -70,8 +70,8 @@ app.use(function(req, res, next) {
             next();
         } else {
             // console.log(`User ${auth[0]} was denied access to ${req.url}!`)
-            res.render("401", {nav: getFile('/src/nav.html')});
-        } 
+            res.render("401", { nav: getFile('/src/nav.html') });
+        }
     }
 });
 
@@ -101,37 +101,37 @@ app.get('/logout', (req, res) => {
 app.get('/forms', (req, res) => {
     const form: string | undefined = req.query.form?.toString()
     if (form && getDeployedForms().includes(form)) {
-        res.render('form', {data: getForm(form), nav: getFile("/src/nav.html")});
-    } else if (getDeployedForms().length > 0){
-        res.render('form-home', {sheets: getDeployedForms(), nav: getFile("/src/nav.html")})
+        res.render('form', { data: getForm(form), nav: getFile("/src/nav.html") });
+    } else if (getDeployedForms().length > 0) {
+        res.render('form-home', { sheets: getDeployedForms(), nav: getFile("/src/nav.html") })
     } else {
-        res.render('form-home', {sheets: false, nav: getFile("/src/nav.html")})
+        res.render('form-home', { sheets: false, nav: getFile("/src/nav.html") })
     }
 })
 
 app.get('/data', (req, res) => {
     const sheet: string | undefined = req.query.sheet?.toString()
     if (sheet) {
-        res.render('data', {data: getSheet(sheet), nav: getFile("/src/nav.html")});
-    } else if (getFile("/storage/scouting.json").toString()){
+        res.render('data', { data: getSheet(sheet), nav: getFile("/src/nav.html") });
+    } else if (getFile("/storage/scouting.json").toString()) {
         const sheets: Array<string> = Object.keys(getFile("/storage/scouting.json"))
-        res.render('data-home', {sheets: sheets, nav: getFile("/src/nav.html")})
+        res.render('data-home', { sheets: sheets, nav: getFile("/src/nav.html") })
     } else {
-        res.render('data-home', {sheets: false, nav: getFile("/src/nav.html")})
+        res.render('data-home', { sheets: false, nav: getFile("/src/nav.html") })
     }
 })
 
 app.get('/data/tba', (req, res) => {
-    res.render('data-tba', {nav: getFile("/src/nav.html")})
+    res.render('data-tba', { nav: getFile("/src/nav.html") })
 })
 
 app.get('/admin', (req, res) => {
-    res.render('admin', {users: getSettings().users, perms: getSettings().permissionLevels, nav: getFile("/src/nav.html"), data: Object.keys(getFile("/storage/scouting.json"))})
+    res.render('admin', { users: getSettings().users, perms: getSettings().permissionLevels, nav: getFile("/src/nav.html"), data: Object.keys(getFile("/storage/scouting.json")) })
 })
 
 app.get('/', (req, res) => {
     const username: string = Buffer.from(req.headers.authorization?.substring(6) || "", 'base64').toString().split(':')[0]
-    res.render('user', {username: username, nav: getFile("/src/nav.html")})
+    res.render('user', { username: username, nav: getFile("/src/nav.html") })
 })
 
 app.get('/user-get', (req, res) => {
@@ -145,7 +145,7 @@ app.get('/user-get', (req, res) => {
     let matchesAndBreaks: Array<AssignedMatch | "break"> = [];
 
     for (let i = 0; i < matches.length; i++) {
-        matchesAndBreaks[matches[i].number-1] = matches[i]
+        matchesAndBreaks[matches[i].number - 1] = matches[i]
     }
 
     for (let i = 0; i < matchesAndBreaks.length; i++) {
@@ -157,8 +157,8 @@ app.get('/user-get', (req, res) => {
     res.send({
         name: name,
         nextMatch: {
-            number: matchNumb, 
-            team: match?.team, 
+            number: matchNumb,
+            team: match?.team,
             station: match?.alliance, // Upercases first letter
             highPriority: match?.highPriority,
             form: match?.form
@@ -173,21 +173,21 @@ app.get('/data/analysis', (req, res) => {
         let sheet: Sheet = getFile("/storage/scouting.json")[req.query.sheet.toString()]
 
         if (!sheet) {
-            res.render('data-analysis-home', {nav: getFile("/src/nav.html"), sheets: Object.keys(getFile("/storage/scouting.json")), error: "No sheet found!"})
+            res.render('data-analysis-home', { nav: getFile("/src/nav.html"), sheets: Object.keys(getFile("/storage/scouting.json")), error: "No sheet found!" })
             return;
         }
 
         sheet.rows = sheet.rows.filter((row) => row.find((value) => value.name == "TeamNum")?.value == req.query.team)
 
         if (!sheet.rows[0]) {
-            res.render('data-analysis-home', {nav: getFile("/src/nav.html"), sheets: Object.keys(getFile("/storage/scouting.json")), error: "No data found for team!"})
+            res.render('data-analysis-home', { nav: getFile("/src/nav.html"), sheets: Object.keys(getFile("/storage/scouting.json")), error: "No data found for team!" })
             return;
         }
 
-        res.render('data-analysis', {nav: getFile("/src/nav.html"), info: sheet, sheets: Object.keys(getFile("/storage/scouting.json"))})
+        res.render('data-analysis', { nav: getFile("/src/nav.html"), info: sheet, sheets: Object.keys(getFile("/storage/scouting.json")) })
 
     } else {
-        res.render('data-analysis-home', {nav: getFile("/src/nav.html"), sheets: Object.keys(getFile("/storage/scouting.json")), error: null})
+        res.render('data-analysis-home', { nav: getFile("/src/nav.html"), sheets: Object.keys(getFile("/storage/scouting.json")), error: null })
     }
 })
 
@@ -204,42 +204,40 @@ app.post('/post', (req, res) => {
 
     switch (req.body.action) {
         case "getSheet":
-            res.send({res: getSheet(body.sheet)});
+            res.send({ res: getSheet(body.sheet) });
             break
         case "addRow":
             addRowToSheet(body.sheet, body.data, username);
-            if (body.matchNumb !== "none") {
-                completeMatch(body.matchNumb, username, body.sheet)
-            }
-            res.send({res: "OK"});
+            completeMatch(body.matchNumb, username, body.sheet)
+            res.send({ res: "OK" });
             break
         case "addColumn":
             addColumnToSheet(body.sheet, body.data);
-            res.send({res: "OK"});
+            res.send({ res: "OK" });
             break
         case "deleteRow":
             deleteRowFromSheet(body.sheet, body.data);
-            res.send({res: "OK"})
+            res.send({ res: "OK" })
             break
         case "getKey":
-            res.send({res: getSettings().eventKey})
+            res.send({ res: getSettings().eventKey })
             break
         case "getScout":
             {
                 const scouts: Array<Scout> = getFile("/storage/scouts.json")
-                res.send({res: scouts.find(p => p.name == username)})
+                res.send({ res: scouts.find(p => p.name == username) })
             }
             break
         case "getSchedule":
-            res.send({res: getFile("/storage/matches.json")})
+            res.send({ res: getFile("/storage/matches.json") })
             break
         case "syncOffline":
             {
-                for (let i=0; i < Object.keys(body.data.scoutingData).length; i++) {
+                for (let i = 0; i < Object.keys(body.data.scoutingData).length; i++) {
                     const sheetName: string = Object.keys(body.data.scoutingData)[i]
                     const sheet: Sheet = body.data.scoutingData[sheetName]
 
-                    for (let i=0; i < sheet.rows.length; i++) {
+                    for (let i = 0; i < sheet.rows.length; i++) {
                         const scoutName: string = sheet.rows[i].find((item) => (item.name == "scout"))?.value;
                         const matchNumber: number = parseInt(sheet.rows[i].find((item) => (item.name == "matchNum"))?.value)
                         if (scoutName && matchNumber) {
@@ -249,14 +247,14 @@ app.post('/post', (req, res) => {
                     }
                 }
 
-                res.send({res: "OK"})
+                res.send({ res: "OK" })
             }
             break
         default:
-            res.send({res: "Invalid Request"});
+            res.send({ res: "Invalid Request" });
             break
     }
-    
+
 })
 
 function isValidUser(userObject: User) {
@@ -282,7 +280,7 @@ app.post('/admin', (req, res) => {
             fs.writeFileSync(__dirname + "/storage/matches.json", JSON.stringify({}))
             fs.writeFileSync(__dirname + "/storage/scouts.json", JSON.stringify({}))
             fs.writeFileSync(__dirname + "/storage/forms.json", JSON.stringify({}))
-            res.send({res: "OK"})
+            res.send({ res: "OK" })
             break
         case "deleteTable":
             deleteSheet(body.data)
@@ -295,28 +293,28 @@ app.post('/admin', (req, res) => {
                 settings.users[userIndex][field] = body.data.updated
                 if (isValidUser(settings.users[userIndex])) {
                     writeSettings(settings)
-                    res.send({res: "OK"})
+                    res.send({ res: "OK" })
                 } else {
-                    res.send({res: "Bad User"});
+                    res.send({ res: "Bad User" });
                 }
             }
             break
         case "setSchedule":
-            fs.writeFileSync(__dirname+"/storage/matches.json", JSON.stringify(body.data))
-            res.send({res: "OK"})
+            fs.writeFileSync(__dirname + "/storage/matches.json", JSON.stringify(body.data))
+            res.send({ res: "OK" })
             break
         case "assignMatches":
-            fs.writeFileSync(__dirname+"/storage/scouts.json", JSON.stringify(body.data))
-            res.send({res: "OK"})
+            fs.writeFileSync(__dirname + "/storage/scouts.json", JSON.stringify(body.data))
+            res.send({ res: "OK" })
             break
         case "addUser":
             var settings: Settings = getSettings()
             if (isValidUser(body.data)) {
                 settings.users.push(body.data)
-                writeSettings(settings) 
-                res.send({res: "OK"})
+                writeSettings(settings)
+                res.send({ res: "OK" })
             } else {
-                res.send({res: "Bad User"});
+                res.send({ res: "Bad User" });
             }
             break
         case "deleteUser":
@@ -324,46 +322,46 @@ app.post('/admin', (req, res) => {
                 var settings: Settings = getSettings()
                 const userIndex: number = settings.users.findIndex(item => item.username === body.data)
                 settings.users.splice(userIndex, 1)
-                writeSettings(settings) 
-                res.send({res: "OK"})
+                writeSettings(settings)
+                res.send({ res: "OK" })
             }
             break
         case "addPerm":
             var settings: Settings = getSettings()
             settings.permissionLevels.push(body.data)
-            writeSettings(settings) 
-            res.send({res: "OK"})
+            writeSettings(settings)
+            res.send({ res: "OK" })
             break
         case "changeKey":
             var settings: Settings = getSettings()
             settings.eventKey = body.data
             writeSettings(settings)
-            res.send({res: "OK"})
+            res.send({ res: "OK" })
             break
         case "saveForm":
             saveForm(body.name, body.data)
-            res.send({res: "OK"})
+            res.send({ res: "OK" })
             break
         case "deleteForm":
             deleteForm(body.name)
-            res.send({res: "OK"})
+            res.send({ res: "OK" })
             break
         case "overwriteForm":
             saveForm(body.name, body.data, true)
-            res.send({res: "OK"})
+            res.send({ res: "OK" })
             break
         case "deployForm":
             deployForm(body.name, body.data)
-            res.send({res: "OK"})
+            res.send({ res: "OK" })
             break
         default:
-            res.send({res: "Invalid Request"});
+            res.send({ res: "Invalid Request" });
             break
     }
 })
 
 app.get("*", (req, res) => {
-    res.render("404", {nav: getFile("/src/nav.html")})
+    res.render("404", { nav: getFile("/src/nav.html") })
 })
 
 console.log(`listening on port ${PORT}! enjoy!`);

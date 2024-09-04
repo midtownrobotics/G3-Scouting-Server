@@ -34,7 +34,8 @@
                 Users to not assign matches: <input class="text-input form-control" id="aas-dna" type="text" placeholder="EX: gray, admin">
                 Scouting groups: <input class="text-input form-control" id="aas-sgr" type="text" placeholder="EX: [gray, admin], [esan, woody, rohan], [asher, ankit]">
                 Form: <input class="text-input form-control" id="aas-form" type="text" placeholder="EX: Quantitative"><br>
-                <div class="form-check form-switch">
+
+		<div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="aas-equ">
                     <label class="form-check-label" for="aas-equ">Qualitative Scouting</label>
                 </div>
@@ -45,7 +46,8 @@
                     <span>Qualitative scouts:</span> <input class="text-input form-control" id="aas-qsc" type="text" placeholder="EX: gray, admin">
                     <span>Qualitative form:</span> <input class="text-input form-control" id="aas-qform" type="text" placeholder="EX: Qualitative"><br>
                 </div>
-                <div class="form-check form-switch">
+                
+		<div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" checked id="aas-soa">
                     <label class="form-check-label" for="aas-soa">Scouts stick to one alliance</label>
                 </div>
@@ -53,6 +55,10 @@
                     <input class="form-check-input" type="checkbox" id="aas-hob">
                     <label class="form-check-label" for="aas-hob">High priority matches are more important than breaks</label>
                 </div>
+		<div class="form-check form-switch">
+		    <input class="form-check-input" type="checkbox" checked id="aas-dnr">
+		    <label class="form-check-label" for="aas-dnr">Do not reset match completion data</label>
+		</div>
 
                 <br>
 
@@ -87,9 +93,20 @@
 
                 <button class="btn btn-primary" id="aas-button">Simulate</button>
                 <button class="btn btn-primary" id="aad-button">Deploy</button>
+		<button class="btn btn-primary" id="load_save">Load Config</button>
                 <div id="aas-results"></div>
 
                 <br>
+
+		<h4 class="collapse-icon-parent">
+		    Config Save Data
+		    <i class="bi bi-caret-down-fill collapse-icon"></i>
+		</h4>
+		<div>
+		    <textarea type="textarea" id="save-data" rows="3"></textarea>
+		</div>
+
+		<br>
 
                 <h4 class="collapse-icon-parent">
                     Simulated Schedule
@@ -374,7 +391,7 @@
         width: calc(100% - 20px);
     }
 
-    .text-input {
+    .text-input, #save-data{
         width: calc(100% - 20px) !important;
     }
 </style>

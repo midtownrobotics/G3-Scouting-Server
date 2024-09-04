@@ -34,7 +34,7 @@
 <style>
 
     nav {
-        width: calc(100% + 40px) !important;
+        width: 100% !important;
     }
 
     h4 {
@@ -45,7 +45,11 @@
         overflow: auto;
         width: fit-content;
         min-width: calc(100% - 40px);
-        background-color: white;
+        background-color: white !important;
+    }
+
+    * {
+	color: #272626 !important;
     }
 
     #data-table {
@@ -79,9 +83,16 @@
 </style>
 
 <script>
+
+    let currentForm = new URLSearchParams(window.location.search).get('form')
+
     async function setNextMatchInfo() {
-        let userget = await fetch("/user-get/").then((res) => res.json())
-        $("#nextForm").text(userget.nextMatch.form)
+        let nextMatch = (await fetch("/user-get/").then((res) => res.json())).nextMatch
+        $("#nextForm").text(nextMatch.form)
+	if (nextMatch.form == currentForm) {
+	    $("#matchNum").val(nextMatch.number)
+	    $("#TeamNum").val(nextMatch.team)
+	}
     }
     setNextMatchInfo()
     
@@ -93,7 +104,7 @@
     function submitForm() {
         let formData = $('form').serializeArray()
         formData.push({name: "timestamp", value: formatDate(new Date(Date.now()))})
-        postData({action: "addRow", sheet: new URLSearchParams(window.location.search).get('form'), data: formData, matchNumb: 0}).then(function(res){
+        postData({action: "addRow", sheet: currentForm, data: formData, matchNumb: $("#matchNum").val() }).then(function(res){
             if (res == "OK") {
                 $('form').trigger("reset");
                 setNextMatchInfo()
