@@ -60,7 +60,7 @@ async function getNextMatch(userGet) {
         $("#nm-teamname").text(getTeamName(nextMatch.team))
         $("#nm-station").text(nextMatch.station.charAt(0).toUpperCase() + nextMatch.station.slice(1))
         $("#nm-form").text(nextMatch.form)
-        // $("#nm-hp").text(nextMatch.highPriority ? "Yes" : "No")
+        $("#nm-hp").text(nextMatch.highPriority ? "Yes" : "No")
         $("#nm-mu").text(currentMatchNumber == "CANNOT ACCESS" ? "????" : nextMatch.number - currentMatchNumber || "Already Happened")
 }
 
