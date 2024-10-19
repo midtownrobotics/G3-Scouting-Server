@@ -100,6 +100,14 @@
         e.preventDefault();
         submitForm()
     });
+
+    $(".plus").click(function() {
+        $(this).prev().children().first().val(parseInt($(this).prev().children().first().val())+1);
+    });
+
+    $(".minus").click(function() {
+        $(this).next().children().first().val(parseInt($(this).next().children().first().val())-1);
+    });
     
     function submitForm() {
         let formData = $('form').serializeArray()

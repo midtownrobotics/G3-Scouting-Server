@@ -45,24 +45,8 @@
         text-decoration: none;
     }
 
-    button {
-        font-size: 30px !important;
-    }
-
     #main {
         margin: 20px;
-    }
-
-    #main h1 {
-        font-size: 60px;
-    }
-
-    #main h3 {
-        font-size: 45px;
-    }
-
-    #main a {
-        font-size: 30px;
     }
 
     a {
@@ -72,5 +56,69 @@
 
     .head-buttons a {
         text-decoration: none;
+    }
+
+         /* Mobile Landscape Only */
+
+    @media (orientation: landscape) and (max-width: 1025px) {
+        #main h1 {
+            font-size: 60px;
+        }
+
+        #main h3 {
+            font-size: 45px;
+        }
+
+        #main   a {
+            font-size: 30px;
+        }
+
+        button {
+            font-size: 30px !important;
+        }
+    }
+
+    /* Mobile Portrait Only */
+
+    @media (orientation: portrait) and (max-width: 1025px) {
+        #main h1 {
+            font-size: 200px;
+        }
+
+        #main h3 {
+            font-size: 120px;
+        }
+
+        #main a {
+            font-size: 100px;
+        }
+
+        #main h5 {
+            font-size: 60px;
+        }
+
+        button {
+            font-size: 60px !important;
+        }
+    }
+
+    /* Desktop Only */
+
+    @media (min-width: 1025px) {
+        #main h1 {
+            font-size: 60px;
+        }
+
+        #main h3 {
+            font-size: 45px;
+        }
+
+        #main   a {
+            font-size: 30px;
+        }
+
+        button {
+            font-size: 30px !important;
+        }
     }
 </style>    
