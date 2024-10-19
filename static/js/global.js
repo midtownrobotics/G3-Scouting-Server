@@ -43,6 +43,8 @@ async function getMatches() {
     const matchesObj = TBHAPI(`/event/${await postData({ action: "getKey" })}/matches/simple`)
     let matches = [];
 
+    matchesObj.sort((a, b) => a.time - b.time);
+
     for (let i = 0; i < matchesObj.length; i++) {
         if (matchesObj[i].comp_level == "qm") {
             const red = matchesObj[i].alliances.red.team_keys

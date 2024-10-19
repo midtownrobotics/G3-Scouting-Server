@@ -171,7 +171,12 @@ async function assignMatches() {
         for (let i = 0; i < matches.length; i++) {
                 for (let x = 0; x < 6; x++) {
                         if (priorityTeams.indexOf(matches[i][x]) > -1) {
-                                priorityScouting.push({ match: i + 1, index: x, team: matches[i][x], scouted: false, priority: priorityTeams.indexOf(matches[i][x]) })
+                                priorityScouting.push({ 
+                                        match: i + 1, 
+                                        index: x, team: matches[i][x], 
+                                        scouted: false, 
+                                        priority: priorityTeams.indexOf(matches[i][x]) 
+                                })
                         } else {
                                 nonPriorityScouting.push({ match: i + 1, index: x, team: matches[i][x], scouted: false })
                         }
@@ -248,6 +253,8 @@ async function assignMatches() {
                 scouts[i].breaks = allMatchNumbers.filter(x => !scouts[i].matchNumbs.includes(x));
         }
 
+        allScouting.sort((a, b) => a.match > b.match)
+
         // Finds data used to display simulation results
         const matchesCovered = Math.round((matches.length * 6 - [...allScouting].filter((el) => !el.assigned).length) / (matches.length * 6) * 1000) / 10
         const priorityMatches = [...allScouting].filter((el) => el.priority !== undefined)
@@ -263,7 +270,6 @@ async function assignMatches() {
         <a>Average number of breaks: ${averageNumberOfBreaks}</a><br>
         ${(priorityCovered) ? ("<a>Percent of priority matches scouted: " + priorityCovered + "%</a>") : ""}
     `)
-
         makeMatchTable([...allScouting].sort(JSONCompareByMatchNumber), "simulator-table")
 
         console.log(allScouting)

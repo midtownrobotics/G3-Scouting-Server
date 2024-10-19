@@ -94,7 +94,7 @@
         for (let i = 0; i < $("#data-table tbody tr").length; i++) {
             for (let x = 0; x < $($("#data-table tbody tr")[i]).children().length - 1; x++) {
                 csvTable += $($("#data-table tbody tr")[i]).children()[x+1].innerText + ","
-            }v 
+            }
 
             csvTable = csvTable.slice(0, -1) + "\n";
         }
@@ -129,7 +129,6 @@
         overflow: auto;
         width: fit-content;
         min-width: calc(100% - 40px);
-        background-color: 
     }
 
     #main {
