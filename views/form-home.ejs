@@ -43,18 +43,6 @@
         margin: 20px;
     }
 
-    #forms h1 {
-        font-size: 60px;
-    }
-
-    #forms h3 {
-        font-size: 45px;
-    }
-
-    #forms   a {
-        font-size: 30px;
-    }
-
     a {
         color: black;
         font-size: large;
@@ -62,5 +50,57 @@
 
     .head-buttons a {
         text-decoration: none;
+    }
+
+     /* Mobile Landscape Only */
+
+    @media (orientation: landscape) and (max-width: 1025px) {
+        #forms h1 {
+            font-size: 60px;
+        }
+
+        #forms h3 {
+            font-size: 45px;
+        }
+
+        #forms   a {
+            font-size: 30px;
+        }
+    }
+
+    /* Mobile Portrait Only */
+
+    @media (orientation: portrait) and (max-width: 1025px) {
+        #forms h1 {
+            font-size: 200px;
+        }
+
+        #forms h3 {
+            font-size: 120px;
+        }
+
+        #forms a {
+            font-size: 100px;
+        }
+
+        #forms h5 {
+            font-size: 60px;
+        }
+    }
+
+    /* Desktop Only */
+
+    @media (min-width: 1025px) {
+        #forms h1 {
+            font-size: 60px;
+        }
+
+        #forms h3 {
+            font-size: 45px;
+        }
+
+        #forms   a {
+            font-size: 30px;
+        }
     }
 </style>    

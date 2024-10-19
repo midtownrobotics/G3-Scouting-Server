@@ -227,7 +227,9 @@ async function assignMatches() {
 
                         const identifier = allScouting[i].match + ":" + allScouting[i].index
 
-                        if (shouldAssignMatch) {
+                        const ONLY_USE_FOR_GRITS = matchNumb > 40
+
+                        if (shouldAssignMatch && ONLY_USE_FOR_GRITS) {
                                 // Assignes qualitative form if needed and quantitative if else
                                 if (qualitativeFormTeams.includes(allScouting[i].team)) {
                                         allScouting[i].form = qualitativeForm
@@ -238,10 +240,6 @@ async function assignMatches() {
 
                                 // Assignes as scouted in schedule if it should
                                 allScouting[i].scouted = completedScouting.includes(identifier)
-                                
-                                
-                                // TODO: ONLY USE FOR GRITS
-                                allScouting[i].scouted = matchNumb <= 40
 
                                 allScouting[i].assigned = scouts[x].name
                                 scouts[x].matchNumbs.push(matchNumb)
