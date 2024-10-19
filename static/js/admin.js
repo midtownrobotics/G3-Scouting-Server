@@ -238,6 +238,10 @@ async function assignMatches() {
 
                                 // Assignes as scouted in schedule if it should
                                 allScouting[i].scouted = completedScouting.includes(identifier)
+                                
+                                
+                                // TODO: ONLY USE FOR GRITS
+                                allScouting[i].scouted = matchNumb <= 40
 
                                 allScouting[i].assigned = scouts[x].name
                                 scouts[x].matchNumbs.push(matchNumb)
