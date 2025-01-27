@@ -1,2 +1,2 @@
-client/static/js/*
-node_modules/*
+client/static/js
+node_modules
