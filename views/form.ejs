@@ -1,0 +1,121 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/libs/bootstrap.min.css">
+        <link rel="stylesheet" href="/libs/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css">
+        <link rel="icon" type="image/png" href="/g3.png">
+        <link rel="stylesheet" href="/form.css">
+        <link rel="stylesheet" href="/global.css">
+        <title>G3 Scouting!</title>
+        <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+        <script src="/libs/jquery-3.7.1.min.js"></script>
+        <script src="/js/global.js"></script>
+    </head>
+    <body>
+
+        <%- nav %>
+
+    <h4>Next Assigned Form: <span id="nextForm"></span></h4>
+
+        <% if (data) { %>
+
+            <%- data %>
+            
+        <% } else { %>
+
+            <h3>The form could not be found :(</h3>
+            
+        <% } %>
+
+    </body>
+</html>
+
+<script>$("#nav-forms").addClass("active")</script>
+
+<style>
+
+    nav {
+        width: 100% !important;
+    }
+
+    h4 {
+        margin: 20px;
+    }
+
+    body {
+        overflow: auto;
+        width: fit-content;
+        min-width: calc(100% - 40px);
+        background-color: white !important;
+    }
+
+    * {
+	color: #272626 !important;
+    }
+
+    #data-table {
+        margin: 20px;
+        margin-top: 40px;
+    }
+
+    #save {
+        position: absolute;
+        left: 100px;
+        top: 5px;
+        display : inline-flex;
+    }
+
+    .head-buttons a {
+        color: black;
+        text-decoration: none;
+    }
+
+    .head-buttons {
+        border: none;
+    }
+
+    #trash-head {
+        width: 30px;
+    }
+
+    .trash:hover {
+        cursor: pointer;
+    }
+</style>
+
+<script>
+
+    let currentForm = new URLSearchParams(window.location.search).get('form')
+
+    async function setNextMatchInfo() {
+        let nextMatch = (await fetch("/user-get/").then((res) => res.json())).nextMatch
+        $("#nextForm").text(nextMatch.form)
+	if (nextMatch.form == currentForm) {
+	    $("#matchNum").val(nextMatch.number)
+	    $("#TeamNum").val(nextMatch.team)
+	}
+    }
+    setNextMatchInfo()
+    
+    $('#submitButton').click(function(e){
+        e.preventDefault();
+        submitForm()
+    });
+    
+    function submitForm() {
+        let formData = $('form').serializeArray()
+        formData.push({name: "timestamp", value: formatDate(new Date(Date.now()))})
+        postData({action: "addRow", sheet: currentForm, data: formData, matchNumb: $("#matchNum").val() }).then(function(res){
+            if (res == "OK") {
+                $('form').trigger("reset");
+                setNextMatchInfo()
+                window.scrollTo(0, 0);
+            } else {
+                alert("FORM NOT SAVED!")
+            }
+        })
+    }
+
+    function formatDate(date) {
+        return [date.getMonth(), "/", date.getDate(), "/", date.getFullYear().toString().substring(2), " ", date.getHours(), ":", date.getMinutes(), ":", date.getSeconds()].join("");
+    }
+</script>

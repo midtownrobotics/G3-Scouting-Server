@@ -1,0 +1,56 @@
+nav .logout {
+    text-decoration: none;
+    color: dimgray;
+}
+
+nav .logout:hover {
+    color: black;
+}
+
+body {
+    background-color: rgb(173, 176, 179);
+    color: rgb(39,38,38);
+}
+
+a:not(nav a) {
+    color:  rgb(39,38,38);
+}
+
+/* Mobile Landscape Only */
+
+@media (orientation: landscape) and (max-width: 1025px) {
+    nav li a, nav .logout {
+        font-size: 20px !important;
+    }
+    
+    nav li {
+        margin-left:5px;
+        margin-right:5px;
+    }
+}
+
+/* Mobile Portrait Only */
+
+@media (orientation: portrait) and (max-width: 1025px) {
+    nav li a, nav .logout {
+        font-size: 40px !important;
+    }
+    
+    nav li {
+        margin-left:10px;
+        margin-right:10px;
+    }
+}
+
+/* Desktop Only */
+
+@media (min-width: 1025px) {
+    nav li a, nav .logout {
+        font-size: 30px !important;
+    }
+    
+    nav li {
+        margin-left:10px;
+        margin-right:10px;
+    }
+}

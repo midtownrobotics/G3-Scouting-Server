@@ -2,7 +2,7 @@
   "name": "g3-scouting",
   "version": "1.0.0",
   "description": "Scouting Software for FRC team 1648.",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,8 +17,19 @@
   },
   "homepage": "https://github.com/gradyrobotics/G3-Scouting#readme",
   "dependencies": {
+    "@types/express": "^4.17.21",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
     "xlsx": "^0.18.5"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "*.json",
+      "static/*.js"
+    ]
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   }
 }
