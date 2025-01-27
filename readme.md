@@ -1,1 +1,0 @@
-The Node.JS based G3 scouting software server. This can be remotly accessed and used by clients online, or using the G3-Scouting-Offline application, clients can save data offline, and then remotly sync to this server later.

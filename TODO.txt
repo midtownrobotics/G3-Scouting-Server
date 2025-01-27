@@ -1,7 +1,0 @@
-- Add qualitative form settings and scheduling                      ✅
-- Fix completeMatch() to work with new scheduling system            ✅
-- Make sure you can redeploy/edit schedules mid comp                ✅
-- Add pit scouting form stuff                                       ❌
-- Full feature test                                                 ❌
-- Add fields that are going to be autofilled based on schedule      ✅
-- Training for scouting lead                                        ❌
