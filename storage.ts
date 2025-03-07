@@ -10,6 +10,7 @@ export type User = {
         username: string;
         password: string;
         permissions: string;
+        isScouting: boolean;
 }
 
 type Permission = {

@@ -124,11 +124,18 @@ async function assignMatches() {
         }
 
         // Remove users that shouldn't be assigned matches
-        let remainingUsers = getUsers()
+        let users = getUsers()
         for (let i = 0; i < doNotAssign.length; i++) {
-                const index = remainingUsers.indexOf(doNotAssign[i]);
+                const index = users.findIndex((u) => u.name == doNotAssign[i]);
                 if (index > -1) {
-                        remainingUsers.splice(index, 1)
+                        users.splice(index, 1)
+                }
+        }
+
+        let remainingUsers = []
+        for (let i = 0; i < users.length; i++) {
+                if (users[i].isScouting) {
+                        remainingUsers.push(users[i].name)
                 }
         }
 
@@ -376,7 +383,10 @@ async function setCurrentKey() {
 function getUsers() {
         let users = []
         for (i = 0; i < $('#user-table tbody').children().length; i++) {
-                users.push($($($('#user-table tbody').children()[i]).children()[1]).text().trim())
+                users.push({
+                        name: $($($('#user-table tbody').children()[i]).children()[1]).text().trim(),
+                        isScouting: $($($('#user-table tbody').children()[i]).children()[4]).text().trim() == "true"
+                })
         }
 
         return users;

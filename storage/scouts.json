@@ -1,1 +1,3578 @@
-[{"name":"carter","matchNumbs":[1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36,37,40,41,44,45,48,49,52,53,56,57],"matches":[{"number":1,"alliance":"blue3","team":"5608","highPriority":false,"scouted":false,"form":""},{"number":4,"alliance":"blue1","team":"4026","highPriority":false,"scouted":false,"form":""},{"number":5,"alliance":"blue3","team":"3344","highPriority":false,"scouted":false,"form":""},{"number":8,"alliance":"blue1","team":"5109","highPriority":false,"scouted":false,"form":""},{"number":9,"alliance":"blue3","team":"832","highPriority":false,"scouted":false,"form":""},{"number":12,"alliance":"blue1","team":"1466","highPriority":false,"scouted":false,"form":""},{"number":13,"alliance":"blue3","team":"9998","highPriority":false,"scouted":false,"form":""},{"number":16,"alliance":"blue1","team":"8736","highPriority":false,"scouted":false,"form":""},{"number":17,"alliance":"blue3","team":"8761","highPriority":false,"scouted":false,"form":""},{"number":20,"alliance":"blue1","team":"8100","highPriority":false,"scouted":false,"form":""},{"number":21,"alliance":"blue3","team":"1261","highPriority":false,"scouted":false,"form":""},{"number":24,"alliance":"blue1","team":"6905","highPriority":false,"scouted":false,"form":""},{"number":25,"alliance":"blue3","team":"1746","highPriority":false,"scouted":false,"form":""},{"number":28,"alliance":"blue1","team":"6829","highPriority":false,"scouted":false,"form":""},{"number":29,"alliance":"blue3","team":"5900","highPriority":false,"scouted":false,"form":""},{"number":32,"alliance":"blue1","team":"9998","highPriority":false,"scouted":false,"form":""},{"number":33,"alliance":"blue3","team":"1466","highPriority":false,"scouted":false,"form":""},{"number":36,"alliance":"blue1","team":"1261","highPriority":false,"scouted":false,"form":""},{"number":37,"alliance":"blue3","team":"8080","highPriority":false,"scouted":false,"form":""},{"number":40,"alliance":"blue1","team":"4188","highPriority":false,"scouted":false,"form":""},{"number":41,"alliance":"blue3","team":"1414","highPriority":false,"scouted":false,"form":""},{"number":44,"alliance":"blue1","team":"8761","highPriority":false,"scouted":false,"form":""},{"number":45,"alliance":"blue3","team":"4188","highPriority":false,"scouted":false,"form":""},{"number":48,"alliance":"blue1","team":"9999","highPriority":false,"scouted":false,"form":""},{"number":49,"alliance":"blue3","team":"5074","highPriority":false,"scouted":false,"form":""},{"number":52,"alliance":"blue1","team":"1466","highPriority":false,"scouted":false,"form":""},{"number":53,"alliance":"blue3","team":"6829","highPriority":false,"scouted":false,"form":""},{"number":56,"alliance":"blue1","team":"6023","highPriority":false,"scouted":false,"form":""},{"number":57,"alliance":"blue3","team":"4509","highPriority":false,"scouted":false,"form":""}],"breaks":[2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55],"id":4,"assignedAlliance":"blue","group":"n/a","canDoQualitative":false},{"name":"eleanor","matchNumbs":[2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55],"matches":[{"number":2,"alliance":"blue1","team":"8761","highPriority":false,"scouted":false,"form":""},{"number":3,"alliance":"blue3","team":"8080","highPriority":false,"scouted":false,"form":""},{"number":6,"alliance":"blue1","team":"4576","highPriority":false,"scouted":false,"form":""},{"number":7,"alliance":"blue3","team":"8866","highPriority":false,"scouted":false,"form":""},{"number":10,"alliance":"blue1","team":"9522","highPriority":false,"scouted":false,"form":""},{"number":11,"alliance":"blue3","team":"8080","highPriority":false,"scouted":false,"form":""},{"number":14,"alliance":"blue1","team":"6023","highPriority":false,"scouted":false,"form":""},{"number":15,"alliance":"blue3","team":"6905","highPriority":false,"scouted":false,"form":""},{"number":18,"alliance":"blue1","team":"8815","highPriority":false,"scouted":false,"form":""},{"number":19,"alliance":"blue3","team":"5074","highPriority":false,"scouted":false,"form":""},{"number":22,"alliance":"blue1","team":"6705","highPriority":false,"scouted":false,"form":""},{"number":23,"alliance":"blue3","team":"1466","highPriority":false,"scouted":false,"form":""},{"number":26,"alliance":"blue1","team":"8866","highPriority":false,"scouted":false,"form":""},{"number":27,"alliance":"blue3","team":"1002","highPriority":false,"scouted":false,"form":""},{"number":30,"alliance":"blue1","team":"832","highPriority":false,"scouted":false,"form":""},{"number":31,"alliance":"blue3","team":"5293","highPriority":false,"scouted":false,"form":""},{"number":34,"alliance":"blue1","team":"8866","highPriority":false,"scouted":false,"form":""},{"number":35,"alliance":"blue3","team":"832","highPriority":false,"scouted":false,"form":""},{"number":38,"alliance":"blue1","team":"1648","highPriority":false,"scouted":false,"form":""},{"number":39,"alliance":"blue3","team":"5608","highPriority":false,"scouted":false,"form":""},{"number":42,"alliance":"blue1","team":"4189","highPriority":false,"scouted":false,"form":""},{"number":43,"alliance":"blue3","team":"9998","highPriority":false,"scouted":false,"form":""},{"number":46,"alliance":"blue1","team":"1746","highPriority":false,"scouted":false,"form":""},{"number":47,"alliance":"blue3","team":"1683","highPriority":false,"scouted":false,"form":""},{"number":50,"alliance":"blue1","team":"2974","highPriority":false,"scouted":false,"form":""},{"number":51,"alliance":"blue3","team":"8736","highPriority":false,"scouted":false,"form":""},{"number":54,"alliance":"blue1","team":"5293","highPriority":false,"scouted":false,"form":""},{"number":55,"alliance":"blue3","team":"5900","highPriority":false,"scouted":false,"form":""}],"breaks":[1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36,37,40,41,44,45,48,49,52,53,56,57],"id":6,"assignedAlliance":"blue","group":"n/a","canDoQualitative":false},{"name":"jack","matchNumbs":[2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55],"matches":[{"number":2,"alliance":"blue2","team":"4188","highPriority":false,"scouted":false,"form":""},{"number":3,"alliance":"blue2","team":"1261","highPriority":false,"scouted":false,"form":""},{"number":6,"alliance":"blue2","team":"9522","highPriority":false,"scouted":false,"form":""},{"number":7,"alliance":"blue2","team":"6705","highPriority":false,"scouted":false,"form":""},{"number":10,"alliance":"blue2","team":"6905","highPriority":false,"scouted":false,"form":""},{"number":11,"alliance":"blue2","team":"8866","highPriority":false,"scouted":false,"form":""},{"number":14,"alliance":"blue2","team":"3344","highPriority":false,"scouted":false,"form":""},{"number":15,"alliance":"blue2","team":"5109","highPriority":false,"scouted":false,"form":""},{"number":18,"alliance":"blue2","team":"4576","highPriority":false,"scouted":false,"form":""},{"number":19,"alliance":"blue2","team":"4026","highPriority":false,"scouted":false,"form":""},{"number":22,"alliance":"blue2","team":"5608","highPriority":false,"scouted":false,"form":""},{"number":23,"alliance":"blue2","team":"8761","highPriority":false,"scouted":false,"form":""},{"number":26,"alliance":"blue2","team":"5109","highPriority":false,"scouted":false,"form":""},{"number":27,"alliance":"blue2","team":"1771","highPriority":false,"scouted":false,"form":""},{"number":30,"alliance":"blue2","team":"8866","highPriority":false,"scouted":false,"form":""},{"number":31,"alliance":"blue2","team":"5074","highPriority":false,"scouted":false,"form":""},{"number":34,"alliance":"blue2","team":"4576","highPriority":false,"scouted":false,"form":""},{"number":35,"alliance":"blue2","team":"1414","highPriority":false,"scouted":false,"form":""},{"number":38,"alliance":"blue2","team":"2415","highPriority":false,"scouted":false,"form":""},{"number":39,"alliance":"blue2","team":"8815","highPriority":false,"scouted":false,"form":""},{"number":42,"alliance":"blue2","team":"7538","highPriority":false,"scouted":false,"form":""},{"number":43,"alliance":"blue2","team":"8577","highPriority":false,"scouted":false,"form":""},{"number":46,"alliance":"blue2","team":"832","highPriority":false,"scouted":false,"form":""},{"number":47,"alliance":"blue2","team":"1414","highPriority":false,"scouted":false,"form":""},{"number":50,"alliance":"blue2","team":"4026","highPriority":false,"scouted":false,"form":""},{"number":51,"alliance":"blue2","team":"6905","highPriority":false,"scouted":false,"form":""},{"number":54,"alliance":"blue2","team":"9522","highPriority":false,"scouted":false,"form":""},{"number":55,"alliance":"blue2","team":"2415","highPriority":false,"scouted":false,"form":""}],"breaks":[1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36,37,40,41,44,45,48,49,52,53,56,57],"id":8,"assignedAlliance":"blue","group":"n/a","canDoQualitative":false},{"name":"henry","matchNumbs":[2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55],"matches":[{"number":2,"alliance":"blue3","team":"1683","highPriority":false,"scouted":false,"form":""},{"number":3,"alliance":"blue1","team":"3635","highPriority":false,"scouted":false,"form":""},{"number":6,"alliance":"blue3","team":"4189","highPriority":false,"scouted":false,"form":""},{"number":7,"alliance":"blue1","team":"1683","highPriority":false,"scouted":false,"form":""},{"number":10,"alliance":"blue3","team":"6023","highPriority":false,"scouted":false,"form":""},{"number":11,"alliance":"blue1","team":"8736","highPriority":false,"scouted":false,"form":""},{"number":14,"alliance":"blue3","team":"2974","highPriority":false,"scouted":false,"form":""},{"number":15,"alliance":"blue1","team":"8100","highPriority":false,"scouted":false,"form":""},{"number":18,"alliance":"blue3","team":"1648","highPriority":false,"scouted":false,"form":""},{"number":19,"alliance":"blue1","team":"1746","highPriority":false,"scouted":false,"form":""},{"number":22,"alliance":"blue3","team":"1771","highPriority":false,"scouted":false,"form":""},{"number":23,"alliance":"blue1","team":"4509","highPriority":false,"scouted":false,"form":""},{"number":26,"alliance":"blue3","team":"2415","highPriority":false,"scouted":false,"form":""},{"number":27,"alliance":"blue1","team":"1683","highPriority":false,"scouted":false,"form":""},{"number":30,"alliance":"blue3","team":"6023","highPriority":false,"scouted":false,"form":""},{"number":31,"alliance":"blue1","team":"8577","highPriority":false,"scouted":false,"form":""},{"number":34,"alliance":"blue3","team":"4188","highPriority":false,"scouted":false,"form":""},{"number":35,"alliance":"blue1","team":"9999","highPriority":false,"scouted":false,"form":""},{"number":38,"alliance":"blue3","team":"8761","highPriority":false,"scouted":false,"form":""},{"number":39,"alliance":"blue1","team":"1002","highPriority":false,"scouted":false,"form":""},{"number":42,"alliance":"blue3","team":"6905","highPriority":false,"scouted":false,"form":""},{"number":43,"alliance":"blue1","team":"2415","highPriority":false,"scouted":false,"form":""},{"number":46,"alliance":"blue3","team":"4576","highPriority":false,"scouted":false,"form":""},{"number":47,"alliance":"blue1","team":"8815","highPriority":false,"scouted":false,"form":""},{"number":50,"alliance":"blue3","team":"3635","highPriority":false,"scouted":false,"form":""},{"number":51,"alliance":"blue1","team":"2415","highPriority":false,"scouted":false,"form":""},{"number":54,"alliance":"blue3","team":"3635","highPriority":false,"scouted":false,"form":""},{"number":55,"alliance":"blue1","team":"4026","highPriority":false,"scouted":false,"form":""}],"breaks":[1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36,37,40,41,44,45,48,49,52,53,56,57],"id":10,"assignedAlliance":"blue","group":"n/a","canDoQualitative":false},{"name":"elliot","matchNumbs":[2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55],"matches":[{"number":2,"alliance":"red1","team":"832","highPriority":false,"scouted":false,"form":""},{"number":3,"alliance":"red3","team":"2415","highPriority":false,"scouted":false,"form":""},{"number":6,"alliance":"red1","team":"1414","highPriority":false,"scouted":false,"form":""},{"number":7,"alliance":"red3","team":"7538","highPriority":false,"scouted":false,"form":""},{"number":10,"alliance":"red1","team":"3344","highPriority":false,"scouted":false,"form":""},{"number":11,"alliance":"red3","team":"8100","highPriority":false,"scouted":false,"form":""},{"number":14,"alliance":"red1","team":"5900","highPriority":false,"scouted":false,"form":""},{"number":15,"alliance":"red3","team":"9522","highPriority":false,"scouted":false,"form":""},{"number":18,"alliance":"red1","team":"2415","highPriority":false,"scouted":false,"form":""},{"number":19,"alliance":"red3","team":"832","highPriority":false,"scouted":false,"form":""},{"number":22,"alliance":"red1","team":"1414","highPriority":false,"scouted":false,"form":""},{"number":23,"alliance":"red3","team":"3635","highPriority":false,"scouted":false,"form":""},{"number":26,"alliance":"red1","team":"3344","highPriority":false,"scouted":false,"form":""},{"number":27,"alliance":"red3","team":"9999","highPriority":false,"scouted":false,"form":""},{"number":30,"alliance":"red1","team":"6905","highPriority":false,"scouted":false,"form":""},{"number":31,"alliance":"red3","team":"8100","highPriority":false,"scouted":false,"form":""},{"number":34,"alliance":"red1","team":"5608","highPriority":false,"scouted":false,"form":""},{"number":35,"alliance":"red3","team":"8100","highPriority":false,"scouted":false,"form":""},{"number":38,"alliance":"red1","team":"1683","highPriority":false,"scouted":false,"form":""},{"number":39,"alliance":"red3","team":"8736","highPriority":false,"scouted":false,"form":""},{"number":42,"alliance":"red1","team":"1466","highPriority":false,"scouted":false,"form":""},{"number":43,"alliance":"red3","team":"4509","highPriority":false,"scouted":false,"form":""},{"number":46,"alliance":"red1","team":"4189","highPriority":false,"scouted":false,"form":""},{"number":47,"alliance":"red3","team":"6905","highPriority":false,"scouted":false,"form":""},{"number":50,"alliance":"red1","team":"3344","highPriority":false,"scouted":false,"form":""},{"number":51,"alliance":"red3","team":"1746","highPriority":false,"scouted":false,"form":""},{"number":54,"alliance":"red1","team":"9998","highPriority":false,"scouted":false,"form":""},{"number":55,"alliance":"red3","team":"1414","highPriority":false,"scouted":false,"form":""}],"breaks":[1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36,37,40,41,44,45,48,49,52,53,56,57],"id":7,"assignedAlliance":"red","group":"n/a","canDoQualitative":false},{"name":"pax","matchNumbs":[2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55],"matches":[{"number":2,"alliance":"red2","team":"5293","highPriority":false,"scouted":false,"form":""},{"number":3,"alliance":"red2","team":"1466","highPriority":false,"scouted":false,"form":""},{"number":6,"alliance":"red2","team":"1002","highPriority":false,"scouted":false,"form":""},{"number":7,"alliance":"red2","team":"3635","highPriority":false,"scouted":false,"form":""},{"number":10,"alliance":"red2","team":"4189","highPriority":false,"scouted":false,"form":""},{"number":11,"alliance":"red2","team":"1648","highPriority":false,"scouted":false,"form":""},{"number":14,"alliance":"red2","team":"1683","highPriority":false,"scouted":false,"form":""},{"number":15,"alliance":"red2","team":"1771","highPriority":false,"scouted":false,"form":""},{"number":18,"alliance":"red2","team":"4509","highPriority":false,"scouted":false,"form":""},{"number":19,"alliance":"red2","team":"6829","highPriority":false,"scouted":false,"form":""},{"number":22,"alliance":"red2","team":"2415","highPriority":false,"scouted":false,"form":""},{"number":23,"alliance":"red2","team":"9999","highPriority":false,"scouted":false,"form":""},{"number":26,"alliance":"red2","team":"832","highPriority":false,"scouted":false,"form":""},{"number":27,"alliance":"red2","team":"4509","highPriority":false,"scouted":false,"form":""},{"number":30,"alliance":"red2","team":"1261","highPriority":false,"scouted":false,"form":""},{"number":31,"alliance":"red2","team":"8761","highPriority":false,"scouted":false,"form":""},{"number":34,"alliance":"red2","team":"8736","highPriority":false,"scouted":false,"form":""},{"number":35,"alliance":"red2","team":"8577","highPriority":false,"scouted":false,"form":""},{"number":38,"alliance":"red2","team":"5074","highPriority":false,"scouted":false,"form":""},{"number":39,"alliance":"red2","team":"8100","highPriority":false,"scouted":false,"form":""},{"number":42,"alliance":"red2","team":"1683","highPriority":false,"scouted":false,"form":""},{"number":43,"alliance":"red2","team":"8866","highPriority":false,"scouted":false,"form":""},{"number":46,"alliance":"red2","team":"8100","highPriority":false,"scouted":false,"form":""},{"number":47,"alliance":"red2","team":"9998","highPriority":false,"scouted":false,"form":""},{"number":50,"alliance":"red2","team":"8577","highPriority":false,"scouted":false,"form":""},{"number":51,"alliance":"red2","team":"5900","highPriority":false,"scouted":false,"form":""},{"number":54,"alliance":"red2","team":"4576","highPriority":false,"scouted":false,"form":""},{"number":55,"alliance":"red2","team":"8736","highPriority":false,"scouted":false,"form":""}],"breaks":[1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36,37,40,41,44,45,48,49,52,53,56,57],"id":9,"assignedAlliance":"red","group":"n/a","canDoQualitative":false},{"name":"hugh","matchNumbs":[2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55],"matches":[{"number":2,"alliance":"red3","team":"1771","highPriority":false,"scouted":false,"form":""},{"number":3,"alliance":"red1","team":"7538","highPriority":false,"scouted":false,"form":""},{"number":6,"alliance":"red3","team":"1648","highPriority":false,"scouted":false,"form":""},{"number":7,"alliance":"red1","team":"5074","highPriority":false,"scouted":false,"form":""},{"number":10,"alliance":"red3","team":"8761","highPriority":false,"scouted":false,"form":""},{"number":11,"alliance":"red1","team":"1771","highPriority":false,"scouted":false,"form":""},{"number":14,"alliance":"red3","team":"9999","highPriority":false,"scouted":false,"form":""},{"number":15,"alliance":"red1","team":"1261","highPriority":false,"scouted":false,"form":""},{"number":18,"alliance":"red3","team":"6705","highPriority":false,"scouted":false,"form":""},{"number":19,"alliance":"red1","team":"4188","highPriority":false,"scouted":false,"form":""},{"number":22,"alliance":"red3","team":"6023","highPriority":false,"scouted":false,"form":""},{"number":23,"alliance":"red1","team":"4188","highPriority":false,"scouted":false,"form":""},{"number":26,"alliance":"red3","team":"9522","highPriority":false,"scouted":false,"form":""},{"number":27,"alliance":"red1","team":"5608","highPriority":false,"scouted":false,"form":""},{"number":30,"alliance":"red3","team":"4576","highPriority":false,"scouted":false,"form":""},{"number":31,"alliance":"red1","team":"7538","highPriority":false,"scouted":false,"form":""},{"number":34,"alliance":"red3","team":"3344","highPriority":false,"scouted":false,"form":""},{"number":35,"alliance":"red1","team":"3635","highPriority":false,"scouted":false,"form":""},{"number":38,"alliance":"red3","team":"9998","highPriority":false,"scouted":false,"form":""},{"number":39,"alliance":"red1","team":"832","highPriority":false,"scouted":false,"form":""},{"number":42,"alliance":"red3","team":"4026","highPriority":false,"scouted":false,"form":""},{"number":43,"alliance":"red1","team":"5293","highPriority":false,"scouted":false,"form":""},{"number":46,"alliance":"red3","team":"1466","highPriority":false,"scouted":false,"form":""},{"number":47,"alliance":"red1","team":"8866","highPriority":false,"scouted":false,"form":""},{"number":50,"alliance":"red3","team":"1261","highPriority":false,"scouted":false,"form":""},{"number":51,"alliance":"red1","team":"1002","highPriority":false,"scouted":false,"form":""},{"number":54,"alliance":"red3","team":"2974","highPriority":false,"scouted":false,"form":""},{"number":55,"alliance":"red1","team":"8761","highPriority":false,"scouted":false,"form":""}],"breaks":[1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36,37,40,41,44,45,48,49,52,53,56,57],"id":11,"assignedAlliance":"red","group":"n/a","canDoQualitative":false},{"name":"woody","matchNumbs":[1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36,37,40,41,44,45,48,49,52,53,56,57],"matches":[{"number":1,"alliance":"blue2","team":"6905","highPriority":false,"scouted":false,"form":""},{"number":4,"alliance":"blue2","team":"9999","highPriority":false,"scouted":false,"form":""},{"number":5,"alliance":"blue2","team":"5900","highPriority":false,"scouted":false,"form":""},{"number":8,"alliance":"blue2","team":"9999","highPriority":false,"scouted":false,"form":""},{"number":9,"alliance":"blue2","team":"1261","highPriority":false,"scouted":false,"form":""},{"number":12,"alliance":"blue2","team":"5074","highPriority":false,"scouted":false,"form":""},{"number":13,"alliance":"blue2","team":"1414","highPriority":false,"scouted":false,"form":""},{"number":16,"alliance":"blue2","team":"3635","highPriority":false,"scouted":false,"form":""},{"number":17,"alliance":"blue2","team":"5293","highPriority":false,"scouted":false,"form":""},{"number":20,"alliance":"blue2","team":"9998","highPriority":false,"scouted":false,"form":""},{"number":21,"alliance":"blue2","team":"1683","highPriority":false,"scouted":false,"form":""},{"number":24,"alliance":"blue2","team":"5900","highPriority":false,"scouted":false,"form":""},{"number":25,"alliance":"blue2","team":"8080","highPriority":false,"scouted":false,"form":""},{"number":28,"alliance":"blue2","team":"2974","highPriority":false,"scouted":false,"form":""},{"number":29,"alliance":"blue2","team":"1648","highPriority":false,"scouted":false,"form":""},{"number":32,"alliance":"blue2","team":"4026","highPriority":false,"scouted":false,"form":""},{"number":33,"alliance":"blue2","team":"9522","highPriority":false,"scouted":false,"form":""},{"number":36,"alliance":"blue2","team":"6023","highPriority":false,"scouted":false,"form":""},{"number":37,"alliance":"blue2","team":"7538","highPriority":false,"scouted":false,"form":""},{"number":40,"alliance":"blue2","team":"1771","highPriority":false,"scouted":false,"form":""},{"number":41,"alliance":"blue2","team":"1746","highPriority":false,"scouted":false,"form":""},{"number":44,"alliance":"blue2","team":"2974","highPriority":false,"scouted":false,"form":""},{"number":45,"alliance":"blue2","team":"6705","highPriority":false,"scouted":false,"form":""},{"number":48,"alliance":"blue2","team":"6829","highPriority":false,"scouted":false,"form":""},{"number":49,"alliance":"blue2","team":"5109","highPriority":false,"scouted":false,"form":""},{"number":52,"alliance":"blue2","team":"832","highPriority":false,"scouted":false,"form":""},{"number":53,"alliance":"blue2","team":"8100","highPriority":false,"scouted":false,"form":""},{"number":56,"alliance":"blue2","team":"1002","highPriority":false,"scouted":false,"form":""},{"number":57,"alliance":"blue2","team":"3344","highPriority":false,"scouted":false,"form":""}],"breaks":[2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55],"id":2,"assignedAlliance":"blue","group":"n/a","canDoQualitative":false},{"name":"gray","matchNumbs":[1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36,37,40,41,44,45,48,49,52,53,56,57],"matches":[{"number":1,"alliance":"blue1","team":"1746","highPriority":false,"scouted":false,"form":""},{"number":4,"alliance":"blue3","team":"8736","highPriority":false,"scouted":false,"form":""},{"number":5,"alliance":"blue1","team":"6829","highPriority":false,"scouted":false,"form":""},{"number":8,"alliance":"blue3","team":"8577","highPriority":false,"scouted":false,"form":""},{"number":9,"alliance":"blue1","team":"5608","highPriority":false,"scouted":false,"form":""},{"number":12,"alliance":"blue3","team":"8815","highPriority":false,"scouted":false,"form":""},{"number":13,"alliance":"blue1","team":"4509","highPriority":false,"scouted":false,"form":""},{"number":16,"alliance":"blue3","team":"4189","highPriority":false,"scouted":false,"form":""},{"number":17,"alliance":"blue1","team":"1002","highPriority":false,"scouted":false,"form":""},{"number":20,"alliance":"blue3","team":"3344","highPriority":false,"scouted":false,"form":""},{"number":21,"alliance":"blue1","team":"7538","highPriority":false,"scouted":false,"form":""},{"number":24,"alliance":"blue3","team":"8577","highPriority":false,"scouted":false,"form":""},{"number":25,"alliance":"blue1","team":"1648","highPriority":false,"scouted":false,"form":""},{"number":28,"alliance":"blue3","team":"1414","highPriority":false,"scouted":false,"form":""},{"number":29,"alliance":"blue1","team":"4189","highPriority":false,"scouted":false,"form":""},{"number":32,"alliance":"blue3","team":"6829","highPriority":false,"scouted":false,"form":""},{"number":33,"alliance":"blue1","team":"5109","highPriority":false,"scouted":false,"form":""},{"number":36,"alliance":"blue3","team":"5293","highPriority":false,"scouted":false,"form":""},{"number":37,"alliance":"blue1","team":"4026","highPriority":false,"scouted":false,"form":""},{"number":40,"alliance":"blue3","team":"5109","highPriority":false,"scouted":false,"form":""},{"number":41,"alliance":"blue1","team":"9522","highPriority":false,"scouted":false,"form":""},{"number":44,"alliance":"blue3","team":"1261","highPriority":false,"scouted":false,"form":""},{"number":45,"alliance":"blue1","team":"5074","highPriority":false,"scouted":false,"form":""},{"number":48,"alliance":"blue3","team":"1771","highPriority":false,"scouted":false,"form":""},{"number":49,"alliance":"blue1","team":"4509","highPriority":false,"scouted":false,"form":""},{"number":52,"alliance":"blue3","team":"6705","highPriority":false,"scouted":false,"form":""},{"number":53,"alliance":"blue1","team":"8080","highPriority":false,"scouted":false,"form":""},{"number":56,"alliance":"blue3","team":"7538","highPriority":false,"scouted":false,"form":""},{"number":57,"alliance":"blue1","team":"1771","highPriority":false,"scouted":false,"form":""}],"breaks":[2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55],"id":0,"assignedAlliance":"blue","group":"n/a","canDoQualitative":false},{"name":"esan","matchNumbs":[1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36,37,40,41,44,45,48,49,52,53,56,57],"matches":[{"number":1,"alliance":"red3","team":"2974","highPriority":false,"scouted":false,"form":""},{"number":4,"alliance":"red1","team":"9998","highPriority":false,"scouted":false,"form":""},{"number":5,"alliance":"red3","team":"8815","highPriority":false,"scouted":false,"form":""},{"number":8,"alliance":"red1","team":"2974","highPriority":false,"scouted":false,"form":""},{"number":9,"alliance":"red3","team":"5293","highPriority":false,"scouted":false,"form":""},{"number":12,"alliance":"red1","team":"4576","highPriority":false,"scouted":false,"form":""},{"number":13,"alliance":"red3","team":"7538","highPriority":false,"scouted":false,"form":""},{"number":16,"alliance":"red1","team":"8080","highPriority":false,"scouted":false,"form":""},{"number":17,"alliance":"red3","team":"8866","highPriority":false,"scouted":false,"form":""},{"number":20,"alliance":"red1","team":"2974","highPriority":false,"scouted":false,"form":""},{"number":21,"alliance":"red3","team":"1002","highPriority":false,"scouted":false,"form":""},{"number":24,"alliance":"red1","team":"5074","highPriority":false,"scouted":false,"form":""},{"number":25,"alliance":"red3","team":"4026","highPriority":false,"scouted":false,"form":""},{"number":28,"alliance":"red1","team":"8736","highPriority":false,"scouted":false,"form":""},{"number":29,"alliance":"red3","team":"1746","highPriority":false,"scouted":false,"form":""},{"number":32,"alliance":"red1","team":"6705","highPriority":false,"scouted":false,"form":""},{"number":33,"alliance":"red3","team":"5900","highPriority":false,"scouted":false,"form":""},{"number":36,"alliance":"red1","team":"6705","highPriority":false,"scouted":false,"form":""},{"number":37,"alliance":"red3","team":"4509","highPriority":false,"scouted":false,"form":""},{"number":40,"alliance":"red1","team":"4576","highPriority":false,"scouted":false,"form":""},{"number":41,"alliance":"red3","team":"9999","highPriority":false,"scouted":false,"form":""},{"number":44,"alliance":"red1","team":"1648","highPriority":false,"scouted":false,"form":""},{"number":45,"alliance":"red3","team":"9522","highPriority":false,"scouted":false,"form":""},{"number":48,"alliance":"red1","team":"5293","highPriority":false,"scouted":false,"form":""},{"number":49,"alliance":"red3","team":"5608","highPriority":false,"scouted":false,"form":""},{"number":52,"alliance":"red1","team":"9999","highPriority":false,"scouted":false,"form":""},{"number":53,"alliance":"red3","team":"1683","highPriority":false,"scouted":false,"form":""},{"number":56,"alliance":"red1","team":"8577","highPriority":false,"scouted":false,"form":""},{"number":57,"alliance":"red3","team":"5074","highPriority":false,"scouted":false,"form":""}],"breaks":[2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55],"id":5,"assignedAlliance":"red","group":"n/a","canDoQualitative":false},{"name":"ava","matchNumbs":[1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36,37,40,41,44,45,48,49,52,53,56,57],"matches":[{"number":1,"alliance":"red2","team":"6705","highPriority":false,"scouted":false,"form":""},{"number":4,"alliance":"red2","team":"6023","highPriority":false,"scouted":false,"form":""},{"number":5,"alliance":"red2","team":"4509","highPriority":false,"scouted":false,"form":""},{"number":8,"alliance":"red2","team":"4188","highPriority":false,"scouted":false,"form":""},{"number":9,"alliance":"red2","team":"9998","highPriority":false,"scouted":false,"form":""},{"number":12,"alliance":"red2","team":"1002","highPriority":false,"scouted":false,"form":""},{"number":13,"alliance":"red2","team":"1746","highPriority":false,"scouted":false,"form":""},{"number":16,"alliance":"red2","team":"5608","highPriority":false,"scouted":false,"form":""},{"number":17,"alliance":"red2","team":"1466","highPriority":false,"scouted":false,"form":""},{"number":20,"alliance":"red2","team":"4189","highPriority":false,"scouted":false,"form":""},{"number":21,"alliance":"red2","team":"8736","highPriority":false,"scouted":false,"form":""},{"number":24,"alliance":"red2","team":"6829","highPriority":false,"scouted":false,"form":""},{"number":25,"alliance":"red2","team":"5293","highPriority":false,"scouted":false,"form":""},{"number":28,"alliance":"red2","team":"1466","highPriority":false,"scouted":false,"form":""},{"number":29,"alliance":"red2","team":"8815","highPriority":false,"scouted":false,"form":""},{"number":32,"alliance":"red2","team":"8080","highPriority":false,"scouted":false,"form":""},{"number":33,"alliance":"red2","team":"8815","highPriority":false,"scouted":false,"form":""},{"number":36,"alliance":"red2","team":"1746","highPriority":false,"scouted":false,"form":""},{"number":37,"alliance":"red2","team":"2974","highPriority":false,"scouted":false,"form":""},{"number":40,"alliance":"red2","team":"3635","highPriority":false,"scouted":false,"form":""},{"number":41,"alliance":"red2","team":"3344","highPriority":false,"scouted":false,"form":""},{"number":44,"alliance":"red2","team":"6023","highPriority":false,"scouted":false,"form":""},{"number":45,"alliance":"red2","team":"8080","highPriority":false,"scouted":false,"form":""},{"number":48,"alliance":"red2","team":"7538","highPriority":false,"scouted":false,"form":""},{"number":49,"alliance":"red2","team":"8761","highPriority":false,"scouted":false,"form":""},{"number":52,"alliance":"red2","team":"1648","highPriority":false,"scouted":false,"form":""},{"number":53,"alliance":"red2","team":"5608","highPriority":false,"scouted":false,"form":""},{"number":56,"alliance":"red2","team":"4188","highPriority":false,"scouted":false,"form":""},{"number":57,"alliance":"red2","team":"4189","highPriority":false,"scouted":false,"form":""}],"breaks":[2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55],"id":3,"assignedAlliance":"red","group":"n/a","canDoQualitative":false},{"name":"dutch","matchNumbs":[1,4,5,8,9,12,13,16,17,20,21,24,25,28,29,32,33,36,37,40,41,44,45,48,49,52,53,56,57],"matches":[{"number":1,"alliance":"red1","team":"8577","highPriority":false,"scouted":false,"form":""},{"number":4,"alliance":"red3","team":"5109","highPriority":false,"scouted":false,"form":""},{"number":5,"alliance":"red1","team":"8100","highPriority":false,"scouted":false,"form":""},{"number":8,"alliance":"red3","team":"2415","highPriority":false,"scouted":false,"form":""},{"number":9,"alliance":"red1","team":"5900","highPriority":false,"scouted":false,"form":""},{"number":12,"alliance":"red3","team":"4026","highPriority":false,"scouted":false,"form":""},{"number":13,"alliance":"red1","team":"6829","highPriority":false,"scouted":false,"form":""},{"number":16,"alliance":"red3","team":"8577","highPriority":false,"scouted":false,"form":""},{"number":17,"alliance":"red1","team":"1414","highPriority":false,"scouted":false,"form":""},{"number":20,"alliance":"red3","team":"5109","highPriority":false,"scouted":false,"form":""},{"number":21,"alliance":"red1","team":"9522","highPriority":false,"scouted":false,"form":""},{"number":24,"alliance":"red3","team":"4576","highPriority":false,"scouted":false,"form":""},{"number":25,"alliance":"red1","team":"8815","highPriority":false,"scouted":false,"form":""},{"number":28,"alliance":"red3","team":"4188","highPriority":false,"scouted":false,"form":""},{"number":29,"alliance":"red1","team":"3635","highPriority":false,"scouted":false,"form":""},{"number":32,"alliance":"red3","team":"1002","highPriority":false,"scouted":false,"form":""},{"number":33,"alliance":"red1","team":"1771","highPriority":false,"scouted":false,"form":""},{"number":36,"alliance":"red3","team":"4189","highPriority":false,"scouted":false,"form":""},{"number":37,"alliance":"red1","team":"6905","highPriority":false,"scouted":false,"form":""},{"number":40,"alliance":"red3","team":"6705","highPriority":false,"scouted":false,"form":""},{"number":41,"alliance":"red1","team":"8080","highPriority":false,"scouted":false,"form":""},{"number":44,"alliance":"red3","team":"6829","highPriority":false,"scouted":false,"form":""},{"number":45,"alliance":"red1","team":"5900","highPriority":false,"scouted":false,"form":""},{"number":48,"alliance":"red3","team":"1648","highPriority":false,"scouted":false,"form":""},{"number":49,"alliance":"red1","team":"6023","highPriority":false,"scouted":false,"form":""},{"number":52,"alliance":"red3","team":"8866","highPriority":false,"scouted":false,"form":""},{"number":53,"alliance":"red1","team":"5109","highPriority":false,"scouted":false,"form":""},{"number":56,"alliance":"red3","team":"8815","highPriority":false,"scouted":false,"form":""},{"number":57,"alliance":"red1","team":"1261","highPriority":false,"scouted":false,"form":""}],"breaks":[2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31,34,35,38,39,42,43,46,47,50,51,54,55],"id":1,"assignedAlliance":"red","group":"n/a","canDoQualitative":false}]
+[
+    {
+        "name": "carter",
+        "matchNumbs": [
+            1,
+            4,
+            5,
+            8,
+            9,
+            12,
+            13,
+            16,
+            17,
+            20,
+            21,
+            24,
+            25,
+            28,
+            29,
+            32,
+            33,
+            36,
+            37,
+            40,
+            41,
+            44,
+            45,
+            48,
+            49,
+            52,
+            53,
+            56,
+            57
+        ],
+        "matches": [
+            {
+                "number": 1,
+                "alliance": "blue3",
+                "team": "5608",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 4,
+                "alliance": "blue1",
+                "team": "4026",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 5,
+                "alliance": "blue3",
+                "team": "3344",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 8,
+                "alliance": "blue1",
+                "team": "5109",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 9,
+                "alliance": "blue3",
+                "team": "832",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 12,
+                "alliance": "blue1",
+                "team": "1466",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 13,
+                "alliance": "blue3",
+                "team": "9998",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 16,
+                "alliance": "blue1",
+                "team": "8736",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 17,
+                "alliance": "blue3",
+                "team": "8761",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 20,
+                "alliance": "blue1",
+                "team": "8100",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 21,
+                "alliance": "blue3",
+                "team": "1261",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 24,
+                "alliance": "blue1",
+                "team": "6905",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 25,
+                "alliance": "blue3",
+                "team": "1746",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 28,
+                "alliance": "blue1",
+                "team": "6829",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 29,
+                "alliance": "blue3",
+                "team": "5900",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 32,
+                "alliance": "blue1",
+                "team": "9998",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 33,
+                "alliance": "blue3",
+                "team": "1466",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 36,
+                "alliance": "blue1",
+                "team": "1261",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 37,
+                "alliance": "blue3",
+                "team": "8080",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 40,
+                "alliance": "blue1",
+                "team": "4188",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 41,
+                "alliance": "blue3",
+                "team": "1414",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 44,
+                "alliance": "blue1",
+                "team": "8761",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 45,
+                "alliance": "blue3",
+                "team": "4188",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 48,
+                "alliance": "blue1",
+                "team": "9999",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 49,
+                "alliance": "blue3",
+                "team": "5074",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 52,
+                "alliance": "blue1",
+                "team": "1466",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 53,
+                "alliance": "blue3",
+                "team": "6829",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 56,
+                "alliance": "blue1",
+                "team": "6023",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 57,
+                "alliance": "blue3",
+                "team": "4509",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            }
+        ],
+        "breaks": [
+            2,
+            3,
+            6,
+            7,
+            10,
+            11,
+            14,
+            15,
+            18,
+            19,
+            22,
+            23,
+            26,
+            27,
+            30,
+            31,
+            34,
+            35,
+            38,
+            39,
+            42,
+            43,
+            46,
+            47,
+            50,
+            51,
+            54,
+            55
+        ],
+        "id": 4,
+        "assignedAlliance": "blue",
+        "group": "n/a",
+        "canDoQualitative": false
+    },
+    {
+        "name": "eleanor",
+        "matchNumbs": [
+            2,
+            3,
+            6,
+            7,
+            10,
+            11,
+            14,
+            15,
+            18,
+            19,
+            22,
+            23,
+            26,
+            27,
+            30,
+            31,
+            34,
+            35,
+            38,
+            39,
+            42,
+            43,
+            46,
+            47,
+            50,
+            51,
+            54,
+            55
+        ],
+        "matches": [
+            {
+                "number": 2,
+                "alliance": "blue1",
+                "team": "8761",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 3,
+                "alliance": "blue3",
+                "team": "8080",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 6,
+                "alliance": "blue1",
+                "team": "4576",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 7,
+                "alliance": "blue3",
+                "team": "8866",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 10,
+                "alliance": "blue1",
+                "team": "9522",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 11,
+                "alliance": "blue3",
+                "team": "8080",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 14,
+                "alliance": "blue1",
+                "team": "6023",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 15,
+                "alliance": "blue3",
+                "team": "6905",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 18,
+                "alliance": "blue1",
+                "team": "8815",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 19,
+                "alliance": "blue3",
+                "team": "5074",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 22,
+                "alliance": "blue1",
+                "team": "6705",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 23,
+                "alliance": "blue3",
+                "team": "1466",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 26,
+                "alliance": "blue1",
+                "team": "8866",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 27,
+                "alliance": "blue3",
+                "team": "1002",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 30,
+                "alliance": "blue1",
+                "team": "832",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 31,
+                "alliance": "blue3",
+                "team": "5293",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 34,
+                "alliance": "blue1",
+                "team": "8866",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 35,
+                "alliance": "blue3",
+                "team": "832",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 38,
+                "alliance": "blue1",
+                "team": "1648",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 39,
+                "alliance": "blue3",
+                "team": "5608",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 42,
+                "alliance": "blue1",
+                "team": "4189",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 43,
+                "alliance": "blue3",
+                "team": "9998",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 46,
+                "alliance": "blue1",
+                "team": "1746",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 47,
+                "alliance": "blue3",
+                "team": "1683",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 50,
+                "alliance": "blue1",
+                "team": "2974",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 51,
+                "alliance": "blue3",
+                "team": "8736",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 54,
+                "alliance": "blue1",
+                "team": "5293",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 55,
+                "alliance": "blue3",
+                "team": "5900",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            }
+        ],
+        "breaks": [
+            1,
+            4,
+            5,
+            8,
+            9,
+            12,
+            13,
+            16,
+            17,
+            20,
+            21,
+            24,
+            25,
+            28,
+            29,
+            32,
+            33,
+            36,
+            37,
+            40,
+            41,
+            44,
+            45,
+            48,
+            49,
+            52,
+            53,
+            56,
+            57
+        ],
+        "id": 6,
+        "assignedAlliance": "blue",
+        "group": "n/a",
+        "canDoQualitative": false
+    },
+    {
+        "name": "jack",
+        "matchNumbs": [
+            2,
+            3,
+            6,
+            7,
+            10,
+            11,
+            14,
+            15,
+            18,
+            19,
+            22,
+            23,
+            26,
+            27,
+            30,
+            31,
+            34,
+            35,
+            38,
+            39,
+            42,
+            43,
+            46,
+            47,
+            50,
+            51,
+            54,
+            55
+        ],
+        "matches": [
+            {
+                "number": 2,
+                "alliance": "blue2",
+                "team": "4188",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 3,
+                "alliance": "blue2",
+                "team": "1261",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 6,
+                "alliance": "blue2",
+                "team": "9522",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 7,
+                "alliance": "blue2",
+                "team": "6705",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 10,
+                "alliance": "blue2",
+                "team": "6905",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 11,
+                "alliance": "blue2",
+                "team": "8866",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 14,
+                "alliance": "blue2",
+                "team": "3344",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 15,
+                "alliance": "blue2",
+                "team": "5109",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 18,
+                "alliance": "blue2",
+                "team": "4576",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 19,
+                "alliance": "blue2",
+                "team": "4026",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 22,
+                "alliance": "blue2",
+                "team": "5608",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 23,
+                "alliance": "blue2",
+                "team": "8761",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 26,
+                "alliance": "blue2",
+                "team": "5109",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 27,
+                "alliance": "blue2",
+                "team": "1771",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 30,
+                "alliance": "blue2",
+                "team": "8866",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 31,
+                "alliance": "blue2",
+                "team": "5074",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 34,
+                "alliance": "blue2",
+                "team": "4576",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 35,
+                "alliance": "blue2",
+                "team": "1414",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 38,
+                "alliance": "blue2",
+                "team": "2415",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 39,
+                "alliance": "blue2",
+                "team": "8815",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 42,
+                "alliance": "blue2",
+                "team": "7538",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 43,
+                "alliance": "blue2",
+                "team": "8577",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 46,
+                "alliance": "blue2",
+                "team": "832",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 47,
+                "alliance": "blue2",
+                "team": "1414",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 50,
+                "alliance": "blue2",
+                "team": "4026",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 51,
+                "alliance": "blue2",
+                "team": "6905",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 54,
+                "alliance": "blue2",
+                "team": "9522",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 55,
+                "alliance": "blue2",
+                "team": "2415",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            }
+        ],
+        "breaks": [
+            1,
+            4,
+            5,
+            8,
+            9,
+            12,
+            13,
+            16,
+            17,
+            20,
+            21,
+            24,
+            25,
+            28,
+            29,
+            32,
+            33,
+            36,
+            37,
+            40,
+            41,
+            44,
+            45,
+            48,
+            49,
+            52,
+            53,
+            56,
+            57
+        ],
+        "id": 8,
+        "assignedAlliance": "blue",
+        "group": "n/a",
+        "canDoQualitative": false
+    },
+    {
+        "name": "henry",
+        "matchNumbs": [
+            2,
+            3,
+            6,
+            7,
+            10,
+            11,
+            14,
+            15,
+            18,
+            19,
+            22,
+            23,
+            26,
+            27,
+            30,
+            31,
+            34,
+            35,
+            38,
+            39,
+            42,
+            43,
+            46,
+            47,
+            50,
+            51,
+            54,
+            55
+        ],
+        "matches": [
+            {
+                "number": 2,
+                "alliance": "blue3",
+                "team": "1683",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 3,
+                "alliance": "blue1",
+                "team": "3635",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 6,
+                "alliance": "blue3",
+                "team": "4189",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 7,
+                "alliance": "blue1",
+                "team": "1683",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 10,
+                "alliance": "blue3",
+                "team": "6023",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 11,
+                "alliance": "blue1",
+                "team": "8736",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 14,
+                "alliance": "blue3",
+                "team": "2974",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 15,
+                "alliance": "blue1",
+                "team": "8100",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 18,
+                "alliance": "blue3",
+                "team": "1648",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 19,
+                "alliance": "blue1",
+                "team": "1746",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 22,
+                "alliance": "blue3",
+                "team": "1771",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 23,
+                "alliance": "blue1",
+                "team": "4509",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 26,
+                "alliance": "blue3",
+                "team": "2415",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 27,
+                "alliance": "blue1",
+                "team": "1683",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 30,
+                "alliance": "blue3",
+                "team": "6023",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 31,
+                "alliance": "blue1",
+                "team": "8577",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 34,
+                "alliance": "blue3",
+                "team": "4188",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 35,
+                "alliance": "blue1",
+                "team": "9999",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 38,
+                "alliance": "blue3",
+                "team": "8761",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 39,
+                "alliance": "blue1",
+                "team": "1002",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 42,
+                "alliance": "blue3",
+                "team": "6905",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 43,
+                "alliance": "blue1",
+                "team": "2415",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 46,
+                "alliance": "blue3",
+                "team": "4576",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 47,
+                "alliance": "blue1",
+                "team": "8815",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 50,
+                "alliance": "blue3",
+                "team": "3635",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 51,
+                "alliance": "blue1",
+                "team": "2415",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 54,
+                "alliance": "blue3",
+                "team": "3635",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 55,
+                "alliance": "blue1",
+                "team": "4026",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            }
+        ],
+        "breaks": [
+            1,
+            4,
+            5,
+            8,
+            9,
+            12,
+            13,
+            16,
+            17,
+            20,
+            21,
+            24,
+            25,
+            28,
+            29,
+            32,
+            33,
+            36,
+            37,
+            40,
+            41,
+            44,
+            45,
+            48,
+            49,
+            52,
+            53,
+            56,
+            57
+        ],
+        "id": 10,
+        "assignedAlliance": "blue",
+        "group": "n/a",
+        "canDoQualitative": false
+    },
+    {
+        "name": "elliot",
+        "matchNumbs": [
+            2,
+            3,
+            6,
+            7,
+            10,
+            11,
+            14,
+            15,
+            18,
+            19,
+            22,
+            23,
+            26,
+            27,
+            30,
+            31,
+            34,
+            35,
+            38,
+            39,
+            42,
+            43,
+            46,
+            47,
+            50,
+            51,
+            54,
+            55
+        ],
+        "matches": [
+            {
+                "number": 2,
+                "alliance": "red1",
+                "team": "832",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 3,
+                "alliance": "red3",
+                "team": "2415",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 6,
+                "alliance": "red1",
+                "team": "1414",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 7,
+                "alliance": "red3",
+                "team": "7538",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 10,
+                "alliance": "red1",
+                "team": "3344",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 11,
+                "alliance": "red3",
+                "team": "8100",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 14,
+                "alliance": "red1",
+                "team": "5900",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 15,
+                "alliance": "red3",
+                "team": "9522",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 18,
+                "alliance": "red1",
+                "team": "2415",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 19,
+                "alliance": "red3",
+                "team": "832",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 22,
+                "alliance": "red1",
+                "team": "1414",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 23,
+                "alliance": "red3",
+                "team": "3635",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 26,
+                "alliance": "red1",
+                "team": "3344",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 27,
+                "alliance": "red3",
+                "team": "9999",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 30,
+                "alliance": "red1",
+                "team": "6905",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 31,
+                "alliance": "red3",
+                "team": "8100",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 34,
+                "alliance": "red1",
+                "team": "5608",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 35,
+                "alliance": "red3",
+                "team": "8100",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 38,
+                "alliance": "red1",
+                "team": "1683",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 39,
+                "alliance": "red3",
+                "team": "8736",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 42,
+                "alliance": "red1",
+                "team": "1466",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 43,
+                "alliance": "red3",
+                "team": "4509",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 46,
+                "alliance": "red1",
+                "team": "4189",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 47,
+                "alliance": "red3",
+                "team": "6905",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 50,
+                "alliance": "red1",
+                "team": "3344",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 51,
+                "alliance": "red3",
+                "team": "1746",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 54,
+                "alliance": "red1",
+                "team": "9998",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 55,
+                "alliance": "red3",
+                "team": "1414",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            }
+        ],
+        "breaks": [
+            1,
+            4,
+            5,
+            8,
+            9,
+            12,
+            13,
+            16,
+            17,
+            20,
+            21,
+            24,
+            25,
+            28,
+            29,
+            32,
+            33,
+            36,
+            37,
+            40,
+            41,
+            44,
+            45,
+            48,
+            49,
+            52,
+            53,
+            56,
+            57
+        ],
+        "id": 7,
+        "assignedAlliance": "red",
+        "group": "n/a",
+        "canDoQualitative": false
+    },
+    {
+        "name": "pax",
+        "matchNumbs": [
+            2,
+            3,
+            6,
+            7,
+            10,
+            11,
+            14,
+            15,
+            18,
+            19,
+            22,
+            23,
+            26,
+            27,
+            30,
+            31,
+            34,
+            35,
+            38,
+            39,
+            42,
+            43,
+            46,
+            47,
+            50,
+            51,
+            54,
+            55
+        ],
+        "matches": [
+            {
+                "number": 2,
+                "alliance": "red2",
+                "team": "5293",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 3,
+                "alliance": "red2",
+                "team": "1466",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 6,
+                "alliance": "red2",
+                "team": "1002",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 7,
+                "alliance": "red2",
+                "team": "3635",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 10,
+                "alliance": "red2",
+                "team": "4189",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 11,
+                "alliance": "red2",
+                "team": "1648",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 14,
+                "alliance": "red2",
+                "team": "1683",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 15,
+                "alliance": "red2",
+                "team": "1771",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 18,
+                "alliance": "red2",
+                "team": "4509",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 19,
+                "alliance": "red2",
+                "team": "6829",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 22,
+                "alliance": "red2",
+                "team": "2415",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 23,
+                "alliance": "red2",
+                "team": "9999",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 26,
+                "alliance": "red2",
+                "team": "832",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 27,
+                "alliance": "red2",
+                "team": "4509",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 30,
+                "alliance": "red2",
+                "team": "1261",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 31,
+                "alliance": "red2",
+                "team": "8761",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 34,
+                "alliance": "red2",
+                "team": "8736",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 35,
+                "alliance": "red2",
+                "team": "8577",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 38,
+                "alliance": "red2",
+                "team": "5074",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 39,
+                "alliance": "red2",
+                "team": "8100",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 42,
+                "alliance": "red2",
+                "team": "1683",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 43,
+                "alliance": "red2",
+                "team": "8866",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 46,
+                "alliance": "red2",
+                "team": "8100",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 47,
+                "alliance": "red2",
+                "team": "9998",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 50,
+                "alliance": "red2",
+                "team": "8577",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 51,
+                "alliance": "red2",
+                "team": "5900",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 54,
+                "alliance": "red2",
+                "team": "4576",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 55,
+                "alliance": "red2",
+                "team": "8736",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            }
+        ],
+        "breaks": [
+            1,
+            4,
+            5,
+            8,
+            9,
+            12,
+            13,
+            16,
+            17,
+            20,
+            21,
+            24,
+            25,
+            28,
+            29,
+            32,
+            33,
+            36,
+            37,
+            40,
+            41,
+            44,
+            45,
+            48,
+            49,
+            52,
+            53,
+            56,
+            57
+        ],
+        "id": 9,
+        "assignedAlliance": "red",
+        "group": "n/a",
+        "canDoQualitative": false
+    },
+    {
+        "name": "hugh",
+        "matchNumbs": [
+            2,
+            3,
+            6,
+            7,
+            10,
+            11,
+            14,
+            15,
+            18,
+            19,
+            22,
+            23,
+            26,
+            27,
+            30,
+            31,
+            34,
+            35,
+            38,
+            39,
+            42,
+            43,
+            46,
+            47,
+            50,
+            51,
+            54,
+            55
+        ],
+        "matches": [
+            {
+                "number": 2,
+                "alliance": "red3",
+                "team": "1771",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 3,
+                "alliance": "red1",
+                "team": "7538",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 6,
+                "alliance": "red3",
+                "team": "1648",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 7,
+                "alliance": "red1",
+                "team": "5074",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 10,
+                "alliance": "red3",
+                "team": "8761",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 11,
+                "alliance": "red1",
+                "team": "1771",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 14,
+                "alliance": "red3",
+                "team": "9999",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 15,
+                "alliance": "red1",
+                "team": "1261",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 18,
+                "alliance": "red3",
+                "team": "6705",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 19,
+                "alliance": "red1",
+                "team": "4188",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 22,
+                "alliance": "red3",
+                "team": "6023",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 23,
+                "alliance": "red1",
+                "team": "4188",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 26,
+                "alliance": "red3",
+                "team": "9522",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 27,
+                "alliance": "red1",
+                "team": "5608",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 30,
+                "alliance": "red3",
+                "team": "4576",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 31,
+                "alliance": "red1",
+                "team": "7538",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 34,
+                "alliance": "red3",
+                "team": "3344",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 35,
+                "alliance": "red1",
+                "team": "3635",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 38,
+                "alliance": "red3",
+                "team": "9998",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 39,
+                "alliance": "red1",
+                "team": "832",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 42,
+                "alliance": "red3",
+                "team": "4026",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 43,
+                "alliance": "red1",
+                "team": "5293",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 46,
+                "alliance": "red3",
+                "team": "1466",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 47,
+                "alliance": "red1",
+                "team": "8866",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 50,
+                "alliance": "red3",
+                "team": "1261",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 51,
+                "alliance": "red1",
+                "team": "1002",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 54,
+                "alliance": "red3",
+                "team": "2974",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 55,
+                "alliance": "red1",
+                "team": "8761",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            }
+        ],
+        "breaks": [
+            1,
+            4,
+            5,
+            8,
+            9,
+            12,
+            13,
+            16,
+            17,
+            20,
+            21,
+            24,
+            25,
+            28,
+            29,
+            32,
+            33,
+            36,
+            37,
+            40,
+            41,
+            44,
+            45,
+            48,
+            49,
+            52,
+            53,
+            56,
+            57
+        ],
+        "id": 11,
+        "assignedAlliance": "red",
+        "group": "n/a",
+        "canDoQualitative": false
+    },
+    {
+        "name": "woody",
+        "matchNumbs": [
+            1,
+            4,
+            5,
+            8,
+            9,
+            12,
+            13,
+            16,
+            17,
+            20,
+            21,
+            24,
+            25,
+            28,
+            29,
+            32,
+            33,
+            36,
+            37,
+            40,
+            41,
+            44,
+            45,
+            48,
+            49,
+            52,
+            53,
+            56,
+            57
+        ],
+        "matches": [
+            {
+                "number": 1,
+                "alliance": "blue2",
+                "team": "6905",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 4,
+                "alliance": "blue2",
+                "team": "9999",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 5,
+                "alliance": "blue2",
+                "team": "5900",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 8,
+                "alliance": "blue2",
+                "team": "9999",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 9,
+                "alliance": "blue2",
+                "team": "1261",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 12,
+                "alliance": "blue2",
+                "team": "5074",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 13,
+                "alliance": "blue2",
+                "team": "1414",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 16,
+                "alliance": "blue2",
+                "team": "3635",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 17,
+                "alliance": "blue2",
+                "team": "5293",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 20,
+                "alliance": "blue2",
+                "team": "9998",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 21,
+                "alliance": "blue2",
+                "team": "1683",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 24,
+                "alliance": "blue2",
+                "team": "5900",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 25,
+                "alliance": "blue2",
+                "team": "8080",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 28,
+                "alliance": "blue2",
+                "team": "2974",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 29,
+                "alliance": "blue2",
+                "team": "1648",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 32,
+                "alliance": "blue2",
+                "team": "4026",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 33,
+                "alliance": "blue2",
+                "team": "9522",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 36,
+                "alliance": "blue2",
+                "team": "6023",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 37,
+                "alliance": "blue2",
+                "team": "7538",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 40,
+                "alliance": "blue2",
+                "team": "1771",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 41,
+                "alliance": "blue2",
+                "team": "1746",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 44,
+                "alliance": "blue2",
+                "team": "2974",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 45,
+                "alliance": "blue2",
+                "team": "6705",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 48,
+                "alliance": "blue2",
+                "team": "6829",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 49,
+                "alliance": "blue2",
+                "team": "5109",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 52,
+                "alliance": "blue2",
+                "team": "832",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 53,
+                "alliance": "blue2",
+                "team": "8100",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 56,
+                "alliance": "blue2",
+                "team": "1002",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 57,
+                "alliance": "blue2",
+                "team": "3344",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            }
+        ],
+        "breaks": [
+            2,
+            3,
+            6,
+            7,
+            10,
+            11,
+            14,
+            15,
+            18,
+            19,
+            22,
+            23,
+            26,
+            27,
+            30,
+            31,
+            34,
+            35,
+            38,
+            39,
+            42,
+            43,
+            46,
+            47,
+            50,
+            51,
+            54,
+            55
+        ],
+        "id": 2,
+        "assignedAlliance": "blue",
+        "group": "n/a",
+        "canDoQualitative": false
+    },
+    {
+        "name": "gray",
+        "matchNumbs": [
+            1,
+            4,
+            5,
+            8,
+            9,
+            12,
+            13,
+            16,
+            17,
+            20,
+            21,
+            24,
+            25,
+            28,
+            29,
+            32,
+            33,
+            36,
+            37,
+            40,
+            41,
+            44,
+            45,
+            48,
+            49,
+            52,
+            53,
+            56,
+            57
+        ],
+        "matches": [
+            {
+                "number": 1,
+                "alliance": "blue1",
+                "team": "1746",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 4,
+                "alliance": "blue3",
+                "team": "8736",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 5,
+                "alliance": "blue1",
+                "team": "6829",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 8,
+                "alliance": "blue3",
+                "team": "8577",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 9,
+                "alliance": "blue1",
+                "team": "5608",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 12,
+                "alliance": "blue3",
+                "team": "8815",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 13,
+                "alliance": "blue1",
+                "team": "4509",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 16,
+                "alliance": "blue3",
+                "team": "4189",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 17,
+                "alliance": "blue1",
+                "team": "1002",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 20,
+                "alliance": "blue3",
+                "team": "3344",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 21,
+                "alliance": "blue1",
+                "team": "7538",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 24,
+                "alliance": "blue3",
+                "team": "8577",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 25,
+                "alliance": "blue1",
+                "team": "1648",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 28,
+                "alliance": "blue3",
+                "team": "1414",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 29,
+                "alliance": "blue1",
+                "team": "4189",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 32,
+                "alliance": "blue3",
+                "team": "6829",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 33,
+                "alliance": "blue1",
+                "team": "5109",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 36,
+                "alliance": "blue3",
+                "team": "5293",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 37,
+                "alliance": "blue1",
+                "team": "4026",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 40,
+                "alliance": "blue3",
+                "team": "5109",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 41,
+                "alliance": "blue1",
+                "team": "9522",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 44,
+                "alliance": "blue3",
+                "team": "1261",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 45,
+                "alliance": "blue1",
+                "team": "5074",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 48,
+                "alliance": "blue3",
+                "team": "1771",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 49,
+                "alliance": "blue1",
+                "team": "4509",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 52,
+                "alliance": "blue3",
+                "team": "6705",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 53,
+                "alliance": "blue1",
+                "team": "8080",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 56,
+                "alliance": "blue3",
+                "team": "7538",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 57,
+                "alliance": "blue1",
+                "team": "1771",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            }
+        ],
+        "breaks": [
+            2,
+            3,
+            6,
+            7,
+            10,
+            11,
+            14,
+            15,
+            18,
+            19,
+            22,
+            23,
+            26,
+            27,
+            30,
+            31,
+            34,
+            35,
+            38,
+            39,
+            42,
+            43,
+            46,
+            47,
+            50,
+            51,
+            54,
+            55
+        ],
+        "id": 0,
+        "assignedAlliance": "blue",
+        "group": "n/a",
+        "canDoQualitative": false
+    },
+    {
+        "name": "esan",
+        "matchNumbs": [
+            1,
+            4,
+            5,
+            8,
+            9,
+            12,
+            13,
+            16,
+            17,
+            20,
+            21,
+            24,
+            25,
+            28,
+            29,
+            32,
+            33,
+            36,
+            37,
+            40,
+            41,
+            44,
+            45,
+            48,
+            49,
+            52,
+            53,
+            56,
+            57
+        ],
+        "matches": [
+            {
+                "number": 1,
+                "alliance": "red3",
+                "team": "2974",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 4,
+                "alliance": "red1",
+                "team": "9998",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 5,
+                "alliance": "red3",
+                "team": "8815",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 8,
+                "alliance": "red1",
+                "team": "2974",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 9,
+                "alliance": "red3",
+                "team": "5293",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 12,
+                "alliance": "red1",
+                "team": "4576",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 13,
+                "alliance": "red3",
+                "team": "7538",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 16,
+                "alliance": "red1",
+                "team": "8080",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 17,
+                "alliance": "red3",
+                "team": "8866",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 20,
+                "alliance": "red1",
+                "team": "2974",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 21,
+                "alliance": "red3",
+                "team": "1002",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 24,
+                "alliance": "red1",
+                "team": "5074",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 25,
+                "alliance": "red3",
+                "team": "4026",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 28,
+                "alliance": "red1",
+                "team": "8736",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 29,
+                "alliance": "red3",
+                "team": "1746",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 32,
+                "alliance": "red1",
+                "team": "6705",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 33,
+                "alliance": "red3",
+                "team": "5900",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 36,
+                "alliance": "red1",
+                "team": "6705",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 37,
+                "alliance": "red3",
+                "team": "4509",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 40,
+                "alliance": "red1",
+                "team": "4576",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 41,
+                "alliance": "red3",
+                "team": "9999",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 44,
+                "alliance": "red1",
+                "team": "1648",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 45,
+                "alliance": "red3",
+                "team": "9522",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 48,
+                "alliance": "red1",
+                "team": "5293",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 49,
+                "alliance": "red3",
+                "team": "5608",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 52,
+                "alliance": "red1",
+                "team": "9999",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 53,
+                "alliance": "red3",
+                "team": "1683",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 56,
+                "alliance": "red1",
+                "team": "8577",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 57,
+                "alliance": "red3",
+                "team": "5074",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            }
+        ],
+        "breaks": [
+            2,
+            3,
+            6,
+            7,
+            10,
+            11,
+            14,
+            15,
+            18,
+            19,
+            22,
+            23,
+            26,
+            27,
+            30,
+            31,
+            34,
+            35,
+            38,
+            39,
+            42,
+            43,
+            46,
+            47,
+            50,
+            51,
+            54,
+            55
+        ],
+        "id": 5,
+        "assignedAlliance": "red",
+        "group": "n/a",
+        "canDoQualitative": false
+    },
+    {
+        "name": "ava",
+        "matchNumbs": [
+            1,
+            4,
+            5,
+            8,
+            9,
+            12,
+            13,
+            16,
+            17,
+            20,
+            21,
+            24,
+            25,
+            28,
+            29,
+            32,
+            33,
+            36,
+            37,
+            40,
+            41,
+            44,
+            45,
+            48,
+            49,
+            52,
+            53,
+            56,
+            57
+        ],
+        "matches": [
+            {
+                "number": 1,
+                "alliance": "red2",
+                "team": "6705",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 4,
+                "alliance": "red2",
+                "team": "6023",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 5,
+                "alliance": "red2",
+                "team": "4509",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 8,
+                "alliance": "red2",
+                "team": "4188",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 9,
+                "alliance": "red2",
+                "team": "9998",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 12,
+                "alliance": "red2",
+                "team": "1002",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 13,
+                "alliance": "red2",
+                "team": "1746",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 16,
+                "alliance": "red2",
+                "team": "5608",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 17,
+                "alliance": "red2",
+                "team": "1466",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 20,
+                "alliance": "red2",
+                "team": "4189",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 21,
+                "alliance": "red2",
+                "team": "8736",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 24,
+                "alliance": "red2",
+                "team": "6829",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 25,
+                "alliance": "red2",
+                "team": "5293",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 28,
+                "alliance": "red2",
+                "team": "1466",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 29,
+                "alliance": "red2",
+                "team": "8815",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 32,
+                "alliance": "red2",
+                "team": "8080",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 33,
+                "alliance": "red2",
+                "team": "8815",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 36,
+                "alliance": "red2",
+                "team": "1746",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 37,
+                "alliance": "red2",
+                "team": "2974",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 40,
+                "alliance": "red2",
+                "team": "3635",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 41,
+                "alliance": "red2",
+                "team": "3344",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 44,
+                "alliance": "red2",
+                "team": "6023",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 45,
+                "alliance": "red2",
+                "team": "8080",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 48,
+                "alliance": "red2",
+                "team": "7538",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 49,
+                "alliance": "red2",
+                "team": "8761",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 52,
+                "alliance": "red2",
+                "team": "1648",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 53,
+                "alliance": "red2",
+                "team": "5608",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 56,
+                "alliance": "red2",
+                "team": "4188",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 57,
+                "alliance": "red2",
+                "team": "4189",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            }
+        ],
+        "breaks": [
+            2,
+            3,
+            6,
+            7,
+            10,
+            11,
+            14,
+            15,
+            18,
+            19,
+            22,
+            23,
+            26,
+            27,
+            30,
+            31,
+            34,
+            35,
+            38,
+            39,
+            42,
+            43,
+            46,
+            47,
+            50,
+            51,
+            54,
+            55
+        ],
+        "id": 3,
+        "assignedAlliance": "red",
+        "group": "n/a",
+        "canDoQualitative": false
+    },
+    {
+        "name": "dutch",
+        "matchNumbs": [
+            1,
+            4,
+            5,
+            8,
+            9,
+            12,
+            13,
+            16,
+            17,
+            20,
+            21,
+            24,
+            25,
+            28,
+            29,
+            32,
+            33,
+            36,
+            37,
+            40,
+            41,
+            44,
+            45,
+            48,
+            49,
+            52,
+            53,
+            56,
+            57
+        ],
+        "matches": [
+            {
+                "number": 1,
+                "alliance": "red1",
+                "team": "8577",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 4,
+                "alliance": "red3",
+                "team": "5109",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 5,
+                "alliance": "red1",
+                "team": "8100",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 8,
+                "alliance": "red3",
+                "team": "2415",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 9,
+                "alliance": "red1",
+                "team": "5900",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 12,
+                "alliance": "red3",
+                "team": "4026",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 13,
+                "alliance": "red1",
+                "team": "6829",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 16,
+                "alliance": "red3",
+                "team": "8577",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 17,
+                "alliance": "red1",
+                "team": "1414",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 20,
+                "alliance": "red3",
+                "team": "5109",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 21,
+                "alliance": "red1",
+                "team": "9522",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 24,
+                "alliance": "red3",
+                "team": "4576",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 25,
+                "alliance": "red1",
+                "team": "8815",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 28,
+                "alliance": "red3",
+                "team": "4188",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 29,
+                "alliance": "red1",
+                "team": "3635",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 32,
+                "alliance": "red3",
+                "team": "1002",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 33,
+                "alliance": "red1",
+                "team": "1771",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 36,
+                "alliance": "red3",
+                "team": "4189",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 37,
+                "alliance": "red1",
+                "team": "6905",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 40,
+                "alliance": "red3",
+                "team": "6705",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 41,
+                "alliance": "red1",
+                "team": "8080",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 44,
+                "alliance": "red3",
+                "team": "6829",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 45,
+                "alliance": "red1",
+                "team": "5900",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 48,
+                "alliance": "red3",
+                "team": "1648",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 49,
+                "alliance": "red1",
+                "team": "6023",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 52,
+                "alliance": "red3",
+                "team": "8866",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 53,
+                "alliance": "red1",
+                "team": "5109",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 56,
+                "alliance": "red3",
+                "team": "8815",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            },
+            {
+                "number": 57,
+                "alliance": "red1",
+                "team": "1261",
+                "highPriority": false,
+                "scouted": false,
+                "form": ""
+            }
+        ],
+        "breaks": [
+            2,
+            3,
+            6,
+            7,
+            10,
+            11,
+            14,
+            15,
+            18,
+            19,
+            22,
+            23,
+            26,
+            27,
+            30,
+            31,
+            34,
+            35,
+            38,
+            39,
+            42,
+            43,
+            46,
+            47,
+            50,
+            51,
+            54,
+            55
+        ],
+        "id": 1,
+        "assignedAlliance": "red",
+        "group": "n/a",
+        "canDoQualitative": false
+    }
+]

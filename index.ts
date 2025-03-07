@@ -20,7 +20,7 @@ app.use(function (req, res, next) {
 
     if (!getSettings().users[0] || !getSettings().users.find((user) => user.permissions == "0")) {
         let settings: Settings = getSettings()
-        settings.users.push({ username: "admin", password: "password", permissions: "0" })
+        settings.users.push({ username: "admin", password: "password", permissions: "0", isScouting: true })
         writeSettings(settings)
     }
 
@@ -288,9 +288,15 @@ app.post('/admin', (req, res) => {
         case "editUserField":
             { // needed to declare const only used in this case
                 var settings: Settings = getSettings()
+                let updated = body.data.updated;
                 const userIndex = settings.users.findIndex(p => p.username == body.data.name)
-                const field: "username" | "password" | "permissions" = body.data.field
-                settings.users[userIndex][field] = body.data.updated
+                const field: keyof User = body.data.field
+                if (field == "isScouting") {
+                    updated = updated.includes("t") ? true : false
+                    settings.users[userIndex]["isScouting"] = updated
+                } else {
+                    settings.users[userIndex][field] = updated
+                }
                 if (isValidUser(settings.users[userIndex])) {
                     writeSettings(settings)
                     res.send({ res: "OK" })
