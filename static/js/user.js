@@ -17,6 +17,7 @@ function generateTable(userGet) {
             <td>Team Name</td>
             <td>Form</td>
             <td>Station</td>
+            <td>HighPriority</td>
         </tr>
     `)
 
@@ -34,6 +35,7 @@ function generateTable(userGet) {
                     <td>${getTeamName(matches[i].team)}</td>
                     <td>${matches[i].form}</td>
                     <td>${matches[i].alliance.charAt(0).toUpperCase() + matches[i].alliance.slice(1)} </td>
+                    <td>${matches[i].highPriority}</td>
                 </tr>
             `);
 
