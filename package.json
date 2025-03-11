@@ -4,7 +4,9 @@
   "description": "Scouting Software for FRC team 1648.",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compileClient": "cd client && tsc",
+    "startDevServer": "ts-node node/index.ts",
+    "dev": "npm run compileClient && npm run startDevServer"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,9 @@
     "@types/express": "^4.17.21",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
+    "sequelize": "^6.37.6",
+    "sequelize-typescript": "^2.1.6",
+    "sqlite3": "^5.1.7",
     "xlsx": "^0.18.5"
   },
   "nodemonConfig": {
@@ -29,6 +34,7 @@
     ]
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.32",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }

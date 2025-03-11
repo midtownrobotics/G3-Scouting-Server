@@ -1,16 +1,19 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="/libs/bootstrap.min.css">
-        <link rel="stylesheet" href="/libs/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css">
-        <link rel="stylesheet" href="/global.css">
-        <link rel="icon" type="image/png" href="/g3.png">
-        <title>G3 Scouting!</title>
-        <script src="/libs/jquery-3.7.1.min.js"></script>
-        <script src="/js/global.js"></script>
-    </head>
-    <body>
 
-        <%- nav %>
+<head>
+    <link rel="stylesheet" href="/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/global.css">
+    <link rel="icon" type="image/png" href="/g3.png">
+    <title>G3 Scouting!</title>
+    <script src="/libs/jquery-3.7.1.min.js"></script>
+    <script>var exports = {};</script>
+    <script type="module" src="/js/global.js"></script>
+</head>
+
+<body>
+
+    <%- nav %>
 
         <br>
 
@@ -27,38 +30,50 @@
             </h2>
 
             <div id="aa" style="font-weight: bold;">
-                High Priority Teams (In order): <input class="text-input form-control" id="aas-hpt" type="text" placeholder="EX: 1648, 1234, 4321">
-                Length of breaks (In matches): <input class="text-input form-control" id="aas-lob" type="text" placeholder="EX: 1">
-                Matches between breaks: <input class="text-input form-control" id="aas-mbb" type="text" placeholder="EX: 5">
-                Scout break offsets: <input class="text-input form-control" id="aas-off" type="text" placeholder="EX: 1">
-                Users to not assign matches: <input class="text-input form-control" id="aas-dna" type="text" placeholder="EX: gray, admin">
-                Scouting groups: <input class="text-input form-control" id="aas-sgr" type="text" placeholder="EX: [gray, admin], [esan, woody, rohan], [asher, ankit]">
-                Form: <input class="text-input form-control" id="aas-form" type="text" placeholder="EX: Quantitative"><br>
+                High Priority Teams (In order): <input class="text-input form-control" id="aas-hpt" type="text"
+                    placeholder="EX: 1648, 1234, 4321">
+                Length of breaks (In matches): <input class="text-input form-control" id="aas-lob" type="text"
+                    placeholder="EX: 1">
+                Matches between breaks: <input class="text-input form-control" id="aas-mbb" type="text"
+                    placeholder="EX: 5">
+                Scout break offsets: <input class="text-input form-control" id="aas-off" type="text"
+                    placeholder="EX: 1">
+                Users to not assign matches: <input class="text-input form-control" id="aas-dna" type="text"
+                    placeholder="EX: gray, admin">
+                Scouting groups: <input class="text-input form-control" id="aas-sgr" type="text"
+                    placeholder="EX: [gray, admin], [esan, woody, rohan], [asher, ankit]">
+                Form: <input class="text-input form-control" id="aas-form" type="text"
+                    placeholder="EX: Quantitative"><br>
 
-		<div class="form-check form-switch">
+                <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="aas-equ">
                     <label class="form-check-label" for="aas-equ">Qualitative Scouting</label>
                 </div>
                 <div id="qualitativeOptions">
                     <span class="smallerbr"></span>
-                    <span>Qualitative teams:</span> <input class="text-input form-control" id="aas-qtm" type="text" placeholder="EX: 1648, 1234, 4321">
-                    <span>Qualitative forms per team:</span> <input class="text-input form-control" id="aas-qpt" type="text" placeholder="EX: 1">
-                    <span>Qualitative scouts:</span> <input class="text-input form-control" id="aas-qsc" type="text" placeholder="EX: gray, admin">
-                    <span>Qualitative form:</span> <input class="text-input form-control" id="aas-qform" type="text" placeholder="EX: Qualitative"><br>
+                    <span>Qualitative teams:</span> <input class="text-input form-control" id="aas-qtm" type="text"
+                        placeholder="EX: 1648, 1234, 4321">
+                    <span>Qualitative forms per team:</span> <input class="text-input form-control" id="aas-qpt"
+                        type="text" placeholder="EX: 1">
+                    <span>Qualitative scouts:</span> <input class="text-input form-control" id="aas-qsc" type="text"
+                        placeholder="EX: gray, admin">
+                    <span>Qualitative form:</span> <input class="text-input form-control" id="aas-qform" type="text"
+                        placeholder="EX: Qualitative"><br>
                 </div>
-                
-		<div class="form-check form-switch">
+
+                <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" checked id="aas-soa">
                     <label class="form-check-label" for="aas-soa">Scouts stick to one alliance</label>
                 </div>
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="aas-hob">
-                    <label class="form-check-label" for="aas-hob">High priority matches are more important than breaks</label>
+                    <label class="form-check-label" for="aas-hob">High priority matches are more important than
+                        breaks</label>
                 </div>
-		<div class="form-check form-switch">
-		    <input class="form-check-input" type="checkbox" checked id="aas-dnr">
-		    <label class="form-check-label" for="aas-dnr">Do not reset match completion data</label>
-		</div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" checked id="aas-dnr">
+                    <label class="form-check-label" for="aas-dnr">Do not reset match completion data</label>
+                </div>
 
                 <br>
 
@@ -68,7 +83,8 @@
                 <a>Warning! Manual Assignments will override all other settings.</a>
                 <div>
                     <div style="display: inline-flex;">
-                        <input class="text-input form-control" id="ma-match" style="width: fit-content !important;" type="text" placeholder="Match Number">&nbsp;
+                        <input class="text-input form-control" id="ma-match" style="width: fit-content !important;"
+                            type="text" placeholder="Match Number">&nbsp;
                         <select class="form-select" id="ma-station" style="width: fit-content;">
                             <option value="" disabled selected>Select Station</option>
                             <option value="Red1">Red 1</option>
@@ -77,13 +93,15 @@
                             <option value="Blue1">Blue 1</option>
                             <option value="Blue2">Blue 2</option>
                             <option value="Blue3">Blue 3</option>
-                        </select>&nbsp;                        
+                        </select>&nbsp;
                         <select class="form-select" id="ma-person" style="width: fit-content;">
                             <option value="" disabled selected>Select User</option>
-                            <% for(i = 0; i < users.length; i++) { %>
-                                <option value="<%= users[i].username %>"><%= users[i].username %></option>
-                            <% } %>
-                        </select>&nbsp;                        
+                            <% for(i=0; i < users.length; i++) { %>
+                                <option value="<%= users[i].username %>">
+                                    <%= users[i].username %>
+                                </option>
+                                <% } %>
+                        </select>&nbsp;
                         <button class="btn btn-primary" id="ma-add">Add</button>
                     </div><br>
                     <div id="ma-list"></div>
@@ -93,20 +111,20 @@
 
                 <button class="btn btn-primary" id="aas-button">Simulate</button>
                 <button class="btn btn-primary" id="aad-button">Deploy</button>
-		<button class="btn btn-primary" id="load_save">Load Config</button>
+                <button class="btn btn-primary" id="load_save">Load Config</button>
                 <div id="aas-results"></div>
 
                 <br>
 
-		<h4 class="collapse-icon-parent">
-		    Config Save Data
-		    <i class="bi bi-caret-down-fill collapse-icon"></i>
-		</h4>
-		<div>
-		    <textarea type="textarea" id="save-data" rows="3"></textarea>
-		</div>
+                <h4 class="collapse-icon-parent">
+                    Config Save Data
+                    <i class="bi bi-caret-down-fill collapse-icon"></i>
+                </h4>
+                <div>
+                    <textarea type="textarea" id="save-data" rows="3"></textarea>
+                </div>
 
-		<br>
+                <br>
 
                 <h4 class="collapse-icon-parent">
                     Simulated Schedule
@@ -131,7 +149,7 @@
                     </table>
                 </div>
             </div>
-            
+
             <hr>
 
             <h2 id="data-h2" class="collapse-icon-parent">
@@ -142,7 +160,8 @@
             <div id="data">
 
                 <br>
-                <table class="table table-hover table-bordered" id="table-table" style="margin-top: -6px; margin-right: 20px;">
+                <table class="table table-hover table-bordered" id="table-table"
+                    style="margin-top: -6px; margin-right: 20px;">
                     <thead style="font-weight: bold;">
                         <tr>
                             <td width="1px;"></td>
@@ -153,15 +172,17 @@
                         <% for (x=0; x<data.length; x++) { %>
                             <tr>
                                 <td><i class="bi bi-trash-fill delete-data-table"></i></td>
-                                <td><%= data[x] %></td>
+                                <td>
+                                    <%= data[x] %>
+                                </td>
                             </tr>
-                        <% } %>
+                            <% } %>
                     </tbody>
                 </table>
             </div>
 
             <hr>
-                                
+
             <h2 id="matches-h2" class="collapse-icon-parent">
                 Matches / Schedule
                 <i class="bi bi-caret-down-fill collapse-icon"></i>
@@ -227,32 +248,42 @@
 
                     <thead>
                         <tr>
-                                <th scope="col" width="1px"></th>
-                            <% for (x=0; x<Object.keys(users[0]).length; x++) { %>
-                                <th scope="col">
-                                    <!-- <button class="btn btn-link" onclick="sortTable('<%= x %>')"> -->
-                                        <%= Object.keys(users[0])[x] %>
-                                    <!-- </button> -->
-                                </th>
-                            <% } %>
+                            <th scope="col" width="1px"></th>
+                            <th scope="col">
+                                id
+                            </th>
+                            <th scope="col">
+                                username
+                            </th>
+                            <th scope="col">
+                                password
+                            </th>
+                            <th scope="col">
+                                permissionId
+                            </th>
                         </tr>
                     </thead>
 
                     <tbody>
-
-                        <% for(i = 0; i < users.length; i++) { %>
-                            <tr id="row-<%= i %>">  
+                        <% for(let i=0; i < users.length; i++) { %>
+                            <tr id="row-<%= i %>">
                                 <td>
                                     <i class="bi bi-trash-fill user-delete curser"></i>
                                 </td>
-                                <% for (x=0; x<Object.keys(users[i]).length; x++) { %>
-                                    <td class="user-field">
-                                        <% const key = Object.keys(users[i])[x] %>
-                                        <%= users[i][key] %>
-                                    </td>
-                                <% } %>
+                                <td class="user-field">
+                                    <%= users[i].id %>
+                                </td>
+                                <td class="user-field">
+                                    <%= users[i].username %>
+                                </td>
+                                <td class="user-field">
+                                    <%= users[i].password %>
+                                </td>
+                                <td class="user-field">
+                                    <%= users[i].permissionId %>
+                                </td>
                             </tr>
-                        <% } %>
+                            <% } %>
                     </tbody>
 
                 </table>
@@ -267,7 +298,7 @@
             </h2>
 
             <div id="permissions">
-                
+
                 <div>
                     <button class="btn btn-primary" id="add-perm">
                         Add Permission
@@ -284,47 +315,48 @@
                             <% for (x=0; x<Object.keys(perms[0]).length; x++) { %>
                                 <th scope="col">
                                     <!-- <button class="btn btn-link" onclick="sortTable('<%= x %>')"> -->
-                                        <%= Object.keys(perms[0])[x] %>
-                                    <!-- </button> -->
+                                    <%= Object.keys(perms[0])[x] %>
+                                        <!-- </button> -->
                                 </th>
-                            <% } %>
+                                <% } %>
                         </tr>
-                    </thead>    
+                    </thead>
 
                     <tbody>
 
-                        <% for(i = 0; i < perms.length; i++) { %>
+                        <% for(i=0; i < perms.length; i++) { %>
                             <tr>
                                 <td>
                                     <%= i %>
                                 </td>
                                 <% for (x=0; x<Object.keys(perms[i]).length; x++) { %>
                                     <td>
-                                        <% const key = Object.keys(perms[i])[x] %>
-                                        <%= perms[i][key] %>
+                                        <% const key=Object.keys(perms[i])[x] %>
+                                            <%= perms[i][key] %>
                                     </td>
-                                <% } %>
+                                    <% } %>
                             </tr>
-                        <% } %>
+                            <% } %>
                     </tbody>
 
                 </table>
 
-                <b>Note: You cannot delete permissions. The only way to remove them is to clear the database. You can do this in settings.</b>
+                <b>Note: You cannot delete permissions. The only way to remove them is to clear the database. You can do
+                    this in settings.</b>
             </div>
 
         </div>
         <br>
-    </body>
+</body>
+
 </html>
 
 <script>$("#nav-admin").addClass("active")</script>
 
 <style>
-
     .smallerbr {
-        display: block; 
-        margin-bottom: 15px; 
+        display: block;
+        margin-bottom: 15px;
     }
 
     html {
@@ -338,12 +370,13 @@
     #dropdowns {
         margin-left: 20px;
     }
-    
+
     span {
         font-weight: bold;
     }
 
-    input, select {
+    input,
+    select {
         background-color: rgb(173, 176, 179);
         border-color: rgb(173, 176, 179);
     }
@@ -357,7 +390,7 @@
         position: absolute;
         left: 100px;
         top: 5px;
-        display : inline-flex;
+        display: inline-flex;
     }
 
     .head-buttons a {
@@ -369,7 +402,9 @@
         border: none;
     }
 
-    #user-table, #perm-table, #table-table {
+    #user-table,
+    #perm-table,
+    #table-table {
         margin-top: 15px;
         margin-bottom: 15px;
         width: calc(100% - 30px);
@@ -391,9 +426,10 @@
         width: calc(100% - 20px);
     }
 
-    .text-input, #save-data{
+    .text-input,
+    #save-data {
         width: calc(100% - 20px) !important;
     }
 </style>
 
-<script src="/js/admin.js"></script>
+<script type="module" src="/js/admin.js"></script>

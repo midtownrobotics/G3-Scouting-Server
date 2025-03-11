@@ -1,0 +1,1 @@
+export type TeamGetRes = { teamNumbers: number[]; teamNames: string[]; fullObject: any; }
