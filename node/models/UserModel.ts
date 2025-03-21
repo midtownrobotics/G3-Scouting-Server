@@ -1,7 +1,6 @@
-import { Column, DataType, HasMany, HasOne, Model, Table } from "sequelize-typescript";
-import MatchModel from "./MatchModel";
-import ScheduleModel from "./ScheduleModel";
-import { User, UserCreationAttributes } from "./modelTypes";
+import { AllowNull, Column, DataType, Model, Table } from "sequelize-typescript";
+import { User, UserCreationAttributes } from "./types";
+import { Assignment, NextMatch, Status } from "../types";
 
 @Table({ tableName: "users" })
 class UserModel extends Model<User, UserCreationAttributes> {
@@ -17,32 +16,44 @@ class UserModel extends Model<User, UserCreationAttributes> {
     @Column({ type: DataType.INTEGER, allowNull: false })
     public permissionId!: number;
 
-    @HasMany(() => MatchModel)
-    public matches!: MatchModel[];
+    @Column({ type: DataType.JSON, allowNull: true })
+    public assignments?: Assignment[];
 
-    @HasOne(() => ScheduleModel)
-    public schedule!: ScheduleModel;
+    @Column({ type: DataType.TEXT, allowNull: false })
+    public assignedAlliance!: "blue" | "red";
 
-    @Column({ type: DataType.TEXT, allowNull: true })
-    public assignedAlliance?: "blue" | "red";
+    @Column({ type: DataType.JSON, allowNull: true })
+    public nextMatch?: NextMatch;
+
+    @Column({ type: DataType.JSON, allowNull: false, defaultValue: [] })
+    public assignedMatches!: number[];
 
     @Column({ type: DataType.INTEGER, allowNull: true })
-    public group?: number;
+    public lastMatchScouted?: number;
 
     public static async addUser(username: string, password: string, permissionId: number) {
-        UserModel.create({
+        const [redCount, blueCount] = await Promise.all([
+            UserModel.count({ where: { assignedAlliance: "red" } }),
+            UserModel.count({ where: { assignedAlliance: "blue" } }),
+        ]);
+
+        await UserModel.create({
             username,
             password,
-            permissionId
+            permissionId,
+            assignedAlliance: redCount < blueCount ? "red" : "blue",
+            assignedMatches: []
         });
     }
 
     public static async getAllUsers() {
-        return await UserModel.findAll({
-            include: [
-                { model: MatchModel, as: "matches" },
-                { model: ScheduleModel, as: "schedule" }
-            ]
+        return await UserModel.findAll()
+    }
+
+    public static async resetAssignedMatchData() {
+        const allUsers = await this.getAllUsers();
+        allUsers.forEach((u) => {
+            u.update({ assignedMatches: [] })
         })
     }
 }

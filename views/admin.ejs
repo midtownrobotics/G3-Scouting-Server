@@ -19,192 +19,127 @@
 
         <div id="dropdowns">
 
-            <h2>
-                <a href="/admin/formMaker">Form Maker / Manager</a>
-            </h2>
-            <hr>
-
-            <h2 id="aa-h2" class="collapse-icon-parent">
-                Auto Assigner
-                <i class="bi bi-caret-down-fill collapse-icon"></i>
-            </h2>
-
-            <div id="aa" style="font-weight: bold;">
-                High Priority Teams (In order): <input class="text-input form-control" id="aas-hpt" type="text"
-                    placeholder="EX: 1648, 1234, 4321">
-                Length of breaks (In matches): <input class="text-input form-control" id="aas-lob" type="text"
-                    placeholder="EX: 1">
-                Matches between breaks: <input class="text-input form-control" id="aas-mbb" type="text"
-                    placeholder="EX: 5">
-                Scout break offsets: <input class="text-input form-control" id="aas-off" type="text"
-                    placeholder="EX: 1">
-                Users to not assign matches: <input class="text-input form-control" id="aas-dna" type="text"
-                    placeholder="EX: gray, admin">
-                Scouting groups: <input class="text-input form-control" id="aas-sgr" type="text"
-                    placeholder="EX: [gray, admin], [esan, woody, rohan], [asher, ankit]">
-                Form: <input class="text-input form-control" id="aas-form" type="text"
-                    placeholder="EX: Quantitative"><br>
-
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="aas-equ">
-                    <label class="form-check-label" for="aas-equ">Qualitative Scouting</label>
-                </div>
-                <div id="qualitativeOptions">
-                    <span class="smallerbr"></span>
-                    <span>Qualitative teams:</span> <input class="text-input form-control" id="aas-qtm" type="text"
-                        placeholder="EX: 1648, 1234, 4321">
-                    <span>Qualitative forms per team:</span> <input class="text-input form-control" id="aas-qpt"
-                        type="text" placeholder="EX: 1">
-                    <span>Qualitative scouts:</span> <input class="text-input form-control" id="aas-qsc" type="text"
-                        placeholder="EX: gray, admin">
-                    <span>Qualitative form:</span> <input class="text-input form-control" id="aas-qform" type="text"
-                        placeholder="EX: Qualitative"><br>
-                </div>
-
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" checked id="aas-soa">
-                    <label class="form-check-label" for="aas-soa">Scouts stick to one alliance</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="aas-hob">
-                    <label class="form-check-label" for="aas-hob">High priority matches are more important than
-                        breaks</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" checked id="aas-dnr">
-                    <label class="form-check-label" for="aas-dnr">Do not reset match completion data</label>
-                </div>
-
-                <br>
-
-                <h4>
-                    Manual Assignments
-                </h4>
-                <a>Warning! Manual Assignments will override all other settings.</a>
-                <div>
-                    <div style="display: inline-flex;">
-                        <input class="text-input form-control" id="ma-match" style="width: fit-content !important;"
-                            type="text" placeholder="Match Number">&nbsp;
-                        <select class="form-select" id="ma-station" style="width: fit-content;">
-                            <option value="" disabled selected>Select Station</option>
-                            <option value="Red1">Red 1</option>
-                            <option value="Red2">Red 2</option>
-                            <option value="Red3">Red 3</option>
-                            <option value="Blue1">Blue 1</option>
-                            <option value="Blue2">Blue 2</option>
-                            <option value="Blue3">Blue 3</option>
-                        </select>&nbsp;
-                        <select class="form-select" id="ma-person" style="width: fit-content;">
-                            <option value="" disabled selected>Select User</option>
-                            <% for(i=0; i < users.length; i++) { %>
-                                <option value="<%= users[i].username %>">
-                                    <%= users[i].username %>
-                                </option>
-                                <% } %>
-                        </select>&nbsp;
-                        <button class="btn btn-primary" id="ma-add">Add</button>
-                    </div><br>
-                    <div id="ma-list"></div>
-                </div>
-
-                <br>
-
-                <button class="btn btn-primary" id="aas-button">Simulate</button>
-                <button class="btn btn-primary" id="aad-button">Deploy</button>
-                <button class="btn btn-primary" id="load_save">Load Config</button>
-                <div id="aas-results"></div>
-
-                <br>
-
-                <h4 class="collapse-icon-parent">
-                    Config Save Data
-                    <i class="bi bi-caret-down-fill collapse-icon"></i>
-                </h4>
-                <div>
-                    <textarea type="textarea" id="save-data" rows="3"></textarea>
-                </div>
-
-                <br>
-
-                <h4 class="collapse-icon-parent">
-                    Simulated Schedule
-                    <i class="bi bi-caret-down-fill collapse-icon"></i>
-                </h4>
-                <div>
-                    <table class="table table-hover table-bordered" id="simulator-table" style="margin-top: -6px;">
-                        <thead style="font-weight: bold;">
-                            <tr>
-                                <td style="width: 1px">Number</td>
-                                <td>Red 1</td>
-                                <td>Red 2</td>
-                                <td>Red 3</td>
-                                <td>Blue 1</td>
-                                <td>Blue 2</td>
-                                <td>Blue 3</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                </div>
+            <h3>Match: <%= match %>
+            </h3>
+            <div class="input-group mb-3" style="width: 200px !important;">
+                <input type="number" step="1" min="0" class="form-control" id="matchNumber" value="<%= match + 1 %>">
+                <button class="btn btn-secondary" type="button" id="setMatch">Set Match</button>
             </div>
 
             <hr>
 
-            <h2 id="data-h2" class="collapse-icon-parent">
-                Data Table Manager
+            <h2 id="matchData-h2" class="collapse-icon-parent">
+                Match Review
                 <i class="bi bi-caret-down-fill collapse-icon"></i>
             </h2>
 
-            <div id="data">
-
+            <div id="matchData">
                 <br>
-                <table class="table table-hover table-bordered" id="table-table"
-                    style="margin-top: -6px; margin-right: 20px;">
-                    <thead style="font-weight: bold;">
+                <h4>Current Match: <%= matchReview.current.number %></h4>
+                <table class="table table-bordered match-review-tables">
+                    <thead>
                         <tr>
-                            <td width="1px;"></td>
-                            <td>Data Table</td>
+                            <td>Scout</td>
+                            <td>Scout Id</td>
+                            <td>Response Id</td>
+                            <td>Team</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <% for (x=0; x<data.length; x++) { %>
+                        <% for (let i = 0; i < matchReview.current.responses.length; i++) { %>
                             <tr>
-                                <td><i class="bi bi-trash-fill delete-data-table"></i></td>
-                                <td>
-                                    <%= data[x] %>
-                                </td>
+                                <td><%= matchReview.current.responses[i].scout %></td>
+                                <td><%= matchReview.current.responses[i].scoutId %></td>
+                                <td><%= matchReview.current.responses[i].id %></td>
+                                <td><%= matchReview.current.responses[i].teamNum %></td>
                             </tr>
-                            <% } %>
+                        <% } %>
+                        <% for (let i = 0; i < matchReview.current.evilScouts.length; i++) { %>
+                            <tr>
+                                <td><%= matchReview.current.evilScouts[i].username %></td>
+                                <td><%= matchReview.current.evilScouts[i].id %></td>
+                                <td colspan="2">No response yet...</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+                <h4>Previous Match: <%= matchReview.last.number %></h4>
+                <table class="table table-bordered match-review-tables">
+                    <thead>
+                        <tr>
+                            <td>Scout</td>
+                            <td>Scout Id</td>
+                            <td>Response Id</td>
+                            <td>Team</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (let i = 0; i < matchReview.last.responses.length; i++) { %>
+                            <tr>
+                                <td><%= matchReview.last.responses[i].scout %></td>
+                                <td><%= matchReview.last.responses[i].scoutId %></td>
+                                <td><%= matchReview.last.responses[i].id %></td>
+                                <td><%= matchReview.last.responses[i].teamNum %></td>
+                            </tr>
+                        <% } %>
+                        <% for (let i = 0; i < matchReview.last.evilScouts.length; i++) { %>
+                            <tr>
+                                <td><%= matchReview.last.evilScouts[i].username %></td>
+                                <td><%= matchReview.last.evilScouts[i].id %></td>
+                                <td colspan="2">No response.</td>
+                            </tr>
+                        <% } %>
                     </tbody>
                 </table>
             </div>
 
             <hr>
 
-            <h2 id="matches-h2" class="collapse-icon-parent">
-                Matches / Schedule
+            <h2 id="aa-h2" class="collapse-icon-parent">
+                Schedule / Assignments
                 <i class="bi bi-caret-down-fill collapse-icon"></i>
             </h2>
 
-            <div id="matches">
-
+            <div id="aa">
                 <br>
-                <table class="table table-hover table-bordered" id="match-table" style="margin-top: -6px;">
-                    <thead style="font-weight: bold;">
+                <button class="btn btn-primary" id="status-update">Set to: scouting</button>
+                <button class="btn btn-success" id="deploy">Deploy Schedule</button>
+
+                <table class="table table-bordered" id="schedule">
+                    <thead>
                         <tr>
-                            <td style="width: 1px">Number</td>
-                            <td>Red 1</td>
-                            <td>Red 2</td>
-                            <td>Red 3</td>
-                            <td>Blue 1</td>
-                            <td>Blue 2</td>
-                            <td>Blue 3</td>
+                            <td>Name</td>
+                            <td>Id</td>
+                            <% let seenDays=[]; for (let i=0; i < times.length; i++) { %>
+                                <td>
+                                    <%= seenDays.includes(times[i].split("-")[0]) ? times[i].split("-")[1] : times[i] %>
+                                </td>
+
+                                <% if (!seenDays.includes(times[i].split("-")[0]))
+                                    {seenDays.push(times[i].split("-")[0])} %>
+                                <% } %>
                         </tr>
                     </thead>
                     <tbody>
-
+                        <% for (let a=0; a < users.length; a++) { %>
+                            <tr>
+                                <td style='color: <%= users[a].assignedAlliance %>'
+                                    data-alliance=<%=users[a].assignedAlliance %> class="schedule-username"><%=
+                                        users[a].username %>
+                                </td>
+                                <td>
+                                    <%= users[a].id %>
+                                </td>
+                                <% for (let i=0; i < times.length; i++) { %>
+                                    <td class="time-slots" data-deployed-status=<%=users[a].assignments?.[i]?.status
+                                        ?? "break" %>
+                                        style="background-color:<%= (users[a].assignments?.[i]?.status ?? "break"
+                                            )=="scouting" ? "lightblue" : "white" %>;"
+                                            >
+                                    </td>
+                                    <% } %>
+                            </tr>
+                            <% } %>
                     </tbody>
                 </table>
             </div>
@@ -219,9 +154,13 @@
             <div id="settings">
                 <span id="currentKey"></span><br>
                 <span>TBA Event Key:</span>
-                <input class="form-control text-input" id="eventKey" type="text" placeholder="YYYYSSCCC"><br>
+                <input class="form-control text-input" id="eventKey" type="text" placeholder="yyyysscccc"><br>
+                <span id="currentDay"></span><br>
+                <span>Event Day Number:</span>
+                <input class="form-control text-input" id="eventDay" type="text" placeholder="#"><br>
                 <button class="btn btn-primary" id="save-settings">Save Changed Settings</button><br><br>
                 <button class="btn btn-danger" id="clear-database">Clear Database</button>
+                <button class="btn btn-danger" id="resetAssignedMatchData">Reset Assigned Match Data</button>
                 <!-- <button class="btn btn-danger" id="clear-database-perm">Clear Database and Permissions</button> -->
             </div>
 
@@ -341,8 +280,8 @@
 
                 </table>
 
-                <b>Note: You cannot delete permissions. The only way to remove them is to clear the database. You can do
-                    this in settings.</b>
+                <b>Note: You cannot delete permissions. The only way to remove them is to take them out of the
+                    settings.json file.</b>
             </div>
 
         </div>
@@ -354,6 +293,21 @@
 <script>$("#nav-admin").addClass("active")</script>
 
 <style>
+    #schedule td {
+        width: 1px;
+    }
+
+    #schedule {
+        width: calc(100% - 20px);
+        padding-right: 10px;
+    }
+
+    .match-review-tables {
+        width: calc(100% - 20px);
+        margin-top: 0;
+        padding-right: 10px;
+    }
+
     .smallerbr {
         display: block;
         margin-bottom: 15px;
@@ -429,6 +383,14 @@
     .text-input,
     #save-data {
         width: calc(100% - 20px) !important;
+    }
+
+    .time-slots:hover {
+        cursor: cell;
+    }
+
+    .selected {
+        background-color: rgb(255, 0, 0);
     }
 </style>
 

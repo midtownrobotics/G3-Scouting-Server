@@ -1,15 +1,44 @@
-import express, {Response, Request} from 'express';
-import MatchModel from './models/MatchModel';
-import UserModel from './models/UserModel';
-import { deleteForm, deployForm, getDeployedForms, getFile, getForm, getSettings, saveForm, writeSettings } from './storage';
-import { AdminPostRequest, AdminPostResponse, GeneralPostRequest, GeneralPostResponse, Settings, Station, UserGetData } from './types';
+import express, { Request } from 'express';
+import http from 'http';
+import TheBlueAllianceV3, { APICalls } from 'thebluealliancev3';
+import { WebSocketServer } from 'ws';
+import { generateSchedule, setMatch } from './assigner';
 import syncDatabase from './models/syncDatabase';
+import UserModel from './models/UserModel';
+import { getDeployedForms, getFile, getFormHTML, getSettings, getSettingsSync, writeSettings } from './storage';
+import { AdminPostRequest, GeneralPostRequest, Settings, UserGetData } from './types';
+import formDataHandler from './formDataHandler';
+import ResponseModel from './models/ResponseModel';
 
 const app = express();
+const server = http.createServer(app);
+const wss = new WebSocketServer({ server });
+
+let nav: string = "";
+
+let PORT: number = 9955;
+const SCOUTING_BLOCKS = ["1-11:00", "1-11:30", "1-12:00", "1-12:30", "1-1:00", "1-1:30", "1-2:00", "1-2:30", "1-3:00", "1-3:30", "1-4:00", "1-4:30", "1-5:00", "1-5:30", "1-6:00", "1-6:30", "2-9:30", "2-10:00", "2-10:30", "2-11:00", "2-11:30", "2-12:00"]
+const TIME_OFFSET = 4;
+
+export const TBA = new TheBlueAllianceV3(getSettingsSync().apiKey);
+
+export async function getCurrentScoutingBlock(): Promise<string | null> {
+    const date = new Date();
+    const minutesRounded = Math.floor(date.getMinutes() / 30) * 30
+    const dayNumber = (await getSettings()).dayNumber
+    if (!dayNumber) {
+        console.error("No dayNumber set!")
+        return null;
+    }
+
+    return dayNumber + "-" + ((date.getHours() - 1 - TIME_OFFSET) % 12 + 1).toString() + ":" + minutesRounded.toString().padStart(2, "0")
+}
+
+interface AuthReq extends Request {
+    user?: UserModel
+}
 
 syncDatabase()
-
-let PORT: number = 8082;
 
 app.set('views', 'views');
 app.set('view engine', 'ejs');
@@ -21,7 +50,7 @@ if (process.argv.indexOf("port") > -1) {
     PORT = parseInt(process.argv[process.argv.indexOf("port") + 1])
 }
 
-app.use(async function (req, res, next) {
+app.use(async function (req: AuthReq, res, next) {
 
     const allUsers = await UserModel.getAllUsers()
 
@@ -29,7 +58,7 @@ app.use(async function (req, res, next) {
         UserModel.addUser("admin", "password", 0)
     }
 
-    const settings: Settings = getSettings();
+    const settings: Settings = await getSettings();
 
     if (!settings.permissionLevels[0]) {
         settings.permissionLevels.push({ name: "admin", blacklist: [] })
@@ -48,7 +77,7 @@ app.use(async function (req, res, next) {
         res.setHeader('WWW-Authenticate', 'Basic realm="G3"');
         res.end('Unauthorized');
     } else {
-        const blacklist = getSettings().permissionLevels[user.permissionId].blacklist
+        const blacklist = settings.permissionLevels[user.permissionId].blacklist
         let bad: boolean = false;
 
         if (!blacklist) {
@@ -62,10 +91,11 @@ app.use(async function (req, res, next) {
             }
         }
 
-        if (!bad) {
-            next();
+        if (bad) {
+            res.render("401", { nav });
         } else {
-            res.render("401", { nav: getFile('/../src/nav.html') });
+            req.user = user
+            next();
         }
     }
 });
@@ -79,11 +109,6 @@ async function getUserFromAuth(authHeader: string | undefined): Promise<UserMode
 }
 
 app.use(express.static(__dirname + '/../static/'));
-app.use('/admin/formMaker', express.static(__dirname + '/src/formMaker/'))
-
-app.get('/form.css', (req, res) => {
-    res.sendFile(__dirname + '/src/formMaker/formMaker.css')
-})
 
 app.get('/logout', (req, res) => {
     res.statusCode = 401;
@@ -91,115 +116,139 @@ app.get('/logout', (req, res) => {
     res.send('Unauthorized');
 })
 
-app.get('/forms', (req, res) => {
+app.get('/forms', async (req: AuthReq, res) => {
+    const user = req.user
+    if (!user) return res.render("401");
+
     const form: string | undefined = req.query.form?.toString()
-    if (form && getDeployedForms().includes(form)) {
-        res.render('form', { data: getForm(form), nav: getFile("/../src/nav.html") });
-    } else if (getDeployedForms().length > 0) {
-        res.render('form-home', { sheets: getDeployedForms(), nav: getFile("/../src/nav.html") })
+    const deployedForms: string[] = await getDeployedForms()
+
+    if (form && deployedForms.includes(form)) {
+        if (user.lastMatchScouted == (await getSettings()).match) {
+            res.render('form-waiting', { nav })
+        } else {
+            res.render('form', { data: await getFormHTML(form), nav });
+        }
+    } else if (deployedForms.length > 0) {
+        res.redirect(`/forms?form=${deployedForms[0]}`)
+        // res.render('form-home', { sheets: deployedForms, nav })
     } else {
-        res.render('form-home', { sheets: false, nav: getFile("/../src/nav.html") })
+        res.render('form-home', { sheets: false, nav })
     }
-})
-
-// app.get('/data', (req, res) => {
-//     const sheet: string | undefined = req.query.sheet?.toString()
-//     if (sheet) {
-//         res.render('data', { data: getSheet(sheet), nav: getFile("/../src/nav.html") });
-//     } else if (getFile("/../storage/scouting.json").toString()) {
-//         const sheets: Array<string> = Object.keys(getFile("/../storage/scouting.json"))
-//         res.render('data-home', { sheets: sheets, nav: getFile("/../src/nav.html") })
-//     } else {
-//         res.render('data-home', { sheets: false, nav: getFile("/../src/nav.html") })
-//     }
-// })
-
-app.get('/data/tba', (req, res) => {
-    res.render('data-tba', { nav: getFile("/../src/nav.html") })
 })
 
 app.get('/admin', async (req, res) => {
-    res.render('admin', { users: await UserModel.getAllUsers(), perms: getSettings().permissionLevels, nav: getFile("/../src/nav.html"), data: Object.keys(getFile("/../storage/scouting.json")) })
+    const settings = await getSettings()
+    const allUsers = await UserModel.getAllUsers()
+    const currentResponses = await ResponseModel.findAll({ where: { matchNum: settings.match } })
+    const lastResponses = await ResponseModel.findAll({ where: { matchNum: settings.match - 1 } })
+    const currentEvilScouts = allUsers.filter((s) => s.assignedMatches.includes(settings.match) && !currentResponses.some((m) => m.scoutId == s.id))
+    const lastEvilScouts = allUsers.filter((s) => s.assignedMatches.includes(settings.match - 1) && !lastResponses.some((m) => m.scoutId == s.id))
+
+    res.render('admin', {
+        users: allUsers,
+        matchReview: {
+            current: {
+                responses: currentResponses,
+                evilScouts: currentEvilScouts,
+                number: settings.match
+            },
+            last: {
+                responses: lastResponses,
+                evilScouts: lastEvilScouts,
+                number: settings.match - 1
+            }
+        },
+        times: SCOUTING_BLOCKS,
+        perms: settings.permissionLevels,
+        match: settings.match,
+        nav
+    })
 })
 
-app.get('/', (req, res) => {
-    const username: string = Buffer.from(req.headers.authorization?.substring(6) || "", 'base64').toString().split(':')[0]
-    res.render('user', { username: username, nav: getFile("/../src/nav.html") })
-})
+app.get('/', async (req: AuthReq, res) => {
+    const user = req.user;
+    if (!user || !user.assignments) return res.render('schedule-error', { nav });
 
-app.get('/user-get', async (req, res) => {
-    const user = await getUserFromAuth(req.headers.authorization)
+    const currentScoutingBlock = await getCurrentScoutingBlock();
+    const currentAssignment = user.assignments.findIndex((a) => a.time == currentScoutingBlock)
 
-    if (!user) {
-        res.render("401", { nav: getFile('/src/nav.html') });
-        return;
+    let lastMatchingTime = "is over.";
+
+    if (currentAssignment > 0) {
+        if (user.assignments[currentAssignment + 1]) {
+            lastMatchingTime = user.assignments[currentAssignment + 1].time
+        }
+
+        for (let i = currentAssignment + 1; i < user.assignments.length; i++) {
+            if (user.assignments[i].status == user.assignments[currentAssignment].status) {
+                if (!user.assignments[i + 1]) {
+                    lastMatchingTime = "is over."
+                } else {
+                    lastMatchingTime = user.assignments[i + 1].time;
+                }
+            } else {
+                break;
+            }
+        }
     }
 
-    const matchNumb: number | undefined = user.matches.filter((m) => !m.scouted).sort((a, b) => a.number - b.number)[0]?.number
+    return res.render('user', {
+        username: user.username,
+        schedule: user.assignments,
+        current: {
+            status: currentAssignment == -1 ? "Day over!" : user.assignments[currentAssignment].status,
+            until: lastMatchingTime,
+            time: currentScoutingBlock
+        },
+        nav
+    })
+})
 
-    const match: MatchModel | undefined = user.matches.find((m) => m.number == matchNumb)
-    const matches: MatchModel[] = user.matches.filter((m: MatchModel) => m.scouted == false).sort((a, b) => (a.number > b.number ? 1 : -1))
+app.get('/user-get', async (req: AuthReq, res) => {
+    const user = req.user
+    if (!user) return res.sendStatus(403);
 
     const data: UserGetData = {
         name: user.username,
-        nextMatch: {
-            number: matchNumb,
-            team: match?.team,
-            station: match?.alliance,
-            highPriority: match?.highPriority
-        },
-        matches
+        lastMatchScouted: user.lastMatchScouted,
+        nextMatch: user.nextMatch
     }
 
-    res.send(data)
+    return res.send(data)
 })
-
-// app.get('/data/analysis', (req, res) => {
-//     if (req.query.team && req.query.sheet) {
-
-//         let sheet: Sheet = getFile("/../storage/scouting.json")[req.query.sheet.toString()]
-
-//         if (!sheet) {
-//             res.render('data-analysis-home', { nav: getFile("/../src/nav.html"), sheets: Object.keys(getFile("/../storage/scouting.json")), error: "No sheet found!" })
-//             return;
-//         }
-
-//         sheet.rows = sheet.rows.filter((row) => row.find((value) => value.name == "TeamNum")?.value == req.query.team)
-
-//         if (!sheet.rows[0]) {
-//             res.render('data-analysis-home', { nav: getFile("/../src/nav.html"), sheets: Object.keys(getFile("/../storage/scouting.json")), error: "No data found for team!" })
-//             return;
-//         }
-
-//         res.render('data-analysis', { nav: getFile("/../src/nav.html"), info: sheet, sheets: Object.keys(getFile("/../storage/scouting.json")) })
-
-//     } else {
-//         res.render('data-analysis-home', { nav: getFile("/../src/nav.html"), sheets: Object.keys(getFile("/../storage/scouting.json")), error: null })
-//     }
-// })
 
 app.get('/forms-get', (req, res) => {
     res.sendFile(__dirname + "/storage/forms.json")
 })
 
-app.post('/post', (req, res) => {
-    const body: any = req.body as GeneralPostRequest
+app.post('/post', async (req: AuthReq, res) => {
+    const body = req.body as GeneralPostRequest
+    const sendPostResponce = (postRes: any) => res.send(postRes);
 
-    const sendPostResponce = (postRes: GeneralPostResponse) => res.send(postRes);
-
-    switch (req.body.action) {
+    switch (body.action) {
         case "getKey":
-            sendPostResponce({ key: getSettings().eventKey })
+            sendPostResponce({ key: (await getSettings()).eventKey })
             break
-        default:
-            sendPostResponce("Invalid Request")
+        case "getDayNumber":
+            sendPostResponce({ dayNumber: (await getSettings()).dayNumber })
+            break
+        case "getBlocks":
+            sendPostResponce({ blocks: SCOUTING_BLOCKS })
+            break
+        case "getCurrentMatch":
+            sendPostResponce({ match: (await getSettings()).match })
+            break
+        case "postFormData":
+            formDataHandler(body.data, req.user)
+            sendPostResponce({ status: 'OK' })
             break
     }
 
 })
 
-function isValidUser(userObject: UserModel) {
-    const settings: Settings = getSettings()
+async function isValidUser(userObject: UserModel) {
+    const settings: Settings = await getSettings()
     return (
         !!userObject.username &&
         !!userObject.password &&
@@ -210,7 +259,7 @@ function isValidUser(userObject: UserModel) {
 app.post('/admin', async (req, res) => {
     const body: AdminPostRequest = req.body
 
-    const sendPostResponce = (postRes: AdminPostResponse) => res.send(postRes);
+    const sendPostResponce = (postRes: object) => res.send(postRes);
 
     switch (body.action) {
         case "editUserField":
@@ -218,7 +267,7 @@ app.post('/admin', async (req, res) => {
                 const users = await UserModel.getAllUsers()
                 const user = users.find(p => p.id == body.data.id)
                 if (!user) {
-                    sendPostResponce("Bad User");
+                    sendPostResponce({ status: "Bad User" });
                     return;
                 }
 
@@ -229,77 +278,93 @@ app.post('/admin', async (req, res) => {
                     user[field] = body.data.updated
                 }
 
-                if (isValidUser(user)) {
+                if (await isValidUser(user)) {
                     user.save()
-                    sendPostResponce("OK")
+                    sendPostResponce({ status: "OK" })
                 } else {
-                    sendPostResponce("Bad User");
+                    sendPostResponce({ status: "Bad User" });
                 }
             }
             break
         case "addUser":
             {
-                const settings: Settings = getSettings()
+                const settings: Settings = await getSettings()
                 if (
                     !!body.data.username &&
                     !!body.data.password &&
                     body.data.permissionId < settings.permissionLevels.length
                 ) {
                     UserModel.addUser(body.data.username, body.data.password, body.data.permissionId)
-                    sendPostResponce("OK")
+                    sendPostResponce({ status: "OK" })
                 } else {
-                    sendPostResponce("Bad User");
+                    sendPostResponce({ status: "Bad User" });
                 }
             }
             break
         case "deleteUser":
-            UserModel.findOne({ where: { id: body.data } })
-            sendPostResponce("OK")
+            await (await UserModel.findOne({ where: { id: body.data } }))?.destroy()
+            sendPostResponce({ status: "OK" })
             break
         case "addPerm":
             {
-                const settings: Settings = getSettings()
+                const settings: Settings = await getSettings()
                 settings.permissionLevels.push({
                     name: body.data.name,
                     blacklist: body.data.blacklist
                 })
                 writeSettings(settings)
-                sendPostResponce("OK")
+                sendPostResponce({ status: "OK" })
             }
             break
         case "changeKey":
             {
-                const settings: Settings = getSettings()
+                const settings: Settings = await getSettings()
                 settings.eventKey = body.data
                 writeSettings(settings)
-                sendPostResponce("OK")
+                sendPostResponce({ status: "OK" })
             }
             break
-        case "saveForm":
-            saveForm(body.name, body.data)
-            sendPostResponce("OK")
+        case "changeDayNumber":
+            {
+                const settings: Settings = await getSettings()
+                settings.dayNumber = body.dayNumber
+                writeSettings(settings)
+                sendPostResponce({ status: "OK" })
+            }
             break
-        case "deleteForm":
-            deleteForm(body.name)
-            sendPostResponce("OK")
+        case "deploySchedule":
+            generateSchedule(body.schedule)
+            sendPostResponce({ status: "OK" })
+            break;
+        case "setMatch":
+            setMatch(body.match)
+            sendPostResponce({ status: "OK" })
             break
-        case "overwriteForm":
-            saveForm(body.name, body.data, true)
-            sendPostResponce("OK")
+        case "resetAssignedMatchData":
+            UserModel.resetAssignedMatchData()
+            sendPostResponce({ status: "OK" })
             break
-        case "deployForm":
-            deployForm(body.name, body.data)
-            sendPostResponce("OK")
-            break
-        default:
-            sendPostResponce("Invalid Request");
-            break
+        case "deleteRow":
+            (await ResponseModel.findOne({ where: { id: body.rowId } }))?.destroy()
+            break;
     }
 })
 
-app.get("*", (req, res) => {
-    res.render("404", { nav: getFile("/../src/nav.html") })
+app.get('/data', async (req, res) => {
+    const jsonData: object[] = []
+        ; (await ResponseModel.findAll()).forEach((r) => jsonData.push(r.toJSON()))
+
+    if (jsonData.length == 0) { return res.render("404", { nav }) }
+
+    res.render("data", { nav, data: { cols: Object.keys(jsonData[0]), rows: jsonData } })
 })
 
-console.log(`listening on port ${PORT}! enjoy!`);
-app.listen(PORT);
+app.get("*", async (req, res) => {
+    res.render("404", { nav })
+})
+
+    ; (async () => {
+        nav = await getFile("/../src/nav.html")
+        server.listen(PORT);
+        console.log(`listening on port ${PORT}! enjoy!`);
+    })()

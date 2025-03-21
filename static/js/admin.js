@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var _a;
+import * as assigner from "./assigner.js";
 import { postDataAdmin, postDataGeneral } from "./global.js";
 $('.collapse-icon').parent().next().slideUp(0);
 setDarkMode(((_a = document.cookie.split(";").find(a => a.includes("darkMode"))) === null || _a === void 0 ? void 0 : _a.trim().split("=")[1]) != "false");
@@ -25,105 +26,45 @@ function setDarkMode(dark) {
     }
 }
 setCurrentKey();
-// makeMatchTable()
-// postData({ action: "getSchedule" }).then(function (res) {
-//         if (res !== "") {
-//                 makeMatchTable(res)
-//         }
-// })
-// function getSchedule() {
-//         return postData({ action: "getSchedule" }).then((res) => {
-//                 console.log(res)
-//                 return res
-//         })
-// }
-// function loadSettings(settings) {
-//         let settingsBoxes = Object.keys(settings)
-//         for (let i = 0; i < settingsBoxes.length; i++) {
-//                 let settingHTML = $(`#${settingsBoxes[i]}`) as JQuery<HTMLInputElement>
-//                 if (settingHTML.hasClass("form-check-input")) {
-//                         if (settingHTML[0].checked !== settings[settingsBoxes[i]]) {
-//                                 settingHTML.click()
-//                         }
-//                 } else {
-//                         settingHTML.val(settings[settingsBoxes[i]])
-//                 }
-//         }
-// }
-const stations = [
-    "red1",
-    "red2",
-    "red3",
-    "blue1",
-    "blue2",
-    "blue3"
-];
-// async function makeMatchTable(matchesScouting: Match[], tableId = "match-table") {
-//         $('#' + tableId + ' tbody').empty()
-//         const matches = await getMatches()
-//         for (let i = 0; i < matches.length; i++) {
-//                 let rows = "";
-//                 if (!matchesScouting) {
-//                         for (let x = 0; x < 6; x++) {
-//                                 rows += `<td>${matches[i][x]}</td>`
-//                         }
-//                 } else {
-//                         for (let x = 0; x < 6; x++) {
-//                                 const assigned = matchesScouting?.filter((m) => m.number == i + 1).find((el) => el.station == stations[x])?.;
-//                                 if (assigned == undefined) {
-//                                         rows += `<td class="team table-danger">${matches[i][x]}</td>`
-//                                 } else {
-//                                         rows += `<td class="team">${matches[i][x]}: ${assigned}</td>`
-//                                 }
-//                         }
-//                 }
-//                 $('#' + tableId + ' tbody').append(`
-//             <tr>
-//                 <td><b>${i + 1}</b></td>
-//                 ${rows}
-//             </tr>
-//         `)
-//         }
-// }
-$('#aas-equ').on('input', function () {
-    $("#qualitativeOptions").slideToggle();
-});
-$("#qualitativeOptions").slideToggle();
-$('#aas-sgr').on('input', function () {
-    if ($(this).val() !== "") {
-        $("#aas-soa").prop('checked', true);
-        $("#aas-soa").prop('disabled', true);
-    }
-    else {
-        $("#aas-soa").prop('disabled', false);
-    }
-});
-$("#ma-add").on('click', function () {
-    const station = $('#ma-station').val();
-    const person = $('#ma-person').val();
-    const match = $('#ma-match').val();
-    if (station && person && match) {
-        $("#ma-list").append('<span class="ma-item">' + ($("#ma-list").text() ? ", " : "") + match + ":" + station + ":" + person + "</span>");
-    }
-});
-$("#ma-list").on('click', '.ma-item', function () {
-    $(this).remove();
-    if ($("#ma-list").children().first().text().includes(", ")) {
-        $("#ma-list").children().first().text($("#ma-list").children().first().text().substring(2));
-    }
-});
+setEventDay();
 function setCurrentKey() {
     return __awaiter(this, void 0, void 0, function* () {
-        $("#currentKey").text("Current Event: " + (yield postDataGeneral({ action: "getKey" })));
+        const res = yield postDataGeneral({ action: "getKey" });
+        $("#currentKey").text("Current Event: " + res.key);
+    });
+}
+function setEventDay() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const res = yield postDataGeneral({ action: "getDayNumber" });
+        $("#currentDay").text("Current Day: " + res.dayNumber);
     });
 }
 $('#save-settings').on('click', function () {
     var _a;
-    if ($('#eventKey').val() !== "") {
-        postDataAdmin({ action: 'changeKey', data: ((_a = $('#eventKey').val()) === null || _a === void 0 ? void 0 : _a.toString()) || "" }, true);
+    if ($('#eventKey').val()) {
+        postDataAdmin({ action: 'changeKey', data: ((_a = $('#eventKey').val()) === null || _a === void 0 ? void 0 : _a.toString()) || "" });
         $('#eventKey').val("");
         setCurrentKey();
     }
+    const newDay = $('#eventDay').val();
+    if (newDay) {
+        postDataAdmin({ action: 'changeDayNumber', dayNumber: parseInt(newDay.toString()) });
+        $('#eventDay').val("");
+        setEventDay();
+    }
+});
+$("#setMatch").on('click', () => {
+    const matchNumber = $("#matchNumber").val();
+    if (!matchNumber)
+        return;
+    postDataAdmin({ action: "setMatch", match: parseInt(matchNumber.toString()) });
+    setTimeout(() => __awaiter(void 0, void 0, void 0, function* () {
+        window.location.reload();
+    }), 1000);
+    $("#setMatch").attr("disabled", "disabled");
+    setTimeout(() => {
+        $("#setMatch").removeAttr("disabled");
+    }, 5000);
 });
 $('.collapse-icon-parent').on("click", function () {
     var _a;
@@ -170,7 +111,7 @@ $("#add-perm").on("click", function () {
                 name: newName,
                 blacklist
             }
-        }, true).then(function () {
+        }).then(function () {
             window.location.reload();
         });
     }
@@ -192,8 +133,8 @@ $("#add-user").on("click", function () {
                     password: newPassword,
                     permissionId: permId
                 }
-            }, true).then(function (res) {
-                if (res == 'Bad User') {
+            }).then(function (res) {
+                if (res.status == 'Bad User') {
                     alert('Bad User!');
                 }
                 else {
@@ -206,15 +147,10 @@ $("#add-user").on("click", function () {
         }
     });
 });
-// $(".perm-delete").on('click', function() {
-//     const id = $(this).parent().next().text().trim()
-//     confirm(`You are about to permission #${id}!`)
-// })
 $(".user-delete").on('click', function () {
-    const name = $(this).parent().next().text().trim();
-    if (confirm(`You are about to delete user ${name}!`)) {
-        // TODO: get user id from table
-        postDataAdmin({ action: "deleteUser", data: 0 }, true).then(function () {
+    const id = $(this).parent().next().text().trim();
+    if (confirm(`You are about to delete user #${id}!`)) {
+        postDataAdmin({ action: "deleteUser", data: parseInt(id) }).then(function () {
             window.location.reload();
         });
     }
@@ -233,8 +169,8 @@ $(".user-field").on('click', function () {
             field: field,
             updated: updated
         }
-    }, true).then(function (res) {
-        if (res != "Bad User") {
+    }).then(function (res) {
+        if (res.status != "Bad User") {
             window.location.reload();
         }
         else {
@@ -242,30 +178,12 @@ $(".user-field").on('click', function () {
         }
     });
 });
-function JSONCompareByNumberOfMatches(a, b) {
-    if (a.matchNumbs.length < b.matchNumbs.length) {
-        return -1;
+$("#resetAssignedMatchData").on('click', () => {
+    const confirmation = confirm("You are about to delete data about assigned matches. This will effectivly erase scout relability data.");
+    if (confirmation) {
+        postDataAdmin({ action: "resetAssignedMatchData" });
     }
-    if (a.matchNumbs.length > b.matchNumbs.length) {
-        return 1;
-    }
-    return 0;
-}
-function JSONCompareByPriority(a, b) {
-    if (a.priority < b.priority) {
-        return -1;
-    }
-    if (a.priority > b.priority) {
-        return 1;
-    }
-    return 0;
-}
-function JSONCompareByMatchNumber(a, b) {
-    if (a.match < b.match) {
-        return -1;
-    }
-    if (a.match > b.match) {
-        return 1;
-    }
-    return 0;
-}
+    else
+        alert("Cancelled.");
+});
+assigner.init();

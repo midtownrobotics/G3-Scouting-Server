@@ -15,8 +15,7 @@
     <div id="forms">
 
         <% if (sheets[0]) { %>
-            <h3>Please select a form below.</h3>
-            <h5>Next Assigned Form: <span id="nextForm"></span></h5>
+            <h3>Select Your Assigned Match Form Below.</h3>
             <% for (let i=0; i < sheets.length; i++) { %>
                 <a href="/forms?form=<%=sheets[i]%>">#<%=i+1%>: <%=sheets[i]%></a><br>
             <% } %>
@@ -39,9 +38,9 @@
 
 <style>
 
-
     #forms {
         margin: 20px;
+        text-align:center;
     }
 
     #forms h1 {

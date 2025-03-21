@@ -2,22 +2,30 @@ import * as fs from 'fs';
 import { Settings } from './types';
 import path from 'path';
 
-export function getFile(relativePath: string): any {
-        const file: string = fs.readFileSync(path.join(__dirname, relativePath)).toString()
-        try {
-                return JSON.parse(file)
-        } catch {
-                return file
-        }
+export async function getFile(relativePath: string): Promise<any> {
+    return new Promise((resolve) => {
+        fs.readFile(path.join(__dirname, relativePath), (err, data) => {
+            let finalData
+            try {
+                finalData = JSON.parse(data.toString())
+            } catch {
+                finalData = data.toString()
+            }
+            resolve(finalData)
+        })
+    })
 }
 
-export function getSettings(): Settings {
-        // todo: make sure the thing actually can be a settings object
-        return getFile("/../storage/settings.json") as Settings
+export async function getSettings(): Promise<Settings> {
+    return await getFile("/../storage/settings.json") as Settings
+}
+
+export function getSettingsSync(): Settings {
+    return JSON.parse(fs.readFileSync(path.join(__dirname, "/../storage/settings.json")).toString()) as Settings
 }
 
 export function writeSettings(data: Settings) {
-        fs.writeFileSync(__dirname + "/../storage/settings.json", JSON.stringify(data))
+    fs.writeFile(__dirname + "/../storage/settings.json", JSON.stringify(data), () => {})
 }
 
 /* EXAMPLE OF USAGE
@@ -69,44 +77,17 @@ export function writeSettings(data: Settings) {
 
 // Form management
 
-export function getForm(form: string): string {
-        return getFile("/../storage/forms.json")[form].html
+export async function getFormHTML(form: string): Promise<string> {
+    return (await getFile("/../storage/forms.json"))[form].html
 }
 
-export function saveForm(name: string, data: Object, overwrite?: boolean) {
-        let formsFile: any = getFile("/../storage/forms.json");
-        let updatedName: string = name;
-        let duplicateNumber: number = 1;
-        if (!overwrite) {
-                while (formsFile[updatedName]) {
-                        updatedName = name;
-                        updatedName += duplicateNumber;
-                        duplicateNumber++;
-                }
+export async function getDeployedForms(): Promise<string[]> {
+    const allForms: Array<string> = Object.keys(await getFile("/../storage/forms.json"))
+    let deployedForms: Array<string> = []
+    for (let i = 0; i < allForms.length; i++) {
+        if ((await getFile("/../storage/forms.json"))[allForms[i]].status == "deployed") {
+            deployedForms.push(allForms[i])
         }
-        formsFile[updatedName] = data;
-        fs.writeFileSync(__dirname + "/storage/forms.json", JSON.stringify(formsFile));
-}
-
-export function deleteForm(name: string) {
-        let formsFile: any = getFile("/../storage/forms.json");
-        delete formsFile[name];
-        fs.writeFileSync(__dirname + "/storage/forms.json", JSON.stringify(formsFile));
-}
-
-export function deployForm(name: string, undeploy: boolean = false) {
-        let formsFile: any = getFile("/../storage/forms.json");
-        formsFile[name].status = undeploy ? "none" : "deployed";
-        fs.writeFileSync(__dirname + "/../storage/forms.json", JSON.stringify(formsFile));
-}
-
-export function getDeployedForms(): Array<string> {
-        const allForms: Array<string> = Object.keys(getFile("/../storage/forms.json"))
-        let deployedForms: Array<string> = []
-        for (let i = 0; i < allForms.length; i++) {
-                if (getFile("/../storage/forms.json")[allForms[i]].status == "deployed") {
-                        deployedForms.push(allForms[i])
-                }
-        }
-        return deployedForms
+    }
+    return deployedForms
 }

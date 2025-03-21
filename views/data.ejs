@@ -8,6 +8,7 @@
         <script src="/libs/jquery-3.7.1.min.js"></script>
         <script>var exports = {};</script>
         <script type="module" src="/js/global.js"></script>
+        <script type="module" src="/js/data.js"></script>
     </head>
     <body>
 
@@ -18,8 +19,6 @@
             <% if (data?.rows) { %>
 
             <button class="btn btn-primary" onclick="downloadTable()">Download as CSV</button><br><br>
-
-            <b>Click on a bold header to sort by that column. Click on it again to reverse sort!</b>
 
             <div id="saveToDriveButton"></div>
             
@@ -48,9 +47,7 @@
                             </td>
                             <% for (x=0; x < data.cols.length; x++) { %>
                                 <td style="white-space: nowrap;">        
-                                    <% if (data.rows[i].findIndex(p => p.name == data.cols[x]) > -1) { %>
-                                        <%= data.rows[i][data.rows[i].findIndex(p => p.name == data.cols[x])].value %> 
-                                    <% } %>
+                                    <%= data.rows[i][data.cols[x]] %> 
                                 </td>
                             <% } %>
                         </tr>
@@ -85,17 +82,17 @@
     })
 
     function downloadTable() {
-        let csvTable = "! This CSV was generated using the G3 Scouting software! \n";
+        let csvTable = "";
         for (let i = 0; i < $("#data-table thead tr").children().length-1; i++) {
-            csvTable += $("#data-table thead tr").children()[i+1].innerText + ","
+            csvTable += `"${$("#data-table thead tr").children()[i+1].innerText}",`
         }
 
         csvTable = csvTable.slice(0, -1) + "\n";
 
         for (let i = 0; i < $("#data-table tbody tr").length; i++) {
             for (let x = 0; x < $($("#data-table tbody tr")[i]).children().length - 1; x++) {
-                csvTable += $($("#data-table tbody tr")[i]).children()[x+1].innerText + ","
-            }v 
+                csvTable += `"${$($("#data-table tbody tr")[i]).children()[x+1].innerText}",`
+            }
 
             csvTable = csvTable.slice(0, -1) + "\n";
         }
@@ -161,17 +158,3 @@
         cursor: pointer;
     }
 </style>
-
-<script>
-    const URLParams = new URLSearchParams(window.location.search)
-    const sheet = URLParams.get("sheet");
-
-    $(".trash").on("click", function(){
-        const rowNumb = $(this).parent().attr('id').split("-")[1];
-        const uSure = confirm(`Row number ${rowNumb} will be deleted!`)
-        if (uSure) {
-            postData({action: "deleteRow", sheet: sheet, data: rowNumb})
-            window.location.reload();
-        }
-    })
-</script>

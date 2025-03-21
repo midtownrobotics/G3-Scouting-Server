@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/libs/bootstrap.min.css">
+        <link rel="stylesheet" href="/libs/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css">
+        <link rel="icon" type="image/png" href="/g3.png">
+        <link rel="stylesheet" href="/global.css">
+        <script src="/libs/jquery-3.7.1.min.js"></script>
+        <script>var exports = {};</script>
+        <script type="module" src="/js/global.js"></script>
+        <title>G3 Scouting!</title>
+    </head>
+
+    <%- nav %>
+
+    <br>
+    <h1 style="text-align: center;">
+        Waiting for lead scout to start next match...
+    </h1>
+
+</html>
+
+<script>$("#nav-forms").addClass("active")</script>
+
+<script>
+
+    function tryOpenForm() {
+        setTimeout(async () => {
+            const data = await fetch('/user-get').then((res) => res.json())
+            if (data.nextMatch.number != data.lastMatchScouted) window.location.reload()
+            tryOpenForm()
+        }, 200)
+    }
+
+    tryOpenForm()
+
+    async function Async() {
+        let userget = await fetch("/user-get/").then((res) => res.json())
+        $("#nextForm").text(userget.nextMatch.form)
+    }
+    Async()
+</script>

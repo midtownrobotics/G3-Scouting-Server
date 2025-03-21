@@ -15,31 +15,36 @@
 
         <div id="main">
 
-            <h1>Hello <%= username %>!</h1>
+            <h1 style="text-align:center; text-decoration: none;">Hello <%= username %>!</h1>
 
             <hr>
 
-            <h2>Next Match Info:</h2>
-            <p>Form: <span id="nm-form"></span></p>
-            <p>Matches Until: <span id="nm-mu"></span></p>
-            <p>Number: <span id="nm-number"></span></p>
-            <p>Team Number: <span id="nm-team"></span></p>
-            <p>Team Name: <span id="nm-teamname"></span></p>
-            <p>Station: <span id="nm-station"></span></p>
-            <!-- <p>High Priority: <span id="nm-hp"></span></p> -->
+            <div style="text-align:center;">
+                <h2>Current status:</h2>
+                <p>Block: <b><%= current.time %></b></p>
+                <p>Status: <b><%= current.status %></b></p>
+                <p>Until: <b><%= "Day " + current.until.split("-").join(" @ ") %></b></p>    
+            </div>
 
             <hr>
 
-            <h2>Your Schedule:</h2><br>
-            <table class="table">
-
-                <tbody id="table">
+            <h2 style="text-align:center;">Your Schedule:</h2>
+            <table class="table table-dark" style="width: 40% !important; min-width: 300px; margin-left:auto; margin-right:auto;">
+                <thead>
+                    <tr>
+                        <td>Time</td>
+                        <td>Status</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let i = 0; i < schedule.length; i++) { %>
+                        <tr class=<%= schedule[i].status == "break" ? "table-primary" : "table" %> !important;">
+                            <td class="table-dark"><%= schedule[i].time %></td>
+                            <td class="table-dark"><%= schedule[i].status %></td>
+                        </tr>
+                    <% } %>
                 </tbody>
             </table>
-
-            <button class="btn btn-link">
-                <i id="reload" class="bi bi-arrow-clockwise"></i>
-            </button>
 
         </div>
 
@@ -159,4 +164,3 @@
     }
 
 </style>
-<script type="module" src="/js/user.js"></script>
