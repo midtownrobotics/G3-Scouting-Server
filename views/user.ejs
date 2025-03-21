@@ -22,7 +22,7 @@
             <div style="text-align:center;">
                 <h2>Current status:</h2>
                 <p>Block: <b><%= current.time %></b></p>
-                <p>Status: <b><%= current.status %></b></p>
+                <p>Status: <b><%= current.status == "break" ? "Break/Other" : "Scouting" %></b></p>
                 <p>Until: <b><%= "Day " + current.until.split("-").join(" @ ") %></b></p>    
             </div>
 
